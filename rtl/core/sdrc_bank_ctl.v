@@ -48,6 +48,7 @@ later version.
 
 module sdrc_bank_ctl (clk,
 		     reset_n,
+		     a2b_req_depth,  // Number of requests we can buffer
 
 		     /* Req from req_gen */
 		     r2b_req,	   // request
@@ -55,35 +56,40 @@ module sdrc_bank_ctl (clk,
 		     r2b_start,	   // First chunk of burst
 		     r2b_last,	   // Last chunk of burst
 		     r2b_wrap,
+		     r2b_ba,	   // bank address
 		     r2b_raddr,	   // row address
 		     r2b_caddr,	   // col address
 		     r2b_len,	   // length
 		     r2b_write,	   // write request
+		     b2r_arb_ok,   // OK to arbitrate for next xfr
 		     b2r_ack,
-                     sdr_dma_last,
 
 		     /* Transfer request to xfr_ctl */
+		     b2x_idle,	   // All banks are idle
 		     b2x_req,	   // Request to xfr_ctl
 		     b2x_start,	   // first chunk of transfer
 		     b2x_last,	   // last chunk of transfer
 		     b2x_wrap,
 		     b2x_id,	   // Transfer ID
+		     b2x_ba,	   // bank address
 		     b2x_addr,	   // row/col address
 		     b2x_len,	   // transfer length
 		     b2x_cmd,	   // transfer command
 		     x2b_ack,	   // command accepted
 		     
 		     /* Status to/from xfr_ctl */
-		     tras_ok,      // TRAS OK for this bank
-		     xfr_ok,
+		     b2x_tras_ok,  // TRAS OK for all banks
 		     x2b_refresh,  // We did a refresh
 		     x2b_pre_ok,   // OK to do a precharge (per bank)
 		     x2b_act_ok,   // OK to do an activate
 		     x2b_rdok,	   // OK to do a read
 		     x2b_wrok,	   // OK to do a write
 
-		     /* current xfr row address of the bank */
-		     bank_row,
+		     /* xfr msb address */
+		     sdr_dev_config,
+		     xfr_bank_sel,
+		     xfr_addr_msb,
+                     sdr_req_norm_dma_last,
 
 		     /* SDRAM Timing */
 		     tras_delay,   // Active to precharge delay
@@ -99,225 +105,466 @@ parameter  SDR_DW   = 16;  // SDR Data Width
 parameter  SDR_BW   = 2;   // SDR Byte Width
    input                        clk, reset_n;
 
+   input [1:0] 			a2b_req_depth;
+   
    /* Req from bank_ctl */
    input 			r2b_req, r2b_start, r2b_last,
 				r2b_write, r2b_wrap;
    input [`SDR_REQ_ID_W-1:0] 	r2b_req_id;
+   input [1:0] 			r2b_ba;
    input [11:0] 		r2b_raddr;
    input [11:0] 		r2b_caddr;
-   input [APP_RW-1:0] 	r2b_len;
-   output 			b2r_ack;
-   input                        sdr_dma_last;
+   input [APP_RW-1:0] 	        r2b_len;
+   output 			b2r_arb_ok, b2r_ack;
+   input                        sdr_req_norm_dma_last;
 
    /* Req to xfr_ctl */
-   output 			b2x_req, b2x_start, b2x_last,
-				tras_ok, b2x_wrap;
+   output 			b2x_idle, b2x_req, b2x_start, b2x_last,
+				b2x_tras_ok, b2x_wrap;
    output [`SDR_REQ_ID_W-1:0] 	b2x_id;
+   output [1:0] 		b2x_ba;
    output [11:0] 		b2x_addr;
    output [APP_RW-1:0] 	b2x_len;
    output [1:0] 		b2x_cmd;
    input 			x2b_ack;
 
    /* Status from xfr_ctl */
+   input [3:0] 			x2b_pre_ok;
    input 			x2b_refresh, x2b_act_ok, x2b_rdok,
-				x2b_wrok, x2b_pre_ok, xfr_ok;
+				x2b_wrok;
    
    input [3:0] 			tras_delay, trp_delay, trcd_delay;
 
-   output [11:0] 			bank_row;
+   input [1:0] sdr_dev_config;
+   input [1:0] xfr_bank_sel;
+   output [13:0] xfr_addr_msb;
 
    /****************************************************************************/
    // Internal Nets
 
-   `define BANK_IDLE         3'b000
-   `define BANK_PRE          3'b001
-   `define BANK_ACT          3'b010
-   `define BANK_XFR          3'b011
-   `define BANK_DMA_LAST_PRE 3'b100
+   wire [3:0] 			r2i_req, i2r_ack, i2x_req, 
+				i2x_start, i2x_last, i2x_wrap, tras_ok;
+   wire [11:0] 			i2x_addr0, i2x_addr1, i2x_addr2, i2x_addr3;
+   wire [APP_RW-1:0] 	i2x_len0, i2x_len1, i2x_len2, i2x_len3;
+   wire [1:0] 			i2x_cmd0, i2x_cmd1, i2x_cmd2, i2x_cmd3;
+   wire [`SDR_REQ_ID_W-1:0] 	i2x_id0, i2x_id1, i2x_id2, i2x_id3;
 
-   reg [2:0] 			bank_st, next_bank_st;
-   wire 			b2x_start, b2x_last;
-   reg 				l_start, l_last;
-   reg 				b2x_req, b2r_ack;
+   reg 				b2x_req;
+   wire 			b2x_idle, b2x_start, b2x_last, b2x_wrap;
    wire [`SDR_REQ_ID_W-1:0] 	b2x_id;
-   reg [`SDR_REQ_ID_W-1:0] 	l_id;
-   reg [11:0] 			b2x_addr;
-   reg [APP_RW-1:0] 	l_len;
+   wire [11:0] 			b2x_addr;
    wire [APP_RW-1:0] 	b2x_len;
-   reg [1:0] 			b2x_cmd;
-   reg  			bank_valid;
-   reg [11:0] 			bank_row;
-   reg [3:0] 			tras_cntr, timer0;
-   reg 				l_wrap, l_write;
-   wire 			b2x_wrap;
-   reg [11:0] 			l_raddr;
-   reg [11:0] 			l_caddr;
-   reg                          l_sdr_dma_last;
-   reg                          bank_prech_page_closed;
+   wire [1:0] 			b2x_cmd;
+   wire [3:0] 			x2i_ack;
+   reg [1:0] 			b2x_ba;
    
-   wire  			tras_ok_internal, tras_ok, activate_bank;
+   reg [`SDR_REQ_ID_W-1:0] 	curr_id;
+
+   wire [1:0] 			xfr_ba;
+   wire  			xfr_ba_last;
+   wire [3:0] 			xfr_ok;
+
+   // This 8 bit register stores the bank addresses for upto 4 requests.
+   reg [7:0] 			rank_ba;
+   reg [3:0] 			rank_ba_last;
+   // This 3 bit counter counts the number of requests we have
+   // buffered so far, legal values are 0, 1, 2, 3, or 4.
+   reg [2:0] 			rank_cnt;
+   wire [3:0] 			rank_req, rank_wr_sel;
+   wire 			rank_fifo_wr, rank_fifo_rd;
+   wire 			rank_fifo_full, rank_fifo_mt;
    
-   wire 			page_hit, timer0_tc, ld_trp, ld_trcd;
+   wire [11:0] bank0_row, bank1_row, bank2_row, bank3_row;
 
-   always @ (posedge clk)
-      if (~reset_n) begin
-	 bank_valid <= 1'b0;
-	 tras_cntr <= 4'b0;
-	 timer0 <= 4'b0;
-	 bank_st <= `BANK_IDLE;
-      end // if (~reset_n)
+   assign b2x_tras_ok = &tras_ok;
 
-      else begin
+   // Distribute the request from req_gen
 
-	 bank_valid <= (x2b_refresh || bank_prech_page_closed) ? 1'b0 :  // force the bank status to be invalid
-//	 bank_valid <= (x2b_refresh) ? 1'b0 :
-		       (activate_bank) ? 1'b1 : bank_valid;
+   assign r2i_req[0] = (r2b_ba == 2'b00) ? r2b_req & ~rank_fifo_full : 1'b0;
+   assign r2i_req[1] = (r2b_ba == 2'b01) ? r2b_req & ~rank_fifo_full : 1'b0;
+   assign r2i_req[2] = (r2b_ba == 2'b10) ? r2b_req & ~rank_fifo_full : 1'b0;
+   assign r2i_req[3] = (r2b_ba == 2'b11) ? r2b_req & ~rank_fifo_full : 1'b0;
 
-	 tras_cntr <= (activate_bank) ? tras_delay :
-		      (~tras_ok_internal) ? tras_cntr - 4'b1 : 4'b0;
-	 
-	 timer0 <= (ld_trp) ? trp_delay :
-		   (ld_trcd) ? trcd_delay :
-		   (~timer0_tc) ? timer0 - 4'b1 : timer0;
-	 
-	 bank_st <= next_bank_st;
+   assign b2r_ack = (r2b_ba == 2'b00) ? i2r_ack[0] :
+		    (r2b_ba == 2'b01) ? i2r_ack[1] :
+		    (r2b_ba == 2'b10) ? i2r_ack[2] :
+		    (r2b_ba == 2'b11) ? i2r_ack[3] : 1'b0;
 
-      end // else: !if(~reset_n)
+   assign b2r_arb_ok = ~rank_fifo_full;
+   
+   // Put the requests from the 4 bank_fsms into a 4 deep shift
+   // register file. The earliest request is prioritized over the
+   // later requests. Also the number of requests we are allowed to
+   // buffer is limited by a 2 bit external input
+   
+   // Mux the req/cmd to xfr_ctl. Allow RD/WR commands from the request in
+   // rank0, allow only PR/ACT commands from the requests in other ranks
+   // If the rank_fifo is empty, send the request from the bank addressed by
+   // r2b_ba 
 
-   always @ (posedge clk) begin 
+   assign xfr_ba = (rank_fifo_mt) ? r2b_ba : rank_ba[1:0];
+   assign xfr_ba_last = (rank_fifo_mt) ? sdr_req_norm_dma_last : rank_ba_last[0];
+   
+   assign rank_req[0] = i2x_req[xfr_ba];     // each rank generates requests
+			
+   assign rank_req[1] = (rank_cnt < 3'h2) ? 1'b0 :
+			(rank_ba[3:2] == 2'b00) ? i2x_req[0] & ~i2x_cmd0[1] :
+			(rank_ba[3:2] == 2'b01) ? i2x_req[1] & ~i2x_cmd1[1] :
+			(rank_ba[3:2] == 2'b10) ? i2x_req[2] & ~i2x_cmd2[1] : 
+			i2x_req[3] & ~i2x_cmd3[1];
+			
+   assign rank_req[2] = (rank_cnt < 3'h3) ? 1'b0 :
+			(rank_ba[5:4] == 2'b00) ? i2x_req[0] & ~i2x_cmd0[1] :
+			(rank_ba[5:4] == 2'b01) ? i2x_req[1] & ~i2x_cmd1[1] :
+			(rank_ba[5:4] == 2'b10) ? i2x_req[2] & ~i2x_cmd2[1] : 
+			i2x_req[3] & ~i2x_cmd3[1];
+			
+   assign rank_req[3] = (rank_cnt < 3'h4) ? 1'b0 :
+			(rank_ba[7:6] == 2'b00) ? i2x_req[0] & ~i2x_cmd0[1] :
+			(rank_ba[7:6] == 2'b01) ? i2x_req[1] & ~i2x_cmd1[1] :
+			(rank_ba[7:6] == 2'b10) ? i2x_req[2] & ~i2x_cmd2[1] : 
+			i2x_req[3] & ~i2x_cmd3[1];
+			
+   always @ (rank_req or rank_ba or xfr_ba or xfr_ba_last) begin
 
-      bank_row <= (activate_bank) ? b2x_addr : bank_row;
+      if (rank_req[0]) begin 
+	 b2x_req = 1'b1;
+	 b2x_ba = xfr_ba;
+      end // if (rank_req[0])
+      
+      else if (rank_req[1]) begin 
+	 b2x_req = 1'b1;
+	 b2x_ba = rank_ba[3:2];
+      end // if (rank_req[1])
+      
+      else if (rank_req[2]) begin 
+	 b2x_req = 1'b1;
+	 b2x_ba = rank_ba[5:4];
+      end // if (rank_req[2])
+      
+      else if (rank_req[3]) begin 
+	 b2x_req = 1'b1;
+	 b2x_ba = rank_ba[7:6];
+      end // if (rank_req[3])
+      
+      else begin 
+	 b2x_req = 1'b0;
+	 b2x_ba = 2'b00;
+      end // else: !if(rank_req[3])
+      
+   end // always @ (rank_req or rank_fifo_mt or r2b_ba or rank_ba)
 
-      if (~reset_n) begin
-	 l_start <= 1'b0;
-	 l_last <= 1'b0;
-	 l_id <= 1'b0;
-	 l_len <= 1'b0;
-	 l_wrap <= 1'b0;
-	 l_write <= 1'b0;
-	 l_raddr <= 1'b0;
-	 l_caddr <= 1'b0;
-         l_sdr_dma_last <= 1'b0;
-      end
-      else begin
-        if (b2r_ack) begin
-  	   l_start <= r2b_start;
-  	   l_last <= r2b_last;
-  	   l_id <= r2b_req_id;
-  	   l_len <= r2b_len;
-  	   l_wrap <= r2b_wrap;
-  	   l_write <= r2b_write;
-  	   l_raddr <= r2b_raddr;
-  	   l_caddr <= r2b_caddr;
-           l_sdr_dma_last <= sdr_dma_last;
-        end // if (b2r_ack)
-      end
+   assign b2x_idle = rank_fifo_mt;
+   assign b2x_start = i2x_start[b2x_ba];
+   assign b2x_last = i2x_last[b2x_ba];
+   assign b2x_wrap = i2x_wrap[b2x_ba];
 
+   assign b2x_addr = (b2x_ba == 2'b11) ? i2x_addr3 :
+		     (b2x_ba == 2'b10) ? i2x_addr2 :
+		     (b2x_ba == 2'b01) ? i2x_addr1 : i2x_addr0;
+   
+   assign b2x_len = (b2x_ba == 2'b11) ? i2x_len3 :
+		    (b2x_ba == 2'b10) ? i2x_len2 :
+		    (b2x_ba == 2'b01) ? i2x_len1 : i2x_len0;
+   
+   assign b2x_cmd = (b2x_ba == 2'b11) ? i2x_cmd3 :
+		    (b2x_ba == 2'b10) ? i2x_cmd2 :
+		    (b2x_ba == 2'b01) ? i2x_cmd1 : i2x_cmd0;
+   
+   assign b2x_id = (b2x_ba == 2'b11) ? i2x_id3 :
+		   (b2x_ba == 2'b10) ? i2x_id2 :
+		   (b2x_ba == 2'b01) ? i2x_id1 : i2x_id0;
+   
+   assign x2i_ack[0] = (b2x_ba == 2'b00) ? x2b_ack : 1'b0;
+   assign x2i_ack[1] = (b2x_ba == 2'b01) ? x2b_ack : 1'b0;
+   assign x2i_ack[2] = (b2x_ba == 2'b10) ? x2b_ack : 1'b0;
+   assign x2i_ack[3] = (b2x_ba == 2'b11) ? x2b_ack : 1'b0;
+
+   // Rank Fifo
+   // On a write write to selected rank and increment rank_cnt
+   // On a read shift rank_ba right 2 bits and decrement rank_cnt
+
+   assign rank_fifo_wr = b2r_ack;
+
+   assign rank_fifo_rd = b2x_req & b2x_cmd[1] & x2b_ack;
+   
+   assign rank_wr_sel[0] = (rank_cnt == 3'h0) ? rank_fifo_wr : 
+			   (rank_cnt == 3'h1) ? rank_fifo_wr & rank_fifo_rd : 
+			   1'b0;
+
+   assign rank_wr_sel[1] = (rank_cnt == 3'h1) ? rank_fifo_wr & ~rank_fifo_rd :
+			   (rank_cnt == 3'h2) ? rank_fifo_wr & rank_fifo_rd :
+			   1'b0; 
+
+   assign rank_wr_sel[2] = (rank_cnt == 3'h2) ? rank_fifo_wr & ~rank_fifo_rd :
+			   (rank_cnt == 3'h3) ? rank_fifo_wr & rank_fifo_rd :
+			   1'b0; 
+
+   assign rank_wr_sel[3] = (rank_cnt == 3'h3) ? rank_fifo_wr & ~rank_fifo_rd :
+			   (rank_cnt == 3'h4) ? rank_fifo_wr & rank_fifo_rd :
+			   1'b0; 
+
+   assign rank_fifo_mt = (rank_cnt == 3'b0) ? 1'b1 : 1'b0;
+
+   assign rank_fifo_full = (rank_cnt[2]) ? 1'b1 : 
+			   (rank_cnt[1:0] == a2b_req_depth) ? 1'b1 : 1'b0; 
+
+   // FIFO Check
+
+   // synopsys translate_off
+
+   always @ (posedge clk) begin
+
+      if (~rank_fifo_wr & rank_fifo_rd && rank_cnt == 3'h0) begin
+	 $display ("%t: %m: ERROR!!! Read from empty Fifo", $time);
+	 $stop;
+      end // if (rank_fifo_rd && rank_cnt == 3'h0)
+
+      if (rank_fifo_wr && ~rank_fifo_rd && rank_cnt == 3'h4) begin
+	 $display ("%t: %m: ERROR!!! Write to full Fifo", $time);
+	 $stop;
+      end // if (rank_fifo_wr && ~rank_fifo_rd && rank_cnt == 3'h4)
+      
    end // always @ (posedge clk)
    
-   assign tras_ok_internal = ~|tras_cntr;
-   assign tras_ok = tras_ok_internal;
+   // synopsys translate_on
+      
+   always @ (posedge clk)
+      if (~reset_n) begin
+	 rank_cnt <= 3'b0;
+	 rank_ba <= 8'b0;
+	 rank_ba_last <= 4'b0;
 
-   assign activate_bank = (b2x_cmd == `OP_ACT) & x2b_ack;
+      end // if (~reset_n)
+      else begin
 
-   assign page_hit = (r2b_raddr == bank_row) ? bank_valid : 1'b0;    // its a hit only if bank is valid
+	 rank_cnt <= (rank_fifo_wr & ~rank_fifo_rd) ? rank_cnt + 3'b1 :
+		     (~rank_fifo_wr & rank_fifo_rd) ? rank_cnt - 3'b1 :
+		     rank_cnt;
 
-   assign timer0_tc = ~|timer0;
+	 rank_ba[1:0] <= (rank_wr_sel[0]) ? r2b_ba :
+			 (rank_fifo_rd) ? rank_ba[3:2] : rank_ba[1:0];
+	 
+	 rank_ba[3:2] <= (rank_wr_sel[1]) ? r2b_ba :
+			 (rank_fifo_rd) ? rank_ba[5:4] : rank_ba[3:2];
+	 
+	 rank_ba[5:4] <= (rank_wr_sel[2]) ? r2b_ba :
+			 (rank_fifo_rd) ? rank_ba[7:6] : rank_ba[5:4];
+	 
+	 rank_ba[7:6] <= (rank_wr_sel[3]) ? r2b_ba :
+			 (rank_fifo_rd) ? 2'b00 : rank_ba[7:6];
 
-   assign ld_trp = (b2x_cmd == `OP_PRE) ? x2b_ack : 1'b0;
+         rank_ba_last[0] <= (rank_wr_sel[0]) ? sdr_req_norm_dma_last :
+                            (rank_fifo_rd) ?  rank_ba_last[1] : rank_ba_last[0];
 
-   assign ld_trcd = (b2x_cmd == `OP_ACT) ? x2b_ack : 1'b0;
+         rank_ba_last[1] <= (rank_wr_sel[1]) ? sdr_req_norm_dma_last :
+                            (rank_fifo_rd) ?  rank_ba_last[2] : rank_ba_last[1];
+
+         rank_ba_last[2] <= (rank_wr_sel[2]) ? sdr_req_norm_dma_last :
+                            (rank_fifo_rd) ?  rank_ba_last[3] : rank_ba_last[2];
+
+         rank_ba_last[3] <= (rank_wr_sel[3]) ? sdr_req_norm_dma_last :
+                            (rank_fifo_rd) ?  1'b0 : rank_ba_last[3];
+
+      end // else: !if(~reset_n)
    
-   always @ (*) begin
-
-       bank_prech_page_closed = 1'b0;
-       b2x_req = 1'b0;
-       b2x_cmd = 2'bx;
-       b2r_ack = 1'b0;
-       b2x_addr = 12'bx;
-       next_bank_st = bank_st;
-
-      case (bank_st)
-
-	`BANK_IDLE : begin
-
-	   if (~r2b_req) begin
-              bank_prech_page_closed = 1'b0;
-	      b2x_req = 1'b0;
-	      b2x_cmd = 2'bx;
-	      b2r_ack = 1'b0;
-	      b2x_addr = 12'bx;
-	      next_bank_st = `BANK_IDLE;
-	   end // if (~r2b_req)
-	   else if (page_hit) begin 
-	      b2x_req = (r2b_write) ? x2b_wrok & xfr_ok : 
-			x2b_rdok & xfr_ok;
-	      b2x_cmd = (r2b_write) ? `OP_WR : `OP_RD;
-	      b2r_ack = 1'b1;
-	      b2x_addr = r2b_caddr;
-	      next_bank_st = (x2b_ack) ? `BANK_IDLE : `BANK_XFR;  // in case of hit, stay here till xfr sm acks
-	   end // if (page_hit)
-	   else begin  // page_miss
-	      b2x_req = tras_ok_internal & x2b_pre_ok;
-	      b2x_cmd = `OP_PRE;
-	      b2r_ack = 1'b1;
-	      b2x_addr = r2b_raddr & 12'hBFF;	   // Dont want to pre all banks!
-	      next_bank_st = (l_sdr_dma_last) ? `BANK_PRE : (x2b_ack) ? `BANK_ACT : `BANK_PRE;  // bank was precharged on l_sdr_dma_last
-	   end // else: !if(page_hit)
-
-	end // case: `BANK_IDLE
-
-	`BANK_PRE : begin
-	   b2x_req = tras_ok_internal & x2b_pre_ok;
-	   b2x_cmd = `OP_PRE;
-	   b2r_ack = 1'b0;
-	   b2x_addr = l_raddr & 12'hBFF;	   // Dont want to pre all banks!
-           bank_prech_page_closed = 1'b0;
-	   next_bank_st = (x2b_ack) ? `BANK_ACT : `BANK_PRE;
-	end // case: `BANK_PRE
-
-	`BANK_ACT : begin
-	   b2x_req = timer0_tc & x2b_act_ok;
-	   b2x_cmd = `OP_ACT;
-	   b2r_ack = 1'b0;
-	   b2x_addr = l_raddr;
-           bank_prech_page_closed = 1'b0;
-	   next_bank_st = (x2b_ack) ? `BANK_XFR : `BANK_ACT;
-	end // case: `BANK_ACT
-	
-	`BANK_XFR : begin
-	   b2x_req = (l_write) ? timer0_tc & x2b_wrok & xfr_ok :
-		     timer0_tc & x2b_rdok & xfr_ok; 
-	   b2x_cmd = (l_write) ? `OP_WR : `OP_RD;
-	   b2r_ack = 1'b0;
-	   b2x_addr = l_caddr;
-           bank_prech_page_closed = 1'b0;
-	   next_bank_st = (x2b_refresh) ? `BANK_ACT : 
-                          (x2b_ack & l_sdr_dma_last) ? `BANK_DMA_LAST_PRE :
-			  (x2b_ack) ? `BANK_IDLE : `BANK_XFR;
-	end // case: `BANK_XFR
-
-        `BANK_DMA_LAST_PRE : begin
-	   b2x_req = tras_ok_internal & x2b_pre_ok;
-	   b2x_cmd = `OP_PRE;
-	   b2r_ack = 1'b0;
-	   b2x_addr = l_raddr & 12'hBFF;	   // Dont want to pre all banks!
-           bank_prech_page_closed = 1'b1;
-	   next_bank_st = (x2b_ack) ? `BANK_IDLE : `BANK_DMA_LAST_PRE;
-	end // case: `BANK_DMA_LAST_PRE
-          
-      endcase // case(bank_st)
-
-   end // always @ (bank_st or ...)
-
-   assign b2x_start = (bank_st == `BANK_IDLE) ? r2b_start : l_start;
-
-   assign b2x_last = (bank_st == `BANK_IDLE) ? r2b_last : l_last;
-
-   assign b2x_id = (bank_st == `BANK_IDLE) ? r2b_req_id : l_id;
-
-   assign b2x_len = (bank_st == `BANK_IDLE) ? r2b_len : l_len;
-
-   assign b2x_wrap = (bank_st == `BANK_IDLE) ? r2b_wrap : l_wrap;
+   assign xfr_ok[0] = (xfr_ba == 2'b00) ? 1'b1 : 1'b0;
+   assign xfr_ok[1] = (xfr_ba == 2'b01) ? 1'b1 : 1'b0;
+   assign xfr_ok[2] = (xfr_ba == 2'b10) ? 1'b1 : 1'b0;
+   assign xfr_ok[3] = (xfr_ba == 2'b11) ? 1'b1 : 1'b0;
    
-endmodule // sdr_bank_fsm
+   /****************************************************************************/
+   // Instantiate Bank Ctl FSM 0
+
+   sdrc_bank_fsm bank0_fsm (.clk (clk),
+			   .reset_n (reset_n),
+
+			   /* Req from req_gen */
+			   .r2b_req (r2i_req[0]),
+			   .r2b_req_id (r2b_req_id),
+			   .r2b_start (r2b_start),
+			   .r2b_last (r2b_last),
+			   .r2b_wrap (r2b_wrap),
+			   .r2b_raddr (r2b_raddr),
+			   .r2b_caddr (r2b_caddr),
+			   .r2b_len (r2b_len),
+			   .r2b_write (r2b_write),
+			   .b2r_ack (i2r_ack[0]),
+                           .sdr_dma_last(rank_ba_last[0]),
+
+			   /* Transfer request to xfr_ctl */
+			   .b2x_req (i2x_req[0]),
+			   .b2x_start (i2x_start[0]),
+			   .b2x_last (i2x_last[0]),
+			   .b2x_wrap (i2x_wrap[0]),
+			   .b2x_id (i2x_id0),
+			   .b2x_addr (i2x_addr0),
+			   .b2x_len (i2x_len0),
+			   .b2x_cmd (i2x_cmd0),
+			   .x2b_ack (x2i_ack[0]),
+		     
+			   /* Status to/from xfr_ctl */
+			   .tras_ok (tras_ok[0]),
+			   .xfr_ok (xfr_ok[0]),
+			   .x2b_refresh (x2b_refresh),
+			   .x2b_pre_ok (x2b_pre_ok[0]),
+			   .x2b_act_ok (x2b_act_ok),
+			   .x2b_rdok (x2b_rdok),
+			   .x2b_wrok (x2b_wrok),
+
+			   .bank_row(bank0_row),
+
+			   /* SDRAM Timing */
+			   .tras_delay (tras_delay),
+			   .trp_delay (trp_delay),
+			   .trcd_delay (trcd_delay));
+   
+   /****************************************************************************/
+   // Instantiate Bank Ctl FSM 1
+
+   sdrc_bank_fsm bank1_fsm (.clk (clk),
+			   .reset_n (reset_n),
+
+			   /* Req from req_gen */
+			   .r2b_req (r2i_req[1]),
+			   .r2b_req_id (r2b_req_id),
+			   .r2b_start (r2b_start),
+			   .r2b_last (r2b_last),
+			   .r2b_wrap (r2b_wrap),
+			   .r2b_raddr (r2b_raddr),
+			   .r2b_caddr (r2b_caddr),
+			   .r2b_len (r2b_len),
+			   .r2b_write (r2b_write),
+			   .b2r_ack (i2r_ack[1]),
+                           .sdr_dma_last(rank_ba_last[1]),
+
+			   /* Transfer request to xfr_ctl */
+			   .b2x_req (i2x_req[1]),
+			   .b2x_start (i2x_start[1]),
+			   .b2x_last (i2x_last[1]),
+			   .b2x_wrap (i2x_wrap[1]),
+			   .b2x_id (i2x_id1),
+			   .b2x_addr (i2x_addr1),
+			   .b2x_len (i2x_len1),
+			   .b2x_cmd (i2x_cmd1),
+			   .x2b_ack (x2i_ack[1]),
+		     
+			   /* Status to/from xfr_ctl */
+			   .tras_ok (tras_ok[1]),           
+			   .xfr_ok (xfr_ok[1]),
+			   .x2b_refresh (x2b_refresh),
+			   .x2b_pre_ok (x2b_pre_ok[1]),
+			   .x2b_act_ok (x2b_act_ok),
+			   .x2b_rdok (x2b_rdok),
+			   .x2b_wrok (x2b_wrok),
+
+			   .bank_row(bank1_row),
+
+			   /* SDRAM Timing */
+			   .tras_delay (tras_delay),
+			   .trp_delay (trp_delay),
+			   .trcd_delay (trcd_delay));
+   
+   /****************************************************************************/
+   // Instantiate Bank Ctl FSM 2
+
+   sdrc_bank_fsm bank2_fsm (.clk (clk),
+			   .reset_n (reset_n),
+
+			   /* Req from req_gen */
+			   .r2b_req (r2i_req[2]),
+			   .r2b_req_id (r2b_req_id),
+			   .r2b_start (r2b_start),
+			   .r2b_last (r2b_last),
+			   .r2b_wrap (r2b_wrap),
+			   .r2b_raddr (r2b_raddr),
+			   .r2b_caddr (r2b_caddr),
+			   .r2b_len (r2b_len),
+			   .r2b_write (r2b_write),
+			   .b2r_ack (i2r_ack[2]),
+                           .sdr_dma_last(rank_ba_last[2]),
+
+			   /* Transfer request to xfr_ctl */
+			   .b2x_req (i2x_req[2]),
+			   .b2x_start (i2x_start[2]),
+			   .b2x_last (i2x_last[2]),
+			   .b2x_wrap (i2x_wrap[2]),
+			   .b2x_id (i2x_id2),
+			   .b2x_addr (i2x_addr2),
+			   .b2x_len (i2x_len2),
+			   .b2x_cmd (i2x_cmd2),
+			   .x2b_ack (x2i_ack[2]),
+		     
+			   /* Status to/from xfr_ctl */
+			   .tras_ok (tras_ok[2]),           
+			   .xfr_ok (xfr_ok[2]),
+			   .x2b_refresh (x2b_refresh),
+			   .x2b_pre_ok (x2b_pre_ok[2]),
+			   .x2b_act_ok (x2b_act_ok),
+			   .x2b_rdok (x2b_rdok),
+			   .x2b_wrok (x2b_wrok),
+
+			   .bank_row(bank2_row),
+
+			   /* SDRAM Timing */
+			   .tras_delay (tras_delay),
+			   .trp_delay (trp_delay),
+			   .trcd_delay (trcd_delay));
+   
+   /****************************************************************************/
+   // Instantiate Bank Ctl FSM 3
+
+   sdrc_bank_fsm bank3_fsm (.clk (clk),
+			   .reset_n (reset_n),
+
+			   /* Req from req_gen */
+			   .r2b_req (r2i_req[3]),
+			   .r2b_req_id (r2b_req_id),
+			   .r2b_start (r2b_start),
+			   .r2b_last (r2b_last),
+			   .r2b_wrap (r2b_wrap),
+			   .r2b_raddr (r2b_raddr),
+			   .r2b_caddr (r2b_caddr),
+			   .r2b_len (r2b_len),
+			   .r2b_write (r2b_write),
+			   .b2r_ack (i2r_ack[3]),
+                           .sdr_dma_last(rank_ba_last[3]),
+
+			   /* Transfer request to xfr_ctl */
+			   .b2x_req (i2x_req[3]),
+			   .b2x_start (i2x_start[3]),
+			   .b2x_last (i2x_last[3]),
+			   .b2x_wrap (i2x_wrap[3]),
+			   .b2x_id (i2x_id3),
+			   .b2x_addr (i2x_addr3),
+			   .b2x_len (i2x_len3),
+			   .b2x_cmd (i2x_cmd3),
+			   .x2b_ack (x2i_ack[3]),
+		     
+			   /* Status to/from xfr_ctl */
+			   .tras_ok (tras_ok[3]),           
+			   .xfr_ok (xfr_ok[3]),
+			   .x2b_refresh (x2b_refresh),
+			   .x2b_pre_ok (x2b_pre_ok[3]),
+			   .x2b_act_ok (x2b_act_ok),
+			   .x2b_rdok (x2b_rdok),
+			   .x2b_wrok (x2b_wrok),
+
+			   .bank_row(bank3_row),
+
+			   /* SDRAM Timing */
+			   .tras_delay (tras_delay),
+			   .trp_delay (trp_delay),
+			   .trcd_delay (trcd_delay));
+   
+
+/* address for current xfr, debug only */
+wire [11:0] cur_row = (xfr_bank_sel==3) ? bank3_row:
+			(xfr_bank_sel==2) ? bank2_row: 
+			(xfr_bank_sel==1) ? bank1_row: bank0_row; 
+
+assign xfr_addr_msb = (sdr_dev_config == 2'b11) ? {cur_row, xfr_bank_sel[1:0]}:
+				  {cur_row, xfr_bank_sel[0]}; 
+ 
+
+endmodule // sdr_bank_ctl

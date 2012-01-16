@@ -67,8 +67,8 @@ later version.
 `include "sdrc.def"
 module sdrc_core 
            (
-		sdram_clk,
-                pad_sdram_clk,
+		clk,
+                pad_clk,
 		reset_n,
                 sdr_width,
 
@@ -129,8 +129,8 @@ parameter  SDR_BW   = 2;   // SDR Byte Width
 //-----------------------------------------------
 // Global Variable
 // ----------------------------------------------
-input                   sdram_clk           ; // SDRAM Clock 
-input                   pad_sdram_clk       ; // SDRAM Clock from Pad, used for registering Read Data
+input                   clk                 ; // SDRAM Clock 
+input                   pad_clk             ; // SDRAM Clock from Pad, used for registering Read Data
 input                   reset_n             ; // Reset Signal
 input                   sdr_width           ; // 0 - 32 Bit SDR, 1 - 16 Bit SDR
 
@@ -266,7 +266,7 @@ wire                     app_rd_valid_int;
    // if wrap=0, decodes the bank and passe the request to bank_ctl
 
    sdrc_req_gen u_req_gen (
-          .clk                (sdram_clk          ),
+          .clk                (clk          ),
           .reset_n            (reset_n            ),
           .sdr_dev_config     (cfg_sdr_dev_config ),
 
@@ -306,7 +306,7 @@ wire                     app_rd_valid_int;
    // sdr_xfr_ctl. 
 
    sdrc_bank_ctl u_bank_ctl (
-          .clk                (sdram_clk          ),
+          .clk                (clk          ),
           .reset_n            (reset_n            ),
           .a2b_req_depth      (cfg_req_depth      ),
 			      
@@ -365,7 +365,7 @@ wire                     app_rd_valid_int;
    // bank is not available.
 
    sdrc_xfr_ctl u_xfr_ctl (
-          .clk                (sdram_clk          ),
+          .clk                (clk          ),
           .reset_n            (reset_n            ),
 			    
       /* Transfer request from bank_ctl */
@@ -410,7 +410,7 @@ wire                     app_rd_valid_int;
           .x2a_rdlast         (xfr_rdlast         ),
           .x2a_wrlast         (xfr_wrlast         ),
           .app_wrdt           (add_wr_data_int    ),
-          .app_wren_n         (add_wr_en_n_int    ),
+          .app_wren_n         (app_wr_en_n_int    ),
           .x2a_wrnext         (app_wr_next_int    ),
           .x2a_rddt           (app_rd_data_int    ),
           .x2a_rdok           (app_rd_valid_int   ),
@@ -433,7 +433,7 @@ wire                     app_rd_valid_int;
     );
    
 sdrc_bs_convert u_bs_convert (
-          .clk                (sdram_clk          ),
+          .clk                (clk          ),
           .reset_n            (reset_n            ),
           .sdr_width          (sdr_width          ),
 
@@ -446,7 +446,7 @@ sdrc_bs_convert u_bs_convert (
           .app_req_dma_last   (app_req_dma_last   ), 
           .app_req_dma_last_int(app_req_dma_last_int),
           .app_req_wr_n       (app_req_wr_n       ),
-          .app_req_ack16      (app_req_ack_int    ),
+          .app_req_ack_int    (app_req_ack_int    ),
           .app_req_ack        (app_req_ack        ),
 
           .app_wr_data        (app_wr_data        ),

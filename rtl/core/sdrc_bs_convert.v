@@ -54,8 +54,8 @@ module sdrc_bs_convert (
                     app_req_addr_int,
                     app_req_len,
                     app_req_len_int,
-                    app_req,
-                    app_req_int,
+                    app_sdr_req,
+                    app_sdr_req_int,
                     app_req_dma_last,
                     app_req_dma_last_int,
                     app_req_wr_n,
@@ -91,8 +91,8 @@ output [APP_AW:0]        app_req_addr_int;
 input  [APP_RW-1:0]      app_req_len ;
 output [APP_RW-1:0]      app_req_len_int; 
 input                    app_req_wr_n;
-input                    app_req;
-output                   app_req_int;
+input                    app_sdr_req;
+output                   app_sdr_req_int;
 input                    app_req_dma_last;
 output                   app_req_dma_last_int;
 input                    app_req_ack_int;
@@ -114,7 +114,7 @@ reg [APP_AW:0]           app_req_addr_int;
 reg [APP_RW-1:0]         app_req_len_int;
 
 reg                      app_req_dma_last_int;
-reg                      app_req_int;
+reg                      app_sdr_req_int;
 reg                      app_req_ack;
 
 reg [APP_DW-1:0]         app_rd_data;
@@ -152,7 +152,7 @@ always @(*) begin
             app_wr_data_int = app_wr_data;
             app_wr_en_n_int = app_wr_en_n;
             app_req_dma_last_int = app_req_dma_last;
-            app_req_int = app_req;
+            app_sdr_req_int = app_sdr_req;
             app_wr_next = app_wr_next_int;
             app_rd_data = app_rd_data_int;
             app_rd_valid = app_rd_valid_int;
@@ -164,7 +164,7 @@ always @(*) begin
             app_req_addr_int = {app_req_addr,1'b0};
             app_req_len_int = {app_req_len,1'b0};
             app_req_dma_last_int = app_req_dma_last;
-            app_req_int = app_req && ok_to_req;
+            app_sdr_req_int = app_sdr_req && ok_to_req;
             app_req_ack = app_req_ack_int;
             app_wr_next = lcl_wr_next;
             app_rd_valid = lcl_rd_valid;
@@ -209,7 +209,7 @@ always @(*) begin
             end
           SDR16_WR_LO:
             begin
-              if(app_wr_next)
+              if(app_wr_next_int)
                 begin
                   upper_word = 1'b1;
                   next_wr_state = SDR16_WR_HI;
