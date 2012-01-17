@@ -1,0 +1,343 @@
+//////////////////////////////////////////////////////////////////////
+////                                                              ////
+////                                                              ////
+////  This file is part of the SDRAM Controller project           ////
+////  http://www.opencores.org/cores/sdr_ctrl/                    ////
+////                                                              ////
+////  Description                                                 ////
+////  SDRAM CTRL definitions.                                     ////
+////                                                              ////
+////  To Do:                                                      ////
+////    nothing                                                   ////
+////                                                              ////
+////  Author(s):                                                  ////
+////      - Dinesh Annayya, dinesha@opencores.org                 ////
+////                                                              ////
+//////////////////////////////////////////////////////////////////////
+////                                                              ////
+//// Copyright (C) 2000 Authors and OPENCORES.ORG                 ////
+////                                                              ////
+//// This source file may be used and distributed without         ////
+//// restriction provided that this copyright statement is not    ////
+//// removed from the file and that any derivative work contains  ////
+//// the original copyright notice and the associated disclaimer. ////
+////                                                              ////
+//// This source file is free software; you can redistribute it   ////
+//// and/or modify it under the terms of the GNU Lesser General   ////
+//// Public License as published by the Free Software Foundation; ////
+//// either version 2.1 of the License, or (at your option) any   ////
+//// later version.                                               ////
+////                                                              ////
+//// This source is distributed in the hope that it will be       ////
+//// useful, but WITHOUT ANY WARRANTY; without even the implied   ////
+//// warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR      ////
+//// PURPOSE.  See the GNU Lesser General Public License for more ////
+//// details.                                                     ////
+////                                                              ////
+//// You should have received a copy of the GNU Lesser General    ////
+//// Public License along with this source; if not, download it   ////
+//// from http://www.opencores.org/lgpl.shtml                     ////
+////                                                              ////
+//////////////////////////////////////////////////////////////////////
+
+
+`timescale 1ns/1ps
+
+module tb_top;
+
+parameter P_SYS  = 10;     //    100MHz
+
+// General
+reg            RESETN;
+reg            sdram_clk;
+
+initial sdram_clk = 0;
+
+always #(P_SYS/2) sdram_clk = !sdram_clk;
+
+parameter      dw              = 32;  // data width
+parameter      tw              = 8;   // tag id width
+parameter      bl              = 5;   // burst_lenght_width 
+
+//-------------------------------------------
+// Application Interface bus
+//-------------------------------------------
+reg                   app_req            ; // Application Request
+reg  [8:0]            app_req_len        ; // Burst Request length
+wire                  app_req_ack        ; // Application Request Ack
+reg [29:0]            app_req_addr       ; // Application Address
+reg                   app_req_wr_n       ; // 1 -> Read, 0 -> Write
+reg [dw-1:0]          app_wr_data        ; // Write Data
+reg [dw/8-1:0]        app_wr_en_n        ; // Write Enable, Active Low
+wire                  app_rd_valid       ; // Read Valid
+wire [dw-1:0]         app_rd_data        ; // Read Data
+
+//--------------------------------------------
+// SDRAM I/F 
+//--------------------------------------------
+
+`ifdef SDR_32BIT
+   wire [31:0]           Dq                 ; // SDRAM Read/Write Data Bus
+   wire [31:0]           sdr_dout           ; // SDRAM Data Out
+   wire [31:0]           pad_sdr_din        ; // SDRAM Data Input
+   wire [3:0]            sdr_den_n          ; // SDRAM Data Enable
+   wire [3:0]            sdr_dqm            ; // SDRAM DATA Mask
+`else
+   wire [15:0]           Dq                 ; // SDRAM Read/Write Data Bus
+   wire [15:0]           sdr_dout           ; // SDRAM Data Out
+   wire [15:0]           pad_sdr_din        ; // SDRAM Data Input
+   wire [1:0]            sdr_den_n          ; // SDRAM Data Enable
+   wire [1:0]            sdr_dqm            ; // SDRAM DATA Mask
+`endif
+
+wire [1:0]            sdr_ba             ; // SDRAM Bank Select
+wire [11:0]           sdr_addr           ; // SDRAM ADRESS
+wire                  sdr_init_done      ; // SDRAM Init Done 
+
+// to fix the sdram interface timing issue
+wire #(1.5) sdram_clk_d = sdram_clk;
+
+`ifdef SDR_32BIT
+
+   sdrc_core #(.SDR_DW(32),.SDR_BW(4)) u_dut(
+`else
+   sdrc_core #(.SDR_DW(16),.SDR_BW(2)) u_dut(
+`endif
+      // System 
+          .clk                (sdram_clk_d        ),
+          .reset_n            (RESETN             ),
+          .pad_clk            (sdram_clk_d        ), 
+`ifdef SDR_32BIT
+          .sdr_width          (1'b0               ), // 32 BIT SDRAM
+`else
+          .sdr_width          (1'b1               ), // 16 BIT SDRAM
+`endif
+
+
+
+/* Request from app */
+          .app_req            (app_req            ),	// Transfer Request
+          .app_req_addr       (app_req_addr       ),	// SDRAM Address
+          .app_req_addr_mask  (29'h1FFF_FFFF      ),	// Address mask for queue wrap
+          .app_req_len        (app_req_len        ),	// Burst Length (in 16 bit words)
+          .app_req_wrap       (1'b0               ),	// Wrap mode request (xfr_len = 4)
+          .app_req_wr_n       (app_req_wr_n       ),	// 0 => Write request, 1 => read req
+          .app_req_ack        (app_req_ack        ),	// Request has been accepted
+          .sdr_core_busy_n    (                   ),	// OK to arbitrate next request
+		
+          .app_wr_data        (app_wr_data        ),
+          .app_wr_en_n        (app_wr_en_n        ),
+          .app_rd_data        (app_rd_data        ),
+          .app_rd_valid       (app_rd_valid       ),
+          .app_wr_next_req    (app_wr_next_req    ),
+          .app_req_dma_last   (app_req            ),
+
+/* Interface to SDRAMs */
+          .sdr_cs_n           (sdr_cs_n           ),
+          .sdr_cke            (sdr_cke            ),
+          .sdr_ras_n          (sdr_ras_n          ),
+          .sdr_cas_n          (sdr_cas_n          ),
+          .sdr_we_n           (sdr_we_n           ),
+          .sdr_dqm            (sdr_dqm            ),
+          .sdr_ba             (sdr_ba             ),
+          .sdr_addr           (sdr_addr           ), 
+          .pad_sdr_din        (Dq                 ),
+          .sdr_dout           (sdr_dout           ),
+          .sdr_den_n          (sdr_den_n          ),
+
+    /* Parameters */
+          .sdr_init_done      (sdr_init_done      ),
+          .cfg_req_depth      (2'h2               ),	        //how many req. buffer should hold
+          .cfg_sdr_en         (1'b1               ),
+          .cfg_sdr_dev_config (2'b0               ),	// using 64M/4bank SDRAMs
+          .cfg_sdr_mode_reg   (12'h033            ),
+          .cfg_sdr_tras_d     (4'h4               ),
+          .cfg_sdr_trp_d      (4'h2               ),
+          .cfg_sdr_trcd_d     (4'h2               ),
+          .cfg_sdr_cas        (3'h2               ),
+          .cfg_sdr_trcar_d    (4'h7               ),
+          .cfg_sdr_twr_d      (4'h1               ),
+          .cfg_sdr_rfsh       (12'hC35            ),
+          .cfg_sdr_rfmax      (3'h6               )
+
+);
+
+
+`ifdef SDR_32BIT
+  assign Dq[7:0]    = (sdr_den_n[0] == 1'b0) ? sdr_dout[7:0]   : 8'hZZ;
+  assign Dq[15:8]   = (sdr_den_n[1] == 1'b0) ? sdr_dout[15:8]  : 8'hZZ;
+  assign Dq[23:16]  = (sdr_den_n[2] == 1'b0) ? sdr_dout[23:16] : 8'hZZ;
+  assign Dq[31:24]  = (sdr_den_n[3] == 1'b0) ? sdr_dout[31:24] : 8'hZZ;
+mt48lc2m32b2 #(.data_bits(32)) u_sdram32 (
+          .Dq                 (Dq                 ) , 
+          .Addr               (sdr_addr           ), 
+          .Ba                 (sdr_ba             ), 
+          .Clk                (sdram_clk          ), 
+          .Cke                (sdr_cke            ), 
+          .Cs_n               (sdr_cs_n           ), 
+          .Ras_n              (sdr_ras_n          ), 
+          .Cas_n              (sdr_cas_n          ), 
+          .We_n               (sdr_we_n           ), 
+          .Dqm                (sdr_dqm            )
+     );
+
+`else
+
+assign Dq[7:0]  = (sdr_den_n[0] == 1'b0) ? sdr_dout[7:0]  : 8'hZZ;
+assign Dq[15:8] = (sdr_den_n[1] == 1'b0) ? sdr_dout[15:8] : 8'hZZ;
+
+   IS42VM16400K u_sdram16 (
+          .dq                 (Dq                 ), 
+          .addr               (sdr_addr           ), 
+          .ba                 (sdr_ba             ), 
+          .clk                (sdram_clk          ), 
+          .cke                (sdr_cke            ), 
+          .csb                (sdr_cs_n           ), 
+          .rasb               (sdr_ras_n          ), 
+          .casb               (sdr_cas_n          ), 
+          .web                (sdr_we_n           ), 
+          .dqm                (sdr_dqm            )
+    );
+`endif
+
+//--------------------
+// Write/Read Burst FIFO
+//--------------------
+int wrdfifo[$]; // write data fifo
+int rddfifo[$]; // read data fifo
+
+reg [31:0] read_data;
+reg [31:0] ErrCnt;
+int k;
+reg [31:0] StartAddr;
+/////////////////////////////////////////////////////////////////////////
+// Test Case
+/////////////////////////////////////////////////////////////////////////
+
+initial begin //{
+  ErrCnt          = 0;
+   app_req_addr  = 0;
+   app_wr_data    = 0;
+   app_wr_en_n    = 4'hF;
+   app_req_wr_n   = 0;
+   app_req        = 0;
+   app_req_len    = 0;
+
+  RESETN    = 1'h1;
+
+ #100
+  // Applying reset
+  RESETN    = 1'h0;
+  #10000;
+  // Releasing reset
+  RESETN    = 1'h1;
+  #1000;
+  wait(u_dut.sdr_init_done == 1);
+
+  #1000;
+  
+  wrdfifo.push_back(32'h11223344);
+  wrdfifo.push_back(32'h22334455);
+  wrdfifo.push_back(32'h33445566);
+  wrdfifo.push_back(32'h44556677);
+  wrdfifo.push_back(32'h55667788);
+
+  burst_write(32'h40000);  
+ #1000;
+  burst_read(32'h40000);  
+
+ #1000;
+  burst_write(32'h7000_0000);  
+ #1000;
+  burst_read(32'h7000_0000);  
+
+  for(k=0; k < 20; k++) begin
+     StartAddr = $random & 32'h07FFFFFF;
+     burst_write(StartAddr);  
+    #1000;
+     burst_read(StartAddr);  
+  end
+
+
+  #10000;
+
+        $display("###############################");
+    if(ErrCnt == 0)
+        $display("STATUS: SDRAM Write/Read TEST PASSED");
+    else
+        $display("ERROR:  SDRAM Write/Read TEST FAILED");
+        $display("###############################");
+
+    $finish;
+end
+
+task burst_write;
+input [31:0] Address;
+int i;
+begin
+   @ (negedge sdram_clk);
+   app_req        = 1;
+   app_wr_en_n    = 0;
+   app_req_wr_n   = 1'b0;
+   $display("Write Address: %x, Burst Size: %d",Address,wrdfifo.size);
+   app_req_addr  = Address[31:2];
+   app_req_len    = wrdfifo.size;
+
+   // wait for app_req_ack == 1
+   do begin
+       @ (posedge sdram_clk);
+   end while(app_req_ack == 1'b0);
+   @ (negedge sdram_clk);
+   app_req           = 0;
+
+   for(i=0; i < wrdfifo.size; i++) begin
+      app_wr_data     = wrdfifo[i];
+
+      do begin
+          @ (posedge sdram_clk);
+      end while(app_wr_next_req == 1'b0);
+          @ (negedge sdram_clk);
+   
+       $display("Status: Burst-No: %d  Write Address: %x  WriteData: %x ",i,Address,app_wr_data);
+   end
+   app_req           = 0;
+   app_wr_en_n       = 4'hF;
+end
+endtask
+
+task burst_read;
+input [31:0] Address;
+
+int i,j;
+reg [31:0]   rd_data;
+begin
+   @ (negedge sdram_clk);
+
+      app_req        = 1;
+      app_wr_en_n    = 0;
+      app_req_wr_n   = 1;
+      app_req_addr   = Address[29:2];
+      app_req_len    = wrdfifo.size;
+      // wait for app_req_ack == 1
+      do begin
+          @ (posedge sdram_clk);
+      end while(app_req_ack == 1'b0);
+      @ (negedge sdram_clk);
+      app_req           = 0;
+
+      for(j=0; j < wrdfifo.size; j++) begin
+         wait(app_rd_valid == 1);
+         @ (posedge sdram_clk);
+         if(app_rd_data != wrdfifo[j]) begin
+             $display("READ ERROR: Burst-No: %d Addr: %x Rxp: %x Exd: %x",j,Address+(j*2),app_rd_data,wrdfifo[j]);
+             ErrCnt = ErrCnt+1;
+         end else begin
+             $display("READ STATUS: Burst-No: %d Addr: %x Rxd: %x",j,Address+(j*2),app_rd_data);
+         end 
+         @ (negedge sdram_clk);
+      end
+end
+endtask
+
+
+endmodule
