@@ -1,0 +1,12 @@
+#!/bin/csh -f
+
+echo "#############################"
+echo " INITIATING SDR 16 BIT Tests"
+echo ##############################
+./run_modelsim SDR_16BIT | tee ../log/sdr16_sim.log
+
+echo "#############################"
+echo " INITIATING SDR 32 BIT Tests"
+echo ##############################
+./run_modelsim SDR_32BIT | tee ../log/sdr32_sim.log
+

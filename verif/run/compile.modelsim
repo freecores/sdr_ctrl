@@ -1,0 +1,10 @@
+#!/bin/csh
+
+if(! -e work) then
+   vlib work
+else
+   \rm -rf work
+   vlib work
+endif
+
+vlog -work work +define+$1 -f filelist.f
