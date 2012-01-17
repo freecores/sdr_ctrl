@@ -265,7 +265,7 @@ wire                     app_rd_valid_int;
    // This module takes requests from the app, chops them to burst booundaries
    // if wrap=0, decodes the bank and passe the request to bank_ctl
 
-   sdrc_req_gen u_req_gen (
+sdrc_req_gen #(.SDR_DW(SDR_DW) , .SDR_BW(SDR_BW)) u_req_gen (
           .clk                (clk          ),
           .reset_n            (reset_n            ),
           .sdr_dev_config     (cfg_sdr_dev_config ),
@@ -305,7 +305,7 @@ wire                     app_rd_valid_int;
    // issues precharge/activate commands and then passes the request to
    // sdr_xfr_ctl. 
 
-   sdrc_bank_ctl u_bank_ctl (
+sdrc_bank_ctl #(.SDR_DW(SDR_DW) ,  .SDR_BW(SDR_BW)) u_bank_ctl (
           .clk                (clk          ),
           .reset_n            (reset_n            ),
           .a2b_req_depth      (cfg_req_depth      ),
@@ -364,7 +364,7 @@ wire                     app_rd_valid_int;
    // burst terminate if not at the end of a burst and another command to this
    // bank is not available.
 
-   sdrc_xfr_ctl u_xfr_ctl (
+sdrc_xfr_ctl #(.SDR_DW(SDR_DW) ,  .SDR_BW(SDR_BW)) u_xfr_ctl (
           .clk                (clk          ),
           .reset_n            (reset_n            ),
 			    
@@ -432,7 +432,7 @@ wire                     app_rd_valid_int;
           .rfsh_rmax          (cfg_sdr_rfmax      )
     );
    
-sdrc_bs_convert u_bs_convert (
+sdrc_bs_convert #(.SDR_DW(SDR_DW) ,  .SDR_BW(SDR_BW)) u_bs_convert (
           .clk                (clk          ),
           .reset_n            (reset_n            ),
           .sdr_width          (sdr_width          ),
