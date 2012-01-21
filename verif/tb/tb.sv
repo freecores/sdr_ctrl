@@ -112,7 +112,7 @@ wire #(1.5) sdram_clk_d = sdram_clk;
 `else
           .sdr_width          (1'b1               ), // 16 BIT SDRAM
 `endif
-
+          .cfg_colbits        (2'b00              ), // 8 Bit Column Address
 
 
 /* Request from app */
