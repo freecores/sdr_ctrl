@@ -86,9 +86,7 @@ module sdrc_bank_ctl (clk,
 		     x2b_wrok,	   // OK to do a write
 
 		     /* xfr msb address */
-		     sdr_dev_config,
 		     xfr_bank_sel,
-		     xfr_addr_msb,
                      sdr_req_norm_dma_last,
 
 		     /* SDRAM Timing */
@@ -135,9 +133,7 @@ parameter  SDR_BW   = 2;   // SDR Byte Width
    
    input [3:0] 			tras_delay, trp_delay, trcd_delay;
 
-   input [1:0] sdr_dev_config;
    input [1:0] xfr_bank_sel;
-   output [13:0] xfr_addr_msb;
 
    /****************************************************************************/
    // Internal Nets
@@ -563,8 +559,6 @@ wire [11:0] cur_row = (xfr_bank_sel==3) ? bank3_row:
 			(xfr_bank_sel==2) ? bank2_row: 
 			(xfr_bank_sel==1) ? bank1_row: bank0_row; 
 
-assign xfr_addr_msb = (sdr_dev_config == 2'b11) ? {cur_row, xfr_bank_sel[1:0]}:
-				  {cur_row, xfr_bank_sel[0]}; 
  
 
 endmodule // sdr_bank_ctl

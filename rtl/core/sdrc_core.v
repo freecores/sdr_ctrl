@@ -107,7 +107,6 @@ module sdrc_core
 
 		/* Parameters */
 		cfg_sdr_en,
-		cfg_sdr_dev_config,	// using 64M/4bank SDRAMs
 		cfg_sdr_mode_reg,
 		cfg_sdr_tras_d,
 		cfg_sdr_trp_d,
@@ -177,7 +176,6 @@ input [3:0] 		cfg_sdr_tras_d      ; // Active to precharge delay
 input [3:0]             cfg_sdr_trp_d       ; // Precharge to active delay
 input [3:0]             cfg_sdr_trcd_d      ; // Active to R/W delay
 input 			cfg_sdr_en          ; // Enable SDRAM controller
-input [1:0]             cfg_sdr_dev_config  ; // 2'b00 - 8 MB, 01 - 16 MB, 10 - 32 MB , 11 - 64 MB
 input [1:0] 		cfg_req_depth       ; // Maximum Request accepted by SDRAM controller
 input [APP_RW-1:0]	app_req_len         ; // Application Burst Request length in 32 bit 
 input [11:0] 		cfg_sdr_mode_reg    ;
@@ -218,7 +216,6 @@ wire 			x2b_refresh, x2b_act_ok, x2b_rdok, x2b_wrok;
 wire 			xfr_rdstart, xfr_rdlast;
 wire 			xfr_wrstart, xfr_wrlast;
 wire [`SDR_REQ_ID_W-1:0]xfr_id;
-wire [13:0]		xfr_addr_msb;
 wire [APP_DW-1:0] 	app_rd_data;
 wire 			app_wr_next_req, app_rd_valid;
 wire 			sdr_cs_n, sdr_cke, sdr_ras_n, sdr_cas_n, sdr_we_n; 
@@ -231,7 +228,6 @@ wire [SDR_BW-1:0] 	sdr_den_n;
 wire [SDR_BW-1:0] 	sdr_den_n_int;
 
 wire [1:0] 		xfr_bank_sel;
-wire [1:0] 		cfg_sdr_dev_config;
 
 wire [APP_AW:0]          app_req_addr_int;
 wire [APP_AW-1:0]        app_req_addr;
@@ -271,7 +267,6 @@ wire                     app_rd_valid_int;
 sdrc_req_gen #(.SDR_DW(SDR_DW) , .SDR_BW(SDR_BW)) u_req_gen (
           .clk                (clk          ),
           .reset_n            (reset_n            ),
-          .sdr_dev_config     (cfg_sdr_dev_config ),
 	  .cfg_colbits        (cfg_colbits        ),
 
 	/* Request from app */
@@ -350,10 +345,8 @@ sdrc_bank_ctl #(.SDR_DW(SDR_DW) ,  .SDR_BW(SDR_BW)) u_bank_ctl (
           .x2b_wrok           (x2b_wrok           ),
 
       /* for generate cuurent xfr address msb */
-          .sdr_dev_config     (cfg_sdr_dev_config ),
           .sdr_req_norm_dma_last(app_req_dma_last_int),
           .xfr_bank_sel       (xfr_bank_sel       ),
-          .xfr_addr_msb       (xfr_addr_msb       ),
 
        /* SDRAM Timing */
           .tras_delay         (cfg_sdr_tras_d     ),

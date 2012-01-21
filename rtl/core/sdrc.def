@@ -23,10 +23,5 @@
 `define SDR_REFRESH      4'b0001
 `define SDR_MODE         4'b0000
 
-// sdr configuration
-`define SDR_CONFIG_IS_8M                2'b00
-`define SDR_CONFIG_IS_16M               2'b01
-`define SDR_CONFIG_IS_32M               2'b10
-`define SDR_CONFIG_IS_64M               2'b11
 
 

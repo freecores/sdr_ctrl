@@ -81,7 +81,6 @@ module sdrc_req_gen (clk,
 		    req_wr_n,	// 0 => Write request, 1 => read req
 		    req_ack,	// Request has been accepted
 		    sdr_core_busy_n,	// SDRAM Core Busy Indication
-                    sdr_dev_config, // sdram configuration
 		    cfg_colbits,
 		    
 		    /* Req to bank_ctl */
@@ -132,7 +131,6 @@ parameter  SDR_BW   = 2;   // SDR Byte Width
    input 			b2r_ack, b2r_arb_ok, sdr_init_done;
 //
    input 			sdr_width;
-   input  [1:0]                 sdr_dev_config;
 
    /****************************************************************************/
    // Internal Nets
