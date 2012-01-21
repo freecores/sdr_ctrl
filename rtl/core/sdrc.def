@@ -27,6 +27,6 @@
 `define SDR_CONFIG_IS_8M                2'b00
 `define SDR_CONFIG_IS_16M               2'b01
 `define SDR_CONFIG_IS_32M               2'b10
-`define SDR_CONFIG_IS_LGCY              2'b11
+`define SDR_CONFIG_IS_64M               2'b11
 
 

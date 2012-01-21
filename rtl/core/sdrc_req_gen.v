@@ -82,6 +82,7 @@ module sdrc_req_gen (clk,
 		    req_ack,	// Request has been accepted
 		    sdr_core_busy_n,	// SDRAM Core Busy Indication
                     sdr_dev_config, // sdram configuration
+		    cfg_colbits,
 		    
 		    /* Req to bank_ctl */
 		    r2x_idle,
@@ -109,6 +110,7 @@ parameter  SDR_DW   = 16;  // SDR Data Width
 parameter  SDR_BW   = 2;   // SDR Byte Width
 
    input                        clk, reset_n;
+   input [1:0]                  cfg_colbits; // 2'b00 - 8 Bit column address, 2'b01 - 9 Bit, 10 - 10 bit, 11 - 11Bits
 
    /* Request from app */
    input 			req;
@@ -165,8 +167,9 @@ parameter  SDR_BW   = 2;   // SDR Byte Width
    // accesses within the space for a Q. When splitting and calculating the next
    // address only the LSBs are incremented, the MSBs remain = req_addr.
    //
-   assign max_r2b_len = (sdr_width == 1'b0) ? ((sdr_dev_config == `SDR_CONFIG_IS_32M) ? (12'h200 - r2b_caddr) : (12'h100 - r2b_caddr)) :
-                                               (sdr_dev_config == `SDR_CONFIG_IS_8M) ? (12'h100 - r2b_caddr) : (12'h200 - r2b_caddr);
+   assign max_r2b_len = (cfg_colbits == 2'b00) ? (12'h100 - r2b_caddr) :
+	                (cfg_colbits == 2'b01) ? (12'h200 - r2b_caddr) :
+			(cfg_colbits == 2'b10) ? (12'h400 - r2b_caddr) : (12'h800 - r2b_caddr);
 
    assign page_ovflw = ({1'b0, lcl_req_len} > max_r2b_len) ? ~lcl_wrap : 1'b0;
 
@@ -245,31 +248,26 @@ parameter  SDR_BW   = 2;   // SDR Byte Width
 //
 // addrs bits for the bank, row and column
 //
-//  SDR_CONFIG_IS_8M                2'b00
-//  SDR_CONFIG_IS_16M               2'b01
-//  SDR_CONFIG_IS_32M               2'b10
-//  SDR_CONFIG_IS_LGCY              2'b11
-//
-   assign r2b_ba = ({sdr_width,sdr_dev_config} == {1'b0,`SDR_CONFIG_IS_8M}) ? curr_sdr_addr[20:19] :
-                   ({sdr_width,sdr_dev_config} == {1'b0,`SDR_CONFIG_IS_16M}) ? curr_sdr_addr[21:20] :
-                   ({sdr_width,sdr_dev_config} == {1'b0,`SDR_CONFIG_IS_32M}) ? curr_sdr_addr[22:21] :
-                   ({sdr_width,sdr_dev_config} == {1'b1,`SDR_CONFIG_IS_8M}) ? curr_sdr_addr[21:20] :
-                   ({sdr_width,sdr_dev_config} == {1'b1,`SDR_CONFIG_IS_16M}) ? curr_sdr_addr[22:21]:
-                   ({sdr_width,sdr_dev_config} == {1'b1,`SDR_CONFIG_IS_32M}) ? curr_sdr_addr[23:22] : curr_sdr_addr[9:8];
 
-   assign r2b_caddr = ({sdr_width,sdr_dev_config} == {1'b0,`SDR_CONFIG_IS_8M}) ? {4'b0, curr_sdr_addr[7:0]} :
-                      ({sdr_width,sdr_dev_config} == {1'b0,`SDR_CONFIG_IS_16M}) ? {4'b0, curr_sdr_addr[7:0]} :
-                      ({sdr_width,sdr_dev_config} == {1'b0,`SDR_CONFIG_IS_32M}) ? {3'b0, curr_sdr_addr[8:0]} :
-                      ({sdr_width,sdr_dev_config} == {1'b1,`SDR_CONFIG_IS_8M}) ? {3'b0, curr_sdr_addr[7:0]} :
-                      ({sdr_width,sdr_dev_config} == {1'b1,`SDR_CONFIG_IS_16M}) ? {3'b0, curr_sdr_addr[8:0]} :
-                      ({sdr_width,sdr_dev_config} == {1'b1,`SDR_CONFIG_IS_32M}) ? {2'b0, curr_sdr_addr[8:0]} : {4'b0, curr_sdr_addr[7:0]};
+// Bank Bits are always - 2 Bits
+   assign r2b_ba = (cfg_colbits == 2'b00) ? {curr_sdr_addr[9:8]}   :
+	           (cfg_colbits == 2'b01) ? {curr_sdr_addr[10:9]}  :
+	           (cfg_colbits == 2'b10) ? {curr_sdr_addr[11:10]} : curr_sdr_addr[12:11];
 
-   assign r2b_raddr = ({sdr_width,sdr_dev_config} == {1'b0,`SDR_CONFIG_IS_8M}) ? {1'b0, curr_sdr_addr[18:8]} :
-                      ({sdr_width,sdr_dev_config} == {1'b0,`SDR_CONFIG_IS_16M}) ? curr_sdr_addr[19:8] :
-                      ({sdr_width,sdr_dev_config} == {1'b0,`SDR_CONFIG_IS_32M}) ? curr_sdr_addr[20:9] :
-                      ({sdr_width,sdr_dev_config} == {1'b1,`SDR_CONFIG_IS_8M}) ? {1'b0,curr_sdr_addr[19:8]} :
-                      ({sdr_width,sdr_dev_config} == {1'b1,`SDR_CONFIG_IS_16M}) ? curr_sdr_addr[20:9] :
-                      ({sdr_width,sdr_dev_config} == {1'b1,`SDR_CONFIG_IS_32M}) ? curr_sdr_addr[21:9] : {1'b0, curr_sdr_addr[20:10]};
+   /********************
+   *  Colbits Mapping:
+   *           2'b00 - 8 Bit
+   *           2'b01 - 16 Bit
+   *           2'b10 - 10 Bit
+   *           2'b11 - 11 Bits
+   ************************/
+   assign r2b_caddr = (cfg_colbits == 2'b00) ? {4'b0, curr_sdr_addr[7:0]} :
+	              (cfg_colbits == 2'b01) ? {3'b0, curr_sdr_addr[8:0]} :
+	              (cfg_colbits == 2'b10) ? {2'b0, curr_sdr_addr[9:0]} : {1'b0, curr_sdr_addr[10:0]};
 
+   assign r2b_raddr = (cfg_colbits == 2'b00)  ? curr_sdr_addr[21:10] :
+	              (cfg_colbits == 2'b01)  ? curr_sdr_addr[22:11] :
+	              (cfg_colbits == 2'b10)  ? curr_sdr_addr[23:12] : curr_sdr_addr[24:13];
+	   
    
 endmodule // sdr_req_gen

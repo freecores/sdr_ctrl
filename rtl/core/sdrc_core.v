@@ -71,6 +71,7 @@ module sdrc_core
                 pad_clk,
 		reset_n,
                 sdr_width,
+		cfg_colbits,
 
 		/* Request from app */
 		app_req,	        // Transfer Request
@@ -133,6 +134,8 @@ input                   clk                 ; // SDRAM Clock
 input                   pad_clk             ; // SDRAM Clock from Pad, used for registering Read Data
 input                   reset_n             ; // Reset Signal
 input                   sdr_width           ; // 0 - 32 Bit SDR, 1 - 16 Bit SDR
+input [1:0]             cfg_colbits         ; // 2'b00 - 8 Bit column address, 2'b01 - 9 Bit, 10 - 10 bit, 11 - 11Bits
+
 
 //------------------------------------------------
 // Request from app
@@ -169,18 +172,18 @@ output [SDR_BW-1:0] 	sdr_den_n           ; // SDRAM Data Output enable
 //------------------------------------------------
 // Configuration Parameter
 //------------------------------------------------
-output                  sdr_init_done       ;
-input [3:0] 		cfg_sdr_tras_d      ;
-input [3:0]             cfg_sdr_trp_d       ;
-input [3:0]             cfg_sdr_trcd_d      ;
-input 			cfg_sdr_en          ; 
+output                  sdr_init_done       ; // Indicate SDRAM Initialisation Done
+input [3:0] 		cfg_sdr_tras_d      ; // Active to precharge delay
+input [3:0]             cfg_sdr_trp_d       ; // Precharge to active delay
+input [3:0]             cfg_sdr_trcd_d      ; // Active to R/W delay
+input 			cfg_sdr_en          ; // Enable SDRAM controller
 input [1:0]             cfg_sdr_dev_config  ; // 2'b00 - 8 MB, 01 - 16 MB, 10 - 32 MB , 11 - 64 MB
-input [1:0] 		cfg_req_depth       ;
-input [APP_RW-1:0]	app_req_len         ;
+input [1:0] 		cfg_req_depth       ; // Maximum Request accepted by SDRAM controller
+input [APP_RW-1:0]	app_req_len         ; // Application Burst Request length in 32 bit 
 input [11:0] 		cfg_sdr_mode_reg    ;
-input [2:0] 		cfg_sdr_cas         ;
-input [3:0] 		cfg_sdr_trcar_d     ;
-input [3:0]             cfg_sdr_twr_d       ;
+input [2:0] 		cfg_sdr_cas         ; // SDRAM CAS Latency
+input [3:0] 		cfg_sdr_trcar_d     ; // Auto-refresh period
+input [3:0]             cfg_sdr_twr_d       ; // Write recovery delay
 input [`SDR_RFSH_TIMER_W-1 : 0] cfg_sdr_rfsh;
 input [`SDR_RFSH_ROW_CNT_W -1 : 0] cfg_sdr_rfmax;
 input                   app_req_dma_last;    // this signal should close the bank
@@ -269,6 +272,7 @@ sdrc_req_gen #(.SDR_DW(SDR_DW) , .SDR_BW(SDR_BW)) u_req_gen (
           .clk                (clk          ),
           .reset_n            (reset_n            ),
           .sdr_dev_config     (cfg_sdr_dev_config ),
+	  .cfg_colbits        (cfg_colbits        ),
 
 	/* Request from app */
           .r2x_idle           (r2x_idle           ),
