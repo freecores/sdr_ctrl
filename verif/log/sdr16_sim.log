@@ -3,6 +3,7 @@ Model Technology ModelSim ACTEL vlog 6.6d Compiler 2010.11 Nov  2 2010
 -- Compiling module tb_top
 -- Compiling module IS42VM16400K
 -- Compiling module mt48lc2m32b2
+-- Compiling module mt48lc8m8a2
 -- Compiling module sdrc_core
 -- Compiling module sdrc_bank_ctl
 -- Compiling module sdrc_bank_fsm
@@ -13,6 +14,7 @@ Model Technology ModelSim ACTEL vlog 6.6d Compiler 2010.11 Nov  2 2010
 Top level modules:
 	tb_top
 	mt48lc2m32b2
+	mt48lc8m8a2
 #### Compile : PASSED
 
 ###########################################
@@ -290,8 +292,8 @@ Reading D:/Actel/Libero_v9.1/Model/tcl/vsim/pref.tcl
 ###############################
 # STATUS: SDRAM Write/Read TEST PASSED
 ###############################
-# ** Note: $finish    : ../tb/tb.sv(271)
-#    Time: 53030 ns  Iteration: 0  Instance: /tb_top
+# ** Note: $finish    : ../tb/tb.sv(296)
+#    Time: 52840 ns  Iteration: 0  Instance: /tb_top
 ### test 1: basic_test1 --> PASSED
 ###########################################
 

@@ -2,6 +2,7 @@ Model Technology ModelSim ACTEL vlog 6.6d Compiler 2010.11 Nov  2 2010
 -- Compiling module tb_top
 -- Compiling module IS42VM16400K
 -- Compiling module mt48lc2m32b2
+-- Compiling module mt48lc8m8a2
 -- Compiling module sdrc_core
 -- Compiling module sdrc_bank_ctl
 -- Compiling module sdrc_bank_fsm
@@ -12,3 +13,4 @@ Model Technology ModelSim ACTEL vlog 6.6d Compiler 2010.11 Nov  2 2010
 Top level modules:
 	tb_top
 	IS42VM16400K
+	mt48lc8m8a2

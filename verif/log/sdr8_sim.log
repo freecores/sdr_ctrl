@@ -1,3 +1,27 @@
+ Compiling with MODELSIM in SDR_8BIT Mode 
+Model Technology ModelSim ACTEL vlog 6.6d Compiler 2010.11 Nov  2 2010
+-- Compiling module tb_top
+-- Compiling module IS42VM16400K
+-- Compiling module mt48lc2m32b2
+-- Compiling module mt48lc8m8a2
+-- Compiling module sdrc_core
+-- Compiling module sdrc_bank_ctl
+-- Compiling module sdrc_bank_fsm
+-- Compiling module sdrc_bs_convert
+-- Compiling module sdrc_req_gen
+-- Compiling module sdrc_xfr_ctl
+
+Top level modules:
+	tb_top
+	IS42VM16400K
+	mt48lc2m32b2
+#### Compile : PASSED
+
+###########################################
+ Runing GMAC/SPI/UART test programs 
+###########################################
+###########################################
+### Running test 1: basic_test1
 Reading D:/Actel/Libero_v9.1/Model/tcl/vsim/pref.tcl 
 
 # 6.6d
@@ -21,7 +45,7 @@ Reading D:/Actel/Libero_v9.1/Model/tcl/vsim/pref.tcl
 # Loading work.sdrc_bank_fsm
 # Loading work.sdrc_xfr_ctl
 # Loading work.sdrc_bs_convert
-# Loading work.IS42VM16400K
+# Loading work.mt48lc8m8a2
 # do run.do 
 # Write Address: 00040000, Burst Size:           5
 # Status: Burst-No:           0  Write Address: 00040000  WriteData: 11223344 
@@ -269,4 +293,17 @@ Reading D:/Actel/Libero_v9.1/Model/tcl/vsim/pref.tcl
 # STATUS: SDRAM Write/Read TEST PASSED
 ###############################
 # ** Note: $finish    : ../tb/tb.sv(296)
-#    Time: 52840 ns  Iteration: 0  Instance: /tb_top
+#    Time: 57240 ns  Iteration: 0  Instance: /tb_top
+### test 1: basic_test1 --> PASSED
+###########################################
+
+###########################################
+###  Test Logs                            
+   test 1: ../log/SDR_8BIT_basic_test1.log
+###########################################
+
+###########################################
+###  Test Summary                          
+### 
+### Failed 0 of 1 SDR_8BIT tests
+###########################################
