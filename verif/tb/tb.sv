@@ -82,12 +82,18 @@ wire [dw-1:0]         app_rd_data        ; // Read Data
    wire [31:0]           pad_sdr_din        ; // SDRAM Data Input
    wire [3:0]            sdr_den_n          ; // SDRAM Data Enable
    wire [3:0]            sdr_dqm            ; // SDRAM DATA Mask
-`else
+`elsif SDR_16BIT 
    wire [15:0]           Dq                 ; // SDRAM Read/Write Data Bus
    wire [15:0]           sdr_dout           ; // SDRAM Data Out
    wire [15:0]           pad_sdr_din        ; // SDRAM Data Input
    wire [1:0]            sdr_den_n          ; // SDRAM Data Enable
    wire [1:0]            sdr_dqm            ; // SDRAM DATA Mask
+`else 
+   wire [7:0]           Dq                 ; // SDRAM Read/Write Data Bus
+   wire [7:0]           sdr_dout           ; // SDRAM Data Out
+   wire [7:0]           pad_sdr_din        ; // SDRAM Data Input
+   wire [0:0]           sdr_den_n          ; // SDRAM Data Enable
+   wire [0:0]           sdr_dqm            ; // SDRAM DATA Mask
 `endif
 
 wire [1:0]            sdr_ba             ; // SDRAM Bank Select
@@ -100,17 +106,21 @@ wire #(1.5) sdram_clk_d = sdram_clk;
 `ifdef SDR_32BIT
 
    sdrc_core #(.SDR_DW(32),.SDR_BW(4)) u_dut(
-`else
+`elsif SDR_16BIT 
    sdrc_core #(.SDR_DW(16),.SDR_BW(2)) u_dut(
+`else  // 8 BIT SDRAM
+   sdrc_core #(.SDR_DW(8),.SDR_BW(1)) u_dut(
 `endif
       // System 
           .clk                (sdram_clk_d        ),
           .reset_n            (RESETN             ),
           .pad_clk            (sdram_clk_d        ), 
 `ifdef SDR_32BIT
-          .sdr_width          (1'b0               ), // 32 BIT SDRAM
-`else
-          .sdr_width          (1'b1               ), // 16 BIT SDRAM
+          .sdr_width          (2'b00              ), // 32 BIT SDRAM
+`elsif SDR_16BIT
+          .sdr_width          (2'b01              ), // 16 BIT SDRAM
+`else 
+          .sdr_width          (2'b10              ), // 8 BIT SDRAM
 `endif
           .cfg_colbits        (2'b00              ), // 8 Bit Column Address
 
@@ -180,7 +190,7 @@ mt48lc2m32b2 #(.data_bits(32)) u_sdram32 (
           .Dqm                (sdr_dqm            )
      );
 
-`else
+`elsif SDR_16BIT
 
 assign Dq[7:0]  = (sdr_den_n[0] == 1'b0) ? sdr_dout[7:0]  : 8'hZZ;
 assign Dq[15:8] = (sdr_den_n[1] == 1'b0) ? sdr_dout[15:8] : 8'hZZ;
@@ -197,6 +207,22 @@ assign Dq[15:8] = (sdr_den_n[1] == 1'b0) ? sdr_dout[15:8] : 8'hZZ;
           .web                (sdr_we_n           ), 
           .dqm                (sdr_dqm            )
     );
+`else 
+
+assign Dq[7:0]  = (sdr_den_n[0] == 1'b0) ? sdr_dout[7:0]  : 8'hZZ;
+
+mt48lc8m8a2 #(.data_bits(8)) u_sdram8 (
+          .Dq                 (Dq                 ) , 
+          .Addr               (sdr_addr           ), 
+          .Ba                 (sdr_ba             ), 
+          .Clk                (sdram_clk          ), 
+          .Cke                (sdr_cke            ), 
+          .Cs_n               (sdr_cs_n           ), 
+          .Ras_n              (sdr_ras_n          ), 
+          .Cas_n              (sdr_cas_n          ), 
+          .We_n               (sdr_we_n           ), 
+          .Dqm                (sdr_dqm            )
+     );
 `endif
 
 //--------------------
