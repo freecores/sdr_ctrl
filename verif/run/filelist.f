@@ -3,6 +3,7 @@
 ../tb/tb.sv \
 ../model/IS42VM16400K.V
 ../model/mt48lc2m32b2.v \
+../model/mt48lc8m8a2.v  \
 ../../rtl/core/sdrc_core.v \
 ../../rtl/core/sdrc_bank_ctl.v \
 ../../rtl/core/sdrc_bank_fsm.v \

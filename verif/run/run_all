@@ -10,3 +10,7 @@ echo " INITIATING SDR 32 BIT Tests"
 echo ##############################
 ./run_modelsim SDR_32BIT | tee ../log/sdr32_sim.log
 
+echo "#############################"
+echo " INITIATING SDR 8 BIT Tests"
+echo ##############################
+./run_modelsim SDR_8BIT | tee ../log/sdr8_sim.log
