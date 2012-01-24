@@ -130,7 +130,8 @@ parameter  SDR_BW   = 2;   // SDR Byte Width
    output [APP_RW-1:0] 	r2b_len;
    input 			b2r_ack, b2r_arb_ok, sdr_init_done;
 //
-   input 			sdr_width;
+   input [1:0] 			sdr_width; // 2'b00 - 32 Bit, 2'b01 - 16 Bit, 2'b1x - 8Bit
+                                         
 
    /****************************************************************************/
    // Internal Nets
@@ -206,7 +207,9 @@ parameter  SDR_BW   = 2;   // SDR Byte Width
       curr_sdr_addr <= (req_ack) ? req_addr :
 		       (req_ld) ? next_sdr_addr : curr_sdr_addr;
 
-      sdr_addrs_mask <= (req_ack) ? (sdr_width ? {req_addr_mask,req_addr_mask[0]} : req_addr_mask) : sdr_addrs_mask;
+      sdr_addrs_mask <= (req_ack) ?((sdr_width == 2'b00)  ? req_addr_mask :
+	                            (sdr_width == 2'b01)  ? {req_addr_mask,req_addr_mask[0]} : 
+				                            {req_addr_mask,req_addr_mask[1:0]}) : sdr_addrs_mask;
       
    end // always @ (posedge clk)
    

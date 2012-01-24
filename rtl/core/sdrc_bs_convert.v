@@ -84,7 +84,7 @@ parameter  SDR_BW   = 2;   // SDR Byte Width
    
 input                    clk;
 input                    reset_n ;
-input                    sdr_width;
+input [1:0]             sdr_width           ; // 2'b00 - 32 Bit SDR, 2'b01 - 16 Bit SDR, 2'b1x - 8 Bit
 
 input [APP_AW-1:0]       app_req_addr;
 output [APP_AW:0]        app_req_addr_int;
@@ -123,29 +123,17 @@ reg [SDR_DW-1:0]         app_wr_data_int;
 reg [SDR_BW-1:0]         app_wr_en_n_int;
 reg                      app_wr_next;
 
-reg                      lcl_rd_valid;
-reg                      lcl_wr_next;
-reg [15:0]               saved_rd_data;
-reg                      save_lower;
-reg                      upper_word;
-reg                      write_upper;
+reg [23:0]               saved_rd_data;
 reg [7:0]                rd_xfr_count;
 reg [7:0]                wr_xfr_count;
 
-reg [3:0]               rd_state,next_rd_state;
-reg [3:0]               wr_state,next_wr_state;
 
-parameter            SDR16_IDLE = 0,
-                     SDR16_RD_LO = 1,
-                     SDR16_RD_HI = 2,
-                     SDR16_WR_LO = 3,
-                     SDR16_WR_HI = 4;
 wire                  ok_to_req;                   
 
-assign ok_to_req = ((wr_state == SDR16_IDLE) && (rd_state == SDR16_IDLE));
+assign ok_to_req = ((wr_xfr_count == 0) && (rd_xfr_count == 0));
 
 always @(*) begin
-        if(!sdr_width) // 32 Bit SDR Mode
+        if(sdr_width == 2'b00) // 32 Bit SDR Mode
           begin
             app_req_addr_int = {1'b0,app_req_addr};
             app_req_len_int = app_req_len;
@@ -158,17 +146,17 @@ always @(*) begin
             app_rd_valid = app_rd_valid_int;
             app_req_ack = app_req_ack_int;
           end
-        else   // 16 Bit SDR Mode
-          begin
+        else if(sdr_width == 2'b01) // 16 Bit SDR Mode
+        begin
            // Changed the address and length to match the 16 bit SDR Mode
             app_req_addr_int = {app_req_addr,1'b0};
             app_req_len_int = {app_req_len,1'b0};
             app_req_dma_last_int = app_req_dma_last;
             app_sdr_req_int = app_sdr_req && ok_to_req;
             app_req_ack = app_req_ack_int;
-            app_wr_next = lcl_wr_next;
-            app_rd_valid = lcl_rd_valid;
-            if(write_upper)
+            app_wr_next = (app_wr_next_int & wr_xfr_count[0]);
+            app_rd_valid = (rd_xfr_count & rd_xfr_count[0]);
+            if(wr_xfr_count[0] == 1'b1)
               begin
                 app_wr_en_n_int = app_wr_en_n[3:2];
                 app_wr_data_int = app_wr_data[31:16];
@@ -179,114 +167,42 @@ always @(*) begin
                 app_wr_data_int = app_wr_data[15:0];
               end
             
-            app_rd_data = {app_rd_data_int[15:0],saved_rd_data};
+            app_rd_data = {app_rd_data_int,saved_rd_data[15:0]};
+        end else  // 8 Bit SDR Mode
+        begin
+           // Changed the address and length to match the 16 bit SDR Mode
+            app_req_addr_int = {app_req_addr,2'b0};
+            app_req_len_int = {app_req_len,2'b0};
+            app_req_dma_last_int = app_req_dma_last;
+            app_sdr_req_int = app_sdr_req && ok_to_req;
+            app_req_ack = app_req_ack_int;
+            app_wr_next = (app_wr_next_int & (wr_xfr_count[1:0]== 2'b01));
+            app_rd_valid = (rd_xfr_count &   (rd_xfr_count[1:0]== 2'b01));
+	    // Note: counter is down counter from 00 -> 11 -> 10 -> 01 --> 00
+            if(wr_xfr_count[1:0] == 2'b01)
+            begin
+                app_wr_en_n_int = app_wr_en_n[3];
+                app_wr_data_int = app_wr_data[31:24];
+            end
+            else if(wr_xfr_count[1:0] == 2'b10)
+            begin
+                app_wr_en_n_int = app_wr_en_n[2];
+                app_wr_data_int = app_wr_data[23:16];
+            end
+            else if(wr_xfr_count[1:0] == 2'b11)
+            begin
+                app_wr_en_n_int = app_wr_en_n[1];
+                app_wr_data_int = app_wr_data[15:8];
+            end
+            else begin
+                app_wr_en_n_int = app_wr_en_n[0];
+                app_wr_data_int = app_wr_data[7:0];
+            end
+            
+            app_rd_data = {app_rd_data_int,saved_rd_data[23:0]};
           end
-        end
+     end
 
-//
-// WRITES
-//
-always @(*) begin
-
-        lcl_wr_next = 1'b0;
-        upper_word = 1'b0;
-        next_wr_state = wr_state;
-
-        case(wr_state)
-          SDR16_IDLE:
-            begin
-              if(app_req_ack_int && sdr_width)
-                begin
-                  if(~app_req_wr_n)
-                    begin
-                      next_wr_state = SDR16_WR_LO;
-                    end
-                end
-              else
-                begin
-                  next_wr_state = SDR16_IDLE;
-                end
-            end
-          SDR16_WR_LO:
-            begin
-              if(app_wr_next_int)
-                begin
-                  upper_word = 1'b1;
-                  next_wr_state = SDR16_WR_HI;
-                end
-             end
-          SDR16_WR_HI:
-            begin
-              if(app_wr_next_int)
-                if(~(|wr_xfr_count))
-                  begin
-                    lcl_wr_next = 1'b1;
-                    next_wr_state = SDR16_IDLE;
-                  end
-                else
-                  begin
-                    lcl_wr_next = 1'b1;
-                    next_wr_state = SDR16_WR_LO;
-                  end
-            end
-          default:
-            begin
-              next_wr_state = SDR16_IDLE;
-            end
-        endcase
-        end
-//
-// READS
-//
-always @(*) begin
-
-        lcl_rd_valid = 1'b0;
-        save_lower = 1'b0;
-        next_rd_state = rd_state;
-
-        case(rd_state)
-          SDR16_IDLE:
-            begin
-              if(app_req_ack_int && sdr_width)
-                begin
-                  if(app_req_wr_n)
-                    begin
-                      next_rd_state = SDR16_RD_LO;
-                    end
-                end
-              else
-                begin
-                  next_rd_state = SDR16_IDLE;
-                end
-            end
-          SDR16_RD_LO:
-            begin
-              if(app_rd_valid_int)
-                begin
-                  save_lower = 1'b1;
-                  next_rd_state = SDR16_RD_HI;
-                end
-            end
-          SDR16_RD_HI:
-            begin
-              if(app_rd_valid_int)
-                if(~(|rd_xfr_count))
-                  begin
-                    lcl_rd_valid = 1'b1;
-                    next_rd_state = SDR16_IDLE;
-                  end
-                else
-                  begin
-                    lcl_rd_valid = 1'b1;
-                    next_rd_state = SDR16_RD_LO;
-                  end
-            end
-          default:
-            begin
-              next_rd_state = SDR16_IDLE;
-            end
-        endcase
-        end
 
 reg lcl_mc_req_wr_n;
 
@@ -294,42 +210,38 @@ always @(posedge clk)
   begin
     if(!reset_n)
       begin
-        rd_xfr_count <= 8'b0;
-        wr_xfr_count <= 8'b0;
+        rd_xfr_count    <= 8'b0;
+        wr_xfr_count    <= 8'b0;
         lcl_mc_req_wr_n <= 1'b1;
+	saved_rd_data   <= 24'h0;
       end
-    else
-      begin
-        if(app_req_ack) begin
-           wr_xfr_count    <= app_req_len - 1'b1;
-           rd_xfr_count    <= app_req_len - 1'b1;
-           lcl_mc_req_wr_n <= app_req_wr_n;
+    else begin
+        lcl_mc_req_wr_n <= app_req_wr_n;
+
+	// During Write Phase
+        if(app_req_ack && (app_req_wr_n == 0)) begin
+           wr_xfr_count    <= app_req_len_int;
         end
-        else if((lcl_wr_next & !lcl_mc_req_wr_n) || (lcl_rd_valid & lcl_mc_req_wr_n)) begin
+        else if(app_wr_next_int & !lcl_mc_req_wr_n) begin
            wr_xfr_count <= wr_xfr_count - 1'b1;
-           rd_xfr_count <= rd_xfr_count - 1'b1;
         end
-      end
-  end
-//
-//
-always @(posedge clk)
-  begin
-    if(!reset_n)
-      begin
-        rd_state      <= SDR16_IDLE;
-        wr_state      <= SDR16_IDLE;
-        saved_rd_data <= 16'b0;
-        write_upper   <= 1'b0;
-      end
-    else
-      begin
-        rd_state        <= next_rd_state;
-        wr_state        <= next_wr_state;
-        if(save_lower)
-          saved_rd_data <= app_rd_data_int[15:0];
-        write_upper <= upper_word;
-      end
-  end
-   
+
+	// During Read Phase
+        if(app_req_ack && app_req_wr_n) begin
+           rd_xfr_count    <= app_req_len_int;
+        end
+        else if(app_rd_valid_int & lcl_mc_req_wr_n) begin
+           rd_xfr_count   <= rd_xfr_count - 1'b1;
+	   if(sdr_width == 2'b01) // 16 Bit SDR Mode
+	      saved_rd_data[15:0]  <= app_rd_data_int;
+            else begin// 8 bit SDR Mode - 
+		      // Note: counter is down counter from 00 -> 11 -> 10 -> 01 --> 00
+	       if(rd_xfr_count[1:0] == 2'b00)      saved_rd_data[7:0]   <= app_rd_data_int[7:0];
+	       else if(rd_xfr_count[1:0] == 2'b11) saved_rd_data[15:8]  <= app_rd_data_int[7:0];
+	       else if(rd_xfr_count[1:0] == 2'b10) saved_rd_data[23:16] <= app_rd_data_int[7:0];
+	    end
+        end
+    end
+end
+
 endmodule // sdr_bs_convert

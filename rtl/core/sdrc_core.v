@@ -35,7 +35,9 @@
   Author(s):                                                  
       - Dinesh Annayya, dinesha@opencores.org                 
   Version  : 1.0 - 8th Jan 2012
-                                                              
+                Initial version with 16/32 Bit SDRAM Support
+           : 1.1 - 24th Jan 2012
+	         8 Bit SDRAM Support is added
 
                                                              
  Copyright (C) 2000 Authors and OPENCORES.ORG                
@@ -132,7 +134,7 @@ parameter  SDR_BW   = 2;   // SDR Byte Width
 input                   clk                 ; // SDRAM Clock 
 input                   pad_clk             ; // SDRAM Clock from Pad, used for registering Read Data
 input                   reset_n             ; // Reset Signal
-input                   sdr_width           ; // 0 - 32 Bit SDR, 1 - 16 Bit SDR
+input [1:0]             sdr_width           ; // 2'b00 - 32 Bit SDR, 2'b01 - 16 Bit SDR, 2'b1x - 8 Bit
 input [1:0]             cfg_colbits         ; // 2'b00 - 8 Bit column address, 2'b01 - 9 Bit, 10 - 10 bit, 11 - 11Bits
 
 
@@ -255,8 +257,8 @@ wire                     app_rd_valid_int;
    assign sdr_cmd = {sdr_cs_n, sdr_ras_n, sdr_cas_n, sdr_we_n}; 
 // synopsys translate_on 
 
-   assign sdr_den_n = sdr_width ? {2'b00,sdr_den_n_int[1:0]} : sdr_den_n_int;
-   assign sdr_dout = sdr_width ? {16'h0000,sdr_dout_int[15:0]} : sdr_dout_int;
+   assign sdr_den_n = sdr_den_n_int ; 
+   assign sdr_dout  = sdr_dout_int ;
 
 
    /****************************************************************************/
