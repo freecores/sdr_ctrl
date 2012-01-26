@@ -261,6 +261,19 @@ wire                     app_rd_valid_int;
    assign sdr_dout  = sdr_dout_int ;
 
 
+// To meet the timing at read path, read data is registered w.r.t pad_sdram_clock and register back to sdram_clk
+// assumption, pad_sdram_clk is synhronous and delayed clock of sdram_clk.
+// register w.r.t pad sdram clk
+reg [SDR_DW-1:0] pad_sdr_din1;
+reg [SDR_DW-1:0] pad_sdr_din2;
+always@(posedge pad_clk) begin
+   pad_sdr_din1 <= pad_sdr_din;
+end
+
+always@(posedge clk) begin
+   pad_sdr_din2 <= pad_sdr_din1;
+end
+
    /****************************************************************************/
    // Instantiate sdr_req_gen
    // This module takes requests from the app, chops them to burst booundaries
@@ -398,7 +411,7 @@ sdrc_xfr_ctl #(.SDR_DW(SDR_DW) ,  .SDR_BW(SDR_BW)) u_xfr_ctl (
           .sdr_dqm            (sdr_dqm            ),
           .sdr_ba             (sdr_ba             ),
           .sdr_addr           (sdr_addr           ),
-          .sdr_din            (pad_sdr_din        ),
+          .sdr_din            (pad_sdr_din2       ),
           .sdr_dout           (sdr_dout_int       ),
           .sdr_den_n          (sdr_den_n_int      ),
 		    
