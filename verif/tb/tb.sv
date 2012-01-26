@@ -101,7 +101,8 @@ wire [11:0]           sdr_addr           ; // SDRAM ADRESS
 wire                  sdr_init_done      ; // SDRAM Init Done 
 
 // to fix the sdram interface timing issue
-wire #(1.5) sdram_clk_d = sdram_clk;
+wire #(2.0) sdram_clk_d = sdram_clk;
+wire #(1.0) pad_clk     = sdram_clk_d;
 
 `ifdef SDR_32BIT
 
@@ -112,9 +113,9 @@ wire #(1.5) sdram_clk_d = sdram_clk;
    sdrc_core #(.SDR_DW(8),.SDR_BW(1)) u_dut(
 `endif
       // System 
-          .clk                (sdram_clk_d        ),
+          .clk                (sdram_clk          ),
           .reset_n            (RESETN             ),
-          .pad_clk            (sdram_clk_d        ), 
+          .pad_clk            (pad_clk            ), 
 `ifdef SDR_32BIT
           .sdr_width          (2'b00              ), // 32 BIT SDRAM
 `elsif SDR_16BIT
@@ -163,7 +164,7 @@ wire #(1.5) sdram_clk_d = sdram_clk;
           .cfg_sdr_tras_d     (4'h4               ),
           .cfg_sdr_trp_d      (4'h2               ),
           .cfg_sdr_trcd_d     (4'h2               ),
-          .cfg_sdr_cas        (3'h2               ),
+          .cfg_sdr_cas        (3'h3               ),
           .cfg_sdr_trcar_d    (4'h7               ),
           .cfg_sdr_twr_d      (4'h1               ),
           .cfg_sdr_rfsh       (12'hC35            ),
@@ -181,7 +182,7 @@ mt48lc2m32b2 #(.data_bits(32)) u_sdram32 (
           .Dq                 (Dq                 ) , 
           .Addr               (sdr_addr           ), 
           .Ba                 (sdr_ba             ), 
-          .Clk                (sdram_clk          ), 
+          .Clk                (sdram_clk_d        ), 
           .Cke                (sdr_cke            ), 
           .Cs_n               (sdr_cs_n           ), 
           .Ras_n              (sdr_ras_n          ), 
@@ -199,7 +200,7 @@ assign Dq[15:8] = (sdr_den_n[1] == 1'b0) ? sdr_dout[15:8] : 8'hZZ;
           .dq                 (Dq                 ), 
           .addr               (sdr_addr           ), 
           .ba                 (sdr_ba             ), 
-          .clk                (sdram_clk          ), 
+          .clk                (sdram_clk_d        ), 
           .cke                (sdr_cke            ), 
           .csb                (sdr_cs_n           ), 
           .rasb               (sdr_ras_n          ), 
@@ -215,7 +216,7 @@ mt48lc8m8a2 #(.data_bits(8)) u_sdram8 (
           .Dq                 (Dq                 ) , 
           .Addr               (sdr_addr           ), 
           .Ba                 (sdr_ba             ), 
-          .Clk                (sdram_clk          ), 
+          .Clk                (sdram_clk_d        ), 
           .Cke                (sdr_cke            ), 
           .Cs_n               (sdr_cs_n           ), 
           .Ras_n              (sdr_ras_n          ), 
@@ -352,13 +353,13 @@ begin
 
       for(j=0; j < wrdfifo.size; j++) begin
          wait(app_rd_valid == 1);
-         @ (posedge sdram_clk);
-         if(app_rd_data != wrdfifo[j]) begin
+         if(app_rd_data !== wrdfifo[j]) begin
              $display("READ ERROR: Burst-No: %d Addr: %x Rxp: %x Exd: %x",j,Address+(j*2),app_rd_data,wrdfifo[j]);
              ErrCnt = ErrCnt+1;
          end else begin
              $display("READ STATUS: Burst-No: %d Addr: %x Rxd: %x",j,Address+(j*2),app_rd_data);
          end 
+         @ (posedge sdram_clk);
          @ (negedge sdram_clk);
       end
 end
