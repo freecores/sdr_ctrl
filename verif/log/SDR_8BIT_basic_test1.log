@@ -268,5 +268,5 @@ Reading D:/Actel/Libero_v9.1/Model/tcl/vsim/pref.tcl
 ###############################
 # STATUS: SDRAM Write/Read TEST PASSED
 ###############################
-# ** Note: $finish    : ../tb/tb.sv(296)
-#    Time: 57240 ns  Iteration: 0  Instance: /tb_top
+# ** Note: $finish    : ../tb/tb.sv(297)
+#    Time: 57460 ns  Iteration: 0  Instance: /tb_top
