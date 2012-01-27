@@ -43,6 +43,8 @@
 
 `timescale 1ns/1ps
 
+// This testbench verify with SDRAM TOP
+
 module tb_top;
 
 parameter P_SYS  = 10;     //    100MHz
