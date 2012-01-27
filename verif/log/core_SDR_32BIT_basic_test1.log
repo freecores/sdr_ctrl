@@ -1,0 +1,580 @@
+Reading D:/Actel/Libero_v9.1/Model/tcl/vsim/pref.tcl 
+
+# 6.6d
+
+# vsim +basic_test1 -do run.do -c tb_core 
+# //  ModelSim ACTEL 6.6d Nov  2 2010 
+# //
+# //  Copyright 1991-2010 Mentor Graphics Corporation
+# //              All Rights Reserved.
+# //
+# //  THIS WORK CONTAINS TRADE SECRET AND 
+# //  PROPRIETARY INFORMATION WHICH IS THE PROPERTY
+# //  OF MENTOR GRAPHICS CORPORATION OR ITS LICENSORS
+# //  AND IS SUBJECT TO LICENSE TERMS.
+# //
+# Loading sv_std.std
+# Loading work.tb_core
+# Loading work.sdrc_core
+# Loading work.sdrc_req_gen
+# Loading work.sdrc_bank_ctl
+# Loading work.sdrc_bank_fsm
+# Loading work.sdrc_xfr_ctl
+# Loading work.sdrc_bs_convert
+# Loading work.mt48lc2m32b2
+# ** Warning: (vsim-3015) ../tb/tb_core.sv(193): [PCDPC] - Port size (11 or 11) does not match connection size (12) for port 'Addr'. The port definition is at: ../model/mt48lc2m32b2.v(42).
+#         Region: /tb_core/u_sdram32
+# do run.do 
+# tb_core.u_sdram32 : at time   10157.0 ns AREF : Auto Refresh
+# tb_core.u_sdram32 : at time   10247.0 ns AREF : Auto Refresh
+# tb_core.u_sdram32 : at time   10337.0 ns AREF : Auto Refresh
+# tb_core.u_sdram32 : at time   10427.0 ns AREF : Auto Refresh
+# tb_core.u_sdram32 : at time   10517.0 ns AREF : Auto Refresh
+# tb_core.u_sdram32 : at time   10607.0 ns AREF : Auto Refresh
+# tb_core.u_sdram32 : at time   10697.0 ns AREF : Auto Refresh
+# tb_core.u_sdram32 : at time   10787.0 ns AREF : Auto Refresh
+# tb_core.u_sdram32 : at time   10877.0 ns AREF : Auto Refresh
+# tb_core.u_sdram32 : at time   10967.0 ns AREF : Auto Refresh
+# tb_core.u_sdram32 : at time   11057.0 ns AREF : Auto Refresh
+# tb_core.u_sdram32 : at time   11147.0 ns AREF : Auto Refresh
+# tb_core.u_sdram32 : at time   11237.0 ns AREF : Auto Refresh
+# tb_core.u_sdram32 : at time   11327.0 ns AREF : Auto Refresh
+# tb_core.u_sdram32 : at time   11417.0 ns AREF : Auto Refresh
+# tb_core.u_sdram32 : at time   11507.0 ns LMR  : Load Mode Register
+# tb_core.u_sdram32 :                             CAS Latency      = 3
+# tb_core.u_sdram32 :                             Burst Length     = 8
+# tb_core.u_sdram32 :                             Burst Type       = Sequential
+# tb_core.u_sdram32 :                             Write Burst Mode = Programmed Burst Length
+# Write Address: 00040000, Burst Size:           5
+# tb_core.u_sdram32 : at time   12647.0 ns ACT  : Bank = 0 Row =   64
+# tb_core.u_sdram32 : at time   12677.0 ns WRITE: Bank = 0 Row =   64, Col =   0, Data = 11223344
+# Status: Burst-No:           0  Write Address: 00040000  WriteData: 11223344 
+# tb_core.u_sdram32 : at time   12687.0 ns WRITE: Bank = 0 Row =   64, Col =   1, Data = 22334455
+# Status: Burst-No:           1  Write Address: 00040000  WriteData: 22334455 
+# tb_core.u_sdram32 : at time   12697.0 ns WRITE: Bank = 0 Row =   64, Col =   2, Data = 33445566
+# Status: Burst-No:           2  Write Address: 00040000  WriteData: 33445566 
+# tb_core.u_sdram32 : at time   12707.0 ns WRITE: Bank = 0 Row =   64, Col =   3, Data = 44556677
+# Status: Burst-No:           3  Write Address: 00040000  WriteData: 44556677 
+# tb_core.u_sdram32 : at time   12717.0 ns WRITE: Bank = 0 Row =   64, Col =   4, Data = 55667788
+# Status: Burst-No:           4  Write Address: 00040000  WriteData: 55667788 
+# tb_core.u_sdram32 : at time   12727.0 ns BST  : Burst Terminate
+# tb_core.u_sdram32 : at time   13763.0 ns READ : Bank = 0 Row =   64, Col =   0, Data = 11223344
+# tb_core.u_sdram32 : at time   13773.0 ns READ : Bank = 0 Row =   64, Col =   1, Data = 22334455
+# READ STATUS: Burst-No:           0 Addr: 00040000 Rxd: 11223344
+# tb_core.u_sdram32 : at time   13783.0 ns READ : Bank = 0 Row =   64, Col =   2, Data = 33445566
+# tb_core.u_sdram32 : at time   13787.0 ns BST  : Burst Terminate
+# READ STATUS: Burst-No:           1 Addr: 00040002 Rxd: 22334455
+# tb_core.u_sdram32 : at time   13793.0 ns READ : Bank = 0 Row =   64, Col =   3, Data = 44556677
+# READ STATUS: Burst-No:           2 Addr: 00040004 Rxd: 33445566
+# tb_core.u_sdram32 : at time   13803.0 ns READ : Bank = 0 Row =   64, Col =   4, Data = 55667788
+# READ STATUS: Burst-No:           3 Addr: 00040006 Rxd: 44556677
+# READ STATUS: Burst-No:           4 Addr: 00040008 Rxd: 55667788
+# Write Address: 70000000, Burst Size:           5
+# tb_core.u_sdram32 : at time   14877.0 ns ACT  : Bank = 0 Row =    0
+# tb_core.u_sdram32 : at time   14907.0 ns WRITE: Bank = 0 Row =    0, Col =   0, Data = 11223344
+# Status: Burst-No:           0  Write Address: 70000000  WriteData: 11223344 
+# tb_core.u_sdram32 : at time   14917.0 ns WRITE: Bank = 0 Row =    0, Col =   1, Data = 22334455
+# Status: Burst-No:           1  Write Address: 70000000  WriteData: 22334455 
+# tb_core.u_sdram32 : at time   14927.0 ns WRITE: Bank = 0 Row =    0, Col =   2, Data = 33445566
+# Status: Burst-No:           2  Write Address: 70000000  WriteData: 33445566 
+# tb_core.u_sdram32 : at time   14937.0 ns WRITE: Bank = 0 Row =    0, Col =   3, Data = 44556677
+# Status: Burst-No:           3  Write Address: 70000000  WriteData: 44556677 
+# tb_core.u_sdram32 : at time   14947.0 ns WRITE: Bank = 0 Row =    0, Col =   4, Data = 55667788
+# Status: Burst-No:           4  Write Address: 70000000  WriteData: 55667788 
+# tb_core.u_sdram32 : at time   14957.0 ns BST  : Burst Terminate
+# tb_core.u_sdram32 : at time   15993.0 ns READ : Bank = 0 Row =    0, Col =   0, Data = 11223344
+# tb_core.u_sdram32 : at time   16003.0 ns READ : Bank = 0 Row =    0, Col =   1, Data = 22334455
+# READ STATUS: Burst-No:           0 Addr: 70000000 Rxd: 11223344
+# tb_core.u_sdram32 : at time   16013.0 ns READ : Bank = 0 Row =    0, Col =   2, Data = 33445566
+# tb_core.u_sdram32 : at time   16017.0 ns BST  : Burst Terminate
+# READ STATUS: Burst-No:           1 Addr: 70000002 Rxd: 22334455
+# tb_core.u_sdram32 : at time   16023.0 ns READ : Bank = 0 Row =    0, Col =   3, Data = 44556677
+# READ STATUS: Burst-No:           2 Addr: 70000004 Rxd: 33445566
+# tb_core.u_sdram32 : at time   16033.0 ns READ : Bank = 0 Row =    0, Col =   4, Data = 55667788
+# READ STATUS: Burst-No:           3 Addr: 70000006 Rxd: 44556677
+# READ STATUS: Burst-No:           4 Addr: 70000008 Rxd: 55667788
+# Write Address: 02153524, Burst Size:           5
+# tb_core.u_sdram32 : at time   16117.0 ns ACT  : Bank = 1 Row =  339
+# tb_core.u_sdram32 : at time   16147.0 ns WRITE: Bank = 1 Row =  339, Col =  73, Data = 11223344
+# Status: Burst-No:           0  Write Address: 02153524  WriteData: 11223344 
+# tb_core.u_sdram32 : at time   16157.0 ns WRITE: Bank = 1 Row =  339, Col =  74, Data = 22334455
+# Status: Burst-No:           1  Write Address: 02153524  WriteData: 22334455 
+# tb_core.u_sdram32 : at time   16167.0 ns WRITE: Bank = 1 Row =  339, Col =  75, Data = 33445566
+# Status: Burst-No:           2  Write Address: 02153524  WriteData: 33445566 
+# tb_core.u_sdram32 : at time   16177.0 ns WRITE: Bank = 1 Row =  339, Col =  76, Data = 44556677
+# Status: Burst-No:           3  Write Address: 02153524  WriteData: 44556677 
+# tb_core.u_sdram32 : at time   16187.0 ns WRITE: Bank = 1 Row =  339, Col =  77, Data = 55667788
+# Status: Burst-No:           4  Write Address: 02153524  WriteData: 55667788 
+# tb_core.u_sdram32 : at time   16197.0 ns BST  : Burst Terminate
+# tb_core.u_sdram32 : at time   17233.0 ns READ : Bank = 1 Row =  339, Col =  73, Data = 11223344
+# tb_core.u_sdram32 : at time   17243.0 ns READ : Bank = 1 Row =  339, Col =  74, Data = 22334455
+# READ STATUS: Burst-No:           0 Addr: 02153524 Rxd: 11223344
+# tb_core.u_sdram32 : at time   17253.0 ns READ : Bank = 1 Row =  339, Col =  75, Data = 33445566
+# tb_core.u_sdram32 : at time   17257.0 ns BST  : Burst Terminate
+# READ STATUS: Burst-No:           1 Addr: 02153526 Rxd: 22334455
+# tb_core.u_sdram32 : at time   17263.0 ns READ : Bank = 1 Row =  339, Col =  76, Data = 44556677
+# READ STATUS: Burst-No:           2 Addr: 02153528 Rxd: 33445566
+# tb_core.u_sdram32 : at time   17273.0 ns READ : Bank = 1 Row =  339, Col =  77, Data = 55667788
+# READ STATUS: Burst-No:           3 Addr: 0215352a Rxd: 44556677
+# READ STATUS: Burst-No:           4 Addr: 0215352c Rxd: 55667788
+# Write Address: 00895e81, Burst Size:           5
+# tb_core.u_sdram32 : at time   17357.0 ns ACT  : Bank = 3 Row =  149
+# tb_core.u_sdram32 : at time   17387.0 ns WRITE: Bank = 3 Row =  149, Col = 160, Data = 11223344
+# Status: Burst-No:           0  Write Address: 00895e81  WriteData: 11223344 
+# tb_core.u_sdram32 : at time   17397.0 ns WRITE: Bank = 3 Row =  149, Col = 161, Data = 22334455
+# Status: Burst-No:           1  Write Address: 00895e81  WriteData: 22334455 
+# tb_core.u_sdram32 : at time   17407.0 ns WRITE: Bank = 3 Row =  149, Col = 162, Data = 33445566
+# Status: Burst-No:           2  Write Address: 00895e81  WriteData: 33445566 
+# tb_core.u_sdram32 : at time   17417.0 ns WRITE: Bank = 3 Row =  149, Col = 163, Data = 44556677
+# Status: Burst-No:           3  Write Address: 00895e81  WriteData: 44556677 
+# tb_core.u_sdram32 : at time   17427.0 ns WRITE: Bank = 3 Row =  149, Col = 164, Data = 55667788
+# Status: Burst-No:           4  Write Address: 00895e81  WriteData: 55667788 
+# tb_core.u_sdram32 : at time   17437.0 ns BST  : Burst Terminate
+# tb_core.u_sdram32 : at time   18473.0 ns READ : Bank = 3 Row =  149, Col = 160, Data = 11223344
+# tb_core.u_sdram32 : at time   18483.0 ns READ : Bank = 3 Row =  149, Col = 161, Data = 22334455
+# READ STATUS: Burst-No:           0 Addr: 00895e81 Rxd: 11223344
+# tb_core.u_sdram32 : at time   18493.0 ns READ : Bank = 3 Row =  149, Col = 162, Data = 33445566
+# tb_core.u_sdram32 : at time   18497.0 ns BST  : Burst Terminate
+# READ STATUS: Burst-No:           1 Addr: 00895e83 Rxd: 22334455
+# tb_core.u_sdram32 : at time   18503.0 ns READ : Bank = 3 Row =  149, Col = 163, Data = 44556677
+# READ STATUS: Burst-No:           2 Addr: 00895e85 Rxd: 33445566
+# tb_core.u_sdram32 : at time   18513.0 ns READ : Bank = 3 Row =  149, Col = 164, Data = 55667788
+# READ STATUS: Burst-No:           3 Addr: 00895e87 Rxd: 44556677
+# READ STATUS: Burst-No:           4 Addr: 00895e89 Rxd: 55667788
+# Write Address: 0484d609, Burst Size:           5
+# tb_core.u_sdram32 : at time   18597.0 ns ACT  : Bank = 1 Row =   77
+# tb_core.u_sdram32 : at time   18627.0 ns WRITE: Bank = 1 Row =   77, Col = 130, Data = 11223344
+# Status: Burst-No:           0  Write Address: 0484d609  WriteData: 11223344 
+# tb_core.u_sdram32 : at time   18637.0 ns WRITE: Bank = 1 Row =   77, Col = 131, Data = 22334455
+# Status: Burst-No:           1  Write Address: 0484d609  WriteData: 22334455 
+# tb_core.u_sdram32 : at time   18647.0 ns WRITE: Bank = 1 Row =   77, Col = 132, Data = 33445566
+# Status: Burst-No:           2  Write Address: 0484d609  WriteData: 33445566 
+# tb_core.u_sdram32 : at time   18657.0 ns WRITE: Bank = 1 Row =   77, Col = 133, Data = 44556677
+# Status: Burst-No:           3  Write Address: 0484d609  WriteData: 44556677 
+# tb_core.u_sdram32 : at time   18667.0 ns WRITE: Bank = 1 Row =   77, Col = 134, Data = 55667788
+# Status: Burst-No:           4  Write Address: 0484d609  WriteData: 55667788 
+# tb_core.u_sdram32 : at time   18677.0 ns BST  : Burst Terminate
+# tb_core.u_sdram32 : at time   19713.0 ns READ : Bank = 1 Row =   77, Col = 130, Data = 11223344
+# tb_core.u_sdram32 : at time   19723.0 ns READ : Bank = 1 Row =   77, Col = 131, Data = 22334455
+# READ STATUS: Burst-No:           0 Addr: 0484d609 Rxd: 11223344
+# tb_core.u_sdram32 : at time   19733.0 ns READ : Bank = 1 Row =   77, Col = 132, Data = 33445566
+# tb_core.u_sdram32 : at time   19737.0 ns BST  : Burst Terminate
+# READ STATUS: Burst-No:           1 Addr: 0484d60b Rxd: 22334455
+# tb_core.u_sdram32 : at time   19743.0 ns READ : Bank = 1 Row =   77, Col = 133, Data = 44556677
+# READ STATUS: Burst-No:           2 Addr: 0484d60d Rxd: 33445566
+# tb_core.u_sdram32 : at time   19753.0 ns READ : Bank = 1 Row =   77, Col = 134, Data = 55667788
+# READ STATUS: Burst-No:           3 Addr: 0484d60f Rxd: 44556677
+# READ STATUS: Burst-No:           4 Addr: 0484d611 Rxd: 55667788
+# Write Address: 01f05663, Burst Size:           5
+# tb_core.u_sdram32 : at time   19837.0 ns ACT  : Bank = 1 Row = 1797
+# tb_core.u_sdram32 : at time   19867.0 ns WRITE: Bank = 1 Row = 1797, Col = 152, Data = 11223344
+# Status: Burst-No:           0  Write Address: 01f05663  WriteData: 11223344 
+# tb_core.u_sdram32 : at time   19877.0 ns WRITE: Bank = 1 Row = 1797, Col = 153, Data = 22334455
+# Status: Burst-No:           1  Write Address: 01f05663  WriteData: 22334455 
+# tb_core.u_sdram32 : at time   19887.0 ns WRITE: Bank = 1 Row = 1797, Col = 154, Data = 33445566
+# Status: Burst-No:           2  Write Address: 01f05663  WriteData: 33445566 
+# tb_core.u_sdram32 : at time   19897.0 ns WRITE: Bank = 1 Row = 1797, Col = 155, Data = 44556677
+# Status: Burst-No:           3  Write Address: 01f05663  WriteData: 44556677 
+# tb_core.u_sdram32 : at time   19907.0 ns WRITE: Bank = 1 Row = 1797, Col = 156, Data = 55667788
+# Status: Burst-No:           4  Write Address: 01f05663  WriteData: 55667788 
+# tb_core.u_sdram32 : at time   19917.0 ns BST  : Burst Terminate
+# tb_core.u_sdram32 : at time   20953.0 ns READ : Bank = 1 Row = 1797, Col = 152, Data = 11223344
+# tb_core.u_sdram32 : at time   20963.0 ns READ : Bank = 1 Row = 1797, Col = 153, Data = 22334455
+# READ STATUS: Burst-No:           0 Addr: 01f05663 Rxd: 11223344
+# tb_core.u_sdram32 : at time   20973.0 ns READ : Bank = 1 Row = 1797, Col = 154, Data = 33445566
+# tb_core.u_sdram32 : at time   20977.0 ns BST  : Burst Terminate
+# READ STATUS: Burst-No:           1 Addr: 01f05665 Rxd: 22334455
+# tb_core.u_sdram32 : at time   20983.0 ns READ : Bank = 1 Row = 1797, Col = 155, Data = 44556677
+# READ STATUS: Burst-No:           2 Addr: 01f05667 Rxd: 33445566
+# tb_core.u_sdram32 : at time   20993.0 ns READ : Bank = 1 Row = 1797, Col = 156, Data = 55667788
+# READ STATUS: Burst-No:           3 Addr: 01f05669 Rxd: 44556677
+# READ STATUS: Burst-No:           4 Addr: 01f0566b Rxd: 55667788
+# Write Address: 06b97b0d, Burst Size:           5
+# tb_core.u_sdram32 : at time   21077.0 ns ACT  : Bank = 2 Row =  919
+# tb_core.u_sdram32 : at time   21107.0 ns WRITE: Bank = 2 Row =  919, Col = 195, Data = 11223344
+# Status: Burst-No:           0  Write Address: 06b97b0d  WriteData: 11223344 
+# tb_core.u_sdram32 : at time   21117.0 ns WRITE: Bank = 2 Row =  919, Col = 196, Data = 22334455
+# Status: Burst-No:           1  Write Address: 06b97b0d  WriteData: 22334455 
+# tb_core.u_sdram32 : at time   21127.0 ns WRITE: Bank = 2 Row =  919, Col = 197, Data = 33445566
+# Status: Burst-No:           2  Write Address: 06b97b0d  WriteData: 33445566 
+# tb_core.u_sdram32 : at time   21137.0 ns WRITE: Bank = 2 Row =  919, Col = 198, Data = 44556677
+# Status: Burst-No:           3  Write Address: 06b97b0d  WriteData: 44556677 
+# tb_core.u_sdram32 : at time   21147.0 ns WRITE: Bank = 2 Row =  919, Col = 199, Data = 55667788
+# Status: Burst-No:           4  Write Address: 06b97b0d  WriteData: 55667788 
+# tb_core.u_sdram32 : at time   21157.0 ns BST  : Burst Terminate
+# tb_core.u_sdram32 : at time   22193.0 ns READ : Bank = 2 Row =  919, Col = 195, Data = 11223344
+# tb_core.u_sdram32 : at time   22203.0 ns READ : Bank = 2 Row =  919, Col = 196, Data = 22334455
+# READ STATUS: Burst-No:           0 Addr: 06b97b0d Rxd: 11223344
+# tb_core.u_sdram32 : at time   22213.0 ns READ : Bank = 2 Row =  919, Col = 197, Data = 33445566
+# tb_core.u_sdram32 : at time   22217.0 ns BST  : Burst Terminate
+# READ STATUS: Burst-No:           1 Addr: 06b97b0f Rxd: 22334455
+# tb_core.u_sdram32 : at time   22223.0 ns READ : Bank = 2 Row =  919, Col = 198, Data = 44556677
+# READ STATUS: Burst-No:           2 Addr: 06b97b11 Rxd: 33445566
+# tb_core.u_sdram32 : at time   22233.0 ns READ : Bank = 2 Row =  919, Col = 199, Data = 55667788
+# READ STATUS: Burst-No:           3 Addr: 06b97b13 Rxd: 44556677
+# READ STATUS: Burst-No:           4 Addr: 06b97b15 Rxd: 55667788
+# Write Address: 06df998d, Burst Size:           5
+# tb_core.u_sdram32 : at time   22317.0 ns ACT  : Bank = 2 Row = 1529
+# tb_core.u_sdram32 : at time   22347.0 ns WRITE: Bank = 2 Row = 1529, Col =  99, Data = 11223344
+# Status: Burst-No:           0  Write Address: 06df998d  WriteData: 11223344 
+# tb_core.u_sdram32 : at time   22357.0 ns WRITE: Bank = 2 Row = 1529, Col = 100, Data = 22334455
+# Status: Burst-No:           1  Write Address: 06df998d  WriteData: 22334455 
+# tb_core.u_sdram32 : at time   22367.0 ns WRITE: Bank = 2 Row = 1529, Col = 101, Data = 33445566
+# Status: Burst-No:           2  Write Address: 06df998d  WriteData: 33445566 
+# tb_core.u_sdram32 : at time   22377.0 ns WRITE: Bank = 2 Row = 1529, Col = 102, Data = 44556677
+# Status: Burst-No:           3  Write Address: 06df998d  WriteData: 44556677 
+# tb_core.u_sdram32 : at time   22387.0 ns WRITE: Bank = 2 Row = 1529, Col = 103, Data = 55667788
+# Status: Burst-No:           4  Write Address: 06df998d  WriteData: 55667788 
+# tb_core.u_sdram32 : at time   22397.0 ns BST  : Burst Terminate
+# tb_core.u_sdram32 : at time   23433.0 ns READ : Bank = 2 Row = 1529, Col =  99, Data = 11223344
+# tb_core.u_sdram32 : at time   23443.0 ns READ : Bank = 2 Row = 1529, Col = 100, Data = 22334455
+# READ STATUS: Burst-No:           0 Addr: 06df998d Rxd: 11223344
+# tb_core.u_sdram32 : at time   23453.0 ns READ : Bank = 2 Row = 1529, Col = 101, Data = 33445566
+# tb_core.u_sdram32 : at time   23457.0 ns BST  : Burst Terminate
+# READ STATUS: Burst-No:           1 Addr: 06df998f Rxd: 22334455
+# tb_core.u_sdram32 : at time   23463.0 ns READ : Bank = 2 Row = 1529, Col = 102, Data = 44556677
+# READ STATUS: Burst-No:           2 Addr: 06df9991 Rxd: 33445566
+# tb_core.u_sdram32 : at time   23473.0 ns READ : Bank = 2 Row = 1529, Col = 103, Data = 55667788
+# READ STATUS: Burst-No:           3 Addr: 06df9993 Rxd: 44556677
+# READ STATUS: Burst-No:           4 Addr: 06df9995 Rxd: 55667788
+# Write Address: 02c28465, Burst Size:           5
+# tb_core.u_sdram32 : at time   23557.0 ns ACT  : Bank = 1 Row = 1064
+# tb_core.u_sdram32 : at time   23587.0 ns WRITE: Bank = 1 Row = 1064, Col =  25, Data = 11223344
+# Status: Burst-No:           0  Write Address: 02c28465  WriteData: 11223344 
+# tb_core.u_sdram32 : at time   23597.0 ns WRITE: Bank = 1 Row = 1064, Col =  26, Data = 22334455
+# Status: Burst-No:           1  Write Address: 02c28465  WriteData: 22334455 
+# tb_core.u_sdram32 : at time   23607.0 ns WRITE: Bank = 1 Row = 1064, Col =  27, Data = 33445566
+# Status: Burst-No:           2  Write Address: 02c28465  WriteData: 33445566 
+# tb_core.u_sdram32 : at time   23617.0 ns WRITE: Bank = 1 Row = 1064, Col =  28, Data = 44556677
+# Status: Burst-No:           3  Write Address: 02c28465  WriteData: 44556677 
+# tb_core.u_sdram32 : at time   23627.0 ns WRITE: Bank = 1 Row = 1064, Col =  29, Data = 55667788
+# Status: Burst-No:           4  Write Address: 02c28465  WriteData: 55667788 
+# tb_core.u_sdram32 : at time   23637.0 ns BST  : Burst Terminate
+# tb_core.u_sdram32 : at time   24673.0 ns READ : Bank = 1 Row = 1064, Col =  25, Data = 11223344
+# tb_core.u_sdram32 : at time   24683.0 ns READ : Bank = 1 Row = 1064, Col =  26, Data = 22334455
+# READ STATUS: Burst-No:           0 Addr: 02c28465 Rxd: 11223344
+# tb_core.u_sdram32 : at time   24693.0 ns READ : Bank = 1 Row = 1064, Col =  27, Data = 33445566
+# tb_core.u_sdram32 : at time   24697.0 ns BST  : Burst Terminate
+# READ STATUS: Burst-No:           1 Addr: 02c28467 Rxd: 22334455
+# tb_core.u_sdram32 : at time   24703.0 ns READ : Bank = 1 Row = 1064, Col =  28, Data = 44556677
+# READ STATUS: Burst-No:           2 Addr: 02c28469 Rxd: 33445566
+# tb_core.u_sdram32 : at time   24713.0 ns READ : Bank = 1 Row = 1064, Col =  29, Data = 55667788
+# READ STATUS: Burst-No:           3 Addr: 02c2846b Rxd: 44556677
+# READ STATUS: Burst-No:           4 Addr: 02c2846d Rxd: 55667788
+# Write Address: 01375212, Burst Size:           5
+# tb_core.u_sdram32 : at time   24797.0 ns ACT  : Bank = 0 Row =  885
+# tb_core.u_sdram32 : at time   24827.0 ns WRITE: Bank = 0 Row =  885, Col = 132, Data = 11223344
+# Status: Burst-No:           0  Write Address: 01375212  WriteData: 11223344 
+# tb_core.u_sdram32 : at time   24837.0 ns WRITE: Bank = 0 Row =  885, Col = 133, Data = 22334455
+# Status: Burst-No:           1  Write Address: 01375212  WriteData: 22334455 
+# tb_core.u_sdram32 : at time   24847.0 ns WRITE: Bank = 0 Row =  885, Col = 134, Data = 33445566
+# Status: Burst-No:           2  Write Address: 01375212  WriteData: 33445566 
+# tb_core.u_sdram32 : at time   24857.0 ns WRITE: Bank = 0 Row =  885, Col = 135, Data = 44556677
+# Status: Burst-No:           3  Write Address: 01375212  WriteData: 44556677 
+# tb_core.u_sdram32 : at time   24867.0 ns WRITE: Bank = 0 Row =  885, Col = 136, Data = 55667788
+# Status: Burst-No:           4  Write Address: 01375212  WriteData: 55667788 
+# tb_core.u_sdram32 : at time   24877.0 ns BST  : Burst Terminate
+# tb_core.u_sdram32 : at time   25913.0 ns READ : Bank = 0 Row =  885, Col = 132, Data = 11223344
+# tb_core.u_sdram32 : at time   25923.0 ns READ : Bank = 0 Row =  885, Col = 133, Data = 22334455
+# READ STATUS: Burst-No:           0 Addr: 01375212 Rxd: 11223344
+# tb_core.u_sdram32 : at time   25933.0 ns READ : Bank = 0 Row =  885, Col = 134, Data = 33445566
+# tb_core.u_sdram32 : at time   25937.0 ns BST  : Burst Terminate
+# READ STATUS: Burst-No:           1 Addr: 01375214 Rxd: 22334455
+# tb_core.u_sdram32 : at time   25943.0 ns READ : Bank = 0 Row =  885, Col = 135, Data = 44556677
+# READ STATUS: Burst-No:           2 Addr: 01375216 Rxd: 33445566
+# tb_core.u_sdram32 : at time   25953.0 ns READ : Bank = 0 Row =  885, Col = 136, Data = 55667788
+# READ STATUS: Burst-No:           3 Addr: 01375218 Rxd: 44556677
+# READ STATUS: Burst-No:           4 Addr: 0137521a Rxd: 55667788
+# Write Address: 00f3e301, Burst Size:           5
+# tb_core.u_sdram32 : at time   26037.0 ns ACT  : Bank = 0 Row = 1854
+# tb_core.u_sdram32 : at time   26067.0 ns WRITE: Bank = 0 Row = 1854, Col = 192, Data = 11223344
+# Status: Burst-No:           0  Write Address: 00f3e301  WriteData: 11223344 
+# tb_core.u_sdram32 : at time   26077.0 ns WRITE: Bank = 0 Row = 1854, Col = 193, Data = 22334455
+# Status: Burst-No:           1  Write Address: 00f3e301  WriteData: 22334455 
+# tb_core.u_sdram32 : at time   26087.0 ns WRITE: Bank = 0 Row = 1854, Col = 194, Data = 33445566
+# Status: Burst-No:           2  Write Address: 00f3e301  WriteData: 33445566 
+# tb_core.u_sdram32 : at time   26097.0 ns WRITE: Bank = 0 Row = 1854, Col = 195, Data = 44556677
+# Status: Burst-No:           3  Write Address: 00f3e301  WriteData: 44556677 
+# tb_core.u_sdram32 : at time   26107.0 ns WRITE: Bank = 0 Row = 1854, Col = 196, Data = 55667788
+# Status: Burst-No:           4  Write Address: 00f3e301  WriteData: 55667788 
+# tb_core.u_sdram32 : at time   26117.0 ns BST  : Burst Terminate
+# tb_core.u_sdram32 : at time   27153.0 ns READ : Bank = 0 Row = 1854, Col = 192, Data = 11223344
+# tb_core.u_sdram32 : at time   27163.0 ns READ : Bank = 0 Row = 1854, Col = 193, Data = 22334455
+# READ STATUS: Burst-No:           0 Addr: 00f3e301 Rxd: 11223344
+# tb_core.u_sdram32 : at time   27173.0 ns READ : Bank = 0 Row = 1854, Col = 194, Data = 33445566
+# tb_core.u_sdram32 : at time   27177.0 ns BST  : Burst Terminate
+# READ STATUS: Burst-No:           1 Addr: 00f3e303 Rxd: 22334455
+# tb_core.u_sdram32 : at time   27183.0 ns READ : Bank = 0 Row = 1854, Col = 195, Data = 44556677
+# READ STATUS: Burst-No:           2 Addr: 00f3e305 Rxd: 33445566
+# tb_core.u_sdram32 : at time   27193.0 ns READ : Bank = 0 Row = 1854, Col = 196, Data = 55667788
+# READ STATUS: Burst-No:           3 Addr: 00f3e307 Rxd: 44556677
+# READ STATUS: Burst-No:           4 Addr: 00f3e309 Rxd: 55667788
+# Write Address: 06d7cd0d, Burst Size:           5
+# tb_core.u_sdram32 : at time   27277.0 ns ACT  : Bank = 3 Row = 1404
+# tb_core.u_sdram32 : at time   27307.0 ns WRITE: Bank = 3 Row = 1404, Col =  67, Data = 11223344
+# Status: Burst-No:           0  Write Address: 06d7cd0d  WriteData: 11223344 
+# tb_core.u_sdram32 : at time   27317.0 ns WRITE: Bank = 3 Row = 1404, Col =  68, Data = 22334455
+# Status: Burst-No:           1  Write Address: 06d7cd0d  WriteData: 22334455 
+# tb_core.u_sdram32 : at time   27327.0 ns WRITE: Bank = 3 Row = 1404, Col =  69, Data = 33445566
+# Status: Burst-No:           2  Write Address: 06d7cd0d  WriteData: 33445566 
+# tb_core.u_sdram32 : at time   27337.0 ns WRITE: Bank = 3 Row = 1404, Col =  70, Data = 44556677
+# Status: Burst-No:           3  Write Address: 06d7cd0d  WriteData: 44556677 
+# tb_core.u_sdram32 : at time   27347.0 ns WRITE: Bank = 3 Row = 1404, Col =  71, Data = 55667788
+# Status: Burst-No:           4  Write Address: 06d7cd0d  WriteData: 55667788 
+# tb_core.u_sdram32 : at time   27357.0 ns BST  : Burst Terminate
+# tb_core.u_sdram32 : at time   28393.0 ns READ : Bank = 3 Row = 1404, Col =  67, Data = 11223344
+# tb_core.u_sdram32 : at time   28403.0 ns READ : Bank = 3 Row = 1404, Col =  68, Data = 22334455
+# READ STATUS: Burst-No:           0 Addr: 06d7cd0d Rxd: 11223344
+# tb_core.u_sdram32 : at time   28413.0 ns READ : Bank = 3 Row = 1404, Col =  69, Data = 33445566
+# tb_core.u_sdram32 : at time   28417.0 ns BST  : Burst Terminate
+# READ STATUS: Burst-No:           1 Addr: 06d7cd0f Rxd: 22334455
+# tb_core.u_sdram32 : at time   28423.0 ns READ : Bank = 3 Row = 1404, Col =  70, Data = 44556677
+# READ STATUS: Burst-No:           2 Addr: 06d7cd11 Rxd: 33445566
+# tb_core.u_sdram32 : at time   28433.0 ns READ : Bank = 3 Row = 1404, Col =  71, Data = 55667788
+# READ STATUS: Burst-No:           3 Addr: 06d7cd13 Rxd: 44556677
+# READ STATUS: Burst-No:           4 Addr: 06d7cd15 Rxd: 55667788
+# Write Address: 0323f176, Burst Size:           5
+# tb_core.u_sdram32 : at time   28517.0 ns ACT  : Bank = 0 Row =  575
+# tb_core.u_sdram32 : at time   28547.0 ns WRITE: Bank = 0 Row =  575, Col =  93, Data = 11223344
+# Status: Burst-No:           0  Write Address: 0323f176  WriteData: 11223344 
+# tb_core.u_sdram32 : at time   28557.0 ns WRITE: Bank = 0 Row =  575, Col =  94, Data = 22334455
+# Status: Burst-No:           1  Write Address: 0323f176  WriteData: 22334455 
+# tb_core.u_sdram32 : at time   28567.0 ns WRITE: Bank = 0 Row =  575, Col =  95, Data = 33445566
+# Status: Burst-No:           2  Write Address: 0323f176  WriteData: 33445566 
+# tb_core.u_sdram32 : at time   28577.0 ns WRITE: Bank = 0 Row =  575, Col =  96, Data = 44556677
+# Status: Burst-No:           3  Write Address: 0323f176  WriteData: 44556677 
+# tb_core.u_sdram32 : at time   28587.0 ns WRITE: Bank = 0 Row =  575, Col =  97, Data = 55667788
+# Status: Burst-No:           4  Write Address: 0323f176  WriteData: 55667788 
+# tb_core.u_sdram32 : at time   28597.0 ns BST  : Burst Terminate
+# tb_core.u_sdram32 : at time   29633.0 ns READ : Bank = 0 Row =  575, Col =  93, Data = 11223344
+# tb_core.u_sdram32 : at time   29643.0 ns READ : Bank = 0 Row =  575, Col =  94, Data = 22334455
+# READ STATUS: Burst-No:           0 Addr: 0323f176 Rxd: 11223344
+# tb_core.u_sdram32 : at time   29653.0 ns READ : Bank = 0 Row =  575, Col =  95, Data = 33445566
+# tb_core.u_sdram32 : at time   29657.0 ns BST  : Burst Terminate
+# READ STATUS: Burst-No:           1 Addr: 0323f178 Rxd: 22334455
+# tb_core.u_sdram32 : at time   29663.0 ns READ : Bank = 0 Row =  575, Col =  96, Data = 44556677
+# READ STATUS: Burst-No:           2 Addr: 0323f17a Rxd: 33445566
+# tb_core.u_sdram32 : at time   29673.0 ns READ : Bank = 0 Row =  575, Col =  97, Data = 55667788
+# READ STATUS: Burst-No:           3 Addr: 0323f17c Rxd: 44556677
+# READ STATUS: Burst-No:           4 Addr: 0323f17e Rxd: 55667788
+# Write Address: 068dcd3d, Burst Size:           5
+# tb_core.u_sdram32 : at time   29757.0 ns ACT  : Bank = 3 Row =  220
+# tb_core.u_sdram32 : at time   29787.0 ns WRITE: Bank = 3 Row =  220, Col =  79, Data = 11223344
+# Status: Burst-No:           0  Write Address: 068dcd3d  WriteData: 11223344 
+# tb_core.u_sdram32 : at time   29797.0 ns WRITE: Bank = 3 Row =  220, Col =  80, Data = 22334455
+# Status: Burst-No:           1  Write Address: 068dcd3d  WriteData: 22334455 
+# tb_core.u_sdram32 : at time   29807.0 ns WRITE: Bank = 3 Row =  220, Col =  81, Data = 33445566
+# Status: Burst-No:           2  Write Address: 068dcd3d  WriteData: 33445566 
+# tb_core.u_sdram32 : at time   29817.0 ns WRITE: Bank = 3 Row =  220, Col =  82, Data = 44556677
+# Status: Burst-No:           3  Write Address: 068dcd3d  WriteData: 44556677 
+# tb_core.u_sdram32 : at time   29827.0 ns WRITE: Bank = 3 Row =  220, Col =  83, Data = 55667788
+# Status: Burst-No:           4  Write Address: 068dcd3d  WriteData: 55667788 
+# tb_core.u_sdram32 : at time   29837.0 ns BST  : Burst Terminate
+# tb_core.u_sdram32 : at time   30873.0 ns READ : Bank = 3 Row =  220, Col =  79, Data = 11223344
+# tb_core.u_sdram32 : at time   30883.0 ns READ : Bank = 3 Row =  220, Col =  80, Data = 22334455
+# READ STATUS: Burst-No:           0 Addr: 068dcd3d Rxd: 11223344
+# tb_core.u_sdram32 : at time   30893.0 ns READ : Bank = 3 Row =  220, Col =  81, Data = 33445566
+# tb_core.u_sdram32 : at time   30897.0 ns BST  : Burst Terminate
+# READ STATUS: Burst-No:           1 Addr: 068dcd3f Rxd: 22334455
+# tb_core.u_sdram32 : at time   30903.0 ns READ : Bank = 3 Row =  220, Col =  82, Data = 44556677
+# READ STATUS: Burst-No:           2 Addr: 068dcd41 Rxd: 33445566
+# tb_core.u_sdram32 : at time   30913.0 ns READ : Bank = 3 Row =  220, Col =  83, Data = 55667788
+# READ STATUS: Burst-No:           3 Addr: 068dcd43 Rxd: 44556677
+# READ STATUS: Burst-No:           4 Addr: 068dcd45 Rxd: 55667788
+# Write Address: 06d457ed, Burst Size:           5
+# tb_core.u_sdram32 : at time   30997.0 ns ACT  : Bank = 1 Row = 1349
+# tb_core.u_sdram32 : at time   31027.0 ns WRITE: Bank = 1 Row = 1349, Col = 251, Data = 11223344
+# Status: Burst-No:           0  Write Address: 06d457ed  WriteData: 11223344 
+# tb_core.u_sdram32 : at time   31037.0 ns WRITE: Bank = 1 Row = 1349, Col = 252, Data = 22334455
+# Status: Burst-No:           1  Write Address: 06d457ed  WriteData: 22334455 
+# tb_core.u_sdram32 : at time   31047.0 ns WRITE: Bank = 1 Row = 1349, Col = 253, Data = 33445566
+# Status: Burst-No:           2  Write Address: 06d457ed  WriteData: 33445566 
+# tb_core.u_sdram32 : at time   31057.0 ns WRITE: Bank = 1 Row = 1349, Col = 254, Data = 44556677
+# Status: Burst-No:           3  Write Address: 06d457ed  WriteData: 44556677 
+# tb_core.u_sdram32 : at time   31067.0 ns WRITE: Bank = 1 Row = 1349, Col = 255, Data = 55667788
+# Status: Burst-No:           4  Write Address: 06d457ed  WriteData: 55667788 
+# tb_core.u_sdram32 : at time   31077.0 ns BST  : Burst Terminate
+# tb_core.u_sdram32 : at time   32113.0 ns READ : Bank = 1 Row = 1349, Col = 251, Data = 11223344
+# tb_core.u_sdram32 : at time   32123.0 ns READ : Bank = 1 Row = 1349, Col = 252, Data = 22334455
+# READ STATUS: Burst-No:           0 Addr: 06d457ed Rxd: 11223344
+# tb_core.u_sdram32 : at time   32133.0 ns READ : Bank = 1 Row = 1349, Col = 253, Data = 33445566
+# tb_core.u_sdram32 : at time   32137.0 ns BST  : Burst Terminate
+# READ STATUS: Burst-No:           1 Addr: 06d457ef Rxd: 22334455
+# tb_core.u_sdram32 : at time   32143.0 ns READ : Bank = 1 Row = 1349, Col = 254, Data = 44556677
+# READ STATUS: Burst-No:           2 Addr: 06d457f1 Rxd: 33445566
+# tb_core.u_sdram32 : at time   32153.0 ns READ : Bank = 1 Row = 1349, Col = 255, Data = 55667788
+# READ STATUS: Burst-No:           3 Addr: 06d457f3 Rxd: 44556677
+# READ STATUS: Burst-No:           4 Addr: 06d457f5 Rxd: 55667788
+# Write Address: 062df78c, Burst Size:           5
+# tb_core.u_sdram32 : at time   32237.0 ns ACT  : Bank = 1 Row =  735
+# tb_core.u_sdram32 : at time   32267.0 ns WRITE: Bank = 1 Row =  735, Col = 227, Data = 11223344
+# Status: Burst-No:           0  Write Address: 062df78c  WriteData: 11223344 
+# tb_core.u_sdram32 : at time   32277.0 ns WRITE: Bank = 1 Row =  735, Col = 228, Data = 22334455
+# Status: Burst-No:           1  Write Address: 062df78c  WriteData: 22334455 
+# tb_core.u_sdram32 : at time   32287.0 ns WRITE: Bank = 1 Row =  735, Col = 229, Data = 33445566
+# Status: Burst-No:           2  Write Address: 062df78c  WriteData: 33445566 
+# tb_core.u_sdram32 : at time   32297.0 ns WRITE: Bank = 1 Row =  735, Col = 230, Data = 44556677
+# Status: Burst-No:           3  Write Address: 062df78c  WriteData: 44556677 
+# tb_core.u_sdram32 : at time   32307.0 ns WRITE: Bank = 1 Row =  735, Col = 231, Data = 55667788
+# Status: Burst-No:           4  Write Address: 062df78c  WriteData: 55667788 
+# tb_core.u_sdram32 : at time   32317.0 ns BST  : Burst Terminate
+# tb_core.u_sdram32 : at time   33353.0 ns READ : Bank = 1 Row =  735, Col = 227, Data = 11223344
+# tb_core.u_sdram32 : at time   33363.0 ns READ : Bank = 1 Row =  735, Col = 228, Data = 22334455
+# READ STATUS: Burst-No:           0 Addr: 062df78c Rxd: 11223344
+# tb_core.u_sdram32 : at time   33373.0 ns READ : Bank = 1 Row =  735, Col = 229, Data = 33445566
+# tb_core.u_sdram32 : at time   33377.0 ns BST  : Burst Terminate
+# READ STATUS: Burst-No:           1 Addr: 062df78e Rxd: 22334455
+# tb_core.u_sdram32 : at time   33383.0 ns READ : Bank = 1 Row =  735, Col = 230, Data = 44556677
+# READ STATUS: Burst-No:           2 Addr: 062df790 Rxd: 33445566
+# tb_core.u_sdram32 : at time   33393.0 ns READ : Bank = 1 Row =  735, Col = 231, Data = 55667788
+# READ STATUS: Burst-No:           3 Addr: 062df792 Rxd: 44556677
+# READ STATUS: Burst-No:           4 Addr: 062df794 Rxd: 55667788
+# Write Address: 04fde9f9, Burst Size:           5
+# tb_core.u_sdram32 : at time   33477.0 ns ACT  : Bank = 2 Row = 2014
+# tb_core.u_sdram32 : at time   33507.0 ns WRITE: Bank = 2 Row = 2014, Col = 126, Data = 11223344
+# Status: Burst-No:           0  Write Address: 04fde9f9  WriteData: 11223344 
+# tb_core.u_sdram32 : at time   33517.0 ns WRITE: Bank = 2 Row = 2014, Col = 127, Data = 22334455
+# Status: Burst-No:           1  Write Address: 04fde9f9  WriteData: 22334455 
+# tb_core.u_sdram32 : at time   33527.0 ns WRITE: Bank = 2 Row = 2014, Col = 128, Data = 33445566
+# Status: Burst-No:           2  Write Address: 04fde9f9  WriteData: 33445566 
+# tb_core.u_sdram32 : at time   33537.0 ns WRITE: Bank = 2 Row = 2014, Col = 129, Data = 44556677
+# Status: Burst-No:           3  Write Address: 04fde9f9  WriteData: 44556677 
+# tb_core.u_sdram32 : at time   33547.0 ns WRITE: Bank = 2 Row = 2014, Col = 130, Data = 55667788
+# Status: Burst-No:           4  Write Address: 04fde9f9  WriteData: 55667788 
+# tb_core.u_sdram32 : at time   33557.0 ns BST  : Burst Terminate
+# tb_core.u_sdram32 : at time   34593.0 ns READ : Bank = 2 Row = 2014, Col = 126, Data = 11223344
+# tb_core.u_sdram32 : at time   34603.0 ns READ : Bank = 2 Row = 2014, Col = 127, Data = 22334455
+# READ STATUS: Burst-No:           0 Addr: 04fde9f9 Rxd: 11223344
+# tb_core.u_sdram32 : at time   34613.0 ns READ : Bank = 2 Row = 2014, Col = 128, Data = 33445566
+# tb_core.u_sdram32 : at time   34617.0 ns BST  : Burst Terminate
+# READ STATUS: Burst-No:           1 Addr: 04fde9fb Rxd: 22334455
+# tb_core.u_sdram32 : at time   34623.0 ns READ : Bank = 2 Row = 2014, Col = 129, Data = 44556677
+# READ STATUS: Burst-No:           2 Addr: 04fde9fd Rxd: 33445566
+# tb_core.u_sdram32 : at time   34633.0 ns READ : Bank = 2 Row = 2014, Col = 130, Data = 55667788
+# READ STATUS: Burst-No:           3 Addr: 04fde9ff Rxd: 44556677
+# READ STATUS: Burst-No:           4 Addr: 04fdea01 Rxd: 55667788
+# Write Address: 033724c6, Burst Size:           5
+# tb_core.u_sdram32 : at time   34717.0 ns ACT  : Bank = 1 Row =  882
+# tb_core.u_sdram32 : at time   34747.0 ns WRITE: Bank = 1 Row =  882, Col =  49, Data = 11223344
+# Status: Burst-No:           0  Write Address: 033724c6  WriteData: 11223344 
+# tb_core.u_sdram32 : at time   34757.0 ns WRITE: Bank = 1 Row =  882, Col =  50, Data = 22334455
+# Status: Burst-No:           1  Write Address: 033724c6  WriteData: 22334455 
+# tb_core.u_sdram32 : at time   34767.0 ns WRITE: Bank = 1 Row =  882, Col =  51, Data = 33445566
+# Status: Burst-No:           2  Write Address: 033724c6  WriteData: 33445566 
+# tb_core.u_sdram32 : at time   34777.0 ns WRITE: Bank = 1 Row =  882, Col =  52, Data = 44556677
+# Status: Burst-No:           3  Write Address: 033724c6  WriteData: 44556677 
+# tb_core.u_sdram32 : at time   34787.0 ns WRITE: Bank = 1 Row =  882, Col =  53, Data = 55667788
+# Status: Burst-No:           4  Write Address: 033724c6  WriteData: 55667788 
+# tb_core.u_sdram32 : at time   34797.0 ns BST  : Burst Terminate
+# tb_core.u_sdram32 : at time   35833.0 ns READ : Bank = 1 Row =  882, Col =  49, Data = 11223344
+# tb_core.u_sdram32 : at time   35843.0 ns READ : Bank = 1 Row =  882, Col =  50, Data = 22334455
+# READ STATUS: Burst-No:           0 Addr: 033724c6 Rxd: 11223344
+# tb_core.u_sdram32 : at time   35853.0 ns READ : Bank = 1 Row =  882, Col =  51, Data = 33445566
+# tb_core.u_sdram32 : at time   35857.0 ns BST  : Burst Terminate
+# READ STATUS: Burst-No:           1 Addr: 033724c8 Rxd: 22334455
+# tb_core.u_sdram32 : at time   35863.0 ns READ : Bank = 1 Row =  882, Col =  52, Data = 44556677
+# READ STATUS: Burst-No:           2 Addr: 033724ca Rxd: 33445566
+# tb_core.u_sdram32 : at time   35873.0 ns READ : Bank = 1 Row =  882, Col =  53, Data = 55667788
+# READ STATUS: Burst-No:           3 Addr: 033724cc Rxd: 44556677
+# READ STATUS: Burst-No:           4 Addr: 033724ce Rxd: 55667788
+# Write Address: 02f784c5, Burst Size:           5
+# tb_core.u_sdram32 : at time   35957.0 ns ACT  : Bank = 1 Row = 1912
+# tb_core.u_sdram32 : at time   35987.0 ns WRITE: Bank = 1 Row = 1912, Col =  49, Data = 11223344
+# Status: Burst-No:           0  Write Address: 02f784c5  WriteData: 11223344 
+# tb_core.u_sdram32 : at time   35997.0 ns WRITE: Bank = 1 Row = 1912, Col =  50, Data = 22334455
+# Status: Burst-No:           1  Write Address: 02f784c5  WriteData: 22334455 
+# tb_core.u_sdram32 : at time   36007.0 ns WRITE: Bank = 1 Row = 1912, Col =  51, Data = 33445566
+# Status: Burst-No:           2  Write Address: 02f784c5  WriteData: 33445566 
+# tb_core.u_sdram32 : at time   36017.0 ns WRITE: Bank = 1 Row = 1912, Col =  52, Data = 44556677
+# Status: Burst-No:           3  Write Address: 02f784c5  WriteData: 44556677 
+# tb_core.u_sdram32 : at time   36027.0 ns WRITE: Bank = 1 Row = 1912, Col =  53, Data = 55667788
+# Status: Burst-No:           4  Write Address: 02f784c5  WriteData: 55667788 
+# tb_core.u_sdram32 : at time   36037.0 ns BST  : Burst Terminate
+# tb_core.u_sdram32 : at time   37073.0 ns READ : Bank = 1 Row = 1912, Col =  49, Data = 11223344
+# tb_core.u_sdram32 : at time   37083.0 ns READ : Bank = 1 Row = 1912, Col =  50, Data = 22334455
+# READ STATUS: Burst-No:           0 Addr: 02f784c5 Rxd: 11223344
+# tb_core.u_sdram32 : at time   37093.0 ns READ : Bank = 1 Row = 1912, Col =  51, Data = 33445566
+# tb_core.u_sdram32 : at time   37097.0 ns BST  : Burst Terminate
+# READ STATUS: Burst-No:           1 Addr: 02f784c7 Rxd: 22334455
+# tb_core.u_sdram32 : at time   37103.0 ns READ : Bank = 1 Row = 1912, Col =  52, Data = 44556677
+# READ STATUS: Burst-No:           2 Addr: 02f784c9 Rxd: 33445566
+# tb_core.u_sdram32 : at time   37113.0 ns READ : Bank = 1 Row = 1912, Col =  53, Data = 55667788
+# READ STATUS: Burst-No:           3 Addr: 02f784cb Rxd: 44556677
+# READ STATUS: Burst-No:           4 Addr: 02f784cd Rxd: 55667788
+# Write Address: 0513d2aa, Burst Size:           5
+# tb_core.u_sdram32 : at time   37197.0 ns ACT  : Bank = 0 Row =  317
+# tb_core.u_sdram32 : at time   37227.0 ns WRITE: Bank = 0 Row =  317, Col = 170, Data = 11223344
+# Status: Burst-No:           0  Write Address: 0513d2aa  WriteData: 11223344 
+# tb_core.u_sdram32 : at time   37237.0 ns WRITE: Bank = 0 Row =  317, Col = 171, Data = 22334455
+# Status: Burst-No:           1  Write Address: 0513d2aa  WriteData: 22334455 
+# tb_core.u_sdram32 : at time   37247.0 ns WRITE: Bank = 0 Row =  317, Col = 172, Data = 33445566
+# Status: Burst-No:           2  Write Address: 0513d2aa  WriteData: 33445566 
+# tb_core.u_sdram32 : at time   37257.0 ns WRITE: Bank = 0 Row =  317, Col = 173, Data = 44556677
+# Status: Burst-No:           3  Write Address: 0513d2aa  WriteData: 44556677 
+# tb_core.u_sdram32 : at time   37267.0 ns WRITE: Bank = 0 Row =  317, Col = 174, Data = 55667788
+# Status: Burst-No:           4  Write Address: 0513d2aa  WriteData: 55667788 
+# tb_core.u_sdram32 : at time   37277.0 ns BST  : Burst Terminate
+# tb_core.u_sdram32 : at time   38313.0 ns READ : Bank = 0 Row =  317, Col = 170, Data = 11223344
+# tb_core.u_sdram32 : at time   38323.0 ns READ : Bank = 0 Row =  317, Col = 171, Data = 22334455
+# READ STATUS: Burst-No:           0 Addr: 0513d2aa Rxd: 11223344
+# tb_core.u_sdram32 : at time   38333.0 ns READ : Bank = 0 Row =  317, Col = 172, Data = 33445566
+# tb_core.u_sdram32 : at time   38337.0 ns BST  : Burst Terminate
+# READ STATUS: Burst-No:           1 Addr: 0513d2ac Rxd: 22334455
+# tb_core.u_sdram32 : at time   38343.0 ns READ : Bank = 0 Row =  317, Col = 173, Data = 44556677
+# READ STATUS: Burst-No:           2 Addr: 0513d2ae Rxd: 33445566
+# tb_core.u_sdram32 : at time   38353.0 ns READ : Bank = 0 Row =  317, Col = 174, Data = 55667788
+# READ STATUS: Burst-No:           3 Addr: 0513d2b0 Rxd: 44556677
+# READ STATUS: Burst-No:           4 Addr: 0513d2b2 Rxd: 55667788
+# Write Address: 02aff7e5, Burst Size:           5
+# tb_core.u_sdram32 : at time   38437.0 ns ACT  : Bank = 1 Row =  767
+# tb_core.u_sdram32 : at time   38467.0 ns WRITE: Bank = 1 Row =  767, Col = 249, Data = 11223344
+# Status: Burst-No:           0  Write Address: 02aff7e5  WriteData: 11223344 
+# tb_core.u_sdram32 : at time   38477.0 ns WRITE: Bank = 1 Row =  767, Col = 250, Data = 22334455
+# Status: Burst-No:           1  Write Address: 02aff7e5  WriteData: 22334455 
+# tb_core.u_sdram32 : at time   38487.0 ns WRITE: Bank = 1 Row =  767, Col = 251, Data = 33445566
+# Status: Burst-No:           2  Write Address: 02aff7e5  WriteData: 33445566 
+# tb_core.u_sdram32 : at time   38497.0 ns WRITE: Bank = 1 Row =  767, Col = 252, Data = 44556677
+# Status: Burst-No:           3  Write Address: 02aff7e5  WriteData: 44556677 
+# tb_core.u_sdram32 : at time   38507.0 ns WRITE: Bank = 1 Row =  767, Col = 253, Data = 55667788
+# Status: Burst-No:           4  Write Address: 02aff7e5  WriteData: 55667788 
+# tb_core.u_sdram32 : at time   38517.0 ns BST  : Burst Terminate
+# tb_core.u_sdram32 : at time   39553.0 ns READ : Bank = 1 Row =  767, Col = 249, Data = 11223344
+# tb_core.u_sdram32 : at time   39563.0 ns READ : Bank = 1 Row =  767, Col = 250, Data = 22334455
+# READ STATUS: Burst-No:           0 Addr: 02aff7e5 Rxd: 11223344
+# tb_core.u_sdram32 : at time   39573.0 ns READ : Bank = 1 Row =  767, Col = 251, Data = 33445566
+# tb_core.u_sdram32 : at time   39577.0 ns BST  : Burst Terminate
+# READ STATUS: Burst-No:           1 Addr: 02aff7e7 Rxd: 22334455
+# tb_core.u_sdram32 : at time   39583.0 ns READ : Bank = 1 Row =  767, Col = 252, Data = 44556677
+# READ STATUS: Burst-No:           2 Addr: 02aff7e9 Rxd: 33445566
+# tb_core.u_sdram32 : at time   39593.0 ns READ : Bank = 1 Row =  767, Col = 253, Data = 55667788
+# READ STATUS: Burst-No:           3 Addr: 02aff7eb Rxd: 44556677
+# READ STATUS: Burst-No:           4 Addr: 02aff7ed Rxd: 55667788
+# Write Address: 03d27277, Burst Size:           5
+# tb_core.u_sdram32 : at time   39677.0 ns ACT  : Bank = 0 Row = 1319
+# tb_core.u_sdram32 : at time   39707.0 ns WRITE: Bank = 0 Row = 1319, Col = 157, Data = 11223344
+# Status: Burst-No:           0  Write Address: 03d27277  WriteData: 11223344 
+# tb_core.u_sdram32 : at time   39717.0 ns WRITE: Bank = 0 Row = 1319, Col = 158, Data = 22334455
+# Status: Burst-No:           1  Write Address: 03d27277  WriteData: 22334455 
+# tb_core.u_sdram32 : at time   39727.0 ns WRITE: Bank = 0 Row = 1319, Col = 159, Data = 33445566
+# Status: Burst-No:           2  Write Address: 03d27277  WriteData: 33445566 
+# tb_core.u_sdram32 : at time   39737.0 ns WRITE: Bank = 0 Row = 1319, Col = 160, Data = 44556677
+# Status: Burst-No:           3  Write Address: 03d27277  WriteData: 44556677 
+# tb_core.u_sdram32 : at time   39747.0 ns WRITE: Bank = 0 Row = 1319, Col = 161, Data = 55667788
+# Status: Burst-No:           4  Write Address: 03d27277  WriteData: 55667788 
+# tb_core.u_sdram32 : at time   39757.0 ns BST  : Burst Terminate
+# tb_core.u_sdram32 : at time   40793.0 ns READ : Bank = 0 Row = 1319, Col = 157, Data = 11223344
+# tb_core.u_sdram32 : at time   40803.0 ns READ : Bank = 0 Row = 1319, Col = 158, Data = 22334455
+# READ STATUS: Burst-No:           0 Addr: 03d27277 Rxd: 11223344
+# tb_core.u_sdram32 : at time   40813.0 ns READ : Bank = 0 Row = 1319, Col = 159, Data = 33445566
+# tb_core.u_sdram32 : at time   40817.0 ns BST  : Burst Terminate
+# READ STATUS: Burst-No:           1 Addr: 03d27279 Rxd: 22334455
+# tb_core.u_sdram32 : at time   40823.0 ns READ : Bank = 0 Row = 1319, Col = 160, Data = 44556677
+# READ STATUS: Burst-No:           2 Addr: 03d2727b Rxd: 33445566
+# tb_core.u_sdram32 : at time   40833.0 ns READ : Bank = 0 Row = 1319, Col = 161, Data = 55667788
+# READ STATUS: Burst-No:           3 Addr: 03d2727d Rxd: 44556677
+# READ STATUS: Burst-No:           4 Addr: 03d2727f Rxd: 55667788
+###############################
+# STATUS: SDRAM Write/Read TEST PASSED
+###############################
+# ** Note: $finish    : ../tb/tb_core.sv(298)
+#    Time: 50860 ns  Iteration: 0  Instance: /tb_core
