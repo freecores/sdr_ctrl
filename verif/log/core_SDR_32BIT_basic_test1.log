@@ -22,7 +22,7 @@ Reading D:/Actel/Libero_v9.1/Model/tcl/vsim/pref.tcl
 # Loading work.sdrc_xfr_ctl
 # Loading work.sdrc_bs_convert
 # Loading work.mt48lc2m32b2
-# ** Warning: (vsim-3015) ../tb/tb_core.sv(193): [PCDPC] - Port size (11 or 11) does not match connection size (12) for port 'Addr'. The port definition is at: ../model/mt48lc2m32b2.v(42).
+# ** Warning: (vsim-3015) ../tb/tb_core.sv(195): [PCDPC] - Port size (11 or 11) does not match connection size (12) for port 'Addr'. The port definition is at: ../model/mt48lc2m32b2.v(42).
 #         Region: /tb_core/u_sdram32
 # do run.do 
 # tb_core.u_sdram32 : at time   10157.0 ns AREF : Auto Refresh
@@ -576,5 +576,5 @@ Reading D:/Actel/Libero_v9.1/Model/tcl/vsim/pref.tcl
 ###############################
 # STATUS: SDRAM Write/Read TEST PASSED
 ###############################
-# ** Note: $finish    : ../tb/tb_core.sv(298)
+# ** Note: $finish    : ../tb/tb_core.sv(300)
 #    Time: 50860 ns  Iteration: 0  Instance: /tb_core

@@ -1,0 +1,1135 @@
+Reading D:/Actel/Libero_v9.1/Model/tcl/vsim/pref.tcl 
+
+# 6.6d
+
+# vsim +basic_test1 -do run.do -c tb_top 
+# //  ModelSim ACTEL 6.6d Nov  2 2010 
+# //
+# //  Copyright 1991-2010 Mentor Graphics Corporation
+# //              All Rights Reserved.
+# //
+# //  THIS WORK CONTAINS TRADE SECRET AND 
+# //  PROPRIETARY INFORMATION WHICH IS THE PROPERTY
+# //  OF MENTOR GRAPHICS CORPORATION OR ITS LICENSORS
+# //  AND IS SUBJECT TO LICENSE TERMS.
+# //
+# Loading sv_std.std
+# Loading work.tb_top
+# Loading work.sdrc_top
+# Loading work.wb2sdrc
+# Loading work.async_fifo
+# Loading work.sdrc_core
+# Loading work.sdrc_req_gen
+# Loading work.sdrc_bank_ctl
+# Loading work.sdrc_bank_fsm
+# Loading work.sdrc_xfr_ctl
+# Loading work.sdrc_bs_convert
+# Loading work.IS42VM16400K
+# do run.do 
+# Time =  10132.00 ns : OPERATION = PCHG  : bank = 0 
+# Time =  10132.00 ns : OPERATION = PCHG  : bank = 1 
+# Time =  10132.00 ns : OPERATION = PCHG  : bank = 2 
+# Time =  10132.00 ns : OPERATION = PCHG  : bank = 3 
+# Time =  10212.00 ns : OPERATION = AREF  : Auto Refresh
+# Time =  10392.00 ns : OPERATION = AREF  : Auto Refresh
+# Time =  10572.00 ns : OPERATION = AREF  : Auto Refresh
+# Time =  10752.00 ns : OPERATION = AREF  : Auto Refresh
+# Time =  10932.00 ns : OPERATION = AREF  : Auto Refresh
+# Time =  11112.00 ns : OPERATION = AREF  : Auto Refresh
+# Time =  11292.00 ns : OPERATION = AREF  : Auto Refresh
+# Time =  11472.00 ns : OPERATION = AREF  : Auto Refresh
+# Time =  11652.00 ns : OPERATION = AREF  : Auto Refresh
+# Time =  11832.00 ns : OPERATION = AREF  : Auto Refresh
+# Time =  12012.00 ns : OPERATION = AREF  : Auto Refresh
+# Time =  12192.00 ns : OPERATION = AREF  : Auto Refresh
+# Time =  12372.00 ns : OPERATION = AREF  : Auto Refresh
+# Time =  12552.00 ns : OPERATION = AREF  : Auto Refresh
+# Time =  12732.00 ns : OPERATION = AREF  : Auto Refresh
+# Time =  12912.00 ns : OPERATION = MRS   : Load Mode Register
+#                                  CAS Latency      = 3
+#                                  Burst Length     = 8
+#                                  Burst Type       = Sequential
+#                                  Write Burst Mode = Programmed Burst Length
+# Time =  13092.00 ns : OPERATION = PPDN  : Precharge Power down
+# Write Address: 00040000, Burst Size:           5
+# Status: Burst-No:           0  Write Address: 00010000  WriteData: 11223344 
+# Status: Burst-No:           1  Write Address: 00010001  WriteData: 22334455 
+# Status: Burst-No:           2  Write Address: 00010002  WriteData: 33445566 
+# Status: Burst-No:           3  Write Address: 00010003  WriteData: 44556677 
+# Time =  14152.00 ns : OPERATION = PPDNX : Precharge Power down exit
+# Status: Burst-No:           4  Write Address: 00010004  WriteData: 55667788 
+# Time =  14232.00 ns : OPERATION = ACT   : bank = 0 Row = 'h080
+# Time =  14292.00 ns : OPERATION = WRITE : bank = 0 Row = 'h080, Col = 'h00, Data = 'h3344
+# Time =  14312.00 ns : OPERATION = WRITE : bank = 0 Row = 'h080, Col = 'h01, Data = 'h1122
+# Time =  14332.00 ns : OPERATION = BST   : Burst Stop
+# Time =  14352.00 ns : OPERATION = WRITE : bank = 0 Row = 'h080, Col = 'h02, Data = 'h4455
+# Time =  14372.00 ns : OPERATION = WRITE : bank = 0 Row = 'h080, Col = 'h03, Data = 'h2233
+# Time =  14392.00 ns : OPERATION = BST   : Burst Stop
+# Time =  14412.00 ns : OPERATION = WRITE : bank = 0 Row = 'h080, Col = 'h04, Data = 'h5566
+# Time =  14432.00 ns : OPERATION = WRITE : bank = 0 Row = 'h080, Col = 'h05, Data = 'h3344
+# Time =  14452.00 ns : OPERATION = BST   : Burst Stop
+# Time =  14472.00 ns : OPERATION = WRITE : bank = 0 Row = 'h080, Col = 'h06, Data = 'h6677
+# Time =  14492.00 ns : OPERATION = WRITE : bank = 0 Row = 'h080, Col = 'h07, Data = 'h4455
+# Time =  14512.00 ns : OPERATION = BST   : Burst Stop
+# Time =  14532.00 ns : OPERATION = WRITE : bank = 0 Row = 'h080, Col = 'h08, Data = 'h7788
+# Time =  14552.00 ns : OPERATION = WRITE : bank = 0 Row = 'h080, Col = 'h09, Data = 'h5566
+# Time =  14572.00 ns : OPERATION = BST   : Burst Stop
+# Time =  14592.00 ns : OPERATION = CKSW   : Clock Suspend during Write
+# Time =  15292.00 ns : OPERATION = BST   : Burst Stop
+# Time =  15297.00 ns : OPERATION = READ  : bank = 0 Row = 'h080, Col = 'h00, Data = 'h3344
+# Time =  15317.00 ns : OPERATION = READ  : bank = 0 Row = 'h080, Col = 'h01, Data = 'h1122
+# Time =  15392.00 ns : OPERATION = CKSR   : Clock Suspend during Read
+# READ STATUS: Burst-No:           0 Addr: 00010000 Rxd: 11223344
+# Time =  15512.00 ns : OPERATION = BST   : Burst Stop
+# Time =  15517.00 ns : OPERATION = READ  : bank = 0 Row = 'h080, Col = 'h02, Data = 'h4455
+# Time =  15537.00 ns : OPERATION = READ  : bank = 0 Row = 'h080, Col = 'h03, Data = 'h2233
+# Time =  15612.00 ns : OPERATION = CKSR   : Clock Suspend during Read
+# READ STATUS: Burst-No:           1 Addr: 00010001 Rxd: 22334455
+# Time =  15732.00 ns : OPERATION = BST   : Burst Stop
+# Time =  15737.00 ns : OPERATION = READ  : bank = 0 Row = 'h080, Col = 'h04, Data = 'h5566
+# Time =  15757.00 ns : OPERATION = READ  : bank = 0 Row = 'h080, Col = 'h05, Data = 'h3344
+# Time =  15832.00 ns : OPERATION = CKSR   : Clock Suspend during Read
+# READ STATUS: Burst-No:           2 Addr: 00010002 Rxd: 33445566
+# Time =  15952.00 ns : OPERATION = BST   : Burst Stop
+# Time =  15957.00 ns : OPERATION = READ  : bank = 0 Row = 'h080, Col = 'h06, Data = 'h6677
+# Time =  15977.00 ns : OPERATION = READ  : bank = 0 Row = 'h080, Col = 'h07, Data = 'h4455
+# Time =  16052.00 ns : OPERATION = CKSR   : Clock Suspend during Read
+# READ STATUS: Burst-No:           3 Addr: 00010003 Rxd: 44556677
+# Time =  16172.00 ns : OPERATION = BST   : Burst Stop
+# Time =  16177.00 ns : OPERATION = READ  : bank = 0 Row = 'h080, Col = 'h08, Data = 'h7788
+# Time =  16197.00 ns : OPERATION = READ  : bank = 0 Row = 'h080, Col = 'h09, Data = 'h5566
+# Time =  16272.00 ns : OPERATION = CKSR   : Clock Suspend during Read
+# READ STATUS: Burst-No:           4 Addr: 00010004 Rxd: 55667788
+# Write Address: 70000000, Burst Size:           5
+# Status: Burst-No:           0  Write Address: 1c000000  WriteData: 11223344 
+# Status: Burst-No:           1  Write Address: 1c000001  WriteData: 22334455 
+# Status: Burst-No:           2  Write Address: 1c000002  WriteData: 33445566 
+# Status: Burst-No:           3  Write Address: 1c000003  WriteData: 44556677 
+# Time =  17352.00 ns : OPERATION = PCHG  : bank = 0 
+# Status: Burst-No:           4  Write Address: 1c000004  WriteData: 55667788 
+# Time =  17412.00 ns : OPERATION = ACT   : bank = 0 Row = 'h000
+# Time =  17472.00 ns : OPERATION = WRITE : bank = 0 Row = 'h000, Col = 'h00, Data = 'h3344
+# Time =  17492.00 ns : OPERATION = WRITE : bank = 0 Row = 'h000, Col = 'h01, Data = 'h1122
+# Time =  17512.00 ns : OPERATION = BST   : Burst Stop
+# Time =  17532.00 ns : OPERATION = WRITE : bank = 0 Row = 'h000, Col = 'h02, Data = 'h4455
+# Time =  17552.00 ns : OPERATION = WRITE : bank = 0 Row = 'h000, Col = 'h03, Data = 'h2233
+# Time =  17572.00 ns : OPERATION = BST   : Burst Stop
+# Time =  17592.00 ns : OPERATION = WRITE : bank = 0 Row = 'h000, Col = 'h04, Data = 'h5566
+# Time =  17612.00 ns : OPERATION = WRITE : bank = 0 Row = 'h000, Col = 'h05, Data = 'h3344
+# Time =  17632.00 ns : OPERATION = BST   : Burst Stop
+# Time =  17652.00 ns : OPERATION = WRITE : bank = 0 Row = 'h000, Col = 'h06, Data = 'h6677
+# Time =  17672.00 ns : OPERATION = WRITE : bank = 0 Row = 'h000, Col = 'h07, Data = 'h4455
+# Time =  17692.00 ns : OPERATION = BST   : Burst Stop
+# Time =  17712.00 ns : OPERATION = WRITE : bank = 0 Row = 'h000, Col = 'h08, Data = 'h7788
+# Time =  17732.00 ns : OPERATION = WRITE : bank = 0 Row = 'h000, Col = 'h09, Data = 'h5566
+# Time =  17752.00 ns : OPERATION = BST   : Burst Stop
+# Time =  17772.00 ns : OPERATION = CKSW   : Clock Suspend during Write
+# Time =  18472.00 ns : OPERATION = BST   : Burst Stop
+# Time =  18477.00 ns : OPERATION = READ  : bank = 0 Row = 'h000, Col = 'h00, Data = 'h3344
+# Time =  18497.00 ns : OPERATION = READ  : bank = 0 Row = 'h000, Col = 'h01, Data = 'h1122
+# Time =  18572.00 ns : OPERATION = CKSR   : Clock Suspend during Read
+# READ STATUS: Burst-No:           0 Addr: 1c000000 Rxd: 11223344
+# Time =  18692.00 ns : OPERATION = BST   : Burst Stop
+# Time =  18697.00 ns : OPERATION = READ  : bank = 0 Row = 'h000, Col = 'h02, Data = 'h4455
+# Time =  18717.00 ns : OPERATION = READ  : bank = 0 Row = 'h000, Col = 'h03, Data = 'h2233
+# Time =  18792.00 ns : OPERATION = CKSR   : Clock Suspend during Read
+# READ STATUS: Burst-No:           1 Addr: 1c000001 Rxd: 22334455
+# Time =  18912.00 ns : OPERATION = BST   : Burst Stop
+# Time =  18917.00 ns : OPERATION = READ  : bank = 0 Row = 'h000, Col = 'h04, Data = 'h5566
+# Time =  18937.00 ns : OPERATION = READ  : bank = 0 Row = 'h000, Col = 'h05, Data = 'h3344
+# Time =  19012.00 ns : OPERATION = CKSR   : Clock Suspend during Read
+# READ STATUS: Burst-No:           2 Addr: 1c000002 Rxd: 33445566
+# Time =  19132.00 ns : OPERATION = BST   : Burst Stop
+# Time =  19137.00 ns : OPERATION = READ  : bank = 0 Row = 'h000, Col = 'h06, Data = 'h6677
+# Time =  19157.00 ns : OPERATION = READ  : bank = 0 Row = 'h000, Col = 'h07, Data = 'h4455
+# Time =  19232.00 ns : OPERATION = CKSR   : Clock Suspend during Read
+# READ STATUS: Burst-No:           3 Addr: 1c000003 Rxd: 44556677
+# Time =  19352.00 ns : OPERATION = BST   : Burst Stop
+# Time =  19357.00 ns : OPERATION = READ  : bank = 0 Row = 'h000, Col = 'h08, Data = 'h7788
+# Time =  19377.00 ns : OPERATION = READ  : bank = 0 Row = 'h000, Col = 'h09, Data = 'h5566
+# Time =  19452.00 ns : OPERATION = CKSR   : Clock Suspend during Read
+# READ STATUS: Burst-No:           4 Addr: 1c000004 Rxd: 55667788
+# Write Address: 02153524, Burst Size:           5
+# Status: Burst-No:           0  Write Address: 00854d49  WriteData: 11223344 
+# Status: Burst-No:           1  Write Address: 00854d4a  WriteData: 22334455 
+# Status: Burst-No:           2  Write Address: 00854d4b  WriteData: 33445566 
+# Status: Burst-No:           3  Write Address: 00854d4c  WriteData: 44556677 
+# Status: Burst-No:           4  Write Address: 00854d4d  WriteData: 55667788 
+# Time =  19612.00 ns : OPERATION = ACT   : bank = 2 Row = 'h2a6
+# Time =  19672.00 ns : OPERATION = WRITE : bank = 2 Row = 'h2a6, Col = 'h92, Data = 'h3344
+# Time =  19692.00 ns : OPERATION = WRITE : bank = 2 Row = 'h2a6, Col = 'h93, Data = 'h1122
+# Time =  19712.00 ns : OPERATION = BST   : Burst Stop
+# Time =  19732.00 ns : OPERATION = WRITE : bank = 2 Row = 'h2a6, Col = 'h94, Data = 'h4455
+# Time =  19752.00 ns : OPERATION = WRITE : bank = 2 Row = 'h2a6, Col = 'h95, Data = 'h2233
+# Time =  19772.00 ns : OPERATION = BST   : Burst Stop
+# Time =  19792.00 ns : OPERATION = WRITE : bank = 2 Row = 'h2a6, Col = 'h96, Data = 'h5566
+# Time =  19812.00 ns : OPERATION = WRITE : bank = 2 Row = 'h2a6, Col = 'h97, Data = 'h3344
+# Time =  19832.00 ns : OPERATION = BST   : Burst Stop
+# Time =  19852.00 ns : OPERATION = WRITE : bank = 2 Row = 'h2a6, Col = 'h98, Data = 'h6677
+# Time =  19872.00 ns : OPERATION = WRITE : bank = 2 Row = 'h2a6, Col = 'h99, Data = 'h4455
+# Time =  19892.00 ns : OPERATION = BST   : Burst Stop
+# Time =  19912.00 ns : OPERATION = WRITE : bank = 2 Row = 'h2a6, Col = 'h9a, Data = 'h7788
+# Time =  19932.00 ns : OPERATION = WRITE : bank = 2 Row = 'h2a6, Col = 'h9b, Data = 'h5566
+# Time =  19952.00 ns : OPERATION = BST   : Burst Stop
+# Time =  19972.00 ns : OPERATION = CKSW   : Clock Suspend during Write
+# Time =  20672.00 ns : OPERATION = BST   : Burst Stop
+# Time =  20677.00 ns : OPERATION = READ  : bank = 2 Row = 'h2a6, Col = 'h92, Data = 'h3344
+# Time =  20697.00 ns : OPERATION = READ  : bank = 2 Row = 'h2a6, Col = 'h93, Data = 'h1122
+# Time =  20772.00 ns : OPERATION = CKSR   : Clock Suspend during Read
+# READ STATUS: Burst-No:           0 Addr: 00854d49 Rxd: 11223344
+# Time =  20892.00 ns : OPERATION = BST   : Burst Stop
+# Time =  20897.00 ns : OPERATION = READ  : bank = 2 Row = 'h2a6, Col = 'h94, Data = 'h4455
+# Time =  20917.00 ns : OPERATION = READ  : bank = 2 Row = 'h2a6, Col = 'h95, Data = 'h2233
+# Time =  20992.00 ns : OPERATION = CKSR   : Clock Suspend during Read
+# READ STATUS: Burst-No:           1 Addr: 00854d4a Rxd: 22334455
+# Time =  21112.00 ns : OPERATION = BST   : Burst Stop
+# Time =  21117.00 ns : OPERATION = READ  : bank = 2 Row = 'h2a6, Col = 'h96, Data = 'h5566
+# Time =  21137.00 ns : OPERATION = READ  : bank = 2 Row = 'h2a6, Col = 'h97, Data = 'h3344
+# Time =  21212.00 ns : OPERATION = CKSR   : Clock Suspend during Read
+# READ STATUS: Burst-No:           2 Addr: 00854d4b Rxd: 33445566
+# Time =  21332.00 ns : OPERATION = BST   : Burst Stop
+# Time =  21337.00 ns : OPERATION = READ  : bank = 2 Row = 'h2a6, Col = 'h98, Data = 'h6677
+# Time =  21357.00 ns : OPERATION = READ  : bank = 2 Row = 'h2a6, Col = 'h99, Data = 'h4455
+# Time =  21432.00 ns : OPERATION = CKSR   : Clock Suspend during Read
+# READ STATUS: Burst-No:           3 Addr: 00854d4c Rxd: 44556677
+# Time =  21552.00 ns : OPERATION = BST   : Burst Stop
+# Time =  21557.00 ns : OPERATION = READ  : bank = 2 Row = 'h2a6, Col = 'h9a, Data = 'h7788
+# Time =  21577.00 ns : OPERATION = READ  : bank = 2 Row = 'h2a6, Col = 'h9b, Data = 'h5566
+# Time =  21652.00 ns : OPERATION = CKSR   : Clock Suspend during Read
+# READ STATUS: Burst-No:           4 Addr: 00854d4d Rxd: 55667788
+# Write Address: 00895e81, Burst Size:           5
+# Status: Burst-No:           0  Write Address: 002257a0  WriteData: 11223344 
+# Status: Burst-No:           1  Write Address: 002257a1  WriteData: 22334455 
+# Status: Burst-No:           2  Write Address: 002257a2  WriteData: 33445566 
+# Status: Burst-No:           3  Write Address: 002257a3  WriteData: 44556677 
+# Status: Burst-No:           4  Write Address: 002257a4  WriteData: 55667788 
+# Time =  21812.00 ns : OPERATION = ACT   : bank = 3 Row = 'h12b
+# Time =  21872.00 ns : OPERATION = WRITE : bank = 3 Row = 'h12b, Col = 'h40, Data = 'h3344
+# Time =  21892.00 ns : OPERATION = WRITE : bank = 3 Row = 'h12b, Col = 'h41, Data = 'h1122
+# Time =  21912.00 ns : OPERATION = BST   : Burst Stop
+# Time =  21932.00 ns : OPERATION = WRITE : bank = 3 Row = 'h12b, Col = 'h42, Data = 'h4455
+# Time =  21952.00 ns : OPERATION = WRITE : bank = 3 Row = 'h12b, Col = 'h43, Data = 'h2233
+# Time =  21972.00 ns : OPERATION = BST   : Burst Stop
+# Time =  21992.00 ns : OPERATION = WRITE : bank = 3 Row = 'h12b, Col = 'h44, Data = 'h5566
+# Time =  22012.00 ns : OPERATION = WRITE : bank = 3 Row = 'h12b, Col = 'h45, Data = 'h3344
+# Time =  22032.00 ns : OPERATION = BST   : Burst Stop
+# Time =  22052.00 ns : OPERATION = WRITE : bank = 3 Row = 'h12b, Col = 'h46, Data = 'h6677
+# Time =  22072.00 ns : OPERATION = WRITE : bank = 3 Row = 'h12b, Col = 'h47, Data = 'h4455
+# Time =  22092.00 ns : OPERATION = BST   : Burst Stop
+# Time =  22112.00 ns : OPERATION = WRITE : bank = 3 Row = 'h12b, Col = 'h48, Data = 'h7788
+# Time =  22132.00 ns : OPERATION = WRITE : bank = 3 Row = 'h12b, Col = 'h49, Data = 'h5566
+# Time =  22152.00 ns : OPERATION = BST   : Burst Stop
+# Time =  22172.00 ns : OPERATION = CKSW   : Clock Suspend during Write
+# Time =  22872.00 ns : OPERATION = BST   : Burst Stop
+# Time =  22877.00 ns : OPERATION = READ  : bank = 3 Row = 'h12b, Col = 'h40, Data = 'h3344
+# Time =  22897.00 ns : OPERATION = READ  : bank = 3 Row = 'h12b, Col = 'h41, Data = 'h1122
+# Time =  22972.00 ns : OPERATION = CKSR   : Clock Suspend during Read
+# READ STATUS: Burst-No:           0 Addr: 002257a0 Rxd: 11223344
+# Time =  23092.00 ns : OPERATION = BST   : Burst Stop
+# Time =  23097.00 ns : OPERATION = READ  : bank = 3 Row = 'h12b, Col = 'h42, Data = 'h4455
+# Time =  23117.00 ns : OPERATION = READ  : bank = 3 Row = 'h12b, Col = 'h43, Data = 'h2233
+# Time =  23192.00 ns : OPERATION = CKSR   : Clock Suspend during Read
+# READ STATUS: Burst-No:           1 Addr: 002257a1 Rxd: 22334455
+# Time =  23312.00 ns : OPERATION = BST   : Burst Stop
+# Time =  23317.00 ns : OPERATION = READ  : bank = 3 Row = 'h12b, Col = 'h44, Data = 'h5566
+# Time =  23337.00 ns : OPERATION = READ  : bank = 3 Row = 'h12b, Col = 'h45, Data = 'h3344
+# Time =  23412.00 ns : OPERATION = CKSR   : Clock Suspend during Read
+# READ STATUS: Burst-No:           2 Addr: 002257a2 Rxd: 33445566
+# Time =  23532.00 ns : OPERATION = BST   : Burst Stop
+# Time =  23537.00 ns : OPERATION = READ  : bank = 3 Row = 'h12b, Col = 'h46, Data = 'h6677
+# Time =  23557.00 ns : OPERATION = READ  : bank = 3 Row = 'h12b, Col = 'h47, Data = 'h4455
+# Time =  23632.00 ns : OPERATION = CKSR   : Clock Suspend during Read
+# READ STATUS: Burst-No:           3 Addr: 002257a3 Rxd: 44556677
+# Time =  23752.00 ns : OPERATION = BST   : Burst Stop
+# Time =  23757.00 ns : OPERATION = READ  : bank = 3 Row = 'h12b, Col = 'h48, Data = 'h7788
+# Time =  23777.00 ns : OPERATION = READ  : bank = 3 Row = 'h12b, Col = 'h49, Data = 'h5566
+# Time =  23852.00 ns : OPERATION = CKSR   : Clock Suspend during Read
+# READ STATUS: Burst-No:           4 Addr: 002257a4 Rxd: 55667788
+# Write Address: 0484d609, Burst Size:           5
+# Status: Burst-No:           0  Write Address: 01213582  WriteData: 11223344 
+# Status: Burst-No:           1  Write Address: 01213583  WriteData: 22334455 
+# Status: Burst-No:           2  Write Address: 01213584  WriteData: 33445566 
+# Status: Burst-No:           3  Write Address: 01213585  WriteData: 44556677 
+# Time =  23952.00 ns : OPERATION = PCHG  : bank = 3 
+# Status: Burst-No:           4  Write Address: 01213586  WriteData: 55667788 
+# Time =  24012.00 ns : OPERATION = ACT   : bank = 3 Row = 'h09a
+# Time =  24072.00 ns : OPERATION = WRITE : bank = 3 Row = 'h09a, Col = 'h04, Data = 'h3344
+# Time =  24092.00 ns : OPERATION = WRITE : bank = 3 Row = 'h09a, Col = 'h05, Data = 'h1122
+# Time =  24112.00 ns : OPERATION = BST   : Burst Stop
+# Time =  24132.00 ns : OPERATION = WRITE : bank = 3 Row = 'h09a, Col = 'h06, Data = 'h4455
+# Time =  24152.00 ns : OPERATION = WRITE : bank = 3 Row = 'h09a, Col = 'h07, Data = 'h2233
+# Time =  24172.00 ns : OPERATION = BST   : Burst Stop
+# Time =  24192.00 ns : OPERATION = WRITE : bank = 3 Row = 'h09a, Col = 'h08, Data = 'h5566
+# Time =  24212.00 ns : OPERATION = WRITE : bank = 3 Row = 'h09a, Col = 'h09, Data = 'h3344
+# Time =  24232.00 ns : OPERATION = BST   : Burst Stop
+# Time =  24252.00 ns : OPERATION = WRITE : bank = 3 Row = 'h09a, Col = 'h0a, Data = 'h6677
+# Time =  24272.00 ns : OPERATION = WRITE : bank = 3 Row = 'h09a, Col = 'h0b, Data = 'h4455
+# Time =  24292.00 ns : OPERATION = BST   : Burst Stop
+# Time =  24312.00 ns : OPERATION = WRITE : bank = 3 Row = 'h09a, Col = 'h0c, Data = 'h7788
+# Time =  24332.00 ns : OPERATION = WRITE : bank = 3 Row = 'h09a, Col = 'h0d, Data = 'h5566
+# Time =  24352.00 ns : OPERATION = BST   : Burst Stop
+# Time =  24372.00 ns : OPERATION = CKSW   : Clock Suspend during Write
+# Time =  25072.00 ns : OPERATION = BST   : Burst Stop
+# Time =  25077.00 ns : OPERATION = READ  : bank = 3 Row = 'h09a, Col = 'h04, Data = 'h3344
+# Time =  25097.00 ns : OPERATION = READ  : bank = 3 Row = 'h09a, Col = 'h05, Data = 'h1122
+# Time =  25172.00 ns : OPERATION = CKSR   : Clock Suspend during Read
+# READ STATUS: Burst-No:           0 Addr: 01213582 Rxd: 11223344
+# Time =  25292.00 ns : OPERATION = BST   : Burst Stop
+# Time =  25297.00 ns : OPERATION = READ  : bank = 3 Row = 'h09a, Col = 'h06, Data = 'h4455
+# Time =  25317.00 ns : OPERATION = READ  : bank = 3 Row = 'h09a, Col = 'h07, Data = 'h2233
+# Time =  25392.00 ns : OPERATION = CKSR   : Clock Suspend during Read
+# READ STATUS: Burst-No:           1 Addr: 01213583 Rxd: 22334455
+# Time =  25512.00 ns : OPERATION = BST   : Burst Stop
+# Time =  25517.00 ns : OPERATION = READ  : bank = 3 Row = 'h09a, Col = 'h08, Data = 'h5566
+# Time =  25537.00 ns : OPERATION = READ  : bank = 3 Row = 'h09a, Col = 'h09, Data = 'h3344
+# Time =  25612.00 ns : OPERATION = CKSR   : Clock Suspend during Read
+# READ STATUS: Burst-No:           2 Addr: 01213584 Rxd: 33445566
+# Time =  25732.00 ns : OPERATION = BST   : Burst Stop
+# Time =  25737.00 ns : OPERATION = READ  : bank = 3 Row = 'h09a, Col = 'h0a, Data = 'h6677
+# Time =  25757.00 ns : OPERATION = READ  : bank = 3 Row = 'h09a, Col = 'h0b, Data = 'h4455
+# Time =  25832.00 ns : OPERATION = CKSR   : Clock Suspend during Read
+# READ STATUS: Burst-No:           3 Addr: 01213585 Rxd: 44556677
+# Time =  25952.00 ns : OPERATION = BST   : Burst Stop
+# Time =  25957.00 ns : OPERATION = READ  : bank = 3 Row = 'h09a, Col = 'h0c, Data = 'h7788
+# Time =  25977.00 ns : OPERATION = READ  : bank = 3 Row = 'h09a, Col = 'h0d, Data = 'h5566
+# Time =  26052.00 ns : OPERATION = CKSR   : Clock Suspend during Read
+# READ STATUS: Burst-No:           4 Addr: 01213586 Rxd: 55667788
+# Write Address: 01f05663, Burst Size:           5
+# Status: Burst-No:           0  Write Address: 007c1598  WriteData: 11223344 
+# Status: Burst-No:           1  Write Address: 007c1599  WriteData: 22334455 
+# Status: Burst-No:           2  Write Address: 007c159a  WriteData: 33445566 
+# Status: Burst-No:           3  Write Address: 007c159b  WriteData: 44556677 
+# Time =  26152.00 ns : OPERATION = PCHG  : bank = 3 
+# Status: Burst-No:           4  Write Address: 007c159c  WriteData: 55667788 
+# Time =  26212.00 ns : OPERATION = ACT   : bank = 3 Row = 'he0a
+# Time =  26272.00 ns : OPERATION = WRITE : bank = 3 Row = 'he0a, Col = 'h30, Data = 'h3344
+# Time =  26292.00 ns : OPERATION = WRITE : bank = 3 Row = 'he0a, Col = 'h31, Data = 'h1122
+# Time =  26312.00 ns : OPERATION = BST   : Burst Stop
+# Time =  26332.00 ns : OPERATION = WRITE : bank = 3 Row = 'he0a, Col = 'h32, Data = 'h4455
+# Time =  26352.00 ns : OPERATION = WRITE : bank = 3 Row = 'he0a, Col = 'h33, Data = 'h2233
+# Time =  26372.00 ns : OPERATION = BST   : Burst Stop
+# Time =  26392.00 ns : OPERATION = WRITE : bank = 3 Row = 'he0a, Col = 'h34, Data = 'h5566
+# Time =  26412.00 ns : OPERATION = WRITE : bank = 3 Row = 'he0a, Col = 'h35, Data = 'h3344
+# Time =  26432.00 ns : OPERATION = BST   : Burst Stop
+# Time =  26452.00 ns : OPERATION = WRITE : bank = 3 Row = 'he0a, Col = 'h36, Data = 'h6677
+# Time =  26472.00 ns : OPERATION = WRITE : bank = 3 Row = 'he0a, Col = 'h37, Data = 'h4455
+# Time =  26492.00 ns : OPERATION = BST   : Burst Stop
+# Time =  26512.00 ns : OPERATION = WRITE : bank = 3 Row = 'he0a, Col = 'h38, Data = 'h7788
+# Time =  26532.00 ns : OPERATION = WRITE : bank = 3 Row = 'he0a, Col = 'h39, Data = 'h5566
+# Time =  26552.00 ns : OPERATION = BST   : Burst Stop
+# Time =  26572.00 ns : OPERATION = CKSW   : Clock Suspend during Write
+# Time =  27272.00 ns : OPERATION = BST   : Burst Stop
+# Time =  27277.00 ns : OPERATION = READ  : bank = 3 Row = 'he0a, Col = 'h30, Data = 'h3344
+# Time =  27297.00 ns : OPERATION = READ  : bank = 3 Row = 'he0a, Col = 'h31, Data = 'h1122
+# Time =  27372.00 ns : OPERATION = CKSR   : Clock Suspend during Read
+# READ STATUS: Burst-No:           0 Addr: 007c1598 Rxd: 11223344
+# Time =  27492.00 ns : OPERATION = BST   : Burst Stop
+# Time =  27497.00 ns : OPERATION = READ  : bank = 3 Row = 'he0a, Col = 'h32, Data = 'h4455
+# Time =  27517.00 ns : OPERATION = READ  : bank = 3 Row = 'he0a, Col = 'h33, Data = 'h2233
+# Time =  27592.00 ns : OPERATION = CKSR   : Clock Suspend during Read
+# READ STATUS: Burst-No:           1 Addr: 007c1599 Rxd: 22334455
+# Time =  27712.00 ns : OPERATION = BST   : Burst Stop
+# Time =  27717.00 ns : OPERATION = READ  : bank = 3 Row = 'he0a, Col = 'h34, Data = 'h5566
+# Time =  27737.00 ns : OPERATION = READ  : bank = 3 Row = 'he0a, Col = 'h35, Data = 'h3344
+# Time =  27812.00 ns : OPERATION = CKSR   : Clock Suspend during Read
+# READ STATUS: Burst-No:           2 Addr: 007c159a Rxd: 33445566
+# Time =  27932.00 ns : OPERATION = BST   : Burst Stop
+# Time =  27937.00 ns : OPERATION = READ  : bank = 3 Row = 'he0a, Col = 'h36, Data = 'h6677
+# Time =  27957.00 ns : OPERATION = READ  : bank = 3 Row = 'he0a, Col = 'h37, Data = 'h4455
+# Time =  28032.00 ns : OPERATION = CKSR   : Clock Suspend during Read
+# READ STATUS: Burst-No:           3 Addr: 007c159b Rxd: 44556677
+# Time =  28152.00 ns : OPERATION = BST   : Burst Stop
+# Time =  28157.00 ns : OPERATION = READ  : bank = 3 Row = 'he0a, Col = 'h38, Data = 'h7788
+# Time =  28177.00 ns : OPERATION = READ  : bank = 3 Row = 'he0a, Col = 'h39, Data = 'h5566
+# Time =  28252.00 ns : OPERATION = CKSR   : Clock Suspend during Read
+# READ STATUS: Burst-No:           4 Addr: 007c159c Rxd: 55667788
+# Write Address: 06b97b0d, Burst Size:           5
+# Status: Burst-No:           0  Write Address: 01ae5ec3  WriteData: 11223344 
+# Status: Burst-No:           1  Write Address: 01ae5ec4  WriteData: 22334455 
+# Status: Burst-No:           2  Write Address: 01ae5ec5  WriteData: 33445566 
+# Status: Burst-No:           3  Write Address: 01ae5ec6  WriteData: 44556677 
+# Status: Burst-No:           4  Write Address: 01ae5ec7  WriteData: 55667788 
+# Time =  28412.00 ns : OPERATION = ACT   : bank = 1 Row = 'h72f
+# Time =  28472.00 ns : OPERATION = WRITE : bank = 1 Row = 'h72f, Col = 'h86, Data = 'h3344
+# Time =  28492.00 ns : OPERATION = WRITE : bank = 1 Row = 'h72f, Col = 'h87, Data = 'h1122
+# Time =  28512.00 ns : OPERATION = BST   : Burst Stop
+# Time =  28532.00 ns : OPERATION = WRITE : bank = 1 Row = 'h72f, Col = 'h88, Data = 'h4455
+# Time =  28552.00 ns : OPERATION = WRITE : bank = 1 Row = 'h72f, Col = 'h89, Data = 'h2233
+# Time =  28572.00 ns : OPERATION = BST   : Burst Stop
+# Time =  28592.00 ns : OPERATION = WRITE : bank = 1 Row = 'h72f, Col = 'h8a, Data = 'h5566
+# Time =  28612.00 ns : OPERATION = WRITE : bank = 1 Row = 'h72f, Col = 'h8b, Data = 'h3344
+# Time =  28632.00 ns : OPERATION = BST   : Burst Stop
+# Time =  28652.00 ns : OPERATION = WRITE : bank = 1 Row = 'h72f, Col = 'h8c, Data = 'h6677
+# Time =  28672.00 ns : OPERATION = WRITE : bank = 1 Row = 'h72f, Col = 'h8d, Data = 'h4455
+# Time =  28692.00 ns : OPERATION = BST   : Burst Stop
+# Time =  28712.00 ns : OPERATION = WRITE : bank = 1 Row = 'h72f, Col = 'h8e, Data = 'h7788
+# Time =  28732.00 ns : OPERATION = WRITE : bank = 1 Row = 'h72f, Col = 'h8f, Data = 'h5566
+# Time =  28752.00 ns : OPERATION = BST   : Burst Stop
+# Time =  28772.00 ns : OPERATION = CKSW   : Clock Suspend during Write
+# Time =  29472.00 ns : OPERATION = BST   : Burst Stop
+# Time =  29477.00 ns : OPERATION = READ  : bank = 1 Row = 'h72f, Col = 'h86, Data = 'h3344
+# Time =  29497.00 ns : OPERATION = READ  : bank = 1 Row = 'h72f, Col = 'h87, Data = 'h1122
+# Time =  29572.00 ns : OPERATION = CKSR   : Clock Suspend during Read
+# READ STATUS: Burst-No:           0 Addr: 01ae5ec3 Rxd: 11223344
+# Time =  29692.00 ns : OPERATION = BST   : Burst Stop
+# Time =  29697.00 ns : OPERATION = READ  : bank = 1 Row = 'h72f, Col = 'h88, Data = 'h4455
+# Time =  29717.00 ns : OPERATION = READ  : bank = 1 Row = 'h72f, Col = 'h89, Data = 'h2233
+# Time =  29792.00 ns : OPERATION = CKSR   : Clock Suspend during Read
+# READ STATUS: Burst-No:           1 Addr: 01ae5ec4 Rxd: 22334455
+# Time =  29912.00 ns : OPERATION = BST   : Burst Stop
+# Time =  29917.00 ns : OPERATION = READ  : bank = 1 Row = 'h72f, Col = 'h8a, Data = 'h5566
+# Time =  29937.00 ns : OPERATION = READ  : bank = 1 Row = 'h72f, Col = 'h8b, Data = 'h3344
+# Time =  30012.00 ns : OPERATION = CKSR   : Clock Suspend during Read
+# READ STATUS: Burst-No:           2 Addr: 01ae5ec5 Rxd: 33445566
+# Time =  30132.00 ns : OPERATION = BST   : Burst Stop
+# Time =  30137.00 ns : OPERATION = READ  : bank = 1 Row = 'h72f, Col = 'h8c, Data = 'h6677
+# Time =  30157.00 ns : OPERATION = READ  : bank = 1 Row = 'h72f, Col = 'h8d, Data = 'h4455
+# Time =  30232.00 ns : OPERATION = CKSR   : Clock Suspend during Read
+# READ STATUS: Burst-No:           3 Addr: 01ae5ec6 Rxd: 44556677
+# Time =  30352.00 ns : OPERATION = BST   : Burst Stop
+# Time =  30357.00 ns : OPERATION = READ  : bank = 1 Row = 'h72f, Col = 'h8e, Data = 'h7788
+# Time =  30377.00 ns : OPERATION = READ  : bank = 1 Row = 'h72f, Col = 'h8f, Data = 'h5566
+# Time =  30452.00 ns : OPERATION = CKSR   : Clock Suspend during Read
+# READ STATUS: Burst-No:           4 Addr: 01ae5ec7 Rxd: 55667788
+# Write Address: 06df998d, Burst Size:           5
+# Status: Burst-No:           0  Write Address: 01b7e663  WriteData: 11223344 
+# Status: Burst-No:           1  Write Address: 01b7e664  WriteData: 22334455 
+# Status: Burst-No:           2  Write Address: 01b7e665  WriteData: 33445566 
+# Status: Burst-No:           3  Write Address: 01b7e666  WriteData: 44556677 
+# Time =  30552.00 ns : OPERATION = PCHG  : bank = 0 
+# Status: Burst-No:           4  Write Address: 01b7e667  WriteData: 55667788 
+# Time =  30612.00 ns : OPERATION = ACT   : bank = 0 Row = 'hbf3
+# Time =  30672.00 ns : OPERATION = WRITE : bank = 0 Row = 'hbf3, Col = 'hc6, Data = 'h3344
+# Time =  30692.00 ns : OPERATION = WRITE : bank = 0 Row = 'hbf3, Col = 'hc7, Data = 'h1122
+# Time =  30712.00 ns : OPERATION = BST   : Burst Stop
+# Time =  30732.00 ns : OPERATION = WRITE : bank = 0 Row = 'hbf3, Col = 'hc8, Data = 'h4455
+# Time =  30752.00 ns : OPERATION = WRITE : bank = 0 Row = 'hbf3, Col = 'hc9, Data = 'h2233
+# Time =  30772.00 ns : OPERATION = BST   : Burst Stop
+# Time =  30792.00 ns : OPERATION = WRITE : bank = 0 Row = 'hbf3, Col = 'hca, Data = 'h5566
+# Time =  30812.00 ns : OPERATION = WRITE : bank = 0 Row = 'hbf3, Col = 'hcb, Data = 'h3344
+# Time =  30832.00 ns : OPERATION = BST   : Burst Stop
+# Time =  30852.00 ns : OPERATION = WRITE : bank = 0 Row = 'hbf3, Col = 'hcc, Data = 'h6677
+# Time =  30872.00 ns : OPERATION = WRITE : bank = 0 Row = 'hbf3, Col = 'hcd, Data = 'h4455
+# Time =  30892.00 ns : OPERATION = BST   : Burst Stop
+# Time =  30912.00 ns : OPERATION = WRITE : bank = 0 Row = 'hbf3, Col = 'hce, Data = 'h7788
+# Time =  30932.00 ns : OPERATION = WRITE : bank = 0 Row = 'hbf3, Col = 'hcf, Data = 'h5566
+# Time =  30952.00 ns : OPERATION = BST   : Burst Stop
+# Time =  30972.00 ns : OPERATION = CKSW   : Clock Suspend during Write
+# Time =  31672.00 ns : OPERATION = BST   : Burst Stop
+# Time =  31677.00 ns : OPERATION = READ  : bank = 0 Row = 'hbf3, Col = 'hc6, Data = 'h3344
+# Time =  31697.00 ns : OPERATION = READ  : bank = 0 Row = 'hbf3, Col = 'hc7, Data = 'h1122
+# Time =  31772.00 ns : OPERATION = CKSR   : Clock Suspend during Read
+# READ STATUS: Burst-No:           0 Addr: 01b7e663 Rxd: 11223344
+# Time =  31892.00 ns : OPERATION = BST   : Burst Stop
+# Time =  31897.00 ns : OPERATION = READ  : bank = 0 Row = 'hbf3, Col = 'hc8, Data = 'h4455
+# Time =  31917.00 ns : OPERATION = READ  : bank = 0 Row = 'hbf3, Col = 'hc9, Data = 'h2233
+# Time =  31992.00 ns : OPERATION = CKSR   : Clock Suspend during Read
+# READ STATUS: Burst-No:           1 Addr: 01b7e664 Rxd: 22334455
+# Time =  32112.00 ns : OPERATION = BST   : Burst Stop
+# Time =  32117.00 ns : OPERATION = READ  : bank = 0 Row = 'hbf3, Col = 'hca, Data = 'h5566
+# Time =  32137.00 ns : OPERATION = READ  : bank = 0 Row = 'hbf3, Col = 'hcb, Data = 'h3344
+# Time =  32212.00 ns : OPERATION = CKSR   : Clock Suspend during Read
+# READ STATUS: Burst-No:           2 Addr: 01b7e665 Rxd: 33445566
+# Time =  32332.00 ns : OPERATION = BST   : Burst Stop
+# Time =  32337.00 ns : OPERATION = READ  : bank = 0 Row = 'hbf3, Col = 'hcc, Data = 'h6677
+# Time =  32357.00 ns : OPERATION = READ  : bank = 0 Row = 'hbf3, Col = 'hcd, Data = 'h4455
+# Time =  32432.00 ns : OPERATION = CKSR   : Clock Suspend during Read
+# READ STATUS: Burst-No:           3 Addr: 01b7e666 Rxd: 44556677
+# Time =  32552.00 ns : OPERATION = BST   : Burst Stop
+# Time =  32557.00 ns : OPERATION = READ  : bank = 0 Row = 'hbf3, Col = 'hce, Data = 'h7788
+# Time =  32577.00 ns : OPERATION = READ  : bank = 0 Row = 'hbf3, Col = 'hcf, Data = 'h5566
+# Time =  32652.00 ns : OPERATION = CKSR   : Clock Suspend during Read
+# READ STATUS: Burst-No:           4 Addr: 01b7e667 Rxd: 55667788
+# Write Address: 02c28465, Burst Size:           5
+# Status: Burst-No:           0  Write Address: 00b0a119  WriteData: 11223344 
+# Status: Burst-No:           1  Write Address: 00b0a11a  WriteData: 22334455 
+# Status: Burst-No:           2  Write Address: 00b0a11b  WriteData: 33445566 
+# Status: Burst-No:           3  Write Address: 00b0a11c  WriteData: 44556677 
+# Time =  32752.00 ns : OPERATION = PCHG  : bank = 2 
+# Status: Burst-No:           4  Write Address: 00b0a11d  WriteData: 55667788 
+# Time =  32812.00 ns : OPERATION = ACT   : bank = 2 Row = 'h850
+# Time =  32872.00 ns : OPERATION = WRITE : bank = 2 Row = 'h850, Col = 'h32, Data = 'h3344
+# Time =  32892.00 ns : OPERATION = WRITE : bank = 2 Row = 'h850, Col = 'h33, Data = 'h1122
+# Time =  32912.00 ns : OPERATION = BST   : Burst Stop
+# Time =  32932.00 ns : OPERATION = WRITE : bank = 2 Row = 'h850, Col = 'h34, Data = 'h4455
+# Time =  32952.00 ns : OPERATION = WRITE : bank = 2 Row = 'h850, Col = 'h35, Data = 'h2233
+# Time =  32972.00 ns : OPERATION = BST   : Burst Stop
+# Time =  32992.00 ns : OPERATION = WRITE : bank = 2 Row = 'h850, Col = 'h36, Data = 'h5566
+# Time =  33012.00 ns : OPERATION = WRITE : bank = 2 Row = 'h850, Col = 'h37, Data = 'h3344
+# Time =  33032.00 ns : OPERATION = BST   : Burst Stop
+# Time =  33052.00 ns : OPERATION = WRITE : bank = 2 Row = 'h850, Col = 'h38, Data = 'h6677
+# Time =  33072.00 ns : OPERATION = WRITE : bank = 2 Row = 'h850, Col = 'h39, Data = 'h4455
+# Time =  33092.00 ns : OPERATION = BST   : Burst Stop
+# Time =  33112.00 ns : OPERATION = WRITE : bank = 2 Row = 'h850, Col = 'h3a, Data = 'h7788
+# Time =  33132.00 ns : OPERATION = WRITE : bank = 2 Row = 'h850, Col = 'h3b, Data = 'h5566
+# Time =  33152.00 ns : OPERATION = BST   : Burst Stop
+# Time =  33172.00 ns : OPERATION = CKSW   : Clock Suspend during Write
+# Time =  33872.00 ns : OPERATION = BST   : Burst Stop
+# Time =  33877.00 ns : OPERATION = READ  : bank = 2 Row = 'h850, Col = 'h32, Data = 'h3344
+# Time =  33897.00 ns : OPERATION = READ  : bank = 2 Row = 'h850, Col = 'h33, Data = 'h1122
+# Time =  33972.00 ns : OPERATION = CKSR   : Clock Suspend during Read
+# READ STATUS: Burst-No:           0 Addr: 00b0a119 Rxd: 11223344
+# Time =  34092.00 ns : OPERATION = BST   : Burst Stop
+# Time =  34097.00 ns : OPERATION = READ  : bank = 2 Row = 'h850, Col = 'h34, Data = 'h4455
+# Time =  34117.00 ns : OPERATION = READ  : bank = 2 Row = 'h850, Col = 'h35, Data = 'h2233
+# Time =  34192.00 ns : OPERATION = CKSR   : Clock Suspend during Read
+# READ STATUS: Burst-No:           1 Addr: 00b0a11a Rxd: 22334455
+# Time =  34312.00 ns : OPERATION = BST   : Burst Stop
+# Time =  34317.00 ns : OPERATION = READ  : bank = 2 Row = 'h850, Col = 'h36, Data = 'h5566
+# Time =  34337.00 ns : OPERATION = READ  : bank = 2 Row = 'h850, Col = 'h37, Data = 'h3344
+# Time =  34412.00 ns : OPERATION = CKSR   : Clock Suspend during Read
+# READ STATUS: Burst-No:           2 Addr: 00b0a11b Rxd: 33445566
+# Time =  34532.00 ns : OPERATION = BST   : Burst Stop
+# Time =  34537.00 ns : OPERATION = READ  : bank = 2 Row = 'h850, Col = 'h38, Data = 'h6677
+# Time =  34557.00 ns : OPERATION = READ  : bank = 2 Row = 'h850, Col = 'h39, Data = 'h4455
+# Time =  34632.00 ns : OPERATION = CKSR   : Clock Suspend during Read
+# READ STATUS: Burst-No:           3 Addr: 00b0a11c Rxd: 44556677
+# Time =  34752.00 ns : OPERATION = BST   : Burst Stop
+# Time =  34757.00 ns : OPERATION = READ  : bank = 2 Row = 'h850, Col = 'h3a, Data = 'h7788
+# Time =  34777.00 ns : OPERATION = READ  : bank = 2 Row = 'h850, Col = 'h3b, Data = 'h5566
+# Time =  34852.00 ns : OPERATION = CKSR   : Clock Suspend during Read
+# READ STATUS: Burst-No:           4 Addr: 00b0a11d Rxd: 55667788
+# Write Address: 01375212, Burst Size:           5
+# Status: Burst-No:           0  Write Address: 004dd484  WriteData: 11223344 
+# Status: Burst-No:           1  Write Address: 004dd485  WriteData: 22334455 
+# Status: Burst-No:           2  Write Address: 004dd486  WriteData: 33445566 
+# Status: Burst-No:           3  Write Address: 004dd487  WriteData: 44556677 
+# Time =  34952.00 ns : OPERATION = PCHG  : bank = 1 
+# Status: Burst-No:           4  Write Address: 004dd488  WriteData: 55667788 
+# Time =  35012.00 ns : OPERATION = ACT   : bank = 1 Row = 'h6ea
+# Time =  35072.00 ns : OPERATION = WRITE : bank = 1 Row = 'h6ea, Col = 'h08, Data = 'h3344
+# Time =  35092.00 ns : OPERATION = WRITE : bank = 1 Row = 'h6ea, Col = 'h09, Data = 'h1122
+# Time =  35112.00 ns : OPERATION = BST   : Burst Stop
+# Time =  35132.00 ns : OPERATION = WRITE : bank = 1 Row = 'h6ea, Col = 'h0a, Data = 'h4455
+# Time =  35152.00 ns : OPERATION = WRITE : bank = 1 Row = 'h6ea, Col = 'h0b, Data = 'h2233
+# Time =  35172.00 ns : OPERATION = BST   : Burst Stop
+# Time =  35192.00 ns : OPERATION = WRITE : bank = 1 Row = 'h6ea, Col = 'h0c, Data = 'h5566
+# Time =  35212.00 ns : OPERATION = WRITE : bank = 1 Row = 'h6ea, Col = 'h0d, Data = 'h3344
+# Time =  35232.00 ns : OPERATION = BST   : Burst Stop
+# Time =  35252.00 ns : OPERATION = WRITE : bank = 1 Row = 'h6ea, Col = 'h0e, Data = 'h6677
+# Time =  35272.00 ns : OPERATION = WRITE : bank = 1 Row = 'h6ea, Col = 'h0f, Data = 'h4455
+# Time =  35292.00 ns : OPERATION = BST   : Burst Stop
+# Time =  35312.00 ns : OPERATION = WRITE : bank = 1 Row = 'h6ea, Col = 'h10, Data = 'h7788
+# Time =  35332.00 ns : OPERATION = WRITE : bank = 1 Row = 'h6ea, Col = 'h11, Data = 'h5566
+# Time =  35352.00 ns : OPERATION = BST   : Burst Stop
+# Time =  35372.00 ns : OPERATION = CKSW   : Clock Suspend during Write
+# Time =  36072.00 ns : OPERATION = BST   : Burst Stop
+# Time =  36077.00 ns : OPERATION = READ  : bank = 1 Row = 'h6ea, Col = 'h08, Data = 'h3344
+# Time =  36097.00 ns : OPERATION = READ  : bank = 1 Row = 'h6ea, Col = 'h09, Data = 'h1122
+# Time =  36172.00 ns : OPERATION = CKSR   : Clock Suspend during Read
+# READ STATUS: Burst-No:           0 Addr: 004dd484 Rxd: 11223344
+# Time =  36292.00 ns : OPERATION = BST   : Burst Stop
+# Time =  36297.00 ns : OPERATION = READ  : bank = 1 Row = 'h6ea, Col = 'h0a, Data = 'h4455
+# Time =  36317.00 ns : OPERATION = READ  : bank = 1 Row = 'h6ea, Col = 'h0b, Data = 'h2233
+# Time =  36392.00 ns : OPERATION = CKSR   : Clock Suspend during Read
+# READ STATUS: Burst-No:           1 Addr: 004dd485 Rxd: 22334455
+# Time =  36512.00 ns : OPERATION = BST   : Burst Stop
+# Time =  36517.00 ns : OPERATION = READ  : bank = 1 Row = 'h6ea, Col = 'h0c, Data = 'h5566
+# Time =  36537.00 ns : OPERATION = READ  : bank = 1 Row = 'h6ea, Col = 'h0d, Data = 'h3344
+# Time =  36612.00 ns : OPERATION = CKSR   : Clock Suspend during Read
+# READ STATUS: Burst-No:           2 Addr: 004dd486 Rxd: 33445566
+# Time =  36732.00 ns : OPERATION = BST   : Burst Stop
+# Time =  36737.00 ns : OPERATION = READ  : bank = 1 Row = 'h6ea, Col = 'h0e, Data = 'h6677
+# Time =  36757.00 ns : OPERATION = READ  : bank = 1 Row = 'h6ea, Col = 'h0f, Data = 'h4455
+# Time =  36832.00 ns : OPERATION = CKSR   : Clock Suspend during Read
+# READ STATUS: Burst-No:           3 Addr: 004dd487 Rxd: 44556677
+# Time =  36952.00 ns : OPERATION = BST   : Burst Stop
+# Time =  36957.00 ns : OPERATION = READ  : bank = 1 Row = 'h6ea, Col = 'h10, Data = 'h7788
+# Time =  36977.00 ns : OPERATION = READ  : bank = 1 Row = 'h6ea, Col = 'h11, Data = 'h5566
+# Time =  37052.00 ns : OPERATION = CKSR   : Clock Suspend during Read
+# READ STATUS: Burst-No:           4 Addr: 004dd488 Rxd: 55667788
+# Write Address: 00f3e301, Burst Size:           5
+# Status: Burst-No:           0  Write Address: 003cf8c0  WriteData: 11223344 
+# Status: Burst-No:           1  Write Address: 003cf8c1  WriteData: 22334455 
+# Status: Burst-No:           2  Write Address: 003cf8c2  WriteData: 33445566 
+# Status: Burst-No:           3  Write Address: 003cf8c3  WriteData: 44556677 
+# Time =  37152.00 ns : OPERATION = PCHG  : bank = 1 
+# Status: Burst-No:           4  Write Address: 003cf8c4  WriteData: 55667788 
+# Time =  37212.00 ns : OPERATION = ACT   : bank = 1 Row = 'he7c
+# Time =  37272.00 ns : OPERATION = WRITE : bank = 1 Row = 'he7c, Col = 'h80, Data = 'h3344
+# Time =  37292.00 ns : OPERATION = WRITE : bank = 1 Row = 'he7c, Col = 'h81, Data = 'h1122
+# Time =  37312.00 ns : OPERATION = BST   : Burst Stop
+# Time =  37332.00 ns : OPERATION = WRITE : bank = 1 Row = 'he7c, Col = 'h82, Data = 'h4455
+# Time =  37352.00 ns : OPERATION = WRITE : bank = 1 Row = 'he7c, Col = 'h83, Data = 'h2233
+# Time =  37372.00 ns : OPERATION = BST   : Burst Stop
+# Time =  37392.00 ns : OPERATION = WRITE : bank = 1 Row = 'he7c, Col = 'h84, Data = 'h5566
+# Time =  37412.00 ns : OPERATION = WRITE : bank = 1 Row = 'he7c, Col = 'h85, Data = 'h3344
+# Time =  37432.00 ns : OPERATION = BST   : Burst Stop
+# Time =  37452.00 ns : OPERATION = WRITE : bank = 1 Row = 'he7c, Col = 'h86, Data = 'h6677
+# Time =  37472.00 ns : OPERATION = WRITE : bank = 1 Row = 'he7c, Col = 'h87, Data = 'h4455
+# Time =  37492.00 ns : OPERATION = BST   : Burst Stop
+# Time =  37512.00 ns : OPERATION = WRITE : bank = 1 Row = 'he7c, Col = 'h88, Data = 'h7788
+# Time =  37532.00 ns : OPERATION = WRITE : bank = 1 Row = 'he7c, Col = 'h89, Data = 'h5566
+# Time =  37552.00 ns : OPERATION = BST   : Burst Stop
+# Time =  37572.00 ns : OPERATION = CKSW   : Clock Suspend during Write
+# Time =  38272.00 ns : OPERATION = BST   : Burst Stop
+# Time =  38277.00 ns : OPERATION = READ  : bank = 1 Row = 'he7c, Col = 'h80, Data = 'h3344
+# Time =  38297.00 ns : OPERATION = READ  : bank = 1 Row = 'he7c, Col = 'h81, Data = 'h1122
+# Time =  38372.00 ns : OPERATION = CKSR   : Clock Suspend during Read
+# READ STATUS: Burst-No:           0 Addr: 003cf8c0 Rxd: 11223344
+# Time =  38492.00 ns : OPERATION = BST   : Burst Stop
+# Time =  38497.00 ns : OPERATION = READ  : bank = 1 Row = 'he7c, Col = 'h82, Data = 'h4455
+# Time =  38517.00 ns : OPERATION = READ  : bank = 1 Row = 'he7c, Col = 'h83, Data = 'h2233
+# Time =  38592.00 ns : OPERATION = CKSR   : Clock Suspend during Read
+# READ STATUS: Burst-No:           1 Addr: 003cf8c1 Rxd: 22334455
+# Time =  38712.00 ns : OPERATION = BST   : Burst Stop
+# Time =  38717.00 ns : OPERATION = READ  : bank = 1 Row = 'he7c, Col = 'h84, Data = 'h5566
+# Time =  38737.00 ns : OPERATION = READ  : bank = 1 Row = 'he7c, Col = 'h85, Data = 'h3344
+# Time =  38812.00 ns : OPERATION = CKSR   : Clock Suspend during Read
+# READ STATUS: Burst-No:           2 Addr: 003cf8c2 Rxd: 33445566
+# Time =  38932.00 ns : OPERATION = BST   : Burst Stop
+# Time =  38937.00 ns : OPERATION = READ  : bank = 1 Row = 'he7c, Col = 'h86, Data = 'h6677
+# Time =  38957.00 ns : OPERATION = READ  : bank = 1 Row = 'he7c, Col = 'h87, Data = 'h4455
+# Time =  39032.00 ns : OPERATION = CKSR   : Clock Suspend during Read
+# READ STATUS: Burst-No:           3 Addr: 003cf8c3 Rxd: 44556677
+# Time =  39152.00 ns : OPERATION = BST   : Burst Stop
+# Time =  39157.00 ns : OPERATION = READ  : bank = 1 Row = 'he7c, Col = 'h88, Data = 'h7788
+# Time =  39177.00 ns : OPERATION = READ  : bank = 1 Row = 'he7c, Col = 'h89, Data = 'h5566
+# Time =  39252.00 ns : OPERATION = CKSR   : Clock Suspend during Read
+# READ STATUS: Burst-No:           4 Addr: 003cf8c4 Rxd: 55667788
+# Write Address: 06d7cd0d, Burst Size:           5
+# Status: Burst-No:           0  Write Address: 01b5f343  WriteData: 11223344 
+# Status: Burst-No:           1  Write Address: 01b5f344  WriteData: 22334455 
+# Status: Burst-No:           2  Write Address: 01b5f345  WriteData: 33445566 
+# Status: Burst-No:           3  Write Address: 01b5f346  WriteData: 44556677 
+# Time =  39352.00 ns : OPERATION = PCHG  : bank = 2 
+# Status: Burst-No:           4  Write Address: 01b5f347  WriteData: 55667788 
+# Time =  39412.00 ns : OPERATION = ACT   : bank = 2 Row = 'haf9
+# Time =  39472.00 ns : OPERATION = WRITE : bank = 2 Row = 'haf9, Col = 'h86, Data = 'h3344
+# Time =  39492.00 ns : OPERATION = WRITE : bank = 2 Row = 'haf9, Col = 'h87, Data = 'h1122
+# Time =  39512.00 ns : OPERATION = BST   : Burst Stop
+# Time =  39532.00 ns : OPERATION = WRITE : bank = 2 Row = 'haf9, Col = 'h88, Data = 'h4455
+# Time =  39552.00 ns : OPERATION = WRITE : bank = 2 Row = 'haf9, Col = 'h89, Data = 'h2233
+# Time =  39572.00 ns : OPERATION = BST   : Burst Stop
+# Time =  39592.00 ns : OPERATION = WRITE : bank = 2 Row = 'haf9, Col = 'h8a, Data = 'h5566
+# Time =  39612.00 ns : OPERATION = WRITE : bank = 2 Row = 'haf9, Col = 'h8b, Data = 'h3344
+# Time =  39632.00 ns : OPERATION = BST   : Burst Stop
+# Time =  39652.00 ns : OPERATION = WRITE : bank = 2 Row = 'haf9, Col = 'h8c, Data = 'h6677
+# Time =  39672.00 ns : OPERATION = WRITE : bank = 2 Row = 'haf9, Col = 'h8d, Data = 'h4455
+# Time =  39692.00 ns : OPERATION = BST   : Burst Stop
+# Time =  39712.00 ns : OPERATION = WRITE : bank = 2 Row = 'haf9, Col = 'h8e, Data = 'h7788
+# Time =  39732.00 ns : OPERATION = WRITE : bank = 2 Row = 'haf9, Col = 'h8f, Data = 'h5566
+# Time =  39752.00 ns : OPERATION = BST   : Burst Stop
+# Time =  39772.00 ns : OPERATION = CKSW   : Clock Suspend during Write
+# Time =  40472.00 ns : OPERATION = BST   : Burst Stop
+# Time =  40477.00 ns : OPERATION = READ  : bank = 2 Row = 'haf9, Col = 'h86, Data = 'h3344
+# Time =  40497.00 ns : OPERATION = READ  : bank = 2 Row = 'haf9, Col = 'h87, Data = 'h1122
+# Time =  40572.00 ns : OPERATION = CKSR   : Clock Suspend during Read
+# READ STATUS: Burst-No:           0 Addr: 01b5f343 Rxd: 11223344
+# Time =  40692.00 ns : OPERATION = BST   : Burst Stop
+# Time =  40697.00 ns : OPERATION = READ  : bank = 2 Row = 'haf9, Col = 'h88, Data = 'h4455
+# Time =  40717.00 ns : OPERATION = READ  : bank = 2 Row = 'haf9, Col = 'h89, Data = 'h2233
+# Time =  40792.00 ns : OPERATION = CKSR   : Clock Suspend during Read
+# READ STATUS: Burst-No:           1 Addr: 01b5f344 Rxd: 22334455
+# Time =  40912.00 ns : OPERATION = BST   : Burst Stop
+# Time =  40917.00 ns : OPERATION = READ  : bank = 2 Row = 'haf9, Col = 'h8a, Data = 'h5566
+# Time =  40937.00 ns : OPERATION = READ  : bank = 2 Row = 'haf9, Col = 'h8b, Data = 'h3344
+# Time =  41012.00 ns : OPERATION = CKSR   : Clock Suspend during Read
+# READ STATUS: Burst-No:           2 Addr: 01b5f345 Rxd: 33445566
+# Time =  41132.00 ns : OPERATION = BST   : Burst Stop
+# Time =  41137.00 ns : OPERATION = READ  : bank = 2 Row = 'haf9, Col = 'h8c, Data = 'h6677
+# Time =  41157.00 ns : OPERATION = READ  : bank = 2 Row = 'haf9, Col = 'h8d, Data = 'h4455
+# Time =  41232.00 ns : OPERATION = CKSR   : Clock Suspend during Read
+# READ STATUS: Burst-No:           3 Addr: 01b5f346 Rxd: 44556677
+# Time =  41352.00 ns : OPERATION = BST   : Burst Stop
+# Time =  41357.00 ns : OPERATION = READ  : bank = 2 Row = 'haf9, Col = 'h8e, Data = 'h7788
+# Time =  41377.00 ns : OPERATION = READ  : bank = 2 Row = 'haf9, Col = 'h8f, Data = 'h5566
+# Time =  41452.00 ns : OPERATION = CKSR   : Clock Suspend during Read
+# READ STATUS: Burst-No:           4 Addr: 01b5f347 Rxd: 55667788
+# Write Address: 0323f176, Burst Size:           5
+# Status: Burst-No:           0  Write Address: 00c8fc5d  WriteData: 11223344 
+# Status: Burst-No:           1  Write Address: 00c8fc5e  WriteData: 22334455 
+# Status: Burst-No:           2  Write Address: 00c8fc5f  WriteData: 33445566 
+# Status: Burst-No:           3  Write Address: 00c8fc60  WriteData: 44556677 
+# Time =  41552.00 ns : OPERATION = PCHG  : bank = 0 
+# Status: Burst-No:           4  Write Address: 00c8fc61  WriteData: 55667788 
+# Time =  41612.00 ns : OPERATION = ACT   : bank = 0 Row = 'h47e
+# Time =  41672.00 ns : OPERATION = WRITE : bank = 0 Row = 'h47e, Col = 'hba, Data = 'h3344
+# Time =  41692.00 ns : OPERATION = WRITE : bank = 0 Row = 'h47e, Col = 'hbb, Data = 'h1122
+# Time =  41712.00 ns : OPERATION = BST   : Burst Stop
+# Time =  41732.00 ns : OPERATION = WRITE : bank = 0 Row = 'h47e, Col = 'hbc, Data = 'h4455
+# Time =  41752.00 ns : OPERATION = WRITE : bank = 0 Row = 'h47e, Col = 'hbd, Data = 'h2233
+# Time =  41772.00 ns : OPERATION = BST   : Burst Stop
+# Time =  41792.00 ns : OPERATION = WRITE : bank = 0 Row = 'h47e, Col = 'hbe, Data = 'h5566
+# Time =  41812.00 ns : OPERATION = WRITE : bank = 0 Row = 'h47e, Col = 'hbf, Data = 'h3344
+# Time =  41832.00 ns : OPERATION = BST   : Burst Stop
+# Time =  41852.00 ns : OPERATION = WRITE : bank = 0 Row = 'h47e, Col = 'hc0, Data = 'h6677
+# Time =  41872.00 ns : OPERATION = WRITE : bank = 0 Row = 'h47e, Col = 'hc1, Data = 'h4455
+# Time =  41892.00 ns : OPERATION = BST   : Burst Stop
+# Time =  41912.00 ns : OPERATION = WRITE : bank = 0 Row = 'h47e, Col = 'hc2, Data = 'h7788
+# Time =  41932.00 ns : OPERATION = WRITE : bank = 0 Row = 'h47e, Col = 'hc3, Data = 'h5566
+# Time =  41952.00 ns : OPERATION = BST   : Burst Stop
+# Time =  41972.00 ns : OPERATION = CKSW   : Clock Suspend during Write
+# Time =  42672.00 ns : OPERATION = BST   : Burst Stop
+# Time =  42677.00 ns : OPERATION = READ  : bank = 0 Row = 'h47e, Col = 'hba, Data = 'h3344
+# Time =  42697.00 ns : OPERATION = READ  : bank = 0 Row = 'h47e, Col = 'hbb, Data = 'h1122
+# Time =  42772.00 ns : OPERATION = CKSR   : Clock Suspend during Read
+# READ STATUS: Burst-No:           0 Addr: 00c8fc5d Rxd: 11223344
+# Time =  42892.00 ns : OPERATION = BST   : Burst Stop
+# Time =  42897.00 ns : OPERATION = READ  : bank = 0 Row = 'h47e, Col = 'hbc, Data = 'h4455
+# Time =  42917.00 ns : OPERATION = READ  : bank = 0 Row = 'h47e, Col = 'hbd, Data = 'h2233
+# Time =  42992.00 ns : OPERATION = CKSR   : Clock Suspend during Read
+# READ STATUS: Burst-No:           1 Addr: 00c8fc5e Rxd: 22334455
+# Time =  43112.00 ns : OPERATION = BST   : Burst Stop
+# Time =  43117.00 ns : OPERATION = READ  : bank = 0 Row = 'h47e, Col = 'hbe, Data = 'h5566
+# Time =  43137.00 ns : OPERATION = READ  : bank = 0 Row = 'h47e, Col = 'hbf, Data = 'h3344
+# Time =  43212.00 ns : OPERATION = CKSR   : Clock Suspend during Read
+# READ STATUS: Burst-No:           2 Addr: 00c8fc5f Rxd: 33445566
+# Time =  43332.00 ns : OPERATION = BST   : Burst Stop
+# Time =  43337.00 ns : OPERATION = READ  : bank = 0 Row = 'h47e, Col = 'hc0, Data = 'h6677
+# Time =  43357.00 ns : OPERATION = READ  : bank = 0 Row = 'h47e, Col = 'hc1, Data = 'h4455
+# Time =  43432.00 ns : OPERATION = CKSR   : Clock Suspend during Read
+# READ STATUS: Burst-No:           3 Addr: 00c8fc60 Rxd: 44556677
+# Time =  43552.00 ns : OPERATION = BST   : Burst Stop
+# Time =  43557.00 ns : OPERATION = READ  : bank = 0 Row = 'h47e, Col = 'hc2, Data = 'h7788
+# Time =  43577.00 ns : OPERATION = READ  : bank = 0 Row = 'h47e, Col = 'hc3, Data = 'h5566
+# Time =  43652.00 ns : OPERATION = CKSR   : Clock Suspend during Read
+# READ STATUS: Burst-No:           4 Addr: 00c8fc61 Rxd: 55667788
+# Write Address: 068dcd3d, Burst Size:           5
+# Status: Burst-No:           0  Write Address: 01a3734f  WriteData: 11223344 
+# Status: Burst-No:           1  Write Address: 01a37350  WriteData: 22334455 
+# Status: Burst-No:           2  Write Address: 01a37351  WriteData: 33445566 
+# Status: Burst-No:           3  Write Address: 01a37352  WriteData: 44556677 
+# Time =  43752.00 ns : OPERATION = PCHG  : bank = 2 
+# Status: Burst-No:           4  Write Address: 01a37353  WriteData: 55667788 
+# Time =  43812.00 ns : OPERATION = ACT   : bank = 2 Row = 'h1b9
+# Time =  43872.00 ns : OPERATION = WRITE : bank = 2 Row = 'h1b9, Col = 'h9e, Data = 'h3344
+# Time =  43892.00 ns : OPERATION = WRITE : bank = 2 Row = 'h1b9, Col = 'h9f, Data = 'h1122
+# Time =  43912.00 ns : OPERATION = BST   : Burst Stop
+# Time =  43932.00 ns : OPERATION = WRITE : bank = 2 Row = 'h1b9, Col = 'ha0, Data = 'h4455
+# Time =  43952.00 ns : OPERATION = WRITE : bank = 2 Row = 'h1b9, Col = 'ha1, Data = 'h2233
+# Time =  43972.00 ns : OPERATION = BST   : Burst Stop
+# Time =  43992.00 ns : OPERATION = WRITE : bank = 2 Row = 'h1b9, Col = 'ha2, Data = 'h5566
+# Time =  44012.00 ns : OPERATION = WRITE : bank = 2 Row = 'h1b9, Col = 'ha3, Data = 'h3344
+# Time =  44032.00 ns : OPERATION = BST   : Burst Stop
+# Time =  44052.00 ns : OPERATION = WRITE : bank = 2 Row = 'h1b9, Col = 'ha4, Data = 'h6677
+# Time =  44072.00 ns : OPERATION = WRITE : bank = 2 Row = 'h1b9, Col = 'ha5, Data = 'h4455
+# Time =  44092.00 ns : OPERATION = BST   : Burst Stop
+# Time =  44112.00 ns : OPERATION = WRITE : bank = 2 Row = 'h1b9, Col = 'ha6, Data = 'h7788
+# Time =  44132.00 ns : OPERATION = WRITE : bank = 2 Row = 'h1b9, Col = 'ha7, Data = 'h5566
+# Time =  44152.00 ns : OPERATION = BST   : Burst Stop
+# Time =  44172.00 ns : OPERATION = CKSW   : Clock Suspend during Write
+# Time =  44872.00 ns : OPERATION = BST   : Burst Stop
+# Time =  44877.00 ns : OPERATION = READ  : bank = 2 Row = 'h1b9, Col = 'h9e, Data = 'h3344
+# Time =  44897.00 ns : OPERATION = READ  : bank = 2 Row = 'h1b9, Col = 'h9f, Data = 'h1122
+# Time =  44972.00 ns : OPERATION = CKSR   : Clock Suspend during Read
+# READ STATUS: Burst-No:           0 Addr: 01a3734f Rxd: 11223344
+# Time =  45092.00 ns : OPERATION = BST   : Burst Stop
+# Time =  45097.00 ns : OPERATION = READ  : bank = 2 Row = 'h1b9, Col = 'ha0, Data = 'h4455
+# Time =  45117.00 ns : OPERATION = READ  : bank = 2 Row = 'h1b9, Col = 'ha1, Data = 'h2233
+# Time =  45192.00 ns : OPERATION = CKSR   : Clock Suspend during Read
+# READ STATUS: Burst-No:           1 Addr: 01a37350 Rxd: 22334455
+# Time =  45312.00 ns : OPERATION = BST   : Burst Stop
+# Time =  45317.00 ns : OPERATION = READ  : bank = 2 Row = 'h1b9, Col = 'ha2, Data = 'h5566
+# Time =  45337.00 ns : OPERATION = READ  : bank = 2 Row = 'h1b9, Col = 'ha3, Data = 'h3344
+# Time =  45412.00 ns : OPERATION = CKSR   : Clock Suspend during Read
+# READ STATUS: Burst-No:           2 Addr: 01a37351 Rxd: 33445566
+# Time =  45532.00 ns : OPERATION = BST   : Burst Stop
+# Time =  45537.00 ns : OPERATION = READ  : bank = 2 Row = 'h1b9, Col = 'ha4, Data = 'h6677
+# Time =  45557.00 ns : OPERATION = READ  : bank = 2 Row = 'h1b9, Col = 'ha5, Data = 'h4455
+# Time =  45632.00 ns : OPERATION = CKSR   : Clock Suspend during Read
+# READ STATUS: Burst-No:           3 Addr: 01a37352 Rxd: 44556677
+# Time =  45752.00 ns : OPERATION = BST   : Burst Stop
+# Time =  45757.00 ns : OPERATION = READ  : bank = 2 Row = 'h1b9, Col = 'ha6, Data = 'h7788
+# Time =  45777.00 ns : OPERATION = READ  : bank = 2 Row = 'h1b9, Col = 'ha7, Data = 'h5566
+# Time =  45852.00 ns : OPERATION = CKSR   : Clock Suspend during Read
+# READ STATUS: Burst-No:           4 Addr: 01a37353 Rxd: 55667788
+# Write Address: 06d457ed, Burst Size:           5
+# Status: Burst-No:           0  Write Address: 01b515fb  WriteData: 11223344 
+# Status: Burst-No:           1  Write Address: 01b515fc  WriteData: 22334455 
+# Status: Burst-No:           2  Write Address: 01b515fd  WriteData: 33445566 
+# Status: Burst-No:           3  Write Address: 01b515fe  WriteData: 44556677 
+# Time =  45952.00 ns : OPERATION = PCHG  : bank = 3 
+# Status: Burst-No:           4  Write Address: 01b515ff  WriteData: 55667788 
+# Time =  46012.00 ns : OPERATION = ACT   : bank = 3 Row = 'ha8a
+# Time =  46072.00 ns : OPERATION = WRITE : bank = 3 Row = 'ha8a, Col = 'hf6, Data = 'h3344
+# Time =  46092.00 ns : OPERATION = WRITE : bank = 3 Row = 'ha8a, Col = 'hf7, Data = 'h1122
+# Time =  46112.00 ns : OPERATION = BST   : Burst Stop
+# Time =  46132.00 ns : OPERATION = WRITE : bank = 3 Row = 'ha8a, Col = 'hf8, Data = 'h4455
+# Time =  46152.00 ns : OPERATION = WRITE : bank = 3 Row = 'ha8a, Col = 'hf9, Data = 'h2233
+# Time =  46172.00 ns : OPERATION = BST   : Burst Stop
+# Time =  46192.00 ns : OPERATION = WRITE : bank = 3 Row = 'ha8a, Col = 'hfa, Data = 'h5566
+# Time =  46212.00 ns : OPERATION = WRITE : bank = 3 Row = 'ha8a, Col = 'hfb, Data = 'h3344
+# Time =  46232.00 ns : OPERATION = BST   : Burst Stop
+# Time =  46252.00 ns : OPERATION = WRITE : bank = 3 Row = 'ha8a, Col = 'hfc, Data = 'h6677
+# Time =  46272.00 ns : OPERATION = WRITE : bank = 3 Row = 'ha8a, Col = 'hfd, Data = 'h4455
+# Time =  46292.00 ns : OPERATION = BST   : Burst Stop
+# Time =  46312.00 ns : OPERATION = WRITE : bank = 3 Row = 'ha8a, Col = 'hfe, Data = 'h7788
+# Time =  46332.00 ns : OPERATION = WRITE : bank = 3 Row = 'ha8a, Col = 'hff, Data = 'h5566
+# Time =  46352.00 ns : OPERATION = BST   : Burst Stop
+# Time =  46372.00 ns : OPERATION = CKSW   : Clock Suspend during Write
+# Time =  47072.00 ns : OPERATION = BST   : Burst Stop
+# Time =  47077.00 ns : OPERATION = READ  : bank = 3 Row = 'ha8a, Col = 'hf6, Data = 'h3344
+# Time =  47097.00 ns : OPERATION = READ  : bank = 3 Row = 'ha8a, Col = 'hf7, Data = 'h1122
+# Time =  47172.00 ns : OPERATION = CKSR   : Clock Suspend during Read
+# READ STATUS: Burst-No:           0 Addr: 01b515fb Rxd: 11223344
+# Time =  47292.00 ns : OPERATION = BST   : Burst Stop
+# Time =  47297.00 ns : OPERATION = READ  : bank = 3 Row = 'ha8a, Col = 'hf8, Data = 'h4455
+# Time =  47317.00 ns : OPERATION = READ  : bank = 3 Row = 'ha8a, Col = 'hf9, Data = 'h2233
+# Time =  47392.00 ns : OPERATION = CKSR   : Clock Suspend during Read
+# READ STATUS: Burst-No:           1 Addr: 01b515fc Rxd: 22334455
+# Time =  47512.00 ns : OPERATION = BST   : Burst Stop
+# Time =  47517.00 ns : OPERATION = READ  : bank = 3 Row = 'ha8a, Col = 'hfa, Data = 'h5566
+# Time =  47537.00 ns : OPERATION = READ  : bank = 3 Row = 'ha8a, Col = 'hfb, Data = 'h3344
+# Time =  47612.00 ns : OPERATION = CKSR   : Clock Suspend during Read
+# READ STATUS: Burst-No:           2 Addr: 01b515fd Rxd: 33445566
+# Time =  47732.00 ns : OPERATION = BST   : Burst Stop
+# Time =  47737.00 ns : OPERATION = READ  : bank = 3 Row = 'ha8a, Col = 'hfc, Data = 'h6677
+# Time =  47757.00 ns : OPERATION = READ  : bank = 3 Row = 'ha8a, Col = 'hfd, Data = 'h4455
+# Time =  47832.00 ns : OPERATION = CKSR   : Clock Suspend during Read
+# READ STATUS: Burst-No:           3 Addr: 01b515fe Rxd: 44556677
+# Time =  47952.00 ns : OPERATION = BST   : Burst Stop
+# Time =  47957.00 ns : OPERATION = READ  : bank = 3 Row = 'ha8a, Col = 'hfe, Data = 'h7788
+# Time =  47977.00 ns : OPERATION = READ  : bank = 3 Row = 'ha8a, Col = 'hff, Data = 'h5566
+# Time =  48052.00 ns : OPERATION = CKSR   : Clock Suspend during Read
+# READ STATUS: Burst-No:           4 Addr: 01b515ff Rxd: 55667788
+# Write Address: 062df78c, Burst Size:           5
+# Status: Burst-No:           0  Write Address: 018b7de3  WriteData: 11223344 
+# Status: Burst-No:           1  Write Address: 018b7de4  WriteData: 22334455 
+# Status: Burst-No:           2  Write Address: 018b7de5  WriteData: 33445566 
+# Status: Burst-No:           3  Write Address: 018b7de6  WriteData: 44556677 
+# Time =  48152.00 ns : OPERATION = PCHG  : bank = 3 
+# Status: Burst-No:           4  Write Address: 018b7de7  WriteData: 55667788 
+# Time =  48212.00 ns : OPERATION = ACT   : bank = 3 Row = 'h5be
+# Time =  48272.00 ns : OPERATION = WRITE : bank = 3 Row = 'h5be, Col = 'hc6, Data = 'h3344
+# Time =  48292.00 ns : OPERATION = WRITE : bank = 3 Row = 'h5be, Col = 'hc7, Data = 'h1122
+# Time =  48312.00 ns : OPERATION = BST   : Burst Stop
+# Time =  48332.00 ns : OPERATION = WRITE : bank = 3 Row = 'h5be, Col = 'hc8, Data = 'h4455
+# Time =  48352.00 ns : OPERATION = WRITE : bank = 3 Row = 'h5be, Col = 'hc9, Data = 'h2233
+# Time =  48372.00 ns : OPERATION = BST   : Burst Stop
+# Time =  48392.00 ns : OPERATION = WRITE : bank = 3 Row = 'h5be, Col = 'hca, Data = 'h5566
+# Time =  48412.00 ns : OPERATION = WRITE : bank = 3 Row = 'h5be, Col = 'hcb, Data = 'h3344
+# Time =  48432.00 ns : OPERATION = BST   : Burst Stop
+# Time =  48452.00 ns : OPERATION = WRITE : bank = 3 Row = 'h5be, Col = 'hcc, Data = 'h6677
+# Time =  48472.00 ns : OPERATION = WRITE : bank = 3 Row = 'h5be, Col = 'hcd, Data = 'h4455
+# Time =  48492.00 ns : OPERATION = BST   : Burst Stop
+# Time =  48512.00 ns : OPERATION = WRITE : bank = 3 Row = 'h5be, Col = 'hce, Data = 'h7788
+# Time =  48532.00 ns : OPERATION = WRITE : bank = 3 Row = 'h5be, Col = 'hcf, Data = 'h5566
+# Time =  48552.00 ns : OPERATION = BST   : Burst Stop
+# Time =  48572.00 ns : OPERATION = CKSW   : Clock Suspend during Write
+# Time =  49272.00 ns : OPERATION = BST   : Burst Stop
+# Time =  49277.00 ns : OPERATION = READ  : bank = 3 Row = 'h5be, Col = 'hc6, Data = 'h3344
+# Time =  49297.00 ns : OPERATION = READ  : bank = 3 Row = 'h5be, Col = 'hc7, Data = 'h1122
+# Time =  49372.00 ns : OPERATION = CKSR   : Clock Suspend during Read
+# READ STATUS: Burst-No:           0 Addr: 018b7de3 Rxd: 11223344
+# Time =  49492.00 ns : OPERATION = BST   : Burst Stop
+# Time =  49497.00 ns : OPERATION = READ  : bank = 3 Row = 'h5be, Col = 'hc8, Data = 'h4455
+# Time =  49517.00 ns : OPERATION = READ  : bank = 3 Row = 'h5be, Col = 'hc9, Data = 'h2233
+# Time =  49592.00 ns : OPERATION = CKSR   : Clock Suspend during Read
+# READ STATUS: Burst-No:           1 Addr: 018b7de4 Rxd: 22334455
+# Time =  49712.00 ns : OPERATION = BST   : Burst Stop
+# Time =  49717.00 ns : OPERATION = READ  : bank = 3 Row = 'h5be, Col = 'hca, Data = 'h5566
+# Time =  49737.00 ns : OPERATION = READ  : bank = 3 Row = 'h5be, Col = 'hcb, Data = 'h3344
+# Time =  49812.00 ns : OPERATION = CKSR   : Clock Suspend during Read
+# READ STATUS: Burst-No:           2 Addr: 018b7de5 Rxd: 33445566
+# Time =  49932.00 ns : OPERATION = BST   : Burst Stop
+# Time =  49937.00 ns : OPERATION = READ  : bank = 3 Row = 'h5be, Col = 'hcc, Data = 'h6677
+# Time =  49957.00 ns : OPERATION = READ  : bank = 3 Row = 'h5be, Col = 'hcd, Data = 'h4455
+# Time =  50032.00 ns : OPERATION = CKSR   : Clock Suspend during Read
+# READ STATUS: Burst-No:           3 Addr: 018b7de6 Rxd: 44556677
+# Time =  50152.00 ns : OPERATION = BST   : Burst Stop
+# Time =  50157.00 ns : OPERATION = READ  : bank = 3 Row = 'h5be, Col = 'hce, Data = 'h7788
+# Time =  50177.00 ns : OPERATION = READ  : bank = 3 Row = 'h5be, Col = 'hcf, Data = 'h5566
+# Time =  50252.00 ns : OPERATION = CKSR   : Clock Suspend during Read
+# READ STATUS: Burst-No:           4 Addr: 018b7de7 Rxd: 55667788
+# Write Address: 04fde9f9, Burst Size:           5
+# Status: Burst-No:           0  Write Address: 013f7a7e  WriteData: 11223344 
+# Status: Burst-No:           1  Write Address: 013f7a7f  WriteData: 22334455 
+# Status: Burst-No:           2  Write Address: 013f7a80  WriteData: 33445566 
+# Status: Burst-No:           3  Write Address: 013f7a81  WriteData: 44556677 
+# Time =  50352.00 ns : OPERATION = PCHG  : bank = 0 
+# Status: Burst-No:           4  Write Address: 013f7a82  WriteData: 55667788 
+# Time =  50412.00 ns : OPERATION = ACT   : bank = 0 Row = 'hfbd
+# Time =  50472.00 ns : OPERATION = WRITE : bank = 0 Row = 'hfbd, Col = 'hfc, Data = 'h3344
+# Time =  50492.00 ns : OPERATION = WRITE : bank = 0 Row = 'hfbd, Col = 'hfd, Data = 'h1122
+# Time =  50512.00 ns : OPERATION = BST   : Burst Stop
+# Time =  50532.00 ns : OPERATION = WRITE : bank = 0 Row = 'hfbd, Col = 'hfe, Data = 'h4455
+# Time =  50552.00 ns : OPERATION = WRITE : bank = 0 Row = 'hfbd, Col = 'hff, Data = 'h2233
+# Time =  50572.00 ns : OPERATION = BST   : Burst Stop
+# Time =  50592.00 ns : OPERATION = PCHG  : bank = 1 
+# Time =  50652.00 ns : OPERATION = ACT   : bank = 1 Row = 'hfbd
+# Time =  50712.00 ns : OPERATION = WRITE : bank = 1 Row = 'hfbd, Col = 'h00, Data = 'h5566
+# Time =  50732.00 ns : OPERATION = WRITE : bank = 1 Row = 'hfbd, Col = 'h01, Data = 'h3344
+# Time =  50752.00 ns : OPERATION = BST   : Burst Stop
+# Time =  50772.00 ns : OPERATION = WRITE : bank = 1 Row = 'hfbd, Col = 'h02, Data = 'h6677
+# Time =  50792.00 ns : OPERATION = WRITE : bank = 1 Row = 'hfbd, Col = 'h03, Data = 'h4455
+# Time =  50812.00 ns : OPERATION = BST   : Burst Stop
+# Time =  50832.00 ns : OPERATION = WRITE : bank = 1 Row = 'hfbd, Col = 'h04, Data = 'h7788
+# Time =  50852.00 ns : OPERATION = WRITE : bank = 1 Row = 'hfbd, Col = 'h05, Data = 'h5566
+# Time =  50872.00 ns : OPERATION = BST   : Burst Stop
+# Time =  50892.00 ns : OPERATION = CKSW   : Clock Suspend during Write
+# Time =  51472.00 ns : OPERATION = BST   : Burst Stop
+# Time =  51477.00 ns : OPERATION = READ  : bank = 0 Row = 'hfbd, Col = 'hfc, Data = 'h3344
+# Time =  51497.00 ns : OPERATION = READ  : bank = 0 Row = 'hfbd, Col = 'hfd, Data = 'h1122
+# Time =  51572.00 ns : OPERATION = CKSR   : Clock Suspend during Read
+# READ STATUS: Burst-No:           0 Addr: 013f7a7e Rxd: 11223344
+# Time =  51692.00 ns : OPERATION = BST   : Burst Stop
+# Time =  51697.00 ns : OPERATION = READ  : bank = 0 Row = 'hfbd, Col = 'hfe, Data = 'h4455
+# Time =  51717.00 ns : OPERATION = READ  : bank = 0 Row = 'hfbd, Col = 'hff, Data = 'h2233
+# Time =  51792.00 ns : OPERATION = CKSR   : Clock Suspend during Read
+# READ STATUS: Burst-No:           1 Addr: 013f7a7f Rxd: 22334455
+# Time =  51912.00 ns : OPERATION = BST   : Burst Stop
+# Time =  51917.00 ns : OPERATION = READ  : bank = 1 Row = 'hfbd, Col = 'h00, Data = 'h5566
+# Time =  51937.00 ns : OPERATION = READ  : bank = 1 Row = 'hfbd, Col = 'h01, Data = 'h3344
+# Time =  52012.00 ns : OPERATION = CKSR   : Clock Suspend during Read
+# READ STATUS: Burst-No:           2 Addr: 013f7a80 Rxd: 33445566
+# Time =  52132.00 ns : OPERATION = BST   : Burst Stop
+# Time =  52137.00 ns : OPERATION = READ  : bank = 1 Row = 'hfbd, Col = 'h02, Data = 'h6677
+# Time =  52157.00 ns : OPERATION = READ  : bank = 1 Row = 'hfbd, Col = 'h03, Data = 'h4455
+# Time =  52232.00 ns : OPERATION = CKSR   : Clock Suspend during Read
+# READ STATUS: Burst-No:           3 Addr: 013f7a81 Rxd: 44556677
+# Time =  52352.00 ns : OPERATION = BST   : Burst Stop
+# Time =  52357.00 ns : OPERATION = READ  : bank = 1 Row = 'hfbd, Col = 'h04, Data = 'h7788
+# Time =  52377.00 ns : OPERATION = READ  : bank = 1 Row = 'hfbd, Col = 'h05, Data = 'h5566
+# Time =  52452.00 ns : OPERATION = CKSR   : Clock Suspend during Read
+# READ STATUS: Burst-No:           4 Addr: 013f7a82 Rxd: 55667788
+# Write Address: 033724c6, Burst Size:           5
+# Status: Burst-No:           0  Write Address: 00cdc931  WriteData: 11223344 
+# Status: Burst-No:           1  Write Address: 00cdc932  WriteData: 22334455 
+# Status: Burst-No:           2  Write Address: 00cdc933  WriteData: 33445566 
+# Status: Burst-No:           3  Write Address: 00cdc934  WriteData: 44556677 
+# Time =  52552.00 ns : OPERATION = PCHG  : bank = 2 
+# Status: Burst-No:           4  Write Address: 00cdc935  WriteData: 55667788 
+# Time =  52612.00 ns : OPERATION = ACT   : bank = 2 Row = 'h6e4
+# Time =  52672.00 ns : OPERATION = WRITE : bank = 2 Row = 'h6e4, Col = 'h62, Data = 'h3344
+# Time =  52692.00 ns : OPERATION = WRITE : bank = 2 Row = 'h6e4, Col = 'h63, Data = 'h1122
+# Time =  52712.00 ns : OPERATION = BST   : Burst Stop
+# Time =  52732.00 ns : OPERATION = WRITE : bank = 2 Row = 'h6e4, Col = 'h64, Data = 'h4455
+# Time =  52752.00 ns : OPERATION = WRITE : bank = 2 Row = 'h6e4, Col = 'h65, Data = 'h2233
+# Time =  52772.00 ns : OPERATION = BST   : Burst Stop
+# Time =  52792.00 ns : OPERATION = WRITE : bank = 2 Row = 'h6e4, Col = 'h66, Data = 'h5566
+# Time =  52812.00 ns : OPERATION = WRITE : bank = 2 Row = 'h6e4, Col = 'h67, Data = 'h3344
+# Time =  52832.00 ns : OPERATION = BST   : Burst Stop
+# Time =  52852.00 ns : OPERATION = WRITE : bank = 2 Row = 'h6e4, Col = 'h68, Data = 'h6677
+# Time =  52872.00 ns : OPERATION = WRITE : bank = 2 Row = 'h6e4, Col = 'h69, Data = 'h4455
+# Time =  52892.00 ns : OPERATION = BST   : Burst Stop
+# Time =  52912.00 ns : OPERATION = WRITE : bank = 2 Row = 'h6e4, Col = 'h6a, Data = 'h7788
+# Time =  52932.00 ns : OPERATION = WRITE : bank = 2 Row = 'h6e4, Col = 'h6b, Data = 'h5566
+# Time =  52952.00 ns : OPERATION = BST   : Burst Stop
+# Time =  52972.00 ns : OPERATION = CKSW   : Clock Suspend during Write
+# Time =  53672.00 ns : OPERATION = BST   : Burst Stop
+# Time =  53677.00 ns : OPERATION = READ  : bank = 2 Row = 'h6e4, Col = 'h62, Data = 'h3344
+# Time =  53697.00 ns : OPERATION = READ  : bank = 2 Row = 'h6e4, Col = 'h63, Data = 'h1122
+# Time =  53772.00 ns : OPERATION = CKSR   : Clock Suspend during Read
+# READ STATUS: Burst-No:           0 Addr: 00cdc931 Rxd: 11223344
+# Time =  53892.00 ns : OPERATION = BST   : Burst Stop
+# Time =  53897.00 ns : OPERATION = READ  : bank = 2 Row = 'h6e4, Col = 'h64, Data = 'h4455
+# Time =  53917.00 ns : OPERATION = READ  : bank = 2 Row = 'h6e4, Col = 'h65, Data = 'h2233
+# Time =  53992.00 ns : OPERATION = CKSR   : Clock Suspend during Read
+# READ STATUS: Burst-No:           1 Addr: 00cdc932 Rxd: 22334455
+# Time =  54112.00 ns : OPERATION = BST   : Burst Stop
+# Time =  54117.00 ns : OPERATION = READ  : bank = 2 Row = 'h6e4, Col = 'h66, Data = 'h5566
+# Time =  54137.00 ns : OPERATION = READ  : bank = 2 Row = 'h6e4, Col = 'h67, Data = 'h3344
+# Time =  54212.00 ns : OPERATION = CKSR   : Clock Suspend during Read
+# READ STATUS: Burst-No:           2 Addr: 00cdc933 Rxd: 33445566
+# Time =  54332.00 ns : OPERATION = BST   : Burst Stop
+# Time =  54337.00 ns : OPERATION = READ  : bank = 2 Row = 'h6e4, Col = 'h68, Data = 'h6677
+# Time =  54357.00 ns : OPERATION = READ  : bank = 2 Row = 'h6e4, Col = 'h69, Data = 'h4455
+# Time =  54432.00 ns : OPERATION = CKSR   : Clock Suspend during Read
+# READ STATUS: Burst-No:           3 Addr: 00cdc934 Rxd: 44556677
+# Time =  54552.00 ns : OPERATION = BST   : Burst Stop
+# Time =  54557.00 ns : OPERATION = READ  : bank = 2 Row = 'h6e4, Col = 'h6a, Data = 'h7788
+# Time =  54577.00 ns : OPERATION = READ  : bank = 2 Row = 'h6e4, Col = 'h6b, Data = 'h5566
+# Time =  54652.00 ns : OPERATION = CKSR   : Clock Suspend during Read
+# READ STATUS: Burst-No:           4 Addr: 00cdc935 Rxd: 55667788
+# Write Address: 02f784c5, Burst Size:           5
+# Status: Burst-No:           0  Write Address: 00bde131  WriteData: 11223344 
+# Status: Burst-No:           1  Write Address: 00bde132  WriteData: 22334455 
+# Status: Burst-No:           2  Write Address: 00bde133  WriteData: 33445566 
+# Status: Burst-No:           3  Write Address: 00bde134  WriteData: 44556677 
+# Time =  54752.00 ns : OPERATION = PCHG  : bank = 2 
+# Status: Burst-No:           4  Write Address: 00bde135  WriteData: 55667788 
+# Time =  54812.00 ns : OPERATION = ACT   : bank = 2 Row = 'hef0
+# Time =  54872.00 ns : OPERATION = WRITE : bank = 2 Row = 'hef0, Col = 'h62, Data = 'h3344
+# Time =  54892.00 ns : OPERATION = WRITE : bank = 2 Row = 'hef0, Col = 'h63, Data = 'h1122
+# Time =  54912.00 ns : OPERATION = BST   : Burst Stop
+# Time =  54932.00 ns : OPERATION = WRITE : bank = 2 Row = 'hef0, Col = 'h64, Data = 'h4455
+# Time =  54952.00 ns : OPERATION = WRITE : bank = 2 Row = 'hef0, Col = 'h65, Data = 'h2233
+# Time =  54972.00 ns : OPERATION = BST   : Burst Stop
+# Time =  54992.00 ns : OPERATION = WRITE : bank = 2 Row = 'hef0, Col = 'h66, Data = 'h5566
+# Time =  55012.00 ns : OPERATION = WRITE : bank = 2 Row = 'hef0, Col = 'h67, Data = 'h3344
+# Time =  55032.00 ns : OPERATION = BST   : Burst Stop
+# Time =  55052.00 ns : OPERATION = WRITE : bank = 2 Row = 'hef0, Col = 'h68, Data = 'h6677
+# Time =  55072.00 ns : OPERATION = WRITE : bank = 2 Row = 'hef0, Col = 'h69, Data = 'h4455
+# Time =  55092.00 ns : OPERATION = BST   : Burst Stop
+# Time =  55112.00 ns : OPERATION = WRITE : bank = 2 Row = 'hef0, Col = 'h6a, Data = 'h7788
+# Time =  55132.00 ns : OPERATION = WRITE : bank = 2 Row = 'hef0, Col = 'h6b, Data = 'h5566
+# Time =  55152.00 ns : OPERATION = BST   : Burst Stop
+# Time =  55172.00 ns : OPERATION = CKSW   : Clock Suspend during Write
+# Time =  55872.00 ns : OPERATION = BST   : Burst Stop
+# Time =  55877.00 ns : OPERATION = READ  : bank = 2 Row = 'hef0, Col = 'h62, Data = 'h3344
+# Time =  55897.00 ns : OPERATION = READ  : bank = 2 Row = 'hef0, Col = 'h63, Data = 'h1122
+# Time =  55972.00 ns : OPERATION = CKSR   : Clock Suspend during Read
+# READ STATUS: Burst-No:           0 Addr: 00bde131 Rxd: 11223344
+# Time =  56092.00 ns : OPERATION = BST   : Burst Stop
+# Time =  56097.00 ns : OPERATION = READ  : bank = 2 Row = 'hef0, Col = 'h64, Data = 'h4455
+# Time =  56117.00 ns : OPERATION = READ  : bank = 2 Row = 'hef0, Col = 'h65, Data = 'h2233
+# Time =  56192.00 ns : OPERATION = CKSR   : Clock Suspend during Read
+# READ STATUS: Burst-No:           1 Addr: 00bde132 Rxd: 22334455
+# Time =  56312.00 ns : OPERATION = BST   : Burst Stop
+# Time =  56317.00 ns : OPERATION = READ  : bank = 2 Row = 'hef0, Col = 'h66, Data = 'h5566
+# Time =  56337.00 ns : OPERATION = READ  : bank = 2 Row = 'hef0, Col = 'h67, Data = 'h3344
+# Time =  56412.00 ns : OPERATION = CKSR   : Clock Suspend during Read
+# READ STATUS: Burst-No:           2 Addr: 00bde133 Rxd: 33445566
+# Time =  56532.00 ns : OPERATION = BST   : Burst Stop
+# Time =  56537.00 ns : OPERATION = READ  : bank = 2 Row = 'hef0, Col = 'h68, Data = 'h6677
+# Time =  56557.00 ns : OPERATION = READ  : bank = 2 Row = 'hef0, Col = 'h69, Data = 'h4455
+# Time =  56632.00 ns : OPERATION = CKSR   : Clock Suspend during Read
+# READ STATUS: Burst-No:           3 Addr: 00bde134 Rxd: 44556677
+# Time =  56752.00 ns : OPERATION = BST   : Burst Stop
+# Time =  56757.00 ns : OPERATION = READ  : bank = 2 Row = 'hef0, Col = 'h6a, Data = 'h7788
+# Time =  56777.00 ns : OPERATION = READ  : bank = 2 Row = 'hef0, Col = 'h6b, Data = 'h5566
+# Time =  56852.00 ns : OPERATION = CKSR   : Clock Suspend during Read
+# READ STATUS: Burst-No:           4 Addr: 00bde135 Rxd: 55667788
+# Write Address: 0513d2aa, Burst Size:           5
+# Status: Burst-No:           0  Write Address: 0144f4aa  WriteData: 11223344 
+# Status: Burst-No:           1  Write Address: 0144f4ab  WriteData: 22334455 
+# Status: Burst-No:           2  Write Address: 0144f4ac  WriteData: 33445566 
+# Status: Burst-No:           3  Write Address: 0144f4ad  WriteData: 44556677 
+# Time =  56952.00 ns : OPERATION = PCHG  : bank = 1 
+# Status: Burst-No:           4  Write Address: 0144f4ae  WriteData: 55667788 
+# Time =  57012.00 ns : OPERATION = ACT   : bank = 1 Row = 'h27a
+# Time =  57072.00 ns : OPERATION = WRITE : bank = 1 Row = 'h27a, Col = 'h54, Data = 'h3344
+# Time =  57092.00 ns : OPERATION = WRITE : bank = 1 Row = 'h27a, Col = 'h55, Data = 'h1122
+# Time =  57112.00 ns : OPERATION = BST   : Burst Stop
+# Time =  57132.00 ns : OPERATION = WRITE : bank = 1 Row = 'h27a, Col = 'h56, Data = 'h4455
+# Time =  57152.00 ns : OPERATION = WRITE : bank = 1 Row = 'h27a, Col = 'h57, Data = 'h2233
+# Time =  57172.00 ns : OPERATION = BST   : Burst Stop
+# Time =  57192.00 ns : OPERATION = WRITE : bank = 1 Row = 'h27a, Col = 'h58, Data = 'h5566
+# Time =  57212.00 ns : OPERATION = WRITE : bank = 1 Row = 'h27a, Col = 'h59, Data = 'h3344
+# Time =  57232.00 ns : OPERATION = BST   : Burst Stop
+# Time =  57252.00 ns : OPERATION = WRITE : bank = 1 Row = 'h27a, Col = 'h5a, Data = 'h6677
+# Time =  57272.00 ns : OPERATION = WRITE : bank = 1 Row = 'h27a, Col = 'h5b, Data = 'h4455
+# Time =  57292.00 ns : OPERATION = BST   : Burst Stop
+# Time =  57312.00 ns : OPERATION = WRITE : bank = 1 Row = 'h27a, Col = 'h5c, Data = 'h7788
+# Time =  57332.00 ns : OPERATION = WRITE : bank = 1 Row = 'h27a, Col = 'h5d, Data = 'h5566
+# Time =  57352.00 ns : OPERATION = BST   : Burst Stop
+# Time =  57372.00 ns : OPERATION = CKSW   : Clock Suspend during Write
+# Time =  58072.00 ns : OPERATION = BST   : Burst Stop
+# Time =  58077.00 ns : OPERATION = READ  : bank = 1 Row = 'h27a, Col = 'h54, Data = 'h3344
+# Time =  58097.00 ns : OPERATION = READ  : bank = 1 Row = 'h27a, Col = 'h55, Data = 'h1122
+# Time =  58172.00 ns : OPERATION = CKSR   : Clock Suspend during Read
+# READ STATUS: Burst-No:           0 Addr: 0144f4aa Rxd: 11223344
+# Time =  58292.00 ns : OPERATION = BST   : Burst Stop
+# Time =  58297.00 ns : OPERATION = READ  : bank = 1 Row = 'h27a, Col = 'h56, Data = 'h4455
+# Time =  58317.00 ns : OPERATION = READ  : bank = 1 Row = 'h27a, Col = 'h57, Data = 'h2233
+# Time =  58392.00 ns : OPERATION = CKSR   : Clock Suspend during Read
+# READ STATUS: Burst-No:           1 Addr: 0144f4ab Rxd: 22334455
+# Time =  58512.00 ns : OPERATION = BST   : Burst Stop
+# Time =  58517.00 ns : OPERATION = READ  : bank = 1 Row = 'h27a, Col = 'h58, Data = 'h5566
+# Time =  58537.00 ns : OPERATION = READ  : bank = 1 Row = 'h27a, Col = 'h59, Data = 'h3344
+# Time =  58612.00 ns : OPERATION = CKSR   : Clock Suspend during Read
+# READ STATUS: Burst-No:           2 Addr: 0144f4ac Rxd: 33445566
+# Time =  58732.00 ns : OPERATION = BST   : Burst Stop
+# Time =  58737.00 ns : OPERATION = READ  : bank = 1 Row = 'h27a, Col = 'h5a, Data = 'h6677
+# Time =  58757.00 ns : OPERATION = READ  : bank = 1 Row = 'h27a, Col = 'h5b, Data = 'h4455
+# Time =  58832.00 ns : OPERATION = CKSR   : Clock Suspend during Read
+# READ STATUS: Burst-No:           3 Addr: 0144f4ad Rxd: 44556677
+# Time =  58952.00 ns : OPERATION = BST   : Burst Stop
+# Time =  58957.00 ns : OPERATION = READ  : bank = 1 Row = 'h27a, Col = 'h5c, Data = 'h7788
+# Time =  58977.00 ns : OPERATION = READ  : bank = 1 Row = 'h27a, Col = 'h5d, Data = 'h5566
+# Time =  59052.00 ns : OPERATION = CKSR   : Clock Suspend during Read
+# READ STATUS: Burst-No:           4 Addr: 0144f4ae Rxd: 55667788
+# Write Address: 02aff7e5, Burst Size:           5
+# Status: Burst-No:           0  Write Address: 00abfdf9  WriteData: 11223344 
+# Status: Burst-No:           1  Write Address: 00abfdfa  WriteData: 22334455 
+# Status: Burst-No:           2  Write Address: 00abfdfb  WriteData: 33445566 
+# Status: Burst-No:           3  Write Address: 00abfdfc  WriteData: 44556677 
+# Time =  59152.00 ns : OPERATION = PCHG  : bank = 3 
+# Status: Burst-No:           4  Write Address: 00abfdfd  WriteData: 55667788 
+# Time =  59212.00 ns : OPERATION = ACT   : bank = 3 Row = 'h5fe
+# Time =  59272.00 ns : OPERATION = WRITE : bank = 3 Row = 'h5fe, Col = 'hf2, Data = 'h3344
+# Time =  59292.00 ns : OPERATION = WRITE : bank = 3 Row = 'h5fe, Col = 'hf3, Data = 'h1122
+# Time =  59312.00 ns : OPERATION = BST   : Burst Stop
+# Time =  59332.00 ns : OPERATION = WRITE : bank = 3 Row = 'h5fe, Col = 'hf4, Data = 'h4455
+# Time =  59352.00 ns : OPERATION = WRITE : bank = 3 Row = 'h5fe, Col = 'hf5, Data = 'h2233
+# Time =  59372.00 ns : OPERATION = BST   : Burst Stop
+# Time =  59392.00 ns : OPERATION = WRITE : bank = 3 Row = 'h5fe, Col = 'hf6, Data = 'h5566
+# Time =  59412.00 ns : OPERATION = WRITE : bank = 3 Row = 'h5fe, Col = 'hf7, Data = 'h3344
+# Time =  59432.00 ns : OPERATION = BST   : Burst Stop
+# Time =  59452.00 ns : OPERATION = WRITE : bank = 3 Row = 'h5fe, Col = 'hf8, Data = 'h6677
+# Time =  59472.00 ns : OPERATION = WRITE : bank = 3 Row = 'h5fe, Col = 'hf9, Data = 'h4455
+# Time =  59492.00 ns : OPERATION = BST   : Burst Stop
+# Time =  59512.00 ns : OPERATION = WRITE : bank = 3 Row = 'h5fe, Col = 'hfa, Data = 'h7788
+# Time =  59532.00 ns : OPERATION = WRITE : bank = 3 Row = 'h5fe, Col = 'hfb, Data = 'h5566
+# Time =  59552.00 ns : OPERATION = BST   : Burst Stop
+# Time =  59572.00 ns : OPERATION = CKSW   : Clock Suspend during Write
+# Time =  60272.00 ns : OPERATION = BST   : Burst Stop
+# Time =  60277.00 ns : OPERATION = READ  : bank = 3 Row = 'h5fe, Col = 'hf2, Data = 'h3344
+# Time =  60297.00 ns : OPERATION = READ  : bank = 3 Row = 'h5fe, Col = 'hf3, Data = 'h1122
+# Time =  60372.00 ns : OPERATION = CKSR   : Clock Suspend during Read
+# READ STATUS: Burst-No:           0 Addr: 00abfdf9 Rxd: 11223344
+# Time =  60492.00 ns : OPERATION = BST   : Burst Stop
+# Time =  60497.00 ns : OPERATION = READ  : bank = 3 Row = 'h5fe, Col = 'hf4, Data = 'h4455
+# Time =  60517.00 ns : OPERATION = READ  : bank = 3 Row = 'h5fe, Col = 'hf5, Data = 'h2233
+# Time =  60592.00 ns : OPERATION = CKSR   : Clock Suspend during Read
+# READ STATUS: Burst-No:           1 Addr: 00abfdfa Rxd: 22334455
+# Time =  60712.00 ns : OPERATION = BST   : Burst Stop
+# Time =  60717.00 ns : OPERATION = READ  : bank = 3 Row = 'h5fe, Col = 'hf6, Data = 'h5566
+# Time =  60737.00 ns : OPERATION = READ  : bank = 3 Row = 'h5fe, Col = 'hf7, Data = 'h3344
+# Time =  60812.00 ns : OPERATION = CKSR   : Clock Suspend during Read
+# READ STATUS: Burst-No:           2 Addr: 00abfdfb Rxd: 33445566
+# Time =  60932.00 ns : OPERATION = BST   : Burst Stop
+# Time =  60937.00 ns : OPERATION = READ  : bank = 3 Row = 'h5fe, Col = 'hf8, Data = 'h6677
+# Time =  60957.00 ns : OPERATION = READ  : bank = 3 Row = 'h5fe, Col = 'hf9, Data = 'h4455
+# Time =  61032.00 ns : OPERATION = CKSR   : Clock Suspend during Read
+# READ STATUS: Burst-No:           3 Addr: 00abfdfc Rxd: 44556677
+# Time =  61152.00 ns : OPERATION = BST   : Burst Stop
+# Time =  61157.00 ns : OPERATION = READ  : bank = 3 Row = 'h5fe, Col = 'hfa, Data = 'h7788
+# Time =  61177.00 ns : OPERATION = READ  : bank = 3 Row = 'h5fe, Col = 'hfb, Data = 'h5566
+# Time =  61252.00 ns : OPERATION = CKSR   : Clock Suspend during Read
+# READ STATUS: Burst-No:           4 Addr: 00abfdfd Rxd: 55667788
+# Write Address: 03d27277, Burst Size:           5
+# Status: Burst-No:           0  Write Address: 00f49c9d  WriteData: 11223344 
+# Status: Burst-No:           1  Write Address: 00f49c9e  WriteData: 22334455 
+# Status: Burst-No:           2  Write Address: 00f49c9f  WriteData: 33445566 
+# Status: Burst-No:           3  Write Address: 00f49ca0  WriteData: 44556677 
+# Time =  61352.00 ns : OPERATION = PCHG  : bank = 1 
+# Status: Burst-No:           4  Write Address: 00f49ca1  WriteData: 55667788 
+# Time =  61412.00 ns : OPERATION = ACT   : bank = 1 Row = 'ha4e
+# Time =  61472.00 ns : OPERATION = WRITE : bank = 1 Row = 'ha4e, Col = 'h3a, Data = 'h3344
+# Time =  61492.00 ns : OPERATION = WRITE : bank = 1 Row = 'ha4e, Col = 'h3b, Data = 'h1122
+# Time =  61512.00 ns : OPERATION = BST   : Burst Stop
+# Time =  61532.00 ns : OPERATION = WRITE : bank = 1 Row = 'ha4e, Col = 'h3c, Data = 'h4455
+# Time =  61552.00 ns : OPERATION = WRITE : bank = 1 Row = 'ha4e, Col = 'h3d, Data = 'h2233
+# Time =  61572.00 ns : OPERATION = BST   : Burst Stop
+# Time =  61592.00 ns : OPERATION = WRITE : bank = 1 Row = 'ha4e, Col = 'h3e, Data = 'h5566
+# Time =  61612.00 ns : OPERATION = WRITE : bank = 1 Row = 'ha4e, Col = 'h3f, Data = 'h3344
+# Time =  61632.00 ns : OPERATION = BST   : Burst Stop
+# Time =  61652.00 ns : OPERATION = WRITE : bank = 1 Row = 'ha4e, Col = 'h40, Data = 'h6677
+# Time =  61672.00 ns : OPERATION = WRITE : bank = 1 Row = 'ha4e, Col = 'h41, Data = 'h4455
+# Time =  61692.00 ns : OPERATION = BST   : Burst Stop
+# Time =  61712.00 ns : OPERATION = WRITE : bank = 1 Row = 'ha4e, Col = 'h42, Data = 'h7788
+# Time =  61732.00 ns : OPERATION = WRITE : bank = 1 Row = 'ha4e, Col = 'h43, Data = 'h5566
+# Time =  61752.00 ns : OPERATION = BST   : Burst Stop
+# Time =  61772.00 ns : OPERATION = CKSW   : Clock Suspend during Write
+# Time =  62472.00 ns : OPERATION = BST   : Burst Stop
+# Time =  62477.00 ns : OPERATION = READ  : bank = 1 Row = 'ha4e, Col = 'h3a, Data = 'h3344
+# Time =  62497.00 ns : OPERATION = READ  : bank = 1 Row = 'ha4e, Col = 'h3b, Data = 'h1122
+# Time =  62572.00 ns : OPERATION = CKSR   : Clock Suspend during Read
+# READ STATUS: Burst-No:           0 Addr: 00f49c9d Rxd: 11223344
+# Time =  62692.00 ns : OPERATION = BST   : Burst Stop
+# Time =  62697.00 ns : OPERATION = READ  : bank = 1 Row = 'ha4e, Col = 'h3c, Data = 'h4455
+# Time =  62717.00 ns : OPERATION = READ  : bank = 1 Row = 'ha4e, Col = 'h3d, Data = 'h2233
+# Time =  62792.00 ns : OPERATION = CKSR   : Clock Suspend during Read
+# READ STATUS: Burst-No:           1 Addr: 00f49c9e Rxd: 22334455
+# Time =  62912.00 ns : OPERATION = BST   : Burst Stop
+# Time =  62917.00 ns : OPERATION = READ  : bank = 1 Row = 'ha4e, Col = 'h3e, Data = 'h5566
+# Time =  62937.00 ns : OPERATION = READ  : bank = 1 Row = 'ha4e, Col = 'h3f, Data = 'h3344
+# Time =  63012.00 ns : OPERATION = CKSR   : Clock Suspend during Read
+# READ STATUS: Burst-No:           2 Addr: 00f49c9f Rxd: 33445566
+# Time =  63132.00 ns : OPERATION = BST   : Burst Stop
+# Time =  63137.00 ns : OPERATION = READ  : bank = 1 Row = 'ha4e, Col = 'h40, Data = 'h6677
+# Time =  63157.00 ns : OPERATION = READ  : bank = 1 Row = 'ha4e, Col = 'h41, Data = 'h4455
+# Time =  63232.00 ns : OPERATION = CKSR   : Clock Suspend during Read
+# READ STATUS: Burst-No:           3 Addr: 00f49ca0 Rxd: 44556677
+# Time =  63352.00 ns : OPERATION = BST   : Burst Stop
+# Time =  63357.00 ns : OPERATION = READ  : bank = 1 Row = 'ha4e, Col = 'h42, Data = 'h7788
+# Time =  63377.00 ns : OPERATION = READ  : bank = 1 Row = 'ha4e, Col = 'h43, Data = 'h5566
+# Time =  63452.00 ns : OPERATION = CKSR   : Clock Suspend during Read
+# READ STATUS: Burst-No:           4 Addr: 00f49ca1 Rxd: 55667788
+###############################
+# STATUS: SDRAM Write/Read TEST PASSED
+###############################
+# ** Note: $finish    : ../tb/tb_top.sv(304)
+#    Time: 73460 ns  Iteration: 0  Instance: /tb_top

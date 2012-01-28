@@ -1,0 +1,1482 @@
+ Compiling with MODELSIM in top SDR_8BIT Mode 
+Model Technology ModelSim ACTEL vlog 6.6d Compiler 2010.11 Nov  2 2010
+-- Compiling module tb_top
+-- Compiling module IS42VM16400K
+-- Compiling module mt48lc2m32b2
+-- Compiling module mt48lc8m8a2
+-- Compiling module sdrc_top
+-- Compiling module wb2sdrc
+-- Compiling module async_fifo
+-- Compiling module sdrc_core
+-- Compiling module sdrc_bank_ctl
+-- Compiling module sdrc_bank_fsm
+-- Compiling module sdrc_bs_convert
+-- Compiling module sdrc_req_gen
+-- Compiling module sdrc_xfr_ctl
+
+Top level modules:
+	tb_top
+	IS42VM16400K
+	mt48lc2m32b2
+#### Compile : PASSED
+
+###########################################
+ Runing GMAC/SPI/UART test programs 
+###########################################
+###########################################
+### Running test 1: basic_test1
+Reading D:/Actel/Libero_v9.1/Model/tcl/vsim/pref.tcl 
+
+# 6.6d
+
+# vsim +basic_test1 -do run.do -c tb_top 
+# //  ModelSim ACTEL 6.6d Nov  2 2010 
+# //
+# //  Copyright 1991-2010 Mentor Graphics Corporation
+# //              All Rights Reserved.
+# //
+# //  THIS WORK CONTAINS TRADE SECRET AND 
+# //  PROPRIETARY INFORMATION WHICH IS THE PROPERTY
+# //  OF MENTOR GRAPHICS CORPORATION OR ITS LICENSORS
+# //  AND IS SUBJECT TO LICENSE TERMS.
+# //
+# Loading sv_std.std
+# Loading work.tb_top
+# Loading work.sdrc_top
+# Loading work.wb2sdrc
+# Loading work.async_fifo
+# Loading work.sdrc_core
+# Loading work.sdrc_req_gen
+# Loading work.sdrc_bank_ctl
+# Loading work.sdrc_bank_fsm
+# Loading work.sdrc_xfr_ctl
+# Loading work.sdrc_bs_convert
+# Loading work.mt48lc8m8a2
+# do run.do 
+# at time     10132 ns PRE  : Bank = ALL
+# at time     10212 ns AREF : Auto Refresh
+# at time     10392 ns AREF : Auto Refresh
+# at time     10572 ns AREF : Auto Refresh
+# at time     10752 ns AREF : Auto Refresh
+# at time     10932 ns AREF : Auto Refresh
+# at time     11112 ns AREF : Auto Refresh
+# at time     11292 ns AREF : Auto Refresh
+# at time     11472 ns AREF : Auto Refresh
+# at time     11652 ns AREF : Auto Refresh
+# at time     11832 ns AREF : Auto Refresh
+# at time     12012 ns AREF : Auto Refresh
+# at time     12192 ns AREF : Auto Refresh
+# at time     12372 ns AREF : Auto Refresh
+# at time     12552 ns AREF : Auto Refresh
+# at time     12732 ns AREF : Auto Refresh
+# at time     12912 ns LMR  : Load Mode Register
+#                             CAS Latency      = 3
+#                             Burst Length     = 8
+#                             Burst Type       = Sequential
+#                             Write Burst Mode = Programmed Burst Length
+# Write Address: 00040000, Burst Size:           5
+# Status: Burst-No:           0  Write Address: 00010000  WriteData: 11223344 
+# Status: Burst-No:           1  Write Address: 00010001  WriteData: 22334455 
+# Status: Burst-No:           2  Write Address: 00010002  WriteData: 33445566 
+# Status: Burst-No:           3  Write Address: 00010003  WriteData: 44556677 
+# at time     14172 ns PRE  : Bank = 0
+# Status: Burst-No:           4  Write Address: 00010004  WriteData: 55667788 
+# at time     14232 ns ACT  : Bank = 0 Row =  256
+# at time     14292 ns WRITE: Bank = 0 Row =  256, Col =   0, Data = 44, Dqm = 0
+# at time     14312 ns WRITE: Bank = 0 Row =  256, Col =   1, Data = 33, Dqm = 0
+# at time     14332 ns WRITE: Bank = 0 Row =  256, Col =   2, Data = 22, Dqm = 0
+# at time     14352 ns WRITE: Bank = 0 Row =  256, Col =   3, Data = 11, Dqm = 0
+# at time     14372 ns BST  : Burst Terminate
+# at time     14392 ns WRITE: Bank = 0 Row =  256, Col =   4, Data = 55, Dqm = 0
+# at time     14412 ns WRITE: Bank = 0 Row =  256, Col =   5, Data = 44, Dqm = 0
+# at time     14432 ns WRITE: Bank = 0 Row =  256, Col =   6, Data = 33, Dqm = 0
+# at time     14452 ns WRITE: Bank = 0 Row =  256, Col =   7, Data = 22, Dqm = 0
+# at time     14472 ns BST  : Burst Terminate
+# at time     14492 ns WRITE: Bank = 0 Row =  256, Col =   8, Data = 66, Dqm = 0
+# at time     14512 ns WRITE: Bank = 0 Row =  256, Col =   9, Data = 55, Dqm = 0
+# at time     14532 ns WRITE: Bank = 0 Row =  256, Col =  10, Data = 44, Dqm = 0
+# at time     14552 ns WRITE: Bank = 0 Row =  256, Col =  11, Data = 33, Dqm = 0
+# at time     14572 ns BST  : Burst Terminate
+# at time     14592 ns WRITE: Bank = 0 Row =  256, Col =  12, Data = 77, Dqm = 0
+# at time     14612 ns WRITE: Bank = 0 Row =  256, Col =  13, Data = 66, Dqm = 0
+# at time     14632 ns WRITE: Bank = 0 Row =  256, Col =  14, Data = 55, Dqm = 0
+# at time     14652 ns WRITE: Bank = 0 Row =  256, Col =  15, Data = 44, Dqm = 0
+# at time     14672 ns BST  : Burst Terminate
+# at time     14692 ns WRITE: Bank = 0 Row =  256, Col =  16, Data = 88, Dqm = 0
+# at time     14712 ns WRITE: Bank = 0 Row =  256, Col =  17, Data = 77, Dqm = 0
+# at time     14732 ns WRITE: Bank = 0 Row =  256, Col =  18, Data = 66, Dqm = 0
+# at time     14752 ns WRITE: Bank = 0 Row =  256, Col =  19, Data = 55, Dqm = 0
+# at time     14772 ns BST  : Burst Terminate
+# at time     15298 ns READ : Bank = 0 Row =  256, Col =   0, Data = 44, Dqm = 0
+# at time     15318 ns READ : Bank = 0 Row =  256, Col =   1, Data = 33, Dqm = 0
+# at time     15332 ns BST  : Burst Terminate
+# at time     15338 ns READ : Bank = 0 Row =  256, Col =   2, Data = 22, Dqm = 0
+# at time     15358 ns READ : Bank = 0 Row =  256, Col =   3, Data = 11, Dqm = 0
+# READ STATUS: Burst-No:           0 Addr: 00010000 Rxd: 11223344
+# at time     15558 ns READ : Bank = 0 Row =  256, Col =   4, Data = 55, Dqm = 0
+# at time     15578 ns READ : Bank = 0 Row =  256, Col =   5, Data = 44, Dqm = 0
+# at time     15592 ns BST  : Burst Terminate
+# at time     15598 ns READ : Bank = 0 Row =  256, Col =   6, Data = 33, Dqm = 0
+# at time     15618 ns READ : Bank = 0 Row =  256, Col =   7, Data = 22, Dqm = 0
+# READ STATUS: Burst-No:           1 Addr: 00010001 Rxd: 22334455
+# at time     15818 ns READ : Bank = 0 Row =  256, Col =   8, Data = 66, Dqm = 0
+# at time     15838 ns READ : Bank = 0 Row =  256, Col =   9, Data = 55, Dqm = 0
+# at time     15852 ns BST  : Burst Terminate
+# at time     15858 ns READ : Bank = 0 Row =  256, Col =  10, Data = 44, Dqm = 0
+# at time     15878 ns READ : Bank = 0 Row =  256, Col =  11, Data = 33, Dqm = 0
+# READ STATUS: Burst-No:           2 Addr: 00010002 Rxd: 33445566
+# at time     16078 ns READ : Bank = 0 Row =  256, Col =  12, Data = 77, Dqm = 0
+# at time     16098 ns READ : Bank = 0 Row =  256, Col =  13, Data = 66, Dqm = 0
+# at time     16112 ns BST  : Burst Terminate
+# at time     16118 ns READ : Bank = 0 Row =  256, Col =  14, Data = 55, Dqm = 0
+# at time     16138 ns READ : Bank = 0 Row =  256, Col =  15, Data = 44, Dqm = 0
+# READ STATUS: Burst-No:           3 Addr: 00010003 Rxd: 44556677
+# at time     16338 ns READ : Bank = 0 Row =  256, Col =  16, Data = 88, Dqm = 0
+# at time     16358 ns READ : Bank = 0 Row =  256, Col =  17, Data = 77, Dqm = 0
+# at time     16372 ns BST  : Burst Terminate
+# at time     16378 ns READ : Bank = 0 Row =  256, Col =  18, Data = 66, Dqm = 0
+# at time     16398 ns READ : Bank = 0 Row =  256, Col =  19, Data = 55, Dqm = 0
+# READ STATUS: Burst-No:           4 Addr: 00010004 Rxd: 55667788
+# Write Address: 70000000, Burst Size:           5
+# Status: Burst-No:           0  Write Address: 1c000000  WriteData: 11223344 
+# Status: Burst-No:           1  Write Address: 1c000001  WriteData: 22334455 
+# Status: Burst-No:           2  Write Address: 1c000002  WriteData: 33445566 
+# Status: Burst-No:           3  Write Address: 1c000003  WriteData: 44556677 
+# at time     17552 ns PRE  : Bank = 0
+# Status: Burst-No:           4  Write Address: 1c000004  WriteData: 55667788 
+# at time     17612 ns ACT  : Bank = 0 Row =    0
+# at time     17672 ns WRITE: Bank = 0 Row =    0, Col =   0, Data = 44, Dqm = 0
+# at time     17692 ns WRITE: Bank = 0 Row =    0, Col =   1, Data = 33, Dqm = 0
+# at time     17712 ns WRITE: Bank = 0 Row =    0, Col =   2, Data = 22, Dqm = 0
+# at time     17732 ns WRITE: Bank = 0 Row =    0, Col =   3, Data = 11, Dqm = 0
+# at time     17752 ns BST  : Burst Terminate
+# at time     17772 ns WRITE: Bank = 0 Row =    0, Col =   4, Data = 55, Dqm = 0
+# at time     17792 ns WRITE: Bank = 0 Row =    0, Col =   5, Data = 44, Dqm = 0
+# at time     17812 ns WRITE: Bank = 0 Row =    0, Col =   6, Data = 33, Dqm = 0
+# at time     17832 ns WRITE: Bank = 0 Row =    0, Col =   7, Data = 22, Dqm = 0
+# at time     17852 ns BST  : Burst Terminate
+# at time     17872 ns WRITE: Bank = 0 Row =    0, Col =   8, Data = 66, Dqm = 0
+# at time     17892 ns WRITE: Bank = 0 Row =    0, Col =   9, Data = 55, Dqm = 0
+# at time     17912 ns WRITE: Bank = 0 Row =    0, Col =  10, Data = 44, Dqm = 0
+# at time     17932 ns WRITE: Bank = 0 Row =    0, Col =  11, Data = 33, Dqm = 0
+# at time     17952 ns BST  : Burst Terminate
+# at time     17972 ns WRITE: Bank = 0 Row =    0, Col =  12, Data = 77, Dqm = 0
+# at time     17992 ns WRITE: Bank = 0 Row =    0, Col =  13, Data = 66, Dqm = 0
+# at time     18012 ns WRITE: Bank = 0 Row =    0, Col =  14, Data = 55, Dqm = 0
+# at time     18032 ns WRITE: Bank = 0 Row =    0, Col =  15, Data = 44, Dqm = 0
+# at time     18052 ns BST  : Burst Terminate
+# at time     18072 ns WRITE: Bank = 0 Row =    0, Col =  16, Data = 88, Dqm = 0
+# at time     18092 ns WRITE: Bank = 0 Row =    0, Col =  17, Data = 77, Dqm = 0
+# at time     18112 ns WRITE: Bank = 0 Row =    0, Col =  18, Data = 66, Dqm = 0
+# at time     18132 ns WRITE: Bank = 0 Row =    0, Col =  19, Data = 55, Dqm = 0
+# at time     18152 ns BST  : Burst Terminate
+# at time     18678 ns READ : Bank = 0 Row =    0, Col =   0, Data = 44, Dqm = 0
+# at time     18698 ns READ : Bank = 0 Row =    0, Col =   1, Data = 33, Dqm = 0
+# at time     18712 ns BST  : Burst Terminate
+# at time     18718 ns READ : Bank = 0 Row =    0, Col =   2, Data = 22, Dqm = 0
+# at time     18738 ns READ : Bank = 0 Row =    0, Col =   3, Data = 11, Dqm = 0
+# READ STATUS: Burst-No:           0 Addr: 1c000000 Rxd: 11223344
+# at time     18938 ns READ : Bank = 0 Row =    0, Col =   4, Data = 55, Dqm = 0
+# at time     18958 ns READ : Bank = 0 Row =    0, Col =   5, Data = 44, Dqm = 0
+# at time     18972 ns BST  : Burst Terminate
+# at time     18978 ns READ : Bank = 0 Row =    0, Col =   6, Data = 33, Dqm = 0
+# at time     18998 ns READ : Bank = 0 Row =    0, Col =   7, Data = 22, Dqm = 0
+# READ STATUS: Burst-No:           1 Addr: 1c000001 Rxd: 22334455
+# at time     19198 ns READ : Bank = 0 Row =    0, Col =   8, Data = 66, Dqm = 0
+# at time     19218 ns READ : Bank = 0 Row =    0, Col =   9, Data = 55, Dqm = 0
+# at time     19232 ns BST  : Burst Terminate
+# at time     19238 ns READ : Bank = 0 Row =    0, Col =  10, Data = 44, Dqm = 0
+# at time     19258 ns READ : Bank = 0 Row =    0, Col =  11, Data = 33, Dqm = 0
+# READ STATUS: Burst-No:           2 Addr: 1c000002 Rxd: 33445566
+# at time     19458 ns READ : Bank = 0 Row =    0, Col =  12, Data = 77, Dqm = 0
+# at time     19478 ns READ : Bank = 0 Row =    0, Col =  13, Data = 66, Dqm = 0
+# at time     19492 ns BST  : Burst Terminate
+# at time     19498 ns READ : Bank = 0 Row =    0, Col =  14, Data = 55, Dqm = 0
+# at time     19518 ns READ : Bank = 0 Row =    0, Col =  15, Data = 44, Dqm = 0
+# READ STATUS: Burst-No:           3 Addr: 1c000003 Rxd: 44556677
+# at time     19718 ns READ : Bank = 0 Row =    0, Col =  16, Data = 88, Dqm = 0
+# at time     19738 ns READ : Bank = 0 Row =    0, Col =  17, Data = 77, Dqm = 0
+# at time     19752 ns BST  : Burst Terminate
+# at time     19758 ns READ : Bank = 0 Row =    0, Col =  18, Data = 66, Dqm = 0
+# at time     19778 ns READ : Bank = 0 Row =    0, Col =  19, Data = 55, Dqm = 0
+# READ STATUS: Burst-No:           4 Addr: 1c000004 Rxd: 55667788
+# Write Address: 02153524, Burst Size:           5
+# Status: Burst-No:           0  Write Address: 00854d49  WriteData: 11223344 
+# Status: Burst-No:           1  Write Address: 00854d4a  WriteData: 22334455 
+# Status: Burst-No:           2  Write Address: 00854d4b  WriteData: 33445566 
+# Status: Burst-No:           3  Write Address: 00854d4c  WriteData: 44556677 
+# at time     19952 ns PRE  : Bank = 1
+# Status: Burst-No:           4  Write Address: 00854d4d  WriteData: 55667788 
+# at time     20012 ns ACT  : Bank = 1 Row = 1357
+# at time     20072 ns WRITE: Bank = 1 Row = 1357, Col =  36, Data = 44, Dqm = 0
+# at time     20092 ns WRITE: Bank = 1 Row = 1357, Col =  37, Data = 33, Dqm = 0
+# at time     20112 ns WRITE: Bank = 1 Row = 1357, Col =  38, Data = 22, Dqm = 0
+# at time     20132 ns WRITE: Bank = 1 Row = 1357, Col =  39, Data = 11, Dqm = 0
+# at time     20152 ns BST  : Burst Terminate
+# at time     20172 ns WRITE: Bank = 1 Row = 1357, Col =  40, Data = 55, Dqm = 0
+# at time     20192 ns WRITE: Bank = 1 Row = 1357, Col =  41, Data = 44, Dqm = 0
+# at time     20212 ns WRITE: Bank = 1 Row = 1357, Col =  42, Data = 33, Dqm = 0
+# at time     20232 ns WRITE: Bank = 1 Row = 1357, Col =  43, Data = 22, Dqm = 0
+# at time     20252 ns BST  : Burst Terminate
+# at time     20272 ns WRITE: Bank = 1 Row = 1357, Col =  44, Data = 66, Dqm = 0
+# at time     20292 ns WRITE: Bank = 1 Row = 1357, Col =  45, Data = 55, Dqm = 0
+# at time     20312 ns WRITE: Bank = 1 Row = 1357, Col =  46, Data = 44, Dqm = 0
+# at time     20332 ns WRITE: Bank = 1 Row = 1357, Col =  47, Data = 33, Dqm = 0
+# at time     20352 ns BST  : Burst Terminate
+# at time     20372 ns WRITE: Bank = 1 Row = 1357, Col =  48, Data = 77, Dqm = 0
+# at time     20392 ns WRITE: Bank = 1 Row = 1357, Col =  49, Data = 66, Dqm = 0
+# at time     20412 ns WRITE: Bank = 1 Row = 1357, Col =  50, Data = 55, Dqm = 0
+# at time     20432 ns WRITE: Bank = 1 Row = 1357, Col =  51, Data = 44, Dqm = 0
+# at time     20452 ns BST  : Burst Terminate
+# at time     20472 ns WRITE: Bank = 1 Row = 1357, Col =  52, Data = 88, Dqm = 0
+# at time     20492 ns WRITE: Bank = 1 Row = 1357, Col =  53, Data = 77, Dqm = 0
+# at time     20512 ns WRITE: Bank = 1 Row = 1357, Col =  54, Data = 66, Dqm = 0
+# at time     20532 ns WRITE: Bank = 1 Row = 1357, Col =  55, Data = 55, Dqm = 0
+# at time     20552 ns BST  : Burst Terminate
+# at time     21078 ns READ : Bank = 1 Row = 1357, Col =  36, Data = 44, Dqm = 0
+# at time     21098 ns READ : Bank = 1 Row = 1357, Col =  37, Data = 33, Dqm = 0
+# at time     21112 ns BST  : Burst Terminate
+# at time     21118 ns READ : Bank = 1 Row = 1357, Col =  38, Data = 22, Dqm = 0
+# at time     21138 ns READ : Bank = 1 Row = 1357, Col =  39, Data = 11, Dqm = 0
+# READ STATUS: Burst-No:           0 Addr: 00854d49 Rxd: 11223344
+# at time     21338 ns READ : Bank = 1 Row = 1357, Col =  40, Data = 55, Dqm = 0
+# at time     21358 ns READ : Bank = 1 Row = 1357, Col =  41, Data = 44, Dqm = 0
+# at time     21372 ns BST  : Burst Terminate
+# at time     21378 ns READ : Bank = 1 Row = 1357, Col =  42, Data = 33, Dqm = 0
+# at time     21398 ns READ : Bank = 1 Row = 1357, Col =  43, Data = 22, Dqm = 0
+# READ STATUS: Burst-No:           1 Addr: 00854d4a Rxd: 22334455
+# at time     21598 ns READ : Bank = 1 Row = 1357, Col =  44, Data = 66, Dqm = 0
+# at time     21618 ns READ : Bank = 1 Row = 1357, Col =  45, Data = 55, Dqm = 0
+# at time     21632 ns BST  : Burst Terminate
+# at time     21638 ns READ : Bank = 1 Row = 1357, Col =  46, Data = 44, Dqm = 0
+# at time     21658 ns READ : Bank = 1 Row = 1357, Col =  47, Data = 33, Dqm = 0
+# READ STATUS: Burst-No:           2 Addr: 00854d4b Rxd: 33445566
+# at time     21858 ns READ : Bank = 1 Row = 1357, Col =  48, Data = 77, Dqm = 0
+# at time     21878 ns READ : Bank = 1 Row = 1357, Col =  49, Data = 66, Dqm = 0
+# at time     21892 ns BST  : Burst Terminate
+# at time     21898 ns READ : Bank = 1 Row = 1357, Col =  50, Data = 55, Dqm = 0
+# at time     21918 ns READ : Bank = 1 Row = 1357, Col =  51, Data = 44, Dqm = 0
+# READ STATUS: Burst-No:           3 Addr: 00854d4c Rxd: 44556677
+# at time     22118 ns READ : Bank = 1 Row = 1357, Col =  52, Data = 88, Dqm = 0
+# at time     22138 ns READ : Bank = 1 Row = 1357, Col =  53, Data = 77, Dqm = 0
+# at time     22152 ns BST  : Burst Terminate
+# at time     22158 ns READ : Bank = 1 Row = 1357, Col =  54, Data = 66, Dqm = 0
+# at time     22178 ns READ : Bank = 1 Row = 1357, Col =  55, Data = 55, Dqm = 0
+# READ STATUS: Burst-No:           4 Addr: 00854d4d Rxd: 55667788
+# Write Address: 00895e81, Burst Size:           5
+# Status: Burst-No:           0  Write Address: 002257a0  WriteData: 11223344 
+# Status: Burst-No:           1  Write Address: 002257a1  WriteData: 22334455 
+# Status: Burst-No:           2  Write Address: 002257a2  WriteData: 33445566 
+# Status: Burst-No:           3  Write Address: 002257a3  WriteData: 44556677 
+# at time     22352 ns PRE  : Bank = 2
+# Status: Burst-No:           4  Write Address: 002257a4  WriteData: 55667788 
+# at time     22412 ns ACT  : Bank = 2 Row =  599
+# at time     22472 ns WRITE: Bank = 2 Row =  599, Col = 128, Data = 44, Dqm = 0
+# at time     22492 ns WRITE: Bank = 2 Row =  599, Col = 129, Data = 33, Dqm = 0
+# at time     22512 ns WRITE: Bank = 2 Row =  599, Col = 130, Data = 22, Dqm = 0
+# at time     22532 ns WRITE: Bank = 2 Row =  599, Col = 131, Data = 11, Dqm = 0
+# at time     22552 ns BST  : Burst Terminate
+# at time     22572 ns WRITE: Bank = 2 Row =  599, Col = 132, Data = 55, Dqm = 0
+# at time     22592 ns WRITE: Bank = 2 Row =  599, Col = 133, Data = 44, Dqm = 0
+# at time     22612 ns WRITE: Bank = 2 Row =  599, Col = 134, Data = 33, Dqm = 0
+# at time     22632 ns WRITE: Bank = 2 Row =  599, Col = 135, Data = 22, Dqm = 0
+# at time     22652 ns BST  : Burst Terminate
+# at time     22672 ns WRITE: Bank = 2 Row =  599, Col = 136, Data = 66, Dqm = 0
+# at time     22692 ns WRITE: Bank = 2 Row =  599, Col = 137, Data = 55, Dqm = 0
+# at time     22712 ns WRITE: Bank = 2 Row =  599, Col = 138, Data = 44, Dqm = 0
+# at time     22732 ns WRITE: Bank = 2 Row =  599, Col = 139, Data = 33, Dqm = 0
+# at time     22752 ns BST  : Burst Terminate
+# at time     22772 ns WRITE: Bank = 2 Row =  599, Col = 140, Data = 77, Dqm = 0
+# at time     22792 ns WRITE: Bank = 2 Row =  599, Col = 141, Data = 66, Dqm = 0
+# at time     22812 ns WRITE: Bank = 2 Row =  599, Col = 142, Data = 55, Dqm = 0
+# at time     22832 ns WRITE: Bank = 2 Row =  599, Col = 143, Data = 44, Dqm = 0
+# at time     22852 ns BST  : Burst Terminate
+# at time     22872 ns WRITE: Bank = 2 Row =  599, Col = 144, Data = 88, Dqm = 0
+# at time     22892 ns WRITE: Bank = 2 Row =  599, Col = 145, Data = 77, Dqm = 0
+# at time     22912 ns WRITE: Bank = 2 Row =  599, Col = 146, Data = 66, Dqm = 0
+# at time     22932 ns WRITE: Bank = 2 Row =  599, Col = 147, Data = 55, Dqm = 0
+# at time     22952 ns BST  : Burst Terminate
+# at time     23478 ns READ : Bank = 2 Row =  599, Col = 128, Data = 44, Dqm = 0
+# at time     23498 ns READ : Bank = 2 Row =  599, Col = 129, Data = 33, Dqm = 0
+# at time     23512 ns BST  : Burst Terminate
+# at time     23518 ns READ : Bank = 2 Row =  599, Col = 130, Data = 22, Dqm = 0
+# at time     23538 ns READ : Bank = 2 Row =  599, Col = 131, Data = 11, Dqm = 0
+# READ STATUS: Burst-No:           0 Addr: 002257a0 Rxd: 11223344
+# at time     23738 ns READ : Bank = 2 Row =  599, Col = 132, Data = 55, Dqm = 0
+# at time     23758 ns READ : Bank = 2 Row =  599, Col = 133, Data = 44, Dqm = 0
+# at time     23772 ns BST  : Burst Terminate
+# at time     23778 ns READ : Bank = 2 Row =  599, Col = 134, Data = 33, Dqm = 0
+# at time     23798 ns READ : Bank = 2 Row =  599, Col = 135, Data = 22, Dqm = 0
+# READ STATUS: Burst-No:           1 Addr: 002257a1 Rxd: 22334455
+# at time     23998 ns READ : Bank = 2 Row =  599, Col = 136, Data = 66, Dqm = 0
+# at time     24018 ns READ : Bank = 2 Row =  599, Col = 137, Data = 55, Dqm = 0
+# at time     24032 ns BST  : Burst Terminate
+# at time     24038 ns READ : Bank = 2 Row =  599, Col = 138, Data = 44, Dqm = 0
+# at time     24058 ns READ : Bank = 2 Row =  599, Col = 139, Data = 33, Dqm = 0
+# READ STATUS: Burst-No:           2 Addr: 002257a2 Rxd: 33445566
+# at time     24258 ns READ : Bank = 2 Row =  599, Col = 140, Data = 77, Dqm = 0
+# at time     24278 ns READ : Bank = 2 Row =  599, Col = 141, Data = 66, Dqm = 0
+# at time     24292 ns BST  : Burst Terminate
+# at time     24298 ns READ : Bank = 2 Row =  599, Col = 142, Data = 55, Dqm = 0
+# at time     24318 ns READ : Bank = 2 Row =  599, Col = 143, Data = 44, Dqm = 0
+# READ STATUS: Burst-No:           3 Addr: 002257a3 Rxd: 44556677
+# at time     24518 ns READ : Bank = 2 Row =  599, Col = 144, Data = 88, Dqm = 0
+# at time     24538 ns READ : Bank = 2 Row =  599, Col = 145, Data = 77, Dqm = 0
+# at time     24552 ns BST  : Burst Terminate
+# at time     24558 ns READ : Bank = 2 Row =  599, Col = 146, Data = 66, Dqm = 0
+# at time     24578 ns READ : Bank = 2 Row =  599, Col = 147, Data = 55, Dqm = 0
+# READ STATUS: Burst-No:           4 Addr: 002257a4 Rxd: 55667788
+# Write Address: 0484d609, Burst Size:           5
+# Status: Burst-No:           0  Write Address: 01213582  WriteData: 11223344 
+# Status: Burst-No:           1  Write Address: 01213583  WriteData: 22334455 
+# Status: Burst-No:           2  Write Address: 01213584  WriteData: 33445566 
+# Status: Burst-No:           3  Write Address: 01213585  WriteData: 44556677 
+# at time     24752 ns PRE  : Bank = 2
+# Status: Burst-No:           4  Write Address: 01213586  WriteData: 55667788 
+# at time     24812 ns ACT  : Bank = 2 Row =  309
+# at time     24872 ns WRITE: Bank = 2 Row =  309, Col =   8, Data = 44, Dqm = 0
+# at time     24892 ns WRITE: Bank = 2 Row =  309, Col =   9, Data = 33, Dqm = 0
+# at time     24912 ns WRITE: Bank = 2 Row =  309, Col =  10, Data = 22, Dqm = 0
+# at time     24932 ns WRITE: Bank = 2 Row =  309, Col =  11, Data = 11, Dqm = 0
+# at time     24952 ns BST  : Burst Terminate
+# at time     24972 ns WRITE: Bank = 2 Row =  309, Col =  12, Data = 55, Dqm = 0
+# at time     24992 ns WRITE: Bank = 2 Row =  309, Col =  13, Data = 44, Dqm = 0
+# at time     25012 ns WRITE: Bank = 2 Row =  309, Col =  14, Data = 33, Dqm = 0
+# at time     25032 ns WRITE: Bank = 2 Row =  309, Col =  15, Data = 22, Dqm = 0
+# at time     25052 ns BST  : Burst Terminate
+# at time     25072 ns WRITE: Bank = 2 Row =  309, Col =  16, Data = 66, Dqm = 0
+# at time     25092 ns WRITE: Bank = 2 Row =  309, Col =  17, Data = 55, Dqm = 0
+# at time     25112 ns WRITE: Bank = 2 Row =  309, Col =  18, Data = 44, Dqm = 0
+# at time     25132 ns WRITE: Bank = 2 Row =  309, Col =  19, Data = 33, Dqm = 0
+# at time     25152 ns BST  : Burst Terminate
+# at time     25172 ns WRITE: Bank = 2 Row =  309, Col =  20, Data = 77, Dqm = 0
+# at time     25192 ns WRITE: Bank = 2 Row =  309, Col =  21, Data = 66, Dqm = 0
+# at time     25212 ns WRITE: Bank = 2 Row =  309, Col =  22, Data = 55, Dqm = 0
+# at time     25232 ns WRITE: Bank = 2 Row =  309, Col =  23, Data = 44, Dqm = 0
+# at time     25252 ns BST  : Burst Terminate
+# at time     25272 ns WRITE: Bank = 2 Row =  309, Col =  24, Data = 88, Dqm = 0
+# at time     25292 ns WRITE: Bank = 2 Row =  309, Col =  25, Data = 77, Dqm = 0
+# at time     25312 ns WRITE: Bank = 2 Row =  309, Col =  26, Data = 66, Dqm = 0
+# at time     25332 ns WRITE: Bank = 2 Row =  309, Col =  27, Data = 55, Dqm = 0
+# at time     25352 ns BST  : Burst Terminate
+# at time     25878 ns READ : Bank = 2 Row =  309, Col =   8, Data = 44, Dqm = 0
+# at time     25898 ns READ : Bank = 2 Row =  309, Col =   9, Data = 33, Dqm = 0
+# at time     25912 ns BST  : Burst Terminate
+# at time     25918 ns READ : Bank = 2 Row =  309, Col =  10, Data = 22, Dqm = 0
+# at time     25938 ns READ : Bank = 2 Row =  309, Col =  11, Data = 11, Dqm = 0
+# READ STATUS: Burst-No:           0 Addr: 01213582 Rxd: 11223344
+# at time     26138 ns READ : Bank = 2 Row =  309, Col =  12, Data = 55, Dqm = 0
+# at time     26158 ns READ : Bank = 2 Row =  309, Col =  13, Data = 44, Dqm = 0
+# at time     26172 ns BST  : Burst Terminate
+# at time     26178 ns READ : Bank = 2 Row =  309, Col =  14, Data = 33, Dqm = 0
+# at time     26198 ns READ : Bank = 2 Row =  309, Col =  15, Data = 22, Dqm = 0
+# READ STATUS: Burst-No:           1 Addr: 01213583 Rxd: 22334455
+# at time     26398 ns READ : Bank = 2 Row =  309, Col =  16, Data = 66, Dqm = 0
+# at time     26418 ns READ : Bank = 2 Row =  309, Col =  17, Data = 55, Dqm = 0
+# at time     26432 ns BST  : Burst Terminate
+# at time     26438 ns READ : Bank = 2 Row =  309, Col =  18, Data = 44, Dqm = 0
+# at time     26458 ns READ : Bank = 2 Row =  309, Col =  19, Data = 33, Dqm = 0
+# READ STATUS: Burst-No:           2 Addr: 01213584 Rxd: 33445566
+# at time     26658 ns READ : Bank = 2 Row =  309, Col =  20, Data = 77, Dqm = 0
+# at time     26678 ns READ : Bank = 2 Row =  309, Col =  21, Data = 66, Dqm = 0
+# at time     26692 ns BST  : Burst Terminate
+# at time     26698 ns READ : Bank = 2 Row =  309, Col =  22, Data = 55, Dqm = 0
+# at time     26718 ns READ : Bank = 2 Row =  309, Col =  23, Data = 44, Dqm = 0
+# READ STATUS: Burst-No:           3 Addr: 01213585 Rxd: 44556677
+# at time     26918 ns READ : Bank = 2 Row =  309, Col =  24, Data = 88, Dqm = 0
+# at time     26938 ns READ : Bank = 2 Row =  309, Col =  25, Data = 77, Dqm = 0
+# at time     26952 ns BST  : Burst Terminate
+# at time     26958 ns READ : Bank = 2 Row =  309, Col =  26, Data = 66, Dqm = 0
+# at time     26978 ns READ : Bank = 2 Row =  309, Col =  27, Data = 55, Dqm = 0
+# READ STATUS: Burst-No:           4 Addr: 01213586 Rxd: 55667788
+# Write Address: 01f05663, Burst Size:           5
+# Status: Burst-No:           0  Write Address: 007c1598  WriteData: 11223344 
+# Status: Burst-No:           1  Write Address: 007c1599  WriteData: 22334455 
+# Status: Burst-No:           2  Write Address: 007c159a  WriteData: 33445566 
+# Status: Burst-No:           3  Write Address: 007c159b  WriteData: 44556677 
+# at time     27152 ns PRE  : Bank = 2
+# Status: Burst-No:           4  Write Address: 007c159c  WriteData: 55667788 
+# at time     27212 ns ACT  : Bank = 2 Row = 3093
+# at time     27272 ns WRITE: Bank = 2 Row = 3093, Col =  96, Data = 44, Dqm = 0
+# at time     27292 ns WRITE: Bank = 2 Row = 3093, Col =  97, Data = 33, Dqm = 0
+# at time     27312 ns WRITE: Bank = 2 Row = 3093, Col =  98, Data = 22, Dqm = 0
+# at time     27332 ns WRITE: Bank = 2 Row = 3093, Col =  99, Data = 11, Dqm = 0
+# at time     27352 ns BST  : Burst Terminate
+# at time     27372 ns WRITE: Bank = 2 Row = 3093, Col = 100, Data = 55, Dqm = 0
+# at time     27392 ns WRITE: Bank = 2 Row = 3093, Col = 101, Data = 44, Dqm = 0
+# at time     27412 ns WRITE: Bank = 2 Row = 3093, Col = 102, Data = 33, Dqm = 0
+# at time     27432 ns WRITE: Bank = 2 Row = 3093, Col = 103, Data = 22, Dqm = 0
+# at time     27452 ns BST  : Burst Terminate
+# at time     27472 ns WRITE: Bank = 2 Row = 3093, Col = 104, Data = 66, Dqm = 0
+# at time     27492 ns WRITE: Bank = 2 Row = 3093, Col = 105, Data = 55, Dqm = 0
+# at time     27512 ns WRITE: Bank = 2 Row = 3093, Col = 106, Data = 44, Dqm = 0
+# at time     27532 ns WRITE: Bank = 2 Row = 3093, Col = 107, Data = 33, Dqm = 0
+# at time     27552 ns BST  : Burst Terminate
+# at time     27572 ns WRITE: Bank = 2 Row = 3093, Col = 108, Data = 77, Dqm = 0
+# at time     27592 ns WRITE: Bank = 2 Row = 3093, Col = 109, Data = 66, Dqm = 0
+# at time     27612 ns WRITE: Bank = 2 Row = 3093, Col = 110, Data = 55, Dqm = 0
+# at time     27632 ns WRITE: Bank = 2 Row = 3093, Col = 111, Data = 44, Dqm = 0
+# at time     27652 ns BST  : Burst Terminate
+# at time     27672 ns WRITE: Bank = 2 Row = 3093, Col = 112, Data = 88, Dqm = 0
+# at time     27692 ns WRITE: Bank = 2 Row = 3093, Col = 113, Data = 77, Dqm = 0
+# at time     27712 ns WRITE: Bank = 2 Row = 3093, Col = 114, Data = 66, Dqm = 0
+# at time     27732 ns WRITE: Bank = 2 Row = 3093, Col = 115, Data = 55, Dqm = 0
+# at time     27752 ns BST  : Burst Terminate
+# at time     28278 ns READ : Bank = 2 Row = 3093, Col =  96, Data = 44, Dqm = 0
+# at time     28298 ns READ : Bank = 2 Row = 3093, Col =  97, Data = 33, Dqm = 0
+# at time     28312 ns BST  : Burst Terminate
+# at time     28318 ns READ : Bank = 2 Row = 3093, Col =  98, Data = 22, Dqm = 0
+# at time     28338 ns READ : Bank = 2 Row = 3093, Col =  99, Data = 11, Dqm = 0
+# READ STATUS: Burst-No:           0 Addr: 007c1598 Rxd: 11223344
+# at time     28538 ns READ : Bank = 2 Row = 3093, Col = 100, Data = 55, Dqm = 0
+# at time     28558 ns READ : Bank = 2 Row = 3093, Col = 101, Data = 44, Dqm = 0
+# at time     28572 ns BST  : Burst Terminate
+# at time     28578 ns READ : Bank = 2 Row = 3093, Col = 102, Data = 33, Dqm = 0
+# at time     28598 ns READ : Bank = 2 Row = 3093, Col = 103, Data = 22, Dqm = 0
+# READ STATUS: Burst-No:           1 Addr: 007c1599 Rxd: 22334455
+# at time     28798 ns READ : Bank = 2 Row = 3093, Col = 104, Data = 66, Dqm = 0
+# at time     28818 ns READ : Bank = 2 Row = 3093, Col = 105, Data = 55, Dqm = 0
+# at time     28832 ns BST  : Burst Terminate
+# at time     28838 ns READ : Bank = 2 Row = 3093, Col = 106, Data = 44, Dqm = 0
+# at time     28858 ns READ : Bank = 2 Row = 3093, Col = 107, Data = 33, Dqm = 0
+# READ STATUS: Burst-No:           2 Addr: 007c159a Rxd: 33445566
+# at time     29058 ns READ : Bank = 2 Row = 3093, Col = 108, Data = 77, Dqm = 0
+# at time     29078 ns READ : Bank = 2 Row = 3093, Col = 109, Data = 66, Dqm = 0
+# at time     29092 ns BST  : Burst Terminate
+# at time     29098 ns READ : Bank = 2 Row = 3093, Col = 110, Data = 55, Dqm = 0
+# at time     29118 ns READ : Bank = 2 Row = 3093, Col = 111, Data = 44, Dqm = 0
+# READ STATUS: Burst-No:           3 Addr: 007c159b Rxd: 44556677
+# at time     29318 ns READ : Bank = 2 Row = 3093, Col = 112, Data = 88, Dqm = 0
+# at time     29338 ns READ : Bank = 2 Row = 3093, Col = 113, Data = 77, Dqm = 0
+# at time     29352 ns BST  : Burst Terminate
+# at time     29358 ns READ : Bank = 2 Row = 3093, Col = 114, Data = 66, Dqm = 0
+# at time     29378 ns READ : Bank = 2 Row = 3093, Col = 115, Data = 55, Dqm = 0
+# READ STATUS: Burst-No:           4 Addr: 007c159c Rxd: 55667788
+# Write Address: 06b97b0d, Burst Size:           5
+# Status: Burst-No:           0  Write Address: 01ae5ec3  WriteData: 11223344 
+# Status: Burst-No:           1  Write Address: 01ae5ec4  WriteData: 22334455 
+# Status: Burst-No:           2  Write Address: 01ae5ec5  WriteData: 33445566 
+# Status: Burst-No:           3  Write Address: 01ae5ec6  WriteData: 44556677 
+# at time     29552 ns PRE  : Bank = 3
+# Status: Burst-No:           4  Write Address: 01ae5ec7  WriteData: 55667788 
+# at time     29612 ns ACT  : Bank = 3 Row = 3678
+# at time     29672 ns WRITE: Bank = 3 Row = 3678, Col =  12, Data = 44, Dqm = 0
+# at time     29692 ns WRITE: Bank = 3 Row = 3678, Col =  13, Data = 33, Dqm = 0
+# at time     29712 ns WRITE: Bank = 3 Row = 3678, Col =  14, Data = 22, Dqm = 0
+# at time     29732 ns WRITE: Bank = 3 Row = 3678, Col =  15, Data = 11, Dqm = 0
+# at time     29752 ns BST  : Burst Terminate
+# at time     29772 ns WRITE: Bank = 3 Row = 3678, Col =  16, Data = 55, Dqm = 0
+# at time     29792 ns WRITE: Bank = 3 Row = 3678, Col =  17, Data = 44, Dqm = 0
+# at time     29812 ns WRITE: Bank = 3 Row = 3678, Col =  18, Data = 33, Dqm = 0
+# at time     29832 ns WRITE: Bank = 3 Row = 3678, Col =  19, Data = 22, Dqm = 0
+# at time     29852 ns BST  : Burst Terminate
+# at time     29872 ns WRITE: Bank = 3 Row = 3678, Col =  20, Data = 66, Dqm = 0
+# at time     29892 ns WRITE: Bank = 3 Row = 3678, Col =  21, Data = 55, Dqm = 0
+# at time     29912 ns WRITE: Bank = 3 Row = 3678, Col =  22, Data = 44, Dqm = 0
+# at time     29932 ns WRITE: Bank = 3 Row = 3678, Col =  23, Data = 33, Dqm = 0
+# at time     29952 ns BST  : Burst Terminate
+# at time     29972 ns WRITE: Bank = 3 Row = 3678, Col =  24, Data = 77, Dqm = 0
+# at time     29992 ns WRITE: Bank = 3 Row = 3678, Col =  25, Data = 66, Dqm = 0
+# at time     30012 ns WRITE: Bank = 3 Row = 3678, Col =  26, Data = 55, Dqm = 0
+# at time     30032 ns WRITE: Bank = 3 Row = 3678, Col =  27, Data = 44, Dqm = 0
+# at time     30052 ns BST  : Burst Terminate
+# at time     30072 ns WRITE: Bank = 3 Row = 3678, Col =  28, Data = 88, Dqm = 0
+# at time     30092 ns WRITE: Bank = 3 Row = 3678, Col =  29, Data = 77, Dqm = 0
+# at time     30112 ns WRITE: Bank = 3 Row = 3678, Col =  30, Data = 66, Dqm = 0
+# at time     30132 ns WRITE: Bank = 3 Row = 3678, Col =  31, Data = 55, Dqm = 0
+# at time     30152 ns BST  : Burst Terminate
+# at time     30678 ns READ : Bank = 3 Row = 3678, Col =  12, Data = 44, Dqm = 0
+# at time     30698 ns READ : Bank = 3 Row = 3678, Col =  13, Data = 33, Dqm = 0
+# at time     30712 ns BST  : Burst Terminate
+# at time     30718 ns READ : Bank = 3 Row = 3678, Col =  14, Data = 22, Dqm = 0
+# at time     30738 ns READ : Bank = 3 Row = 3678, Col =  15, Data = 11, Dqm = 0
+# READ STATUS: Burst-No:           0 Addr: 01ae5ec3 Rxd: 11223344
+# at time     30938 ns READ : Bank = 3 Row = 3678, Col =  16, Data = 55, Dqm = 0
+# at time     30958 ns READ : Bank = 3 Row = 3678, Col =  17, Data = 44, Dqm = 0
+# at time     30972 ns BST  : Burst Terminate
+# at time     30978 ns READ : Bank = 3 Row = 3678, Col =  18, Data = 33, Dqm = 0
+# at time     30998 ns READ : Bank = 3 Row = 3678, Col =  19, Data = 22, Dqm = 0
+# READ STATUS: Burst-No:           1 Addr: 01ae5ec4 Rxd: 22334455
+# at time     31198 ns READ : Bank = 3 Row = 3678, Col =  20, Data = 66, Dqm = 0
+# at time     31218 ns READ : Bank = 3 Row = 3678, Col =  21, Data = 55, Dqm = 0
+# at time     31232 ns BST  : Burst Terminate
+# at time     31238 ns READ : Bank = 3 Row = 3678, Col =  22, Data = 44, Dqm = 0
+# at time     31258 ns READ : Bank = 3 Row = 3678, Col =  23, Data = 33, Dqm = 0
+# READ STATUS: Burst-No:           2 Addr: 01ae5ec5 Rxd: 33445566
+# at time     31458 ns READ : Bank = 3 Row = 3678, Col =  24, Data = 77, Dqm = 0
+# at time     31478 ns READ : Bank = 3 Row = 3678, Col =  25, Data = 66, Dqm = 0
+# at time     31492 ns BST  : Burst Terminate
+# at time     31498 ns READ : Bank = 3 Row = 3678, Col =  26, Data = 55, Dqm = 0
+# at time     31518 ns READ : Bank = 3 Row = 3678, Col =  27, Data = 44, Dqm = 0
+# READ STATUS: Burst-No:           3 Addr: 01ae5ec6 Rxd: 44556677
+# at time     31718 ns READ : Bank = 3 Row = 3678, Col =  28, Data = 88, Dqm = 0
+# at time     31738 ns READ : Bank = 3 Row = 3678, Col =  29, Data = 77, Dqm = 0
+# at time     31752 ns BST  : Burst Terminate
+# at time     31758 ns READ : Bank = 3 Row = 3678, Col =  30, Data = 66, Dqm = 0
+# at time     31778 ns READ : Bank = 3 Row = 3678, Col =  31, Data = 55, Dqm = 0
+# READ STATUS: Burst-No:           4 Addr: 01ae5ec7 Rxd: 55667788
+# Write Address: 06df998d, Burst Size:           5
+# Status: Burst-No:           0  Write Address: 01b7e663  WriteData: 11223344 
+# Status: Burst-No:           1  Write Address: 01b7e664  WriteData: 22334455 
+# Status: Burst-No:           2  Write Address: 01b7e665  WriteData: 33445566 
+# Status: Burst-No:           3  Write Address: 01b7e666  WriteData: 44556677 
+# at time     31952 ns PRE  : Bank = 1
+# Status: Burst-No:           4  Write Address: 01b7e667  WriteData: 55667788 
+# at time     32012 ns ACT  : Bank = 1 Row = 2022
+# at time     32072 ns WRITE: Bank = 1 Row = 2022, Col = 140, Data = 44, Dqm = 0
+# at time     32092 ns WRITE: Bank = 1 Row = 2022, Col = 141, Data = 33, Dqm = 0
+# at time     32112 ns WRITE: Bank = 1 Row = 2022, Col = 142, Data = 22, Dqm = 0
+# at time     32132 ns WRITE: Bank = 1 Row = 2022, Col = 143, Data = 11, Dqm = 0
+# at time     32152 ns BST  : Burst Terminate
+# at time     32172 ns WRITE: Bank = 1 Row = 2022, Col = 144, Data = 55, Dqm = 0
+# at time     32192 ns WRITE: Bank = 1 Row = 2022, Col = 145, Data = 44, Dqm = 0
+# at time     32212 ns WRITE: Bank = 1 Row = 2022, Col = 146, Data = 33, Dqm = 0
+# at time     32232 ns WRITE: Bank = 1 Row = 2022, Col = 147, Data = 22, Dqm = 0
+# at time     32252 ns BST  : Burst Terminate
+# at time     32272 ns WRITE: Bank = 1 Row = 2022, Col = 148, Data = 66, Dqm = 0
+# at time     32292 ns WRITE: Bank = 1 Row = 2022, Col = 149, Data = 55, Dqm = 0
+# at time     32312 ns WRITE: Bank = 1 Row = 2022, Col = 150, Data = 44, Dqm = 0
+# at time     32332 ns WRITE: Bank = 1 Row = 2022, Col = 151, Data = 33, Dqm = 0
+# at time     32352 ns BST  : Burst Terminate
+# at time     32372 ns WRITE: Bank = 1 Row = 2022, Col = 152, Data = 77, Dqm = 0
+# at time     32392 ns WRITE: Bank = 1 Row = 2022, Col = 153, Data = 66, Dqm = 0
+# at time     32412 ns WRITE: Bank = 1 Row = 2022, Col = 154, Data = 55, Dqm = 0
+# at time     32432 ns WRITE: Bank = 1 Row = 2022, Col = 155, Data = 44, Dqm = 0
+# at time     32452 ns BST  : Burst Terminate
+# at time     32472 ns WRITE: Bank = 1 Row = 2022, Col = 156, Data = 88, Dqm = 0
+# at time     32492 ns WRITE: Bank = 1 Row = 2022, Col = 157, Data = 77, Dqm = 0
+# at time     32512 ns WRITE: Bank = 1 Row = 2022, Col = 158, Data = 66, Dqm = 0
+# at time     32532 ns WRITE: Bank = 1 Row = 2022, Col = 159, Data = 55, Dqm = 0
+# at time     32552 ns BST  : Burst Terminate
+# at time     33078 ns READ : Bank = 1 Row = 2022, Col = 140, Data = 44, Dqm = 0
+# at time     33098 ns READ : Bank = 1 Row = 2022, Col = 141, Data = 33, Dqm = 0
+# at time     33112 ns BST  : Burst Terminate
+# at time     33118 ns READ : Bank = 1 Row = 2022, Col = 142, Data = 22, Dqm = 0
+# at time     33138 ns READ : Bank = 1 Row = 2022, Col = 143, Data = 11, Dqm = 0
+# READ STATUS: Burst-No:           0 Addr: 01b7e663 Rxd: 11223344
+# at time     33338 ns READ : Bank = 1 Row = 2022, Col = 144, Data = 55, Dqm = 0
+# at time     33358 ns READ : Bank = 1 Row = 2022, Col = 145, Data = 44, Dqm = 0
+# at time     33372 ns BST  : Burst Terminate
+# at time     33378 ns READ : Bank = 1 Row = 2022, Col = 146, Data = 33, Dqm = 0
+# at time     33398 ns READ : Bank = 1 Row = 2022, Col = 147, Data = 22, Dqm = 0
+# READ STATUS: Burst-No:           1 Addr: 01b7e664 Rxd: 22334455
+# at time     33598 ns READ : Bank = 1 Row = 2022, Col = 148, Data = 66, Dqm = 0
+# at time     33618 ns READ : Bank = 1 Row = 2022, Col = 149, Data = 55, Dqm = 0
+# at time     33632 ns BST  : Burst Terminate
+# at time     33638 ns READ : Bank = 1 Row = 2022, Col = 150, Data = 44, Dqm = 0
+# at time     33658 ns READ : Bank = 1 Row = 2022, Col = 151, Data = 33, Dqm = 0
+# READ STATUS: Burst-No:           2 Addr: 01b7e665 Rxd: 33445566
+# at time     33858 ns READ : Bank = 1 Row = 2022, Col = 152, Data = 77, Dqm = 0
+# at time     33878 ns READ : Bank = 1 Row = 2022, Col = 153, Data = 66, Dqm = 0
+# at time     33892 ns BST  : Burst Terminate
+# at time     33898 ns READ : Bank = 1 Row = 2022, Col = 154, Data = 55, Dqm = 0
+# at time     33918 ns READ : Bank = 1 Row = 2022, Col = 155, Data = 44, Dqm = 0
+# READ STATUS: Burst-No:           3 Addr: 01b7e666 Rxd: 44556677
+# at time     34118 ns READ : Bank = 1 Row = 2022, Col = 156, Data = 88, Dqm = 0
+# at time     34138 ns READ : Bank = 1 Row = 2022, Col = 157, Data = 77, Dqm = 0
+# at time     34152 ns BST  : Burst Terminate
+# at time     34158 ns READ : Bank = 1 Row = 2022, Col = 158, Data = 66, Dqm = 0
+# at time     34178 ns READ : Bank = 1 Row = 2022, Col = 159, Data = 55, Dqm = 0
+# READ STATUS: Burst-No:           4 Addr: 01b7e667 Rxd: 55667788
+# Write Address: 02c28465, Burst Size:           5
+# Status: Burst-No:           0  Write Address: 00b0a119  WriteData: 11223344 
+# Status: Burst-No:           1  Write Address: 00b0a11a  WriteData: 22334455 
+# Status: Burst-No:           2  Write Address: 00b0a11b  WriteData: 33445566 
+# Status: Burst-No:           3  Write Address: 00b0a11c  WriteData: 44556677 
+# at time     34352 ns PRE  : Bank = 0
+# Status: Burst-No:           4  Write Address: 00b0a11d  WriteData: 55667788 
+# at time     34412 ns ACT  : Bank = 0 Row =  161
+# at time     34472 ns WRITE: Bank = 0 Row =  161, Col = 100, Data = 44, Dqm = 0
+# at time     34492 ns WRITE: Bank = 0 Row =  161, Col = 101, Data = 33, Dqm = 0
+# at time     34512 ns WRITE: Bank = 0 Row =  161, Col = 102, Data = 22, Dqm = 0
+# at time     34532 ns WRITE: Bank = 0 Row =  161, Col = 103, Data = 11, Dqm = 0
+# at time     34552 ns BST  : Burst Terminate
+# at time     34572 ns WRITE: Bank = 0 Row =  161, Col = 104, Data = 55, Dqm = 0
+# at time     34592 ns WRITE: Bank = 0 Row =  161, Col = 105, Data = 44, Dqm = 0
+# at time     34612 ns WRITE: Bank = 0 Row =  161, Col = 106, Data = 33, Dqm = 0
+# at time     34632 ns WRITE: Bank = 0 Row =  161, Col = 107, Data = 22, Dqm = 0
+# at time     34652 ns BST  : Burst Terminate
+# at time     34672 ns WRITE: Bank = 0 Row =  161, Col = 108, Data = 66, Dqm = 0
+# at time     34692 ns WRITE: Bank = 0 Row =  161, Col = 109, Data = 55, Dqm = 0
+# at time     34712 ns WRITE: Bank = 0 Row =  161, Col = 110, Data = 44, Dqm = 0
+# at time     34732 ns WRITE: Bank = 0 Row =  161, Col = 111, Data = 33, Dqm = 0
+# at time     34752 ns BST  : Burst Terminate
+# at time     34772 ns WRITE: Bank = 0 Row =  161, Col = 112, Data = 77, Dqm = 0
+# at time     34792 ns WRITE: Bank = 0 Row =  161, Col = 113, Data = 66, Dqm = 0
+# at time     34812 ns WRITE: Bank = 0 Row =  161, Col = 114, Data = 55, Dqm = 0
+# at time     34832 ns WRITE: Bank = 0 Row =  161, Col = 115, Data = 44, Dqm = 0
+# at time     34852 ns BST  : Burst Terminate
+# at time     34872 ns WRITE: Bank = 0 Row =  161, Col = 116, Data = 88, Dqm = 0
+# at time     34892 ns WRITE: Bank = 0 Row =  161, Col = 117, Data = 77, Dqm = 0
+# at time     34912 ns WRITE: Bank = 0 Row =  161, Col = 118, Data = 66, Dqm = 0
+# at time     34932 ns WRITE: Bank = 0 Row =  161, Col = 119, Data = 55, Dqm = 0
+# at time     34952 ns BST  : Burst Terminate
+# at time     35478 ns READ : Bank = 0 Row =  161, Col = 100, Data = 44, Dqm = 0
+# at time     35498 ns READ : Bank = 0 Row =  161, Col = 101, Data = 33, Dqm = 0
+# at time     35512 ns BST  : Burst Terminate
+# at time     35518 ns READ : Bank = 0 Row =  161, Col = 102, Data = 22, Dqm = 0
+# at time     35538 ns READ : Bank = 0 Row =  161, Col = 103, Data = 11, Dqm = 0
+# READ STATUS: Burst-No:           0 Addr: 00b0a119 Rxd: 11223344
+# at time     35738 ns READ : Bank = 0 Row =  161, Col = 104, Data = 55, Dqm = 0
+# at time     35758 ns READ : Bank = 0 Row =  161, Col = 105, Data = 44, Dqm = 0
+# at time     35772 ns BST  : Burst Terminate
+# at time     35778 ns READ : Bank = 0 Row =  161, Col = 106, Data = 33, Dqm = 0
+# at time     35798 ns READ : Bank = 0 Row =  161, Col = 107, Data = 22, Dqm = 0
+# READ STATUS: Burst-No:           1 Addr: 00b0a11a Rxd: 22334455
+# at time     35998 ns READ : Bank = 0 Row =  161, Col = 108, Data = 66, Dqm = 0
+# at time     36018 ns READ : Bank = 0 Row =  161, Col = 109, Data = 55, Dqm = 0
+# at time     36032 ns BST  : Burst Terminate
+# at time     36038 ns READ : Bank = 0 Row =  161, Col = 110, Data = 44, Dqm = 0
+# at time     36058 ns READ : Bank = 0 Row =  161, Col = 111, Data = 33, Dqm = 0
+# READ STATUS: Burst-No:           2 Addr: 00b0a11b Rxd: 33445566
+# at time     36258 ns READ : Bank = 0 Row =  161, Col = 112, Data = 77, Dqm = 0
+# at time     36278 ns READ : Bank = 0 Row =  161, Col = 113, Data = 66, Dqm = 0
+# at time     36292 ns BST  : Burst Terminate
+# at time     36298 ns READ : Bank = 0 Row =  161, Col = 114, Data = 55, Dqm = 0
+# at time     36318 ns READ : Bank = 0 Row =  161, Col = 115, Data = 44, Dqm = 0
+# READ STATUS: Burst-No:           3 Addr: 00b0a11c Rxd: 44556677
+# at time     36518 ns READ : Bank = 0 Row =  161, Col = 116, Data = 88, Dqm = 0
+# at time     36538 ns READ : Bank = 0 Row =  161, Col = 117, Data = 77, Dqm = 0
+# at time     36552 ns BST  : Burst Terminate
+# at time     36558 ns READ : Bank = 0 Row =  161, Col = 118, Data = 66, Dqm = 0
+# at time     36578 ns READ : Bank = 0 Row =  161, Col = 119, Data = 55, Dqm = 0
+# READ STATUS: Burst-No:           4 Addr: 00b0a11d Rxd: 55667788
+# Write Address: 01375212, Burst Size:           5
+# Status: Burst-No:           0  Write Address: 004dd484  WriteData: 11223344 
+# Status: Burst-No:           1  Write Address: 004dd485  WriteData: 22334455 
+# Status: Burst-No:           2  Write Address: 004dd486  WriteData: 33445566 
+# Status: Burst-No:           3  Write Address: 004dd487  WriteData: 44556677 
+# at time     36752 ns PRE  : Bank = 2
+# Status: Burst-No:           4  Write Address: 004dd488  WriteData: 55667788 
+# at time     36812 ns ACT  : Bank = 2 Row = 3540
+# at time     36872 ns WRITE: Bank = 2 Row = 3540, Col =  16, Data = 44, Dqm = 0
+# at time     36892 ns WRITE: Bank = 2 Row = 3540, Col =  17, Data = 33, Dqm = 0
+# at time     36912 ns WRITE: Bank = 2 Row = 3540, Col =  18, Data = 22, Dqm = 0
+# at time     36932 ns WRITE: Bank = 2 Row = 3540, Col =  19, Data = 11, Dqm = 0
+# at time     36952 ns BST  : Burst Terminate
+# at time     36972 ns WRITE: Bank = 2 Row = 3540, Col =  20, Data = 55, Dqm = 0
+# at time     36992 ns WRITE: Bank = 2 Row = 3540, Col =  21, Data = 44, Dqm = 0
+# at time     37012 ns WRITE: Bank = 2 Row = 3540, Col =  22, Data = 33, Dqm = 0
+# at time     37032 ns WRITE: Bank = 2 Row = 3540, Col =  23, Data = 22, Dqm = 0
+# at time     37052 ns BST  : Burst Terminate
+# at time     37072 ns WRITE: Bank = 2 Row = 3540, Col =  24, Data = 66, Dqm = 0
+# at time     37092 ns WRITE: Bank = 2 Row = 3540, Col =  25, Data = 55, Dqm = 0
+# at time     37112 ns WRITE: Bank = 2 Row = 3540, Col =  26, Data = 44, Dqm = 0
+# at time     37132 ns WRITE: Bank = 2 Row = 3540, Col =  27, Data = 33, Dqm = 0
+# at time     37152 ns BST  : Burst Terminate
+# at time     37172 ns WRITE: Bank = 2 Row = 3540, Col =  28, Data = 77, Dqm = 0
+# at time     37192 ns WRITE: Bank = 2 Row = 3540, Col =  29, Data = 66, Dqm = 0
+# at time     37212 ns WRITE: Bank = 2 Row = 3540, Col =  30, Data = 55, Dqm = 0
+# at time     37232 ns WRITE: Bank = 2 Row = 3540, Col =  31, Data = 44, Dqm = 0
+# at time     37252 ns BST  : Burst Terminate
+# at time     37272 ns WRITE: Bank = 2 Row = 3540, Col =  32, Data = 88, Dqm = 0
+# at time     37292 ns WRITE: Bank = 2 Row = 3540, Col =  33, Data = 77, Dqm = 0
+# at time     37312 ns WRITE: Bank = 2 Row = 3540, Col =  34, Data = 66, Dqm = 0
+# at time     37332 ns WRITE: Bank = 2 Row = 3540, Col =  35, Data = 55, Dqm = 0
+# at time     37352 ns BST  : Burst Terminate
+# at time     37878 ns READ : Bank = 2 Row = 3540, Col =  16, Data = 44, Dqm = 0
+# at time     37898 ns READ : Bank = 2 Row = 3540, Col =  17, Data = 33, Dqm = 0
+# at time     37912 ns BST  : Burst Terminate
+# at time     37918 ns READ : Bank = 2 Row = 3540, Col =  18, Data = 22, Dqm = 0
+# at time     37938 ns READ : Bank = 2 Row = 3540, Col =  19, Data = 11, Dqm = 0
+# READ STATUS: Burst-No:           0 Addr: 004dd484 Rxd: 11223344
+# at time     38138 ns READ : Bank = 2 Row = 3540, Col =  20, Data = 55, Dqm = 0
+# at time     38158 ns READ : Bank = 2 Row = 3540, Col =  21, Data = 44, Dqm = 0
+# at time     38172 ns BST  : Burst Terminate
+# at time     38178 ns READ : Bank = 2 Row = 3540, Col =  22, Data = 33, Dqm = 0
+# at time     38198 ns READ : Bank = 2 Row = 3540, Col =  23, Data = 22, Dqm = 0
+# READ STATUS: Burst-No:           1 Addr: 004dd485 Rxd: 22334455
+# at time     38398 ns READ : Bank = 2 Row = 3540, Col =  24, Data = 66, Dqm = 0
+# at time     38418 ns READ : Bank = 2 Row = 3540, Col =  25, Data = 55, Dqm = 0
+# at time     38432 ns BST  : Burst Terminate
+# at time     38438 ns READ : Bank = 2 Row = 3540, Col =  26, Data = 44, Dqm = 0
+# at time     38458 ns READ : Bank = 2 Row = 3540, Col =  27, Data = 33, Dqm = 0
+# READ STATUS: Burst-No:           2 Addr: 004dd486 Rxd: 33445566
+# at time     38658 ns READ : Bank = 2 Row = 3540, Col =  28, Data = 77, Dqm = 0
+# at time     38678 ns READ : Bank = 2 Row = 3540, Col =  29, Data = 66, Dqm = 0
+# at time     38692 ns BST  : Burst Terminate
+# at time     38698 ns READ : Bank = 2 Row = 3540, Col =  30, Data = 55, Dqm = 0
+# at time     38718 ns READ : Bank = 2 Row = 3540, Col =  31, Data = 44, Dqm = 0
+# READ STATUS: Burst-No:           3 Addr: 004dd487 Rxd: 44556677
+# at time     38918 ns READ : Bank = 2 Row = 3540, Col =  32, Data = 88, Dqm = 0
+# at time     38938 ns READ : Bank = 2 Row = 3540, Col =  33, Data = 77, Dqm = 0
+# at time     38952 ns BST  : Burst Terminate
+# at time     38958 ns READ : Bank = 2 Row = 3540, Col =  34, Data = 66, Dqm = 0
+# at time     38978 ns READ : Bank = 2 Row = 3540, Col =  35, Data = 55, Dqm = 0
+# READ STATUS: Burst-No:           4 Addr: 004dd488 Rxd: 55667788
+# Write Address: 00f3e301, Burst Size:           5
+# Status: Burst-No:           0  Write Address: 003cf8c0  WriteData: 11223344 
+# Status: Burst-No:           1  Write Address: 003cf8c1  WriteData: 22334455 
+# Status: Burst-No:           2  Write Address: 003cf8c2  WriteData: 33445566 
+# Status: Burst-No:           3  Write Address: 003cf8c3  WriteData: 44556677 
+# at time     39152 ns PRE  : Bank = 3
+# Status: Burst-No:           4  Write Address: 003cf8c4  WriteData: 55667788 
+# at time     39212 ns ACT  : Bank = 3 Row = 3320
+# at time     39272 ns WRITE: Bank = 3 Row = 3320, Col =   0, Data = 44, Dqm = 0
+# at time     39292 ns WRITE: Bank = 3 Row = 3320, Col =   1, Data = 33, Dqm = 0
+# at time     39312 ns WRITE: Bank = 3 Row = 3320, Col =   2, Data = 22, Dqm = 0
+# at time     39332 ns WRITE: Bank = 3 Row = 3320, Col =   3, Data = 11, Dqm = 0
+# at time     39352 ns BST  : Burst Terminate
+# at time     39372 ns WRITE: Bank = 3 Row = 3320, Col =   4, Data = 55, Dqm = 0
+# at time     39392 ns WRITE: Bank = 3 Row = 3320, Col =   5, Data = 44, Dqm = 0
+# at time     39412 ns WRITE: Bank = 3 Row = 3320, Col =   6, Data = 33, Dqm = 0
+# at time     39432 ns WRITE: Bank = 3 Row = 3320, Col =   7, Data = 22, Dqm = 0
+# at time     39452 ns BST  : Burst Terminate
+# at time     39472 ns WRITE: Bank = 3 Row = 3320, Col =   8, Data = 66, Dqm = 0
+# at time     39492 ns WRITE: Bank = 3 Row = 3320, Col =   9, Data = 55, Dqm = 0
+# at time     39512 ns WRITE: Bank = 3 Row = 3320, Col =  10, Data = 44, Dqm = 0
+# at time     39532 ns WRITE: Bank = 3 Row = 3320, Col =  11, Data = 33, Dqm = 0
+# at time     39552 ns BST  : Burst Terminate
+# at time     39572 ns WRITE: Bank = 3 Row = 3320, Col =  12, Data = 77, Dqm = 0
+# at time     39592 ns WRITE: Bank = 3 Row = 3320, Col =  13, Data = 66, Dqm = 0
+# at time     39612 ns WRITE: Bank = 3 Row = 3320, Col =  14, Data = 55, Dqm = 0
+# at time     39632 ns WRITE: Bank = 3 Row = 3320, Col =  15, Data = 44, Dqm = 0
+# at time     39652 ns BST  : Burst Terminate
+# at time     39672 ns WRITE: Bank = 3 Row = 3320, Col =  16, Data = 88, Dqm = 0
+# at time     39692 ns WRITE: Bank = 3 Row = 3320, Col =  17, Data = 77, Dqm = 0
+# at time     39712 ns WRITE: Bank = 3 Row = 3320, Col =  18, Data = 66, Dqm = 0
+# at time     39732 ns WRITE: Bank = 3 Row = 3320, Col =  19, Data = 55, Dqm = 0
+# at time     39752 ns BST  : Burst Terminate
+# at time     40278 ns READ : Bank = 3 Row = 3320, Col =   0, Data = 44, Dqm = 0
+# at time     40298 ns READ : Bank = 3 Row = 3320, Col =   1, Data = 33, Dqm = 0
+# at time     40312 ns BST  : Burst Terminate
+# at time     40318 ns READ : Bank = 3 Row = 3320, Col =   2, Data = 22, Dqm = 0
+# at time     40338 ns READ : Bank = 3 Row = 3320, Col =   3, Data = 11, Dqm = 0
+# READ STATUS: Burst-No:           0 Addr: 003cf8c0 Rxd: 11223344
+# at time     40538 ns READ : Bank = 3 Row = 3320, Col =   4, Data = 55, Dqm = 0
+# at time     40558 ns READ : Bank = 3 Row = 3320, Col =   5, Data = 44, Dqm = 0
+# at time     40572 ns BST  : Burst Terminate
+# at time     40578 ns READ : Bank = 3 Row = 3320, Col =   6, Data = 33, Dqm = 0
+# at time     40598 ns READ : Bank = 3 Row = 3320, Col =   7, Data = 22, Dqm = 0
+# READ STATUS: Burst-No:           1 Addr: 003cf8c1 Rxd: 22334455
+# at time     40798 ns READ : Bank = 3 Row = 3320, Col =   8, Data = 66, Dqm = 0
+# at time     40818 ns READ : Bank = 3 Row = 3320, Col =   9, Data = 55, Dqm = 0
+# at time     40832 ns BST  : Burst Terminate
+# at time     40838 ns READ : Bank = 3 Row = 3320, Col =  10, Data = 44, Dqm = 0
+# at time     40858 ns READ : Bank = 3 Row = 3320, Col =  11, Data = 33, Dqm = 0
+# READ STATUS: Burst-No:           2 Addr: 003cf8c2 Rxd: 33445566
+# at time     41058 ns READ : Bank = 3 Row = 3320, Col =  12, Data = 77, Dqm = 0
+# at time     41078 ns READ : Bank = 3 Row = 3320, Col =  13, Data = 66, Dqm = 0
+# at time     41092 ns BST  : Burst Terminate
+# at time     41098 ns READ : Bank = 3 Row = 3320, Col =  14, Data = 55, Dqm = 0
+# at time     41118 ns READ : Bank = 3 Row = 3320, Col =  15, Data = 44, Dqm = 0
+# READ STATUS: Burst-No:           3 Addr: 003cf8c3 Rxd: 44556677
+# at time     41318 ns READ : Bank = 3 Row = 3320, Col =  16, Data = 88, Dqm = 0
+# at time     41338 ns READ : Bank = 3 Row = 3320, Col =  17, Data = 77, Dqm = 0
+# at time     41352 ns BST  : Burst Terminate
+# at time     41358 ns READ : Bank = 3 Row = 3320, Col =  18, Data = 66, Dqm = 0
+# at time     41378 ns READ : Bank = 3 Row = 3320, Col =  19, Data = 55, Dqm = 0
+# READ STATUS: Burst-No:           4 Addr: 003cf8c4 Rxd: 55667788
+# Write Address: 06d7cd0d, Burst Size:           5
+# Status: Burst-No:           0  Write Address: 01b5f343  WriteData: 11223344 
+# Status: Burst-No:           1  Write Address: 01b5f344  WriteData: 22334455 
+# Status: Burst-No:           2  Write Address: 01b5f345  WriteData: 33445566 
+# Status: Burst-No:           3  Write Address: 01b5f346  WriteData: 44556677 
+# at time     41552 ns PRE  : Bank = 1
+# Status: Burst-No:           4  Write Address: 01b5f347  WriteData: 55667788 
+# at time     41612 ns ACT  : Bank = 1 Row = 1523
+# at time     41672 ns WRITE: Bank = 1 Row = 1523, Col =  12, Data = 44, Dqm = 0
+# at time     41692 ns WRITE: Bank = 1 Row = 1523, Col =  13, Data = 33, Dqm = 0
+# at time     41712 ns WRITE: Bank = 1 Row = 1523, Col =  14, Data = 22, Dqm = 0
+# at time     41732 ns WRITE: Bank = 1 Row = 1523, Col =  15, Data = 11, Dqm = 0
+# at time     41752 ns BST  : Burst Terminate
+# at time     41772 ns WRITE: Bank = 1 Row = 1523, Col =  16, Data = 55, Dqm = 0
+# at time     41792 ns WRITE: Bank = 1 Row = 1523, Col =  17, Data = 44, Dqm = 0
+# at time     41812 ns WRITE: Bank = 1 Row = 1523, Col =  18, Data = 33, Dqm = 0
+# at time     41832 ns WRITE: Bank = 1 Row = 1523, Col =  19, Data = 22, Dqm = 0
+# at time     41852 ns BST  : Burst Terminate
+# at time     41872 ns WRITE: Bank = 1 Row = 1523, Col =  20, Data = 66, Dqm = 0
+# at time     41892 ns WRITE: Bank = 1 Row = 1523, Col =  21, Data = 55, Dqm = 0
+# at time     41912 ns WRITE: Bank = 1 Row = 1523, Col =  22, Data = 44, Dqm = 0
+# at time     41932 ns WRITE: Bank = 1 Row = 1523, Col =  23, Data = 33, Dqm = 0
+# at time     41952 ns BST  : Burst Terminate
+# at time     41972 ns WRITE: Bank = 1 Row = 1523, Col =  24, Data = 77, Dqm = 0
+# at time     41992 ns WRITE: Bank = 1 Row = 1523, Col =  25, Data = 66, Dqm = 0
+# at time     42012 ns WRITE: Bank = 1 Row = 1523, Col =  26, Data = 55, Dqm = 0
+# at time     42032 ns WRITE: Bank = 1 Row = 1523, Col =  27, Data = 44, Dqm = 0
+# at time     42052 ns BST  : Burst Terminate
+# at time     42072 ns WRITE: Bank = 1 Row = 1523, Col =  28, Data = 88, Dqm = 0
+# at time     42092 ns WRITE: Bank = 1 Row = 1523, Col =  29, Data = 77, Dqm = 0
+# at time     42112 ns WRITE: Bank = 1 Row = 1523, Col =  30, Data = 66, Dqm = 0
+# at time     42132 ns WRITE: Bank = 1 Row = 1523, Col =  31, Data = 55, Dqm = 0
+# at time     42152 ns BST  : Burst Terminate
+# at time     42678 ns READ : Bank = 1 Row = 1523, Col =  12, Data = 44, Dqm = 0
+# at time     42698 ns READ : Bank = 1 Row = 1523, Col =  13, Data = 33, Dqm = 0
+# at time     42712 ns BST  : Burst Terminate
+# at time     42718 ns READ : Bank = 1 Row = 1523, Col =  14, Data = 22, Dqm = 0
+# at time     42738 ns READ : Bank = 1 Row = 1523, Col =  15, Data = 11, Dqm = 0
+# READ STATUS: Burst-No:           0 Addr: 01b5f343 Rxd: 11223344
+# at time     42938 ns READ : Bank = 1 Row = 1523, Col =  16, Data = 55, Dqm = 0
+# at time     42958 ns READ : Bank = 1 Row = 1523, Col =  17, Data = 44, Dqm = 0
+# at time     42972 ns BST  : Burst Terminate
+# at time     42978 ns READ : Bank = 1 Row = 1523, Col =  18, Data = 33, Dqm = 0
+# at time     42998 ns READ : Bank = 1 Row = 1523, Col =  19, Data = 22, Dqm = 0
+# READ STATUS: Burst-No:           1 Addr: 01b5f344 Rxd: 22334455
+# at time     43198 ns READ : Bank = 1 Row = 1523, Col =  20, Data = 66, Dqm = 0
+# at time     43218 ns READ : Bank = 1 Row = 1523, Col =  21, Data = 55, Dqm = 0
+# at time     43232 ns BST  : Burst Terminate
+# at time     43238 ns READ : Bank = 1 Row = 1523, Col =  22, Data = 44, Dqm = 0
+# at time     43258 ns READ : Bank = 1 Row = 1523, Col =  23, Data = 33, Dqm = 0
+# READ STATUS: Burst-No:           2 Addr: 01b5f345 Rxd: 33445566
+# at time     43458 ns READ : Bank = 1 Row = 1523, Col =  24, Data = 77, Dqm = 0
+# at time     43478 ns READ : Bank = 1 Row = 1523, Col =  25, Data = 66, Dqm = 0
+# at time     43492 ns BST  : Burst Terminate
+# at time     43498 ns READ : Bank = 1 Row = 1523, Col =  26, Data = 55, Dqm = 0
+# at time     43518 ns READ : Bank = 1 Row = 1523, Col =  27, Data = 44, Dqm = 0
+# READ STATUS: Burst-No:           3 Addr: 01b5f346 Rxd: 44556677
+# at time     43718 ns READ : Bank = 1 Row = 1523, Col =  28, Data = 88, Dqm = 0
+# at time     43738 ns READ : Bank = 1 Row = 1523, Col =  29, Data = 77, Dqm = 0
+# at time     43752 ns BST  : Burst Terminate
+# at time     43758 ns READ : Bank = 1 Row = 1523, Col =  30, Data = 66, Dqm = 0
+# at time     43778 ns READ : Bank = 1 Row = 1523, Col =  31, Data = 55, Dqm = 0
+# READ STATUS: Burst-No:           4 Addr: 01b5f347 Rxd: 55667788
+# Write Address: 0323f176, Burst Size:           5
+# Status: Burst-No:           0  Write Address: 00c8fc5d  WriteData: 11223344 
+# Status: Burst-No:           1  Write Address: 00c8fc5e  WriteData: 22334455 
+# Status: Burst-No:           2  Write Address: 00c8fc5f  WriteData: 33445566 
+# Status: Burst-No:           3  Write Address: 00c8fc60  WriteData: 44556677 
+# at time     43952 ns PRE  : Bank = 1
+# Status: Burst-No:           4  Write Address: 00c8fc61  WriteData: 55667788 
+# at time     44012 ns ACT  : Bank = 1 Row = 2300
+# at time     44072 ns WRITE: Bank = 1 Row = 2300, Col = 116, Data = 44, Dqm = 0
+# at time     44092 ns WRITE: Bank = 1 Row = 2300, Col = 117, Data = 33, Dqm = 0
+# at time     44112 ns WRITE: Bank = 1 Row = 2300, Col = 118, Data = 22, Dqm = 0
+# at time     44132 ns WRITE: Bank = 1 Row = 2300, Col = 119, Data = 11, Dqm = 0
+# at time     44152 ns BST  : Burst Terminate
+# at time     44172 ns WRITE: Bank = 1 Row = 2300, Col = 120, Data = 55, Dqm = 0
+# at time     44192 ns WRITE: Bank = 1 Row = 2300, Col = 121, Data = 44, Dqm = 0
+# at time     44212 ns WRITE: Bank = 1 Row = 2300, Col = 122, Data = 33, Dqm = 0
+# at time     44232 ns WRITE: Bank = 1 Row = 2300, Col = 123, Data = 22, Dqm = 0
+# at time     44252 ns BST  : Burst Terminate
+# at time     44272 ns WRITE: Bank = 1 Row = 2300, Col = 124, Data = 66, Dqm = 0
+# at time     44292 ns WRITE: Bank = 1 Row = 2300, Col = 125, Data = 55, Dqm = 0
+# at time     44312 ns WRITE: Bank = 1 Row = 2300, Col = 126, Data = 44, Dqm = 0
+# at time     44332 ns WRITE: Bank = 1 Row = 2300, Col = 127, Data = 33, Dqm = 0
+# at time     44352 ns BST  : Burst Terminate
+# at time     44372 ns WRITE: Bank = 1 Row = 2300, Col = 128, Data = 77, Dqm = 0
+# at time     44392 ns WRITE: Bank = 1 Row = 2300, Col = 129, Data = 66, Dqm = 0
+# at time     44412 ns WRITE: Bank = 1 Row = 2300, Col = 130, Data = 55, Dqm = 0
+# at time     44432 ns WRITE: Bank = 1 Row = 2300, Col = 131, Data = 44, Dqm = 0
+# at time     44452 ns BST  : Burst Terminate
+# at time     44472 ns WRITE: Bank = 1 Row = 2300, Col = 132, Data = 88, Dqm = 0
+# at time     44492 ns WRITE: Bank = 1 Row = 2300, Col = 133, Data = 77, Dqm = 0
+# at time     44512 ns WRITE: Bank = 1 Row = 2300, Col = 134, Data = 66, Dqm = 0
+# at time     44532 ns WRITE: Bank = 1 Row = 2300, Col = 135, Data = 55, Dqm = 0
+# at time     44552 ns BST  : Burst Terminate
+# at time     45078 ns READ : Bank = 1 Row = 2300, Col = 116, Data = 44, Dqm = 0
+# at time     45098 ns READ : Bank = 1 Row = 2300, Col = 117, Data = 33, Dqm = 0
+# at time     45112 ns BST  : Burst Terminate
+# at time     45118 ns READ : Bank = 1 Row = 2300, Col = 118, Data = 22, Dqm = 0
+# at time     45138 ns READ : Bank = 1 Row = 2300, Col = 119, Data = 11, Dqm = 0
+# READ STATUS: Burst-No:           0 Addr: 00c8fc5d Rxd: 11223344
+# at time     45338 ns READ : Bank = 1 Row = 2300, Col = 120, Data = 55, Dqm = 0
+# at time     45358 ns READ : Bank = 1 Row = 2300, Col = 121, Data = 44, Dqm = 0
+# at time     45372 ns BST  : Burst Terminate
+# at time     45378 ns READ : Bank = 1 Row = 2300, Col = 122, Data = 33, Dqm = 0
+# at time     45398 ns READ : Bank = 1 Row = 2300, Col = 123, Data = 22, Dqm = 0
+# READ STATUS: Burst-No:           1 Addr: 00c8fc5e Rxd: 22334455
+# at time     45598 ns READ : Bank = 1 Row = 2300, Col = 124, Data = 66, Dqm = 0
+# at time     45618 ns READ : Bank = 1 Row = 2300, Col = 125, Data = 55, Dqm = 0
+# at time     45632 ns BST  : Burst Terminate
+# at time     45638 ns READ : Bank = 1 Row = 2300, Col = 126, Data = 44, Dqm = 0
+# at time     45658 ns READ : Bank = 1 Row = 2300, Col = 127, Data = 33, Dqm = 0
+# READ STATUS: Burst-No:           2 Addr: 00c8fc5f Rxd: 33445566
+# at time     45858 ns READ : Bank = 1 Row = 2300, Col = 128, Data = 77, Dqm = 0
+# at time     45878 ns READ : Bank = 1 Row = 2300, Col = 129, Data = 66, Dqm = 0
+# at time     45892 ns BST  : Burst Terminate
+# at time     45898 ns READ : Bank = 1 Row = 2300, Col = 130, Data = 55, Dqm = 0
+# at time     45918 ns READ : Bank = 1 Row = 2300, Col = 131, Data = 44, Dqm = 0
+# READ STATUS: Burst-No:           3 Addr: 00c8fc60 Rxd: 44556677
+# at time     46118 ns READ : Bank = 1 Row = 2300, Col = 132, Data = 88, Dqm = 0
+# at time     46138 ns READ : Bank = 1 Row = 2300, Col = 133, Data = 77, Dqm = 0
+# at time     46152 ns BST  : Burst Terminate
+# at time     46158 ns READ : Bank = 1 Row = 2300, Col = 134, Data = 66, Dqm = 0
+# at time     46178 ns READ : Bank = 1 Row = 2300, Col = 135, Data = 55, Dqm = 0
+# READ STATUS: Burst-No:           4 Addr: 00c8fc61 Rxd: 55667788
+# Write Address: 068dcd3d, Burst Size:           5
+# Status: Burst-No:           0  Write Address: 01a3734f  WriteData: 11223344 
+# Status: Burst-No:           1  Write Address: 01a37350  WriteData: 22334455 
+# Status: Burst-No:           2  Write Address: 01a37351  WriteData: 33445566 
+# Status: Burst-No:           3  Write Address: 01a37352  WriteData: 44556677 
+# at time     46352 ns PRE  : Bank = 1
+# Status: Burst-No:           4  Write Address: 01a37353  WriteData: 55667788 
+# at time     46412 ns ACT  : Bank = 1 Row =  883
+# at time     46472 ns WRITE: Bank = 1 Row =  883, Col =  60, Data = 44, Dqm = 0
+# at time     46492 ns WRITE: Bank = 1 Row =  883, Col =  61, Data = 33, Dqm = 0
+# at time     46512 ns WRITE: Bank = 1 Row =  883, Col =  62, Data = 22, Dqm = 0
+# at time     46532 ns WRITE: Bank = 1 Row =  883, Col =  63, Data = 11, Dqm = 0
+# at time     46552 ns BST  : Burst Terminate
+# at time     46572 ns WRITE: Bank = 1 Row =  883, Col =  64, Data = 55, Dqm = 0
+# at time     46592 ns WRITE: Bank = 1 Row =  883, Col =  65, Data = 44, Dqm = 0
+# at time     46612 ns WRITE: Bank = 1 Row =  883, Col =  66, Data = 33, Dqm = 0
+# at time     46632 ns WRITE: Bank = 1 Row =  883, Col =  67, Data = 22, Dqm = 0
+# at time     46652 ns BST  : Burst Terminate
+# at time     46672 ns WRITE: Bank = 1 Row =  883, Col =  68, Data = 66, Dqm = 0
+# at time     46692 ns WRITE: Bank = 1 Row =  883, Col =  69, Data = 55, Dqm = 0
+# at time     46712 ns WRITE: Bank = 1 Row =  883, Col =  70, Data = 44, Dqm = 0
+# at time     46732 ns WRITE: Bank = 1 Row =  883, Col =  71, Data = 33, Dqm = 0
+# at time     46752 ns BST  : Burst Terminate
+# at time     46772 ns WRITE: Bank = 1 Row =  883, Col =  72, Data = 77, Dqm = 0
+# at time     46792 ns WRITE: Bank = 1 Row =  883, Col =  73, Data = 66, Dqm = 0
+# at time     46812 ns WRITE: Bank = 1 Row =  883, Col =  74, Data = 55, Dqm = 0
+# at time     46832 ns WRITE: Bank = 1 Row =  883, Col =  75, Data = 44, Dqm = 0
+# at time     46852 ns BST  : Burst Terminate
+# at time     46872 ns WRITE: Bank = 1 Row =  883, Col =  76, Data = 88, Dqm = 0
+# at time     46892 ns WRITE: Bank = 1 Row =  883, Col =  77, Data = 77, Dqm = 0
+# at time     46912 ns WRITE: Bank = 1 Row =  883, Col =  78, Data = 66, Dqm = 0
+# at time     46932 ns WRITE: Bank = 1 Row =  883, Col =  79, Data = 55, Dqm = 0
+# at time     46952 ns BST  : Burst Terminate
+# at time     47478 ns READ : Bank = 1 Row =  883, Col =  60, Data = 44, Dqm = 0
+# at time     47498 ns READ : Bank = 1 Row =  883, Col =  61, Data = 33, Dqm = 0
+# at time     47512 ns BST  : Burst Terminate
+# at time     47518 ns READ : Bank = 1 Row =  883, Col =  62, Data = 22, Dqm = 0
+# at time     47538 ns READ : Bank = 1 Row =  883, Col =  63, Data = 11, Dqm = 0
+# READ STATUS: Burst-No:           0 Addr: 01a3734f Rxd: 11223344
+# at time     47738 ns READ : Bank = 1 Row =  883, Col =  64, Data = 55, Dqm = 0
+# at time     47758 ns READ : Bank = 1 Row =  883, Col =  65, Data = 44, Dqm = 0
+# at time     47772 ns BST  : Burst Terminate
+# at time     47778 ns READ : Bank = 1 Row =  883, Col =  66, Data = 33, Dqm = 0
+# at time     47798 ns READ : Bank = 1 Row =  883, Col =  67, Data = 22, Dqm = 0
+# READ STATUS: Burst-No:           1 Addr: 01a37350 Rxd: 22334455
+# at time     47998 ns READ : Bank = 1 Row =  883, Col =  68, Data = 66, Dqm = 0
+# at time     48018 ns READ : Bank = 1 Row =  883, Col =  69, Data = 55, Dqm = 0
+# at time     48032 ns BST  : Burst Terminate
+# at time     48038 ns READ : Bank = 1 Row =  883, Col =  70, Data = 44, Dqm = 0
+# at time     48058 ns READ : Bank = 1 Row =  883, Col =  71, Data = 33, Dqm = 0
+# READ STATUS: Burst-No:           2 Addr: 01a37351 Rxd: 33445566
+# at time     48258 ns READ : Bank = 1 Row =  883, Col =  72, Data = 77, Dqm = 0
+# at time     48278 ns READ : Bank = 1 Row =  883, Col =  73, Data = 66, Dqm = 0
+# at time     48292 ns BST  : Burst Terminate
+# at time     48298 ns READ : Bank = 1 Row =  883, Col =  74, Data = 55, Dqm = 0
+# at time     48318 ns READ : Bank = 1 Row =  883, Col =  75, Data = 44, Dqm = 0
+# READ STATUS: Burst-No:           3 Addr: 01a37352 Rxd: 44556677
+# at time     48518 ns READ : Bank = 1 Row =  883, Col =  76, Data = 88, Dqm = 0
+# at time     48538 ns READ : Bank = 1 Row =  883, Col =  77, Data = 77, Dqm = 0
+# at time     48552 ns BST  : Burst Terminate
+# at time     48558 ns READ : Bank = 1 Row =  883, Col =  78, Data = 66, Dqm = 0
+# at time     48578 ns READ : Bank = 1 Row =  883, Col =  79, Data = 55, Dqm = 0
+# READ STATUS: Burst-No:           4 Addr: 01a37353 Rxd: 55667788
+# Write Address: 06d457ed, Burst Size:           5
+# Status: Burst-No:           0  Write Address: 01b515fb  WriteData: 11223344 
+# Status: Burst-No:           1  Write Address: 01b515fc  WriteData: 22334455 
+# Status: Burst-No:           2  Write Address: 01b515fd  WriteData: 33445566 
+# Status: Burst-No:           3  Write Address: 01b515fe  WriteData: 44556677 
+# at time     48752 ns PRE  : Bank = 3
+# Status: Burst-No:           4  Write Address: 01b515ff  WriteData: 55667788 
+# at time     48812 ns ACT  : Bank = 3 Row = 1301
+# at time     48872 ns WRITE: Bank = 3 Row = 1301, Col = 236, Data = 44, Dqm = 0
+# at time     48892 ns WRITE: Bank = 3 Row = 1301, Col = 237, Data = 33, Dqm = 0
+# at time     48912 ns WRITE: Bank = 3 Row = 1301, Col = 238, Data = 22, Dqm = 0
+# at time     48932 ns WRITE: Bank = 3 Row = 1301, Col = 239, Data = 11, Dqm = 0
+# at time     48952 ns BST  : Burst Terminate
+# at time     48972 ns WRITE: Bank = 3 Row = 1301, Col = 240, Data = 55, Dqm = 0
+# at time     48992 ns WRITE: Bank = 3 Row = 1301, Col = 241, Data = 44, Dqm = 0
+# at time     49012 ns WRITE: Bank = 3 Row = 1301, Col = 242, Data = 33, Dqm = 0
+# at time     49032 ns WRITE: Bank = 3 Row = 1301, Col = 243, Data = 22, Dqm = 0
+# at time     49052 ns BST  : Burst Terminate
+# at time     49072 ns WRITE: Bank = 3 Row = 1301, Col = 244, Data = 66, Dqm = 0
+# at time     49092 ns WRITE: Bank = 3 Row = 1301, Col = 245, Data = 55, Dqm = 0
+# at time     49112 ns WRITE: Bank = 3 Row = 1301, Col = 246, Data = 44, Dqm = 0
+# at time     49132 ns WRITE: Bank = 3 Row = 1301, Col = 247, Data = 33, Dqm = 0
+# at time     49152 ns BST  : Burst Terminate
+# at time     49172 ns WRITE: Bank = 3 Row = 1301, Col = 248, Data = 77, Dqm = 0
+# at time     49192 ns WRITE: Bank = 3 Row = 1301, Col = 249, Data = 66, Dqm = 0
+# at time     49212 ns WRITE: Bank = 3 Row = 1301, Col = 250, Data = 55, Dqm = 0
+# at time     49232 ns WRITE: Bank = 3 Row = 1301, Col = 251, Data = 44, Dqm = 0
+# at time     49252 ns BST  : Burst Terminate
+# at time     49272 ns WRITE: Bank = 3 Row = 1301, Col = 252, Data = 88, Dqm = 0
+# at time     49292 ns WRITE: Bank = 3 Row = 1301, Col = 253, Data = 77, Dqm = 0
+# at time     49312 ns WRITE: Bank = 3 Row = 1301, Col = 254, Data = 66, Dqm = 0
+# at time     49332 ns WRITE: Bank = 3 Row = 1301, Col = 255, Data = 55, Dqm = 0
+# at time     49352 ns BST  : Burst Terminate
+# at time     49878 ns READ : Bank = 3 Row = 1301, Col = 236, Data = 44, Dqm = 0
+# at time     49898 ns READ : Bank = 3 Row = 1301, Col = 237, Data = 33, Dqm = 0
+# at time     49912 ns BST  : Burst Terminate
+# at time     49918 ns READ : Bank = 3 Row = 1301, Col = 238, Data = 22, Dqm = 0
+# at time     49938 ns READ : Bank = 3 Row = 1301, Col = 239, Data = 11, Dqm = 0
+# READ STATUS: Burst-No:           0 Addr: 01b515fb Rxd: 11223344
+# at time     50138 ns READ : Bank = 3 Row = 1301, Col = 240, Data = 55, Dqm = 0
+# at time     50158 ns READ : Bank = 3 Row = 1301, Col = 241, Data = 44, Dqm = 0
+# at time     50172 ns BST  : Burst Terminate
+# at time     50178 ns READ : Bank = 3 Row = 1301, Col = 242, Data = 33, Dqm = 0
+# at time     50198 ns READ : Bank = 3 Row = 1301, Col = 243, Data = 22, Dqm = 0
+# READ STATUS: Burst-No:           1 Addr: 01b515fc Rxd: 22334455
+# at time     50398 ns READ : Bank = 3 Row = 1301, Col = 244, Data = 66, Dqm = 0
+# at time     50418 ns READ : Bank = 3 Row = 1301, Col = 245, Data = 55, Dqm = 0
+# at time     50432 ns BST  : Burst Terminate
+# at time     50438 ns READ : Bank = 3 Row = 1301, Col = 246, Data = 44, Dqm = 0
+# at time     50458 ns READ : Bank = 3 Row = 1301, Col = 247, Data = 33, Dqm = 0
+# READ STATUS: Burst-No:           2 Addr: 01b515fd Rxd: 33445566
+# at time     50658 ns READ : Bank = 3 Row = 1301, Col = 248, Data = 77, Dqm = 0
+# at time     50678 ns READ : Bank = 3 Row = 1301, Col = 249, Data = 66, Dqm = 0
+# at time     50692 ns BST  : Burst Terminate
+# at time     50698 ns READ : Bank = 3 Row = 1301, Col = 250, Data = 55, Dqm = 0
+# at time     50718 ns READ : Bank = 3 Row = 1301, Col = 251, Data = 44, Dqm = 0
+# READ STATUS: Burst-No:           3 Addr: 01b515fe Rxd: 44556677
+# at time     50918 ns READ : Bank = 3 Row = 1301, Col = 252, Data = 88, Dqm = 0
+# at time     50938 ns READ : Bank = 3 Row = 1301, Col = 253, Data = 77, Dqm = 0
+# at time     50952 ns BST  : Burst Terminate
+# at time     50958 ns READ : Bank = 3 Row = 1301, Col = 254, Data = 66, Dqm = 0
+# at time     50978 ns READ : Bank = 3 Row = 1301, Col = 255, Data = 55, Dqm = 0
+# READ STATUS: Burst-No:           4 Addr: 01b515ff Rxd: 55667788
+# Write Address: 062df78c, Burst Size:           5
+# Status: Burst-No:           0  Write Address: 018b7de3  WriteData: 11223344 
+# Status: Burst-No:           1  Write Address: 018b7de4  WriteData: 22334455 
+# Status: Burst-No:           2  Write Address: 018b7de5  WriteData: 33445566 
+# Status: Burst-No:           3  Write Address: 018b7de6  WriteData: 44556677 
+# at time     51152 ns PRE  : Bank = 3
+# Status: Burst-No:           4  Write Address: 018b7de7  WriteData: 55667788 
+# at time     51212 ns ACT  : Bank = 3 Row = 2941
+# at time     51272 ns WRITE: Bank = 3 Row = 2941, Col = 140, Data = 44, Dqm = 0
+# at time     51292 ns WRITE: Bank = 3 Row = 2941, Col = 141, Data = 33, Dqm = 0
+# at time     51312 ns WRITE: Bank = 3 Row = 2941, Col = 142, Data = 22, Dqm = 0
+# at time     51332 ns WRITE: Bank = 3 Row = 2941, Col = 143, Data = 11, Dqm = 0
+# at time     51352 ns BST  : Burst Terminate
+# at time     51372 ns WRITE: Bank = 3 Row = 2941, Col = 144, Data = 55, Dqm = 0
+# at time     51392 ns WRITE: Bank = 3 Row = 2941, Col = 145, Data = 44, Dqm = 0
+# at time     51412 ns WRITE: Bank = 3 Row = 2941, Col = 146, Data = 33, Dqm = 0
+# at time     51432 ns WRITE: Bank = 3 Row = 2941, Col = 147, Data = 22, Dqm = 0
+# at time     51452 ns BST  : Burst Terminate
+# at time     51472 ns WRITE: Bank = 3 Row = 2941, Col = 148, Data = 66, Dqm = 0
+# at time     51492 ns WRITE: Bank = 3 Row = 2941, Col = 149, Data = 55, Dqm = 0
+# at time     51512 ns WRITE: Bank = 3 Row = 2941, Col = 150, Data = 44, Dqm = 0
+# at time     51532 ns WRITE: Bank = 3 Row = 2941, Col = 151, Data = 33, Dqm = 0
+# at time     51552 ns BST  : Burst Terminate
+# at time     51572 ns WRITE: Bank = 3 Row = 2941, Col = 152, Data = 77, Dqm = 0
+# at time     51592 ns WRITE: Bank = 3 Row = 2941, Col = 153, Data = 66, Dqm = 0
+# at time     51612 ns WRITE: Bank = 3 Row = 2941, Col = 154, Data = 55, Dqm = 0
+# at time     51632 ns WRITE: Bank = 3 Row = 2941, Col = 155, Data = 44, Dqm = 0
+# at time     51652 ns BST  : Burst Terminate
+# at time     51672 ns WRITE: Bank = 3 Row = 2941, Col = 156, Data = 88, Dqm = 0
+# at time     51692 ns WRITE: Bank = 3 Row = 2941, Col = 157, Data = 77, Dqm = 0
+# at time     51712 ns WRITE: Bank = 3 Row = 2941, Col = 158, Data = 66, Dqm = 0
+# at time     51732 ns WRITE: Bank = 3 Row = 2941, Col = 159, Data = 55, Dqm = 0
+# at time     51752 ns BST  : Burst Terminate
+# at time     52278 ns READ : Bank = 3 Row = 2941, Col = 140, Data = 44, Dqm = 0
+# at time     52298 ns READ : Bank = 3 Row = 2941, Col = 141, Data = 33, Dqm = 0
+# at time     52312 ns BST  : Burst Terminate
+# at time     52318 ns READ : Bank = 3 Row = 2941, Col = 142, Data = 22, Dqm = 0
+# at time     52338 ns READ : Bank = 3 Row = 2941, Col = 143, Data = 11, Dqm = 0
+# READ STATUS: Burst-No:           0 Addr: 018b7de3 Rxd: 11223344
+# at time     52538 ns READ : Bank = 3 Row = 2941, Col = 144, Data = 55, Dqm = 0
+# at time     52558 ns READ : Bank = 3 Row = 2941, Col = 145, Data = 44, Dqm = 0
+# at time     52572 ns BST  : Burst Terminate
+# at time     52578 ns READ : Bank = 3 Row = 2941, Col = 146, Data = 33, Dqm = 0
+# at time     52598 ns READ : Bank = 3 Row = 2941, Col = 147, Data = 22, Dqm = 0
+# READ STATUS: Burst-No:           1 Addr: 018b7de4 Rxd: 22334455
+# at time     52798 ns READ : Bank = 3 Row = 2941, Col = 148, Data = 66, Dqm = 0
+# at time     52818 ns READ : Bank = 3 Row = 2941, Col = 149, Data = 55, Dqm = 0
+# at time     52832 ns BST  : Burst Terminate
+# at time     52838 ns READ : Bank = 3 Row = 2941, Col = 150, Data = 44, Dqm = 0
+# at time     52858 ns READ : Bank = 3 Row = 2941, Col = 151, Data = 33, Dqm = 0
+# READ STATUS: Burst-No:           2 Addr: 018b7de5 Rxd: 33445566
+# at time     53058 ns READ : Bank = 3 Row = 2941, Col = 152, Data = 77, Dqm = 0
+# at time     53078 ns READ : Bank = 3 Row = 2941, Col = 153, Data = 66, Dqm = 0
+# at time     53092 ns BST  : Burst Terminate
+# at time     53098 ns READ : Bank = 3 Row = 2941, Col = 154, Data = 55, Dqm = 0
+# at time     53118 ns READ : Bank = 3 Row = 2941, Col = 155, Data = 44, Dqm = 0
+# READ STATUS: Burst-No:           3 Addr: 018b7de6 Rxd: 44556677
+# at time     53318 ns READ : Bank = 3 Row = 2941, Col = 156, Data = 88, Dqm = 0
+# at time     53338 ns READ : Bank = 3 Row = 2941, Col = 157, Data = 77, Dqm = 0
+# at time     53352 ns BST  : Burst Terminate
+# at time     53358 ns READ : Bank = 3 Row = 2941, Col = 158, Data = 66, Dqm = 0
+# at time     53378 ns READ : Bank = 3 Row = 2941, Col = 159, Data = 55, Dqm = 0
+# READ STATUS: Burst-No:           4 Addr: 018b7de7 Rxd: 55667788
+# Write Address: 04fde9f9, Burst Size:           5
+# Status: Burst-No:           0  Write Address: 013f7a7e  WriteData: 11223344 
+# Status: Burst-No:           1  Write Address: 013f7a7f  WriteData: 22334455 
+# Status: Burst-No:           2  Write Address: 013f7a80  WriteData: 33445566 
+# Status: Burst-No:           3  Write Address: 013f7a81  WriteData: 44556677 
+# at time     53552 ns PRE  : Bank = 1
+# Status: Burst-No:           4  Write Address: 013f7a82  WriteData: 55667788 
+# at time     53612 ns ACT  : Bank = 1 Row = 3962
+# at time     53672 ns WRITE: Bank = 1 Row = 3962, Col = 248, Data = 44, Dqm = 0
+# at time     53692 ns WRITE: Bank = 1 Row = 3962, Col = 249, Data = 33, Dqm = 0
+# at time     53712 ns WRITE: Bank = 1 Row = 3962, Col = 250, Data = 22, Dqm = 0
+# at time     53732 ns WRITE: Bank = 1 Row = 3962, Col = 251, Data = 11, Dqm = 0
+# at time     53752 ns BST  : Burst Terminate
+# at time     53772 ns WRITE: Bank = 1 Row = 3962, Col = 252, Data = 55, Dqm = 0
+# at time     53792 ns WRITE: Bank = 1 Row = 3962, Col = 253, Data = 44, Dqm = 0
+# at time     53812 ns WRITE: Bank = 1 Row = 3962, Col = 254, Data = 33, Dqm = 0
+# at time     53832 ns WRITE: Bank = 1 Row = 3962, Col = 255, Data = 22, Dqm = 0
+# at time     53852 ns BST  : Burst Terminate
+# at time     53872 ns PRE  : Bank = 2
+# at time     53932 ns ACT  : Bank = 2 Row = 3962
+# at time     53992 ns WRITE: Bank = 2 Row = 3962, Col =   0, Data = 66, Dqm = 0
+# at time     54012 ns WRITE: Bank = 2 Row = 3962, Col =   1, Data = 55, Dqm = 0
+# at time     54032 ns WRITE: Bank = 2 Row = 3962, Col =   2, Data = 44, Dqm = 0
+# at time     54052 ns WRITE: Bank = 2 Row = 3962, Col =   3, Data = 33, Dqm = 0
+# at time     54072 ns BST  : Burst Terminate
+# at time     54092 ns WRITE: Bank = 2 Row = 3962, Col =   4, Data = 77, Dqm = 0
+# at time     54112 ns WRITE: Bank = 2 Row = 3962, Col =   5, Data = 66, Dqm = 0
+# at time     54132 ns WRITE: Bank = 2 Row = 3962, Col =   6, Data = 55, Dqm = 0
+# at time     54152 ns WRITE: Bank = 2 Row = 3962, Col =   7, Data = 44, Dqm = 0
+# at time     54172 ns BST  : Burst Terminate
+# at time     54192 ns WRITE: Bank = 2 Row = 3962, Col =   8, Data = 88, Dqm = 0
+# at time     54212 ns WRITE: Bank = 2 Row = 3962, Col =   9, Data = 77, Dqm = 0
+# at time     54232 ns WRITE: Bank = 2 Row = 3962, Col =  10, Data = 66, Dqm = 0
+# at time     54252 ns WRITE: Bank = 2 Row = 3962, Col =  11, Data = 55, Dqm = 0
+# at time     54272 ns BST  : Burst Terminate
+# at time     54678 ns READ : Bank = 1 Row = 3962, Col = 248, Data = 44, Dqm = 0
+# at time     54698 ns READ : Bank = 1 Row = 3962, Col = 249, Data = 33, Dqm = 0
+# at time     54712 ns BST  : Burst Terminate
+# at time     54718 ns READ : Bank = 1 Row = 3962, Col = 250, Data = 22, Dqm = 0
+# at time     54738 ns READ : Bank = 1 Row = 3962, Col = 251, Data = 11, Dqm = 0
+# READ STATUS: Burst-No:           0 Addr: 013f7a7e Rxd: 11223344
+# at time     54938 ns READ : Bank = 1 Row = 3962, Col = 252, Data = 55, Dqm = 0
+# at time     54958 ns READ : Bank = 1 Row = 3962, Col = 253, Data = 44, Dqm = 0
+# at time     54972 ns BST  : Burst Terminate
+# at time     54978 ns READ : Bank = 1 Row = 3962, Col = 254, Data = 33, Dqm = 0
+# at time     54998 ns READ : Bank = 1 Row = 3962, Col = 255, Data = 22, Dqm = 0
+# READ STATUS: Burst-No:           1 Addr: 013f7a7f Rxd: 22334455
+# at time     55198 ns READ : Bank = 2 Row = 3962, Col =   0, Data = 66, Dqm = 0
+# at time     55218 ns READ : Bank = 2 Row = 3962, Col =   1, Data = 55, Dqm = 0
+# at time     55232 ns BST  : Burst Terminate
+# at time     55238 ns READ : Bank = 2 Row = 3962, Col =   2, Data = 44, Dqm = 0
+# at time     55258 ns READ : Bank = 2 Row = 3962, Col =   3, Data = 33, Dqm = 0
+# READ STATUS: Burst-No:           2 Addr: 013f7a80 Rxd: 33445566
+# at time     55458 ns READ : Bank = 2 Row = 3962, Col =   4, Data = 77, Dqm = 0
+# at time     55478 ns READ : Bank = 2 Row = 3962, Col =   5, Data = 66, Dqm = 0
+# at time     55492 ns BST  : Burst Terminate
+# at time     55498 ns READ : Bank = 2 Row = 3962, Col =   6, Data = 55, Dqm = 0
+# at time     55518 ns READ : Bank = 2 Row = 3962, Col =   7, Data = 44, Dqm = 0
+# READ STATUS: Burst-No:           3 Addr: 013f7a81 Rxd: 44556677
+# at time     55718 ns READ : Bank = 2 Row = 3962, Col =   8, Data = 88, Dqm = 0
+# at time     55738 ns READ : Bank = 2 Row = 3962, Col =   9, Data = 77, Dqm = 0
+# at time     55752 ns BST  : Burst Terminate
+# at time     55758 ns READ : Bank = 2 Row = 3962, Col =  10, Data = 66, Dqm = 0
+# at time     55778 ns READ : Bank = 2 Row = 3962, Col =  11, Data = 55, Dqm = 0
+# READ STATUS: Burst-No:           4 Addr: 013f7a82 Rxd: 55667788
+# Write Address: 033724c6, Burst Size:           5
+# Status: Burst-No:           0  Write Address: 00cdc931  WriteData: 11223344 
+# Status: Burst-No:           1  Write Address: 00cdc932  WriteData: 22334455 
+# Status: Burst-No:           2  Write Address: 00cdc933  WriteData: 33445566 
+# Status: Burst-No:           3  Write Address: 00cdc934  WriteData: 44556677 
+# at time     55952 ns PRE  : Bank = 0
+# Status: Burst-No:           4  Write Address: 00cdc935  WriteData: 55667788 
+# at time     56012 ns ACT  : Bank = 0 Row = 3529
+# at time     56072 ns WRITE: Bank = 0 Row = 3529, Col = 196, Data = 44, Dqm = 0
+# at time     56092 ns WRITE: Bank = 0 Row = 3529, Col = 197, Data = 33, Dqm = 0
+# at time     56112 ns WRITE: Bank = 0 Row = 3529, Col = 198, Data = 22, Dqm = 0
+# at time     56132 ns WRITE: Bank = 0 Row = 3529, Col = 199, Data = 11, Dqm = 0
+# at time     56152 ns BST  : Burst Terminate
+# at time     56172 ns WRITE: Bank = 0 Row = 3529, Col = 200, Data = 55, Dqm = 0
+# at time     56192 ns WRITE: Bank = 0 Row = 3529, Col = 201, Data = 44, Dqm = 0
+# at time     56212 ns WRITE: Bank = 0 Row = 3529, Col = 202, Data = 33, Dqm = 0
+# at time     56232 ns WRITE: Bank = 0 Row = 3529, Col = 203, Data = 22, Dqm = 0
+# at time     56252 ns BST  : Burst Terminate
+# at time     56272 ns WRITE: Bank = 0 Row = 3529, Col = 204, Data = 66, Dqm = 0
+# at time     56292 ns WRITE: Bank = 0 Row = 3529, Col = 205, Data = 55, Dqm = 0
+# at time     56312 ns WRITE: Bank = 0 Row = 3529, Col = 206, Data = 44, Dqm = 0
+# at time     56332 ns WRITE: Bank = 0 Row = 3529, Col = 207, Data = 33, Dqm = 0
+# at time     56352 ns BST  : Burst Terminate
+# at time     56372 ns WRITE: Bank = 0 Row = 3529, Col = 208, Data = 77, Dqm = 0
+# at time     56392 ns WRITE: Bank = 0 Row = 3529, Col = 209, Data = 66, Dqm = 0
+# at time     56412 ns WRITE: Bank = 0 Row = 3529, Col = 210, Data = 55, Dqm = 0
+# at time     56432 ns WRITE: Bank = 0 Row = 3529, Col = 211, Data = 44, Dqm = 0
+# at time     56452 ns BST  : Burst Terminate
+# at time     56472 ns WRITE: Bank = 0 Row = 3529, Col = 212, Data = 88, Dqm = 0
+# at time     56492 ns WRITE: Bank = 0 Row = 3529, Col = 213, Data = 77, Dqm = 0
+# at time     56512 ns WRITE: Bank = 0 Row = 3529, Col = 214, Data = 66, Dqm = 0
+# at time     56532 ns WRITE: Bank = 0 Row = 3529, Col = 215, Data = 55, Dqm = 0
+# at time     56552 ns BST  : Burst Terminate
+# at time     57078 ns READ : Bank = 0 Row = 3529, Col = 196, Data = 44, Dqm = 0
+# at time     57098 ns READ : Bank = 0 Row = 3529, Col = 197, Data = 33, Dqm = 0
+# at time     57112 ns BST  : Burst Terminate
+# at time     57118 ns READ : Bank = 0 Row = 3529, Col = 198, Data = 22, Dqm = 0
+# at time     57138 ns READ : Bank = 0 Row = 3529, Col = 199, Data = 11, Dqm = 0
+# READ STATUS: Burst-No:           0 Addr: 00cdc931 Rxd: 11223344
+# at time     57338 ns READ : Bank = 0 Row = 3529, Col = 200, Data = 55, Dqm = 0
+# at time     57358 ns READ : Bank = 0 Row = 3529, Col = 201, Data = 44, Dqm = 0
+# at time     57372 ns BST  : Burst Terminate
+# at time     57378 ns READ : Bank = 0 Row = 3529, Col = 202, Data = 33, Dqm = 0
+# at time     57398 ns READ : Bank = 0 Row = 3529, Col = 203, Data = 22, Dqm = 0
+# READ STATUS: Burst-No:           1 Addr: 00cdc932 Rxd: 22334455
+# at time     57598 ns READ : Bank = 0 Row = 3529, Col = 204, Data = 66, Dqm = 0
+# at time     57618 ns READ : Bank = 0 Row = 3529, Col = 205, Data = 55, Dqm = 0
+# at time     57632 ns BST  : Burst Terminate
+# at time     57638 ns READ : Bank = 0 Row = 3529, Col = 206, Data = 44, Dqm = 0
+# at time     57658 ns READ : Bank = 0 Row = 3529, Col = 207, Data = 33, Dqm = 0
+# READ STATUS: Burst-No:           2 Addr: 00cdc933 Rxd: 33445566
+# at time     57858 ns READ : Bank = 0 Row = 3529, Col = 208, Data = 77, Dqm = 0
+# at time     57878 ns READ : Bank = 0 Row = 3529, Col = 209, Data = 66, Dqm = 0
+# at time     57892 ns BST  : Burst Terminate
+# at time     57898 ns READ : Bank = 0 Row = 3529, Col = 210, Data = 55, Dqm = 0
+# at time     57918 ns READ : Bank = 0 Row = 3529, Col = 211, Data = 44, Dqm = 0
+# READ STATUS: Burst-No:           3 Addr: 00cdc934 Rxd: 44556677
+# at time     58118 ns READ : Bank = 0 Row = 3529, Col = 212, Data = 88, Dqm = 0
+# at time     58138 ns READ : Bank = 0 Row = 3529, Col = 213, Data = 77, Dqm = 0
+# at time     58152 ns BST  : Burst Terminate
+# at time     58158 ns READ : Bank = 0 Row = 3529, Col = 214, Data = 66, Dqm = 0
+# at time     58178 ns READ : Bank = 0 Row = 3529, Col = 215, Data = 55, Dqm = 0
+# READ STATUS: Burst-No:           4 Addr: 00cdc935 Rxd: 55667788
+# Write Address: 02f784c5, Burst Size:           5
+# Status: Burst-No:           0  Write Address: 00bde131  WriteData: 11223344 
+# Status: Burst-No:           1  Write Address: 00bde132  WriteData: 22334455 
+# Status: Burst-No:           2  Write Address: 00bde133  WriteData: 33445566 
+# Status: Burst-No:           3  Write Address: 00bde134  WriteData: 44556677 
+# at time     58352 ns PRE  : Bank = 0
+# Status: Burst-No:           4  Write Address: 00bde135  WriteData: 55667788 
+# at time     58412 ns ACT  : Bank = 0 Row = 3553
+# at time     58472 ns WRITE: Bank = 0 Row = 3553, Col = 196, Data = 44, Dqm = 0
+# at time     58492 ns WRITE: Bank = 0 Row = 3553, Col = 197, Data = 33, Dqm = 0
+# at time     58512 ns WRITE: Bank = 0 Row = 3553, Col = 198, Data = 22, Dqm = 0
+# at time     58532 ns WRITE: Bank = 0 Row = 3553, Col = 199, Data = 11, Dqm = 0
+# at time     58552 ns BST  : Burst Terminate
+# at time     58572 ns WRITE: Bank = 0 Row = 3553, Col = 200, Data = 55, Dqm = 0
+# at time     58592 ns WRITE: Bank = 0 Row = 3553, Col = 201, Data = 44, Dqm = 0
+# at time     58612 ns WRITE: Bank = 0 Row = 3553, Col = 202, Data = 33, Dqm = 0
+# at time     58632 ns WRITE: Bank = 0 Row = 3553, Col = 203, Data = 22, Dqm = 0
+# at time     58652 ns BST  : Burst Terminate
+# at time     58672 ns WRITE: Bank = 0 Row = 3553, Col = 204, Data = 66, Dqm = 0
+# at time     58692 ns WRITE: Bank = 0 Row = 3553, Col = 205, Data = 55, Dqm = 0
+# at time     58712 ns WRITE: Bank = 0 Row = 3553, Col = 206, Data = 44, Dqm = 0
+# at time     58732 ns WRITE: Bank = 0 Row = 3553, Col = 207, Data = 33, Dqm = 0
+# at time     58752 ns BST  : Burst Terminate
+# at time     58772 ns WRITE: Bank = 0 Row = 3553, Col = 208, Data = 77, Dqm = 0
+# at time     58792 ns WRITE: Bank = 0 Row = 3553, Col = 209, Data = 66, Dqm = 0
+# at time     58812 ns WRITE: Bank = 0 Row = 3553, Col = 210, Data = 55, Dqm = 0
+# at time     58832 ns WRITE: Bank = 0 Row = 3553, Col = 211, Data = 44, Dqm = 0
+# at time     58852 ns BST  : Burst Terminate
+# at time     58872 ns WRITE: Bank = 0 Row = 3553, Col = 212, Data = 88, Dqm = 0
+# at time     58892 ns WRITE: Bank = 0 Row = 3553, Col = 213, Data = 77, Dqm = 0
+# at time     58912 ns WRITE: Bank = 0 Row = 3553, Col = 214, Data = 66, Dqm = 0
+# at time     58932 ns WRITE: Bank = 0 Row = 3553, Col = 215, Data = 55, Dqm = 0
+# at time     58952 ns BST  : Burst Terminate
+# at time     59478 ns READ : Bank = 0 Row = 3553, Col = 196, Data = 44, Dqm = 0
+# at time     59498 ns READ : Bank = 0 Row = 3553, Col = 197, Data = 33, Dqm = 0
+# at time     59512 ns BST  : Burst Terminate
+# at time     59518 ns READ : Bank = 0 Row = 3553, Col = 198, Data = 22, Dqm = 0
+# at time     59538 ns READ : Bank = 0 Row = 3553, Col = 199, Data = 11, Dqm = 0
+# READ STATUS: Burst-No:           0 Addr: 00bde131 Rxd: 11223344
+# at time     59738 ns READ : Bank = 0 Row = 3553, Col = 200, Data = 55, Dqm = 0
+# at time     59758 ns READ : Bank = 0 Row = 3553, Col = 201, Data = 44, Dqm = 0
+# at time     59772 ns BST  : Burst Terminate
+# at time     59778 ns READ : Bank = 0 Row = 3553, Col = 202, Data = 33, Dqm = 0
+# at time     59798 ns READ : Bank = 0 Row = 3553, Col = 203, Data = 22, Dqm = 0
+# READ STATUS: Burst-No:           1 Addr: 00bde132 Rxd: 22334455
+# at time     59998 ns READ : Bank = 0 Row = 3553, Col = 204, Data = 66, Dqm = 0
+# at time     60018 ns READ : Bank = 0 Row = 3553, Col = 205, Data = 55, Dqm = 0
+# at time     60032 ns BST  : Burst Terminate
+# at time     60038 ns READ : Bank = 0 Row = 3553, Col = 206, Data = 44, Dqm = 0
+# at time     60058 ns READ : Bank = 0 Row = 3553, Col = 207, Data = 33, Dqm = 0
+# READ STATUS: Burst-No:           2 Addr: 00bde133 Rxd: 33445566
+# at time     60258 ns READ : Bank = 0 Row = 3553, Col = 208, Data = 77, Dqm = 0
+# at time     60278 ns READ : Bank = 0 Row = 3553, Col = 209, Data = 66, Dqm = 0
+# at time     60292 ns BST  : Burst Terminate
+# at time     60298 ns READ : Bank = 0 Row = 3553, Col = 210, Data = 55, Dqm = 0
+# at time     60318 ns READ : Bank = 0 Row = 3553, Col = 211, Data = 44, Dqm = 0
+# READ STATUS: Burst-No:           3 Addr: 00bde134 Rxd: 44556677
+# at time     60518 ns READ : Bank = 0 Row = 3553, Col = 212, Data = 88, Dqm = 0
+# at time     60538 ns READ : Bank = 0 Row = 3553, Col = 213, Data = 77, Dqm = 0
+# at time     60552 ns BST  : Burst Terminate
+# at time     60558 ns READ : Bank = 0 Row = 3553, Col = 214, Data = 66, Dqm = 0
+# at time     60578 ns READ : Bank = 0 Row = 3553, Col = 215, Data = 55, Dqm = 0
+# READ STATUS: Burst-No:           4 Addr: 00bde135 Rxd: 55667788
+# Write Address: 0513d2aa, Burst Size:           5
+# Status: Burst-No:           0  Write Address: 0144f4aa  WriteData: 11223344 
+# Status: Burst-No:           1  Write Address: 0144f4ab  WriteData: 22334455 
+# Status: Burst-No:           2  Write Address: 0144f4ac  WriteData: 33445566 
+# Status: Burst-No:           3  Write Address: 0144f4ad  WriteData: 44556677 
+# at time     60752 ns PRE  : Bank = 2
+# Status: Burst-No:           4  Write Address: 0144f4ae  WriteData: 55667788 
+# at time     60812 ns ACT  : Bank = 2 Row = 1268
+# at time     60872 ns WRITE: Bank = 2 Row = 1268, Col = 168, Data = 44, Dqm = 0
+# at time     60892 ns WRITE: Bank = 2 Row = 1268, Col = 169, Data = 33, Dqm = 0
+# at time     60912 ns WRITE: Bank = 2 Row = 1268, Col = 170, Data = 22, Dqm = 0
+# at time     60932 ns WRITE: Bank = 2 Row = 1268, Col = 171, Data = 11, Dqm = 0
+# at time     60952 ns BST  : Burst Terminate
+# at time     60972 ns WRITE: Bank = 2 Row = 1268, Col = 172, Data = 55, Dqm = 0
+# at time     60992 ns WRITE: Bank = 2 Row = 1268, Col = 173, Data = 44, Dqm = 0
+# at time     61012 ns WRITE: Bank = 2 Row = 1268, Col = 174, Data = 33, Dqm = 0
+# at time     61032 ns WRITE: Bank = 2 Row = 1268, Col = 175, Data = 22, Dqm = 0
+# at time     61052 ns BST  : Burst Terminate
+# at time     61072 ns WRITE: Bank = 2 Row = 1268, Col = 176, Data = 66, Dqm = 0
+# at time     61092 ns WRITE: Bank = 2 Row = 1268, Col = 177, Data = 55, Dqm = 0
+# at time     61112 ns WRITE: Bank = 2 Row = 1268, Col = 178, Data = 44, Dqm = 0
+# at time     61132 ns WRITE: Bank = 2 Row = 1268, Col = 179, Data = 33, Dqm = 0
+# at time     61152 ns BST  : Burst Terminate
+# at time     61172 ns WRITE: Bank = 2 Row = 1268, Col = 180, Data = 77, Dqm = 0
+# at time     61192 ns WRITE: Bank = 2 Row = 1268, Col = 181, Data = 66, Dqm = 0
+# at time     61212 ns WRITE: Bank = 2 Row = 1268, Col = 182, Data = 55, Dqm = 0
+# at time     61232 ns WRITE: Bank = 2 Row = 1268, Col = 183, Data = 44, Dqm = 0
+# at time     61252 ns BST  : Burst Terminate
+# at time     61272 ns WRITE: Bank = 2 Row = 1268, Col = 184, Data = 88, Dqm = 0
+# at time     61292 ns WRITE: Bank = 2 Row = 1268, Col = 185, Data = 77, Dqm = 0
+# at time     61312 ns WRITE: Bank = 2 Row = 1268, Col = 186, Data = 66, Dqm = 0
+# at time     61332 ns WRITE: Bank = 2 Row = 1268, Col = 187, Data = 55, Dqm = 0
+# at time     61352 ns BST  : Burst Terminate
+# at time     61878 ns READ : Bank = 2 Row = 1268, Col = 168, Data = 44, Dqm = 0
+# at time     61898 ns READ : Bank = 2 Row = 1268, Col = 169, Data = 33, Dqm = 0
+# at time     61912 ns BST  : Burst Terminate
+# at time     61918 ns READ : Bank = 2 Row = 1268, Col = 170, Data = 22, Dqm = 0
+# at time     61938 ns READ : Bank = 2 Row = 1268, Col = 171, Data = 11, Dqm = 0
+# READ STATUS: Burst-No:           0 Addr: 0144f4aa Rxd: 11223344
+# at time     62138 ns READ : Bank = 2 Row = 1268, Col = 172, Data = 55, Dqm = 0
+# at time     62158 ns READ : Bank = 2 Row = 1268, Col = 173, Data = 44, Dqm = 0
+# at time     62172 ns BST  : Burst Terminate
+# at time     62178 ns READ : Bank = 2 Row = 1268, Col = 174, Data = 33, Dqm = 0
+# at time     62198 ns READ : Bank = 2 Row = 1268, Col = 175, Data = 22, Dqm = 0
+# READ STATUS: Burst-No:           1 Addr: 0144f4ab Rxd: 22334455
+# at time     62398 ns READ : Bank = 2 Row = 1268, Col = 176, Data = 66, Dqm = 0
+# at time     62418 ns READ : Bank = 2 Row = 1268, Col = 177, Data = 55, Dqm = 0
+# at time     62432 ns BST  : Burst Terminate
+# at time     62438 ns READ : Bank = 2 Row = 1268, Col = 178, Data = 44, Dqm = 0
+# at time     62458 ns READ : Bank = 2 Row = 1268, Col = 179, Data = 33, Dqm = 0
+# READ STATUS: Burst-No:           2 Addr: 0144f4ac Rxd: 33445566
+# at time     62658 ns READ : Bank = 2 Row = 1268, Col = 180, Data = 77, Dqm = 0
+# at time     62678 ns READ : Bank = 2 Row = 1268, Col = 181, Data = 66, Dqm = 0
+# at time     62692 ns BST  : Burst Terminate
+# at time     62698 ns READ : Bank = 2 Row = 1268, Col = 182, Data = 55, Dqm = 0
+# at time     62718 ns READ : Bank = 2 Row = 1268, Col = 183, Data = 44, Dqm = 0
+# READ STATUS: Burst-No:           3 Addr: 0144f4ad Rxd: 44556677
+# at time     62918 ns READ : Bank = 2 Row = 1268, Col = 184, Data = 88, Dqm = 0
+# at time     62938 ns READ : Bank = 2 Row = 1268, Col = 185, Data = 77, Dqm = 0
+# at time     62952 ns BST  : Burst Terminate
+# at time     62958 ns READ : Bank = 2 Row = 1268, Col = 186, Data = 66, Dqm = 0
+# at time     62978 ns READ : Bank = 2 Row = 1268, Col = 187, Data = 55, Dqm = 0
+# READ STATUS: Burst-No:           4 Addr: 0144f4ae Rxd: 55667788
+# Write Address: 02aff7e5, Burst Size:           5
+# Status: Burst-No:           0  Write Address: 00abfdf9  WriteData: 11223344 
+# Status: Burst-No:           1  Write Address: 00abfdfa  WriteData: 22334455 
+# Status: Burst-No:           2  Write Address: 00abfdfb  WriteData: 33445566 
+# Status: Burst-No:           3  Write Address: 00abfdfc  WriteData: 44556677 
+# at time     63152 ns PRE  : Bank = 3
+# Status: Burst-No:           4  Write Address: 00abfdfd  WriteData: 55667788 
+# at time     63212 ns ACT  : Bank = 3 Row = 3069
+# at time     63272 ns WRITE: Bank = 3 Row = 3069, Col = 228, Data = 44, Dqm = 0
+# at time     63292 ns WRITE: Bank = 3 Row = 3069, Col = 229, Data = 33, Dqm = 0
+# at time     63312 ns WRITE: Bank = 3 Row = 3069, Col = 230, Data = 22, Dqm = 0
+# at time     63332 ns WRITE: Bank = 3 Row = 3069, Col = 231, Data = 11, Dqm = 0
+# at time     63352 ns BST  : Burst Terminate
+# at time     63372 ns WRITE: Bank = 3 Row = 3069, Col = 232, Data = 55, Dqm = 0
+# at time     63392 ns WRITE: Bank = 3 Row = 3069, Col = 233, Data = 44, Dqm = 0
+# at time     63412 ns WRITE: Bank = 3 Row = 3069, Col = 234, Data = 33, Dqm = 0
+# at time     63432 ns WRITE: Bank = 3 Row = 3069, Col = 235, Data = 22, Dqm = 0
+# at time     63452 ns BST  : Burst Terminate
+# at time     63472 ns WRITE: Bank = 3 Row = 3069, Col = 236, Data = 66, Dqm = 0
+# at time     63492 ns WRITE: Bank = 3 Row = 3069, Col = 237, Data = 55, Dqm = 0
+# at time     63512 ns WRITE: Bank = 3 Row = 3069, Col = 238, Data = 44, Dqm = 0
+# at time     63532 ns WRITE: Bank = 3 Row = 3069, Col = 239, Data = 33, Dqm = 0
+# at time     63552 ns BST  : Burst Terminate
+# at time     63572 ns WRITE: Bank = 3 Row = 3069, Col = 240, Data = 77, Dqm = 0
+# at time     63592 ns WRITE: Bank = 3 Row = 3069, Col = 241, Data = 66, Dqm = 0
+# at time     63612 ns WRITE: Bank = 3 Row = 3069, Col = 242, Data = 55, Dqm = 0
+# at time     63632 ns WRITE: Bank = 3 Row = 3069, Col = 243, Data = 44, Dqm = 0
+# at time     63652 ns BST  : Burst Terminate
+# at time     63672 ns WRITE: Bank = 3 Row = 3069, Col = 244, Data = 88, Dqm = 0
+# at time     63692 ns WRITE: Bank = 3 Row = 3069, Col = 245, Data = 77, Dqm = 0
+# at time     63712 ns WRITE: Bank = 3 Row = 3069, Col = 246, Data = 66, Dqm = 0
+# at time     63732 ns WRITE: Bank = 3 Row = 3069, Col = 247, Data = 55, Dqm = 0
+# at time     63752 ns BST  : Burst Terminate
+# at time     64278 ns READ : Bank = 3 Row = 3069, Col = 228, Data = 44, Dqm = 0
+# at time     64298 ns READ : Bank = 3 Row = 3069, Col = 229, Data = 33, Dqm = 0
+# at time     64312 ns BST  : Burst Terminate
+# at time     64318 ns READ : Bank = 3 Row = 3069, Col = 230, Data = 22, Dqm = 0
+# at time     64338 ns READ : Bank = 3 Row = 3069, Col = 231, Data = 11, Dqm = 0
+# READ STATUS: Burst-No:           0 Addr: 00abfdf9 Rxd: 11223344
+# at time     64538 ns READ : Bank = 3 Row = 3069, Col = 232, Data = 55, Dqm = 0
+# at time     64558 ns READ : Bank = 3 Row = 3069, Col = 233, Data = 44, Dqm = 0
+# at time     64572 ns BST  : Burst Terminate
+# at time     64578 ns READ : Bank = 3 Row = 3069, Col = 234, Data = 33, Dqm = 0
+# at time     64598 ns READ : Bank = 3 Row = 3069, Col = 235, Data = 22, Dqm = 0
+# READ STATUS: Burst-No:           1 Addr: 00abfdfa Rxd: 22334455
+# at time     64798 ns READ : Bank = 3 Row = 3069, Col = 236, Data = 66, Dqm = 0
+# at time     64818 ns READ : Bank = 3 Row = 3069, Col = 237, Data = 55, Dqm = 0
+# at time     64832 ns BST  : Burst Terminate
+# at time     64838 ns READ : Bank = 3 Row = 3069, Col = 238, Data = 44, Dqm = 0
+# at time     64858 ns READ : Bank = 3 Row = 3069, Col = 239, Data = 33, Dqm = 0
+# READ STATUS: Burst-No:           2 Addr: 00abfdfb Rxd: 33445566
+# at time     65058 ns READ : Bank = 3 Row = 3069, Col = 240, Data = 77, Dqm = 0
+# at time     65078 ns READ : Bank = 3 Row = 3069, Col = 241, Data = 66, Dqm = 0
+# at time     65092 ns BST  : Burst Terminate
+# at time     65098 ns READ : Bank = 3 Row = 3069, Col = 242, Data = 55, Dqm = 0
+# at time     65118 ns READ : Bank = 3 Row = 3069, Col = 243, Data = 44, Dqm = 0
+# READ STATUS: Burst-No:           3 Addr: 00abfdfc Rxd: 44556677
+# at time     65318 ns READ : Bank = 3 Row = 3069, Col = 244, Data = 88, Dqm = 0
+# at time     65338 ns READ : Bank = 3 Row = 3069, Col = 245, Data = 77, Dqm = 0
+# at time     65352 ns BST  : Burst Terminate
+# at time     65358 ns READ : Bank = 3 Row = 3069, Col = 246, Data = 66, Dqm = 0
+# at time     65378 ns READ : Bank = 3 Row = 3069, Col = 247, Data = 55, Dqm = 0
+# READ STATUS: Burst-No:           4 Addr: 00abfdfd Rxd: 55667788
+# Write Address: 03d27277, Burst Size:           5
+# Status: Burst-No:           0  Write Address: 00f49c9d  WriteData: 11223344 
+# Status: Burst-No:           1  Write Address: 00f49c9e  WriteData: 22334455 
+# Status: Burst-No:           2  Write Address: 00f49c9f  WriteData: 33445566 
+# Status: Burst-No:           3  Write Address: 00f49ca0  WriteData: 44556677 
+# at time     65552 ns PRE  : Bank = 2
+# Status: Burst-No:           4  Write Address: 00f49ca1  WriteData: 55667788 
+# at time     65612 ns ACT  : Bank = 2 Row = 1180
+# at time     65672 ns WRITE: Bank = 2 Row = 1180, Col = 116, Data = 44, Dqm = 0
+# at time     65692 ns WRITE: Bank = 2 Row = 1180, Col = 117, Data = 33, Dqm = 0
+# at time     65712 ns WRITE: Bank = 2 Row = 1180, Col = 118, Data = 22, Dqm = 0
+# at time     65732 ns WRITE: Bank = 2 Row = 1180, Col = 119, Data = 11, Dqm = 0
+# at time     65752 ns BST  : Burst Terminate
+# at time     65772 ns WRITE: Bank = 2 Row = 1180, Col = 120, Data = 55, Dqm = 0
+# at time     65792 ns WRITE: Bank = 2 Row = 1180, Col = 121, Data = 44, Dqm = 0
+# at time     65812 ns WRITE: Bank = 2 Row = 1180, Col = 122, Data = 33, Dqm = 0
+# at time     65832 ns WRITE: Bank = 2 Row = 1180, Col = 123, Data = 22, Dqm = 0
+# at time     65852 ns BST  : Burst Terminate
+# at time     65872 ns WRITE: Bank = 2 Row = 1180, Col = 124, Data = 66, Dqm = 0
+# at time     65892 ns WRITE: Bank = 2 Row = 1180, Col = 125, Data = 55, Dqm = 0
+# at time     65912 ns WRITE: Bank = 2 Row = 1180, Col = 126, Data = 44, Dqm = 0
+# at time     65932 ns WRITE: Bank = 2 Row = 1180, Col = 127, Data = 33, Dqm = 0
+# at time     65952 ns BST  : Burst Terminate
+# at time     65972 ns WRITE: Bank = 2 Row = 1180, Col = 128, Data = 77, Dqm = 0
+# at time     65992 ns WRITE: Bank = 2 Row = 1180, Col = 129, Data = 66, Dqm = 0
+# at time     66012 ns WRITE: Bank = 2 Row = 1180, Col = 130, Data = 55, Dqm = 0
+# at time     66032 ns WRITE: Bank = 2 Row = 1180, Col = 131, Data = 44, Dqm = 0
+# at time     66052 ns BST  : Burst Terminate
+# at time     66072 ns WRITE: Bank = 2 Row = 1180, Col = 132, Data = 88, Dqm = 0
+# at time     66092 ns WRITE: Bank = 2 Row = 1180, Col = 133, Data = 77, Dqm = 0
+# at time     66112 ns WRITE: Bank = 2 Row = 1180, Col = 134, Data = 66, Dqm = 0
+# at time     66132 ns WRITE: Bank = 2 Row = 1180, Col = 135, Data = 55, Dqm = 0
+# at time     66152 ns BST  : Burst Terminate
+# at time     66678 ns READ : Bank = 2 Row = 1180, Col = 116, Data = 44, Dqm = 0
+# at time     66698 ns READ : Bank = 2 Row = 1180, Col = 117, Data = 33, Dqm = 0
+# at time     66712 ns BST  : Burst Terminate
+# at time     66718 ns READ : Bank = 2 Row = 1180, Col = 118, Data = 22, Dqm = 0
+# at time     66738 ns READ : Bank = 2 Row = 1180, Col = 119, Data = 11, Dqm = 0
+# READ STATUS: Burst-No:           0 Addr: 00f49c9d Rxd: 11223344
+# at time     66938 ns READ : Bank = 2 Row = 1180, Col = 120, Data = 55, Dqm = 0
+# at time     66958 ns READ : Bank = 2 Row = 1180, Col = 121, Data = 44, Dqm = 0
+# at time     66972 ns BST  : Burst Terminate
+# at time     66978 ns READ : Bank = 2 Row = 1180, Col = 122, Data = 33, Dqm = 0
+# at time     66998 ns READ : Bank = 2 Row = 1180, Col = 123, Data = 22, Dqm = 0
+# READ STATUS: Burst-No:           1 Addr: 00f49c9e Rxd: 22334455
+# at time     67198 ns READ : Bank = 2 Row = 1180, Col = 124, Data = 66, Dqm = 0
+# at time     67218 ns READ : Bank = 2 Row = 1180, Col = 125, Data = 55, Dqm = 0
+# at time     67232 ns BST  : Burst Terminate
+# at time     67238 ns READ : Bank = 2 Row = 1180, Col = 126, Data = 44, Dqm = 0
+# at time     67258 ns READ : Bank = 2 Row = 1180, Col = 127, Data = 33, Dqm = 0
+# READ STATUS: Burst-No:           2 Addr: 00f49c9f Rxd: 33445566
+# at time     67458 ns READ : Bank = 2 Row = 1180, Col = 128, Data = 77, Dqm = 0
+# at time     67478 ns READ : Bank = 2 Row = 1180, Col = 129, Data = 66, Dqm = 0
+# at time     67492 ns BST  : Burst Terminate
+# at time     67498 ns READ : Bank = 2 Row = 1180, Col = 130, Data = 55, Dqm = 0
+# at time     67518 ns READ : Bank = 2 Row = 1180, Col = 131, Data = 44, Dqm = 0
+# READ STATUS: Burst-No:           3 Addr: 00f49ca0 Rxd: 44556677
+# at time     67718 ns READ : Bank = 2 Row = 1180, Col = 132, Data = 88, Dqm = 0
+# at time     67738 ns READ : Bank = 2 Row = 1180, Col = 133, Data = 77, Dqm = 0
+# at time     67752 ns BST  : Burst Terminate
+# at time     67758 ns READ : Bank = 2 Row = 1180, Col = 134, Data = 66, Dqm = 0
+# at time     67778 ns READ : Bank = 2 Row = 1180, Col = 135, Data = 55, Dqm = 0
+# READ STATUS: Burst-No:           4 Addr: 00f49ca1 Rxd: 55667788
+###############################
+# STATUS: SDRAM Write/Read TEST PASSED
+###############################
+# ** Note: $finish    : ../tb/tb_top.sv(304)
+#    Time: 77860 ns  Iteration: 0  Instance: /tb_top
+### test 1: basic_test1 --> PASSED
+###########################################
+
+###########################################
+###  Test Logs                            
+   test 1: ../log/top_SDR_8BIT_basic_test1.log
+###########################################
+
+###########################################
+###  Test Summary                          
+### 
+### Failed 0 of 1 SDR_8BIT tests
+###########################################
