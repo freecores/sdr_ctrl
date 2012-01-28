@@ -216,7 +216,8 @@ always @(posedge clk)
 	saved_rd_data   <= 24'h0;
       end
     else begin
-        lcl_mc_req_wr_n <= app_req_wr_n;
+	if(app_req_ack)
+            lcl_mc_req_wr_n <= app_req_wr_n;
 
 	// During Write Phase
         if(app_req_ack && (app_req_wr_n == 0)) begin

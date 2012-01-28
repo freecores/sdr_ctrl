@@ -90,6 +90,7 @@ module sdrc_core
                 app_wr_en_n,
 		app_rd_data,
 		app_rd_valid,
+		app_last_rd,
 		app_wr_next_req,
 		sdr_init_done,
 		app_req_dma_last,
@@ -154,6 +155,7 @@ output 		        app_wr_next_req     ; // Next Write Data Request
 input [APP_BW-1:0] 	app_wr_en_n         ; // Byte wise Write Enable
 output [APP_DW-1:0] 	app_rd_data         ; // Read Data
 output                  app_rd_valid        ; // Read Valid
+output                  app_last_rd         ; // Last Read Transfer of a given Burst
 		
 //------------------------------------------------
 // Interface to SDRAMs
@@ -215,7 +217,7 @@ wire [1:0] 		b2x_cmd;
 wire 			x2b_ack;
 wire [3:0] 		x2b_pre_ok;
 wire 			x2b_refresh, x2b_act_ok, x2b_rdok, x2b_wrok;
-wire 			xfr_rdstart, xfr_rdlast;
+wire 			xfr_rdstart, app_last_rd;
 wire 			xfr_wrstart, xfr_wrlast;
 wire [`SDR_REQ_ID_W-1:0]xfr_id;
 wire [APP_DW-1:0] 	app_rd_data;
@@ -419,7 +421,7 @@ sdrc_xfr_ctl #(.SDR_DW(SDR_DW) ,  .SDR_BW(SDR_BW)) u_xfr_ctl (
           .x2a_rdstart        (xfr_rdstart        ),
           .x2a_wrstart        (xfr_wrstart        ),
           .x2a_id             (xfr_id             ),
-          .x2a_rdlast         (xfr_rdlast         ),
+          .x2a_rdlast         (app_last_rd         ),
           .x2a_wrlast         (xfr_wrlast         ),
           .app_wrdt           (add_wr_data_int    ),
           .app_wren_n         (app_wr_en_n_int    ),
