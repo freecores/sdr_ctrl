@@ -115,10 +115,14 @@ module mt48lc8m8a2 (Dq, Addr, Ba, Clk, Cke, Cs_n, Ras_n, Cas_n, We_n, Dqm);
     wire      Cas_latency_2    = ~Mode_reg[6] &  Mode_reg[5] & ~Mode_reg[4];
     wire      Cas_latency_3    = ~Mode_reg[6] &  Mode_reg[5] &  Mode_reg[4];
 
+`ifdef VERBOSE
+    wire      Debug            = 1'b1;                          // Debug messages : 1 = On
+`else
+    wire      Debug            = 1'b0;                          // Debug messages : 1 = On
+`endif
     // Write Burst Mode
     wire      Write_burst_mode = Mode_reg[9];
 
-    reg	      Debug;                         // Debug messages : 1 = On
     wire      Dq_chk           = Sys_clk & Data_in_enable;      // Check setup/hold time for DQ
 
     assign    Dq               = Dq_reg;                        // DQ buffer
@@ -158,7 +162,6 @@ module mt48lc8m8a2 (Dq, Addr, Ba, Clk, Cke, Cs_n, Ras_n, Cas_n, We_n, Dqm);
     time      RP_chk0, RP_chk1, RP_chk2, RP_chk3;
 
     initial begin
-       Debug = 1'b0;
       
         Dq_reg = {data_bits{1'bz}};
         {Data_in_enable, Data_out_enable} = 0;
