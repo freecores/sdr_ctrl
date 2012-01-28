@@ -10,9 +10,9 @@ set sdr_tests =(basic_test1 )
 #set misc_tests=( )
 
 
-echo " Compiling with MODELSIM in $1 Mode "
+echo " Compiling with MODELSIM in $1 $2 Mode "
 
-./compile.modelsim $1 | tee ../log/$1_complie.log
+./compile.modelsim $1 $2 | tee ../log/$1_$2_complie.log
 
 
 if ($status != 0) then
@@ -37,7 +37,7 @@ foreach run_test ($sdr_tests)
 	#echo ""
 	echo "### Running test ${i}: ${run_test}"
 
-        vsim -do run.do -c tb_top +${run_test} | tee  ../log/run.log
+        vsim -do run.do -c tb_$1 +${run_test} | tee  ../log/run.log
 	if ($status != 0) then
 	  cat ../log/run.log
 	  exit
@@ -50,7 +50,7 @@ foreach run_test ($sdr_tests)
           @ all_testsm += 1;
 	endif
   
-        mv ../log/run.log ../log/$1_${run_test}.log
+        mv ../log/run.log ../log/$1_$2_${run_test}.log
 
 
 end
@@ -63,7 +63,7 @@ echo "###########################################"
 echo "###  Test Logs                            "
 foreach run_test ($sdr_tests)
 	  @ i += 1;
-	  echo "   test ${i}: ../log/$1_${run_test}.log"
+	  echo "   test ${i}: ../log/$1_$2_${run_test}.log"
 
 end
     echo "###########################################"
@@ -73,6 +73,6 @@ echo ""
 echo "###########################################"
 echo "###  Test Summary                          "
 echo "### "
-echo "### Failed $failedm of $all_testsm $1 tests"
+echo "### Failed $failedm of $all_testsm $2 tests"
 echo "###########################################"
 

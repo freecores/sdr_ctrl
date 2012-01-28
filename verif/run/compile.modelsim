@@ -6,5 +6,8 @@ else
    \rm -rf work
    vlib work
 endif
-
-vlog -work work +define+$1 -f filelist.f
+if($1 == "core") then # run SDRAM Core level test case
+   vlog -work work +define+$2 -f filelist_core.f
+else # Run SDRAM Top Level test cases
+   vlog -work work +define+$2 -f filelist_top.f
+endif
