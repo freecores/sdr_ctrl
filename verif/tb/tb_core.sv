@@ -40,48 +40,39 @@
 ////                                                              ////
 //////////////////////////////////////////////////////////////////////
 
+// This testbench stand-alone verify the sdram core
 
 `timescale 1ns/1ps
 
-// This testbench verify with SDRAM TOP
+module tb_core;
 
-module tb_top;
-
-parameter P_SYS  = 10;     //    200MHz
-parameter P_SDR  = 20;     //    100MHz
+parameter P_SYS  = 10;     //    100MHz
 
 // General
 reg            RESETN;
 reg            sdram_clk;
-reg            sys_clk;
 
-initial sys_clk = 0;
 initial sdram_clk = 0;
 
-always #(P_SYS/2) sys_clk = !sys_clk;
-always #(P_SDR/2) sdram_clk = !sdram_clk;
+always #(P_SYS/2) sdram_clk = !sdram_clk;
 
 parameter      dw              = 32;  // data width
 parameter      tw              = 8;   // tag id width
 parameter      bl              = 5;   // burst_lenght_width 
 
 //-------------------------------------------
-// WISH BONE Interface
+// Application Interface bus
 //-------------------------------------------
-//--------------------------------------
-// Wish Bone Interface
-// -------------------------------------      
-reg             wb_stb_i           ;
-wire            wb_ack_o           ;
-reg  [29:0]     wb_addr_i          ;
-reg             wb_we_i            ; // 1 - Write, 0 - Read
-reg  [dw-1:0]   wb_dat_i           ;
-reg  [dw/8-1:0] wb_sel_i           ; // Byte enable
-wire  [dw-1:0]  wb_dat_o           ;
-reg             wb_cyc_i           ;
-reg   [2:0]     wb_cti_i           ;
-
-
+reg                   app_req            ; // Application Request
+reg  [8:0]            app_req_len        ; // Burst Request length
+wire                  app_req_ack        ; // Application Request Ack
+reg [29:0]            app_req_addr       ; // Application Address
+reg                   app_req_wr_n       ; // 1 -> Read, 0 -> Write
+reg [dw-1:0]          app_wr_data        ; // Write Data
+reg [dw/8-1:0]        app_wr_en_n        ; // Write Enable, Active Low
+wire                  app_rd_valid       ; // Read Valid
+wire                  app_last_rd        ; // Last Read Valid
+wire [dw-1:0]         app_rd_data        ; // Read Data
 
 //--------------------------------------------
 // SDRAM I/F 
@@ -112,18 +103,21 @@ wire [11:0]           sdr_addr           ; // SDRAM ADRESS
 wire                  sdr_init_done      ; // SDRAM Init Done 
 
 // to fix the sdram interface timing issue
-wire #(2.0) sdram_clk_d   = sdram_clk;
-wire #(1.0) sdram_pad_clk = sdram_clk_d;
+wire #(2.0) sdram_clk_d = sdram_clk;
+wire #(1.0) pad_clk     = sdram_clk_d;
 
 `ifdef SDR_32BIT
 
-   sdrc_top #(.SDR_DW(32),.SDR_BW(4)) u_dut(
+   sdrc_core #(.SDR_DW(32),.SDR_BW(4)) u_dut(
 `elsif SDR_16BIT 
-   sdrc_top #(.SDR_DW(16),.SDR_BW(2)) u_dut(
+   sdrc_core #(.SDR_DW(16),.SDR_BW(2)) u_dut(
 `else  // 8 BIT SDRAM
-   sdrc_top #(.SDR_DW(8),.SDR_BW(1)) u_dut(
+   sdrc_core #(.SDR_DW(8),.SDR_BW(1)) u_dut(
 `endif
       // System 
+          .clk                (sdram_clk          ),
+          .reset_n            (RESETN             ),
+          .pad_clk            (pad_clk            ), 
 `ifdef SDR_32BIT
           .sdr_width          (2'b00              ), // 32 BIT SDRAM
 `elsif SDR_16BIT
@@ -133,24 +127,26 @@ wire #(1.0) sdram_pad_clk = sdram_clk_d;
 `endif
           .cfg_colbits        (2'b00              ), // 8 Bit Column Address
 
-/* WISH BONE */
-          .wb_rst_i           (!RESETN            ),
-          .wb_clk_i           (sys_clk            ),
 
-          .wb_stb_i           (wb_stb_i           ),
-          .wb_ack_o           (wb_ack_o           ),
-          .wb_addr_i          (wb_addr_i          ),
-          .wb_we_i            (wb_we_i            ),
-          .wb_dat_i           (wb_dat_i           ),
-          .wb_sel_i           (wb_sel_i           ),
-          .wb_dat_o           (wb_dat_o           ),
-          .wb_cyc_i           (wb_cyc_i           ),
-          .wb_cti_i           (wb_cti_i           ), 
+/* Request from app */
+          .app_req            (app_req            ),	// Transfer Request
+          .app_req_addr       (app_req_addr       ),	// SDRAM Address
+          .app_req_addr_mask  (29'h1FFF_FFFF      ),	// Address mask for queue wrap
+          .app_req_len        (app_req_len        ),	// Burst Length (in 16 bit words)
+          .app_req_wrap       (1'b0               ),	// Wrap mode request (xfr_len = 4)
+          .app_req_wr_n       (app_req_wr_n       ),	// 0 => Write request, 1 => read req
+          .app_req_ack        (app_req_ack        ),	// Request has been accepted
+          .sdr_core_busy_n    (                   ),	// OK to arbitrate next request
+		
+          .app_wr_data        (app_wr_data        ),
+          .app_wr_en_n        (app_wr_en_n        ),
+          .app_rd_data        (app_rd_data        ),
+          .app_last_rd        (app_last_rd        ),
+          .app_rd_valid       (app_rd_valid       ),
+          .app_wr_next_req    (app_wr_next_req    ),
+          .app_req_dma_last   (app_req            ),
 
 /* Interface to SDRAMs */
-          .sdram_clk          (sdram_clk          ),
-          .sdram_pad_clk      (sdram_pad_clk      ),
-          .sdram_resetn       (RESETN             ),
           .sdr_cs_n           (sdr_cs_n           ),
           .sdr_cke            (sdr_cke            ),
           .sdr_ras_n          (sdr_ras_n          ),
@@ -249,12 +245,12 @@ reg [31:0] StartAddr;
 
 initial begin //{
   ErrCnt          = 0;
-   wb_addr_i      = 0;
-   wb_dat_i      = 0;
-   wb_sel_i       = 4'h0;
-   wb_we_i        = 0;
-   wb_stb_i       = 0;
-   wb_cyc_i       = 0;
+   app_req_addr  = 0;
+   app_wr_data    = 0;
+   app_wr_en_n    = 4'hF;
+   app_req_wr_n   = 0;
+   app_req        = 0;
+   app_req_len    = 0;
 
   RESETN    = 1'h1;
 
@@ -308,26 +304,33 @@ task burst_write;
 input [31:0] Address;
 int i;
 begin
-   @ (negedge sys_clk);
+   @ (negedge sdram_clk);
+   app_req        = 1;
+   app_wr_en_n    = 0;
+   app_req_wr_n   = 1'b0;
    $display("Write Address: %x, Burst Size: %d",Address,wrdfifo.size);
+   app_req_addr  = Address[31:2];
+   app_req_len    = wrdfifo.size;
+
+   // wait for app_req_ack == 1
+   do begin
+       @ (posedge sdram_clk);
+   end while(app_req_ack == 1'b0);
+   @ (negedge sdram_clk);
+   app_req           = 0;
 
    for(i=0; i < wrdfifo.size; i++) begin
-      wb_stb_i        = 1;
-      wb_cyc_i        = 1;
-      wb_we_i         = 1;
-      wb_sel_i        = 4'b1111;
-      wb_addr_i       = Address[31:2]+i;
-      wb_dat_i        = wrdfifo[i];
+      app_wr_data     = wrdfifo[i];
 
       do begin
-          @ (posedge sys_clk);
-      end while(wb_ack_o == 1'b0);
-          @ (negedge sys_clk);
+          @ (posedge sdram_clk);
+      end while(app_wr_next_req == 1'b0);
+          @ (negedge sdram_clk);
    
-       $display("Status: Burst-No: %d  Write Address: %x  WriteData: %x ",i,wb_addr_i,wb_dat_i);
+       $display("Status: Burst-No: %d  Write Address: %x  WriteData: %x ",i,Address,app_wr_data);
    end
-   wb_stb_i           = 0;
-   wb_cyc_i           = 0;
+   app_req           = 0;
+   app_wr_en_n       = 4'hF;
 end
 endtask
 
@@ -337,27 +340,31 @@ input [31:0] Address;
 int i,j;
 reg [31:0]   rd_data;
 begin
-   @ (negedge sys_clk);
+   @ (negedge sdram_clk);
+
+      app_req        = 1;
+      app_wr_en_n    = 0;
+      app_req_wr_n   = 1;
+      app_req_addr   = Address[29:2];
+      app_req_len    = wrdfifo.size;
+      // wait for app_req_ack == 1
+      do begin
+          @ (posedge sdram_clk);
+      end while(app_req_ack == 1'b0);
+      @ (negedge sdram_clk);
+      app_req           = 0;
 
       for(j=0; j < wrdfifo.size; j++) begin
-         wb_stb_i        = 1;
-         wb_cyc_i        = 1;
-         wb_we_i         = 0;
-         wb_addr_i       = Address[31:2]+j;
-
-         do begin
-             @ (posedge sys_clk);
-         end while(wb_ack_o == 1'b0);
-         if(wb_dat_o !== wrdfifo[j]) begin
-             $display("READ ERROR: Burst-No: %d Addr: %x Rxp: %x Exd: %x",j,wb_addr_i,wb_dat_o,wrdfifo[j]);
+         wait(app_rd_valid == 1);
+         if(app_rd_data !== wrdfifo[j]) begin
+             $display("READ ERROR: Burst-No: %d Addr: %x Rxp: %x Exd: %x",j,Address+(j*2),app_rd_data,wrdfifo[j]);
              ErrCnt = ErrCnt+1;
          end else begin
-             $display("READ STATUS: Burst-No: %d Addr: %x Rxd: %x",j,wb_addr_i,wb_dat_o);
+             $display("READ STATUS: Burst-No: %d Addr: %x Rxd: %x",j,Address+(j*2),app_rd_data);
          end 
+         @ (posedge sdram_clk);
          @ (negedge sdram_clk);
       end
-   wb_stb_i           = 0;
-   wb_cyc_i           = 0;
 end
 endtask
 
