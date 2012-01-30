@@ -546,7 +546,7 @@ output [SDR_BW-1:0] 	sdr_den_n;
 	 sdr_ras_n <= 1'b1;
 	 sdr_cas_n <= 1'b1;
 	 sdr_we_n <= 1'b1;
-	 sdr_dqm   <= {SDR_DW{1'b1}};
+	 sdr_dqm   <= {SDR_BW{1'b1}};
 	 sdr_den_n <= {SDR_DW{1'b1}};
       end // if (~reset_n)
       else begin
