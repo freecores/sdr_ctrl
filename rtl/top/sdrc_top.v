@@ -5,8 +5,12 @@
   This file is part of the sdram controller project           
   http://www.opencores.org/cores/sdr_ctrl/                    
                                                               
-  Description: SDRAM Controller Core Module
-    2 types of SDRAMs are supported, 1Mx16 2 bank, or 4Mx16 4 bank.
+  Description: SDRAM Controller Top Module.
+    Support 81/6/32 Bit SDRAM.
+    Column Address is Programmable
+    Bank Bit are 2 Bit
+    Row Bits are 12 Bits
+
     This block integrate following sub modules
 
     sdrc_core   
@@ -54,90 +58,92 @@ later version.
 `include "sdrc.def"
 module sdrc_top 
            (
-                sdr_width,
-		cfg_colbits,
-
+                    sdr_width           ,
+                    cfg_colbits         ,
+                    
                 // WB bus
-                wb_rst_i           ,
-                wb_clk_i           ,
-
-                wb_stb_i           ,
-                wb_ack_o           ,
-                wb_addr_i          ,
-                wb_we_i            ,
-                wb_dat_i           ,
-                wb_sel_i           ,
-                wb_dat_o           ,
-                wb_cyc_i           ,
-                wb_cti_i           , 
+                    wb_rst_i            ,
+                    wb_clk_i            ,
+                    
+                    wb_stb_i            ,
+                    wb_ack_o            ,
+                    wb_addr_i           ,
+                    wb_we_i             ,
+                    wb_dat_i            ,
+                    wb_sel_i            ,
+                    wb_dat_o            ,
+                    wb_cyc_i            ,
+                    wb_cti_i            , 
 
 		
 		/* Interface to SDRAMs */
-                sdram_clk,
-                sdram_pad_clk,
-                sdram_resetn,
-		sdr_cs_n,
-		sdr_cke,
-		sdr_ras_n,
-		sdr_cas_n,
-		sdr_we_n,
-		sdr_dqm,
-		sdr_ba,
-		sdr_addr, 
-		pad_sdr_din,
-		sdr_dout,
-		sdr_den_n,
-
+                    sdram_clk           ,
+                    sdram_pad_clk       ,
+                    sdram_resetn        ,
+                    sdr_cs_n            ,
+                    sdr_cke             ,
+                    sdr_ras_n           ,
+                    sdr_cas_n           ,
+                    sdr_we_n            ,
+                    sdr_dqm             ,
+                    sdr_ba              ,
+                    sdr_addr            , 
+                    pad_sdr_din         ,
+                    sdr_dout            ,
+                    sdr_den_n           ,
+                    
 		/* Parameters */
-		sdr_init_done,
-		cfg_req_depth,	        //how many req. buffer should hold
-		cfg_sdr_en,
-		cfg_sdr_mode_reg,
-		cfg_sdr_tras_d,
-		cfg_sdr_trp_d,
-		cfg_sdr_trcd_d,
-		cfg_sdr_cas,
-		cfg_sdr_trcar_d,
-		cfg_sdr_twr_d,
-		cfg_sdr_rfsh,
-		cfg_sdr_rfmax);
+                    sdr_init_done       ,
+                    cfg_req_depth       ,	        //how many req. buffer should hold
+                    cfg_sdr_en          ,
+                    cfg_sdr_mode_reg    ,
+                    cfg_sdr_tras_d      ,
+                    cfg_sdr_trp_d       ,
+                    cfg_sdr_trcd_d      ,
+                    cfg_sdr_cas         ,
+                    cfg_sdr_trcar_d     ,
+                    cfg_sdr_twr_d       ,
+                    cfg_sdr_rfsh        ,
+	            cfg_sdr_rfmax
+	    );
   
-parameter  APP_AW   = 30;  // Application Address Width
-parameter  APP_DW   = 32;  // Application Data Width 
-parameter  APP_BW   = 4;   // Application Byte Width
-parameter  APP_RW   = 9;   // Application Request Width
+parameter      APP_AW   = 30;  // Application Address Width
+parameter      APP_DW   = 32;  // Application Data Width 
+parameter      APP_BW   = 4;   // Application Byte Width
+parameter      APP_RW   = 9;   // Application Request Width
 
-parameter  SDR_DW   = 16;  // SDR Data Width 
-parameter  SDR_BW   = 2;   // SDR Byte Width
+parameter      SDR_DW   = 16;  // SDR Data Width 
+parameter      SDR_BW   = 2;   // SDR Byte Width
              
-parameter      dw              = 32;  // data width
-parameter      tw              = 8;   // tag id width
-parameter      bl              = 9;   // burst_lenght_width 
+parameter      dw       = 32;  // data width
+parameter      tw       = 8;   // tag id width
+parameter      bl       = 9;   // burst_lenght_width 
 
 //-----------------------------------------------
 // Global Variable
 // ----------------------------------------------
-input                   sdram_clk                 ; // SDRAM Clock 
-input                   sdram_pad_clk             ; // SDRAM Clock from Pad, used for registering Read Data
-input                   sdram_resetn             ; // Reset Signal
-input [1:0]             sdr_width                 ; // 2'b00 - 32 Bit SDR, 2'b01 - 16 Bit SDR, 2'b1x - 8 Bit
-input [1:0]             cfg_colbits               ; // 2'b00 - 8 Bit column address, 2'b01 - 9 Bit, 10 - 10 bit, 11 - 11Bits
+input                   sdram_clk          ; // SDRAM Clock 
+input                   sdram_pad_clk      ; // SDRAM Clock from Pad, used for registering Read Data
+input                   sdram_resetn       ; // Reset Signal
+input [1:0]             sdr_width          ; // 2'b00 - 32 Bit SDR, 2'b01 - 16 Bit SDR, 2'b1x - 8 Bit
+input [1:0]             cfg_colbits        ; // 2'b00 - 8 Bit column address, 
+                                             // 2'b01 - 9 Bit, 10 - 10 bit, 11 - 11Bits
 
 //--------------------------------------
 // Wish Bone Interface
 // -------------------------------------      
-input           wb_rst_i           ;
-input           wb_clk_i           ;
+input                   wb_rst_i           ;
+input                   wb_clk_i           ;
 
-input           wb_stb_i           ;
-output          wb_ack_o           ;
-input [29:0]    wb_addr_i          ;
-input           wb_we_i            ; // 1 - Write, 0 - Read
-input [dw-1:0]  wb_dat_i           ;
-input [dw/8-1:0]wb_sel_i           ; // Byte enable
-output [dw-1:0] wb_dat_o           ;
-input           wb_cyc_i           ;
-input  [2:0]    wb_cti_i           ;
+input                   wb_stb_i           ;
+output                  wb_ack_o           ;
+input [29:0]            wb_addr_i          ;
+input                   wb_we_i            ; // 1 - Write, 0 - Read
+input [dw-1:0]          wb_dat_i           ;
+input [dw/8-1:0]        wb_sel_i           ; // Byte enable
+output [dw-1:0]         wb_dat_o           ;
+input                   wb_cyc_i           ;
+input  [2:0]            wb_cti_i           ;
 
 //------------------------------------------------
 // Interface to SDRAMs

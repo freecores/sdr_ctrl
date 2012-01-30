@@ -46,3 +46,5 @@ echo "#############################"
 echo " INITIATING SDR 8 BIT Tests"
 echo ##############################
 ./run_modelsim top SDR_8BIT | tee ../log/top_sdr8_sim.log
+
+./regression_analysis

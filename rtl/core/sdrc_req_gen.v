@@ -6,29 +6,27 @@
   http://www.opencores.org/cores/sdr_ctrl/                    
                                                               
   Description: SDRAM Controller Reguest Generation
-  The 2Mx32 SDRAM is addressed by a 21 bit address, 
-  each loation is 32 bits wide. 
-  This 21 bit address is mapped as follows:
-  ADDR [7:0]      : Column Address (256 columns)
-  ADDR [18:8]     : Row Address (2K Rows)
-  ADDR [20:19]    : Bank Address (2 banks)
- 
-  The 4Mx16 SDRAM is addressed by a 22 bit address, 
-  each loation is 16 bits wide. 
-  This 22 bit address is mapped as follows:
-  ADDR [7:0]      : Column Address (256 columns)
-  ADDR [21:10]    : Row Address (4K Rows)
-  ADDR [21:20]    : Bank Address (4 banks)
- 
-  The 8Mx16 SDRAM is addressed by a 23 bit address, 
-  each loation is 16 bits wide. 
-  This 23 bit address is mapped as follows:
-  ADDR [8:0]      : Column Address (512 columns)
-  ADDR [20:9]     : Row Address (4K Rows)
-  ADDR [22:21]    : Bank Address (4 banks)
- 
+
+  Address Generation Based on cfg_colbits
+     cfg_colbits= 2'b00
+            Address[7:0]    - Column Address
+            Address[9:8]    - Bank Address
+            Address[21:10]  - Row Address
+     cfg_colbits= 2'b01
+            Address[8:0]    - Column Address
+            Address[10:9]   - Bank Address
+            Address[22:11]  - Row Address
+     cfg_colbits= 2'b10
+            Address[9:0]    - Column Address
+            Address[11:10]   - Bank Address
+            Address[23:12]  - Row Address
+     cfg_colbits= 2'b11
+            Address[10:0]    - Column Address
+            Address[12:11]   - Bank Address
+            Address[24:13]  - Row Address
+
   The SDRAMs are operated in 4 beat burst mode.
-  This module takes requests from the mc, 
+  This module takes requests from the memory controller, 
   chops them to page boundaries if wrap=0, 
   and passes the request to bank_ctl
                                                               

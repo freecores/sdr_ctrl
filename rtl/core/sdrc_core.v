@@ -10,7 +10,7 @@
     This block integrate following sub modules
 
     sdrc_bs_convert   
-        convert the system side 32 bit into equvailent 16/32 SDR format
+        convert the system side 32 bit into equvailent 8/16/32 SDR format
     sdrc_req_gen    
         This module takes requests from the app, chops them to burst booundaries
         if wrap=0, decodes the bank and passe the request to bank_ctl
@@ -446,6 +446,14 @@ sdrc_xfr_ctl #(.SDR_DW(SDR_DW) ,  .SDR_BW(SDR_BW)) u_xfr_ctl (
           .rfsh_rmax          (cfg_sdr_rfmax      )
     );
    
+   /****************************************************************************/
+   // Instantiate sdr_bs_convert
+   //    This model handle the bus with transaltion from application layer to
+   //       8/16/32 SDRAM Memory format
+   //     During Write Phase, this block split the data as per SDRAM Width
+   //     During Read Phase, This block does the re-packing based on SDRAM
+   //     Width
+   //---------------------------------------------------------------------------
 sdrc_bs_convert #(.SDR_DW(SDR_DW) ,  .SDR_BW(SDR_BW)) u_bs_convert (
           .clk                (clk          ),
           .reset_n            (reset_n            ),
