@@ -60,7 +60,7 @@ later version.
 `include "sdrc_define.v"
 module sdrc_top 
            (
-                    sdr_width           ,
+                    cfg_sdr_width       ,
                     cfg_colbits         ,
                     
                 // WB bus
@@ -123,7 +123,7 @@ parameter      bl       = 9;   // burst_lenght_width
 // ----------------------------------------------
 input                   sdram_clk          ; // SDRAM Clock 
 input                   sdram_resetn       ; // Reset Signal
-input [1:0]             sdr_width          ; // 2'b00 - 32 Bit SDR, 2'b01 - 16 Bit SDR, 2'b1x - 8 Bit
+input [1:0]             cfg_sdr_width      ; // 2'b00 - 32 Bit SDR, 2'b01 - 16 Bit SDR, 2'b1x - 8 Bit
 input [1:0]             cfg_colbits        ; // 2'b00 - 8 Bit column address, 
                                              // 2'b01 - 9 Bit, 10 - 10 bit, 11 - 11Bits
 
@@ -243,7 +243,7 @@ sdrc_core #(.SDR_DW(SDR_DW) , .SDR_BW(SDR_BW)) u_sdrc_core (
           .clk                (sdram_clk          ) ,
           .pad_clk            (sdram_pad_clk      ) ,
           .reset_n            (sdram_resetn       ) ,
-          .sdr_width          (sdr_width          ) ,
+          .sdr_width          (cfg_sdr_width      ) ,
           .cfg_colbits        (cfg_colbits        ) ,
 
  		/* Request from app */

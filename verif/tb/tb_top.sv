@@ -115,11 +115,11 @@ wire #(2.0) sdram_clk_d   = sdram_clk;
 `endif
       // System 
 `ifdef SDR_32BIT
-          .sdr_width          (2'b00              ), // 32 BIT SDRAM
+          .cfg_sdr_width      (2'b00              ), // 32 BIT SDRAM
 `elsif SDR_16BIT
-          .sdr_width          (2'b01              ), // 16 BIT SDRAM
+          .cfg_sdr_width      (2'b01              ), // 16 BIT SDRAM
 `else 
-          .sdr_width          (2'b10              ), // 8 BIT SDRAM
+          .cfg_sdr_width      (2'b10              ), // 8 BIT SDRAM
 `endif
           .cfg_colbits        (2'b00              ), // 8 Bit Column Address
 
