@@ -61,7 +61,7 @@ later version.
                                                               
 *******************************************************************/
 
-`include "sdrc.def"
+`include "sdrc_define.v"
 
 module sdrc_xfr_ctl (clk,
 		    reset_n,
@@ -547,7 +547,7 @@ output [SDR_BW-1:0] 	sdr_den_n;
 	 sdr_cas_n <= 1'b1;
 	 sdr_we_n <= 1'b1;
 	 sdr_dqm   <= {SDR_BW{1'b1}};
-	 sdr_den_n <= {SDR_DW{1'b1}};
+	 sdr_den_n <= {SDR_BW{1'b1}};
       end // if (~reset_n)
       else begin
 	 sdr_cs_n <= xfr_cmd[3];

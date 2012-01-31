@@ -44,7 +44,7 @@ later version.
                                                               
 *******************************************************************/
 
-`include "sdrc.def"
+`include "sdrc_define.v"
 module sdrc_bs_convert (
                     clk,
                     reset_n,

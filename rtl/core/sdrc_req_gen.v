@@ -64,7 +64,7 @@ later version.
                                                               
 *******************************************************************/
 
-`include "sdrc.def"
+`include "sdrc_define.v"
 
 module sdrc_req_gen (clk,
 		    reset_n,

@@ -231,6 +231,7 @@ always @(posedge wb_clk_i) begin
      $display("ERROR:%m COMMAND FIFO WRITE OVERFLOW");
   end 
 end 
+// synopsys translate_on
 // synopsys translate_off
 always @(posedge sdram_clk) begin
    if (cmdfifo_empty == 1'b1 && cmdfifo_rd == 1'b1) begin

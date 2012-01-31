@@ -23,10 +23,12 @@
     nothing                                                   
                                                               
   Author(s): Dinesh Annayya, dinesha@opencores.org                 
-  Version  : 1.0 - 8th Jan 2012
+  Version  : 0.0 - 8th Jan 2012
                 Initial version with 16/32 Bit SDRAM Support
-           : 1.1 - 24th Jan 2012
+           : 0.1 - 24th Jan 2012
 	         8 Bit SDRAM Support is added
+	     0.2 - 31st Jan 2012
+	         sdram_dq and sdram_pad_clk are internally generated
 
                                                              
  Copyright (C) 2000 Authors and OPENCORES.ORG                
@@ -55,7 +57,7 @@ later version.
 *******************************************************************/
 
 
-`include "sdrc.def"
+`include "sdrc_define.v"
 module sdrc_top 
            (
                     sdr_width           ,
@@ -78,7 +80,6 @@ module sdrc_top
 		
 		/* Interface to SDRAMs */
                     sdram_clk           ,
-                    sdram_pad_clk       ,
                     sdram_resetn        ,
                     sdr_cs_n            ,
                     sdr_cke             ,
@@ -88,9 +89,7 @@ module sdrc_top
                     sdr_dqm             ,
                     sdr_ba              ,
                     sdr_addr            , 
-                    pad_sdr_din         ,
-                    sdr_dout            ,
-                    sdr_den_n           ,
+                    sdr_dq              ,
                     
 		/* Parameters */
                     sdr_init_done       ,
@@ -123,7 +122,6 @@ parameter      bl       = 9;   // burst_lenght_width
 // Global Variable
 // ----------------------------------------------
 input                   sdram_clk          ; // SDRAM Clock 
-input                   sdram_pad_clk      ; // SDRAM Clock from Pad, used for registering Read Data
 input                   sdram_resetn       ; // Reset Signal
 input [1:0]             sdr_width          ; // 2'b00 - 32 Bit SDR, 2'b01 - 16 Bit SDR, 2'b1x - 8 Bit
 input [1:0]             cfg_colbits        ; // 2'b00 - 8 Bit column address, 
@@ -156,9 +154,7 @@ output			sdr_we_n            ; // SDRAM write enable
 output [SDR_BW-1:0] 	sdr_dqm             ; // SDRAM Data Mask
 output [1:0] 		sdr_ba              ; // SDRAM Bank Enable
 output [11:0] 		sdr_addr            ; // SDRAM Address
-input [SDR_DW-1:0] 	pad_sdr_din         ; // SDRA Data Input
-output [SDR_DW-1:0] 	sdr_dout            ; // SDRAM Data Output
-output [SDR_BW-1:0] 	sdr_den_n           ; // SDRAM Data Output enable
+inout [SDR_DW-1:0] 	sdr_dq              ; // SDRA Data Input/output
 
 //------------------------------------------------
 // Configuration Parameter
@@ -192,6 +188,22 @@ wire                  app_last_rd        ; // Indicate last Read of Burst Transf
 wire [dw-1:0]         app_wr_data        ; // sdr write data
 wire  [dw-1:0]        app_rd_data        ; // sdr read data
 
+/****************************************
+*  These logic has to be implemented using Pads
+*  **************************************/
+wire  [SDR_DW-1:0]    pad_sdr_din         ; // SDRA Data Input
+wire  [SDR_DW-1:0]    sdr_dout            ; // SDRAM Data Output
+wire  [SDR_BW-1:0]    sdr_den_n           ; // SDRAM Data Output enable
+
+
+assign   sdr_dq = (&sdr_den_n == 1'b0) ? sdr_dout :  {SDR_DW{1'bz}}; 
+assign   pad_sdr_din = sdr_dq;
+
+// sdram pad clock is routed back through pad
+// SDRAM Clock from Pad, used for registering Read Data
+wire #(1.0) sdram_pad_clk = sdram_clk;
+
+/************** Ends Here **************************/
 wb2sdrc u_wb2sdrc (
       // WB bus
           .wb_rst_i           (wb_rst_i           ) ,

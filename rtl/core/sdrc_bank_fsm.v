@@ -44,7 +44,7 @@ later version.
 *******************************************************************/
 
 
-`include "sdrc.def"
+`include "sdrc_define.v"
 
 module sdrc_bank_fsm (clk,
 		     reset_n,
