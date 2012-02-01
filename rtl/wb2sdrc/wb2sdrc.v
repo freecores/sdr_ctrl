@@ -11,9 +11,13 @@
     nothing                                                   
                                                               
   Author(s):  Dinesh Annayya, dinesha@opencores.org                 
+  Version  : 0.0 - Initial Release
+             0.1 - 2nd Feb 2012
+	           Async Fifo towards the application layer is selected with Registered Full Generation
                                                              
  Copyright (C) 2000 Authors and OPENCORES.ORG                
                                                              
+
  This source file may be used and distributed without         
  restriction provided that this copyright statement is not    
  removed from the file and that any derivative work contains  
@@ -203,7 +207,7 @@ end
 // Application layer to SDRAM Controller
 // ------------------------------------------------------------------
    // Address + Burst Length + W/R Request 
-    async_fifo #(.W(30+bl+1),.DP(4)) u_cmdfifo (
+    async_fifo #(.W(30+bl+1),.DP(4),.WR_FAST(1'b0), .RD_FAST(1'b1)) u_cmdfifo (
      // Write Path Sys CLock Domain
           .wr_clk             (wb_clk_i           ),
           .wr_reset_n         (!wb_rst_i          ),
@@ -261,7 +265,7 @@ wire  wrdatafifo_rd  = sdr_wr_next;
 //------------------------------------------------------------------------
 
    // Write DATA + Data Mask FIFO
-    async_fifo #(.W(dw+(dw/8)), .DP(16)) u_wrdatafifo (
+    async_fifo #(.W(dw+(dw/8)), .DP(8), .WR_FAST(1'b0), .RD_FAST(1'b1)) u_wrdatafifo (
        // Write Path , System clock domain
           .wr_clk             (wb_clk_i           ),
           .wr_reset_n         (!wb_rst_i          ),
@@ -321,7 +325,7 @@ wire    rddatafifo_rd = wb_ack_o & !wb_we_i;
 //       Tag handling per burst
 //
 // ------------------------------------------------------------------------
-    async_fifo #(.W(dw+1), .DP(4)) u_rddatafifo (
+    async_fifo #(.W(dw+1), .DP(4), .WR_FAST(1'b0), .RD_FAST(1'b1) ) u_rddatafifo (
        // Write Path , SDRAM clock domain
           .wr_clk             (sdram_clk          ),
           .wr_reset_n         (sdram_resetn       ),
