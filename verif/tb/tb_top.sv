@@ -248,11 +248,16 @@ initial begin //{
 
   #1000;
   
+  wrdfifo.push_back(32'h00112233);
   wrdfifo.push_back(32'h11223344);
   wrdfifo.push_back(32'h22334455);
   wrdfifo.push_back(32'h33445566);
   wrdfifo.push_back(32'h44556677);
   wrdfifo.push_back(32'h55667788);
+  wrdfifo.push_back(32'h66778899);
+  wrdfifo.push_back(32'h77889900);
+  wrdfifo.push_back(32'h88990011);
+  wrdfifo.push_back(32'h99001122);
 
   burst_write(32'h40000);  
  #1000;
