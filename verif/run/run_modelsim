@@ -27,7 +27,7 @@ endif
 
 echo ""
 echo "###########################################"
-echo " Runing GMAC/SPI/UART test programs "
+echo " Runing test programs "
 echo "###########################################"
 
 set i = 0;

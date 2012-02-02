@@ -9,6 +9,10 @@
 ////                                                              ////
 ////  To Do:                                                      ////
 ////    nothing                                                   ////
+//   Version  :0.1 - Test Bench automation is improvised with     ////
+//             seperate data,address,burst length fifo.           ////
+//             Now user can create different write and            ////
+//             read sequence                                      ////
 ////                                                              ////
 ////  Author(s):                                                  ////
 ////      - Dinesh Annayya, dinesha@opencores.org                 ////
@@ -230,10 +234,11 @@ mt48lc8m8a2 #(.data_bits(8)) u_sdram8 (
 `endif
 
 //--------------------
-// Write/Read Burst FIFO
+// data/address/burst length FIFO
 //--------------------
-int wrdfifo[$]; // write data fifo
-int rddfifo[$]; // read data fifo
+int dfifo[$]; // data fifo
+int afifo[$]; // address  fifo
+int bfifo[$]; // Burst Length fifo
 
 reg [31:0] read_data;
 reg [31:0] ErrCnt;
@@ -265,27 +270,42 @@ initial begin //{
 
   #1000;
   
-  wrdfifo.push_back(32'h11223344);
-  wrdfifo.push_back(32'h22334455);
-  wrdfifo.push_back(32'h33445566);
-  wrdfifo.push_back(32'h44556677);
-  wrdfifo.push_back(32'h55667788);
-
-  burst_write(32'h40000);  
+  burst_write(32'h4_0000,6'h4);  
  #1000;
-  burst_read(32'h40000);  
+  burst_read();  
 
  #1000;
-  burst_write(32'h7000_0000);  
+  burst_write(32'h0040_0000,6'h5);  
  #1000;
-  burst_read(32'h7000_0000);  
+  burst_read();  
+
+  // 4 Write & 4 Read 
+  burst_write(32'h4_0000,6'h4);  
+  burst_write(32'h5_0000,6'h5);  
+  burst_write(32'h6_0000,6'h6);  
+  burst_write(32'h7_0000,6'h7);  
+  burst_read();  
+  burst_read();  
+  burst_read();  
+  burst_read();  
+
+
+  // 2 write and 2 read random
 
   for(k=0; k < 20; k++) begin
-     StartAddr = $random & 32'h07FFFFFF;
-     burst_write(StartAddr);  
-    #1000;
-     burst_read(StartAddr);  
+     StartAddr = $random & 32'h003FFFFF;
+     burst_write(StartAddr,($random & 8'h3f)+1);  
+ #100;
+
+     StartAddr = $random & 32'h003FFFFF;
+     burst_write(StartAddr,($random & 8'h3f)+1);  
+ #100;
+     burst_read();  
+ #100;
+     burst_read();  
+ #100;
   end
+
 
 
   #10000;
@@ -300,17 +320,22 @@ initial begin //{
     $finish;
 end
 
+
 task burst_write;
 input [31:0] Address;
+input [7:0]  bl;
 int i;
 begin
+  afifo.push_back(Address);
+  bfifo.push_back(bl);
+
    @ (negedge sdram_clk);
    app_req        = 1;
    app_wr_en_n    = 0;
    app_req_wr_n   = 1'b0;
-   $display("Write Address: %x, Burst Size: %d",Address,wrdfifo.size);
-   app_req_addr  = Address[31:2];
-   app_req_len    = wrdfifo.size;
+   app_req_addr   = Address[31:2];
+   app_req_len    = bl;
+   $display("Write Address: %x, Burst Size: %d",Address,bl);
 
    // wait for app_req_ack == 1
    do begin
@@ -319,8 +344,9 @@ begin
    @ (negedge sdram_clk);
    app_req           = 0;
 
-   for(i=0; i < wrdfifo.size; i++) begin
-      app_wr_data     = wrdfifo[i];
+   for(i=0; i < bl; i++) begin
+      app_wr_data        = $random & 32'hFFFFFFFF;
+      dfifo.push_back(app_wr_data);
 
       do begin
           @ (posedge sdram_clk);
@@ -331,22 +357,28 @@ begin
    end
    app_req           = 0;
    app_wr_en_n       = 4'hF;
+
+
 end
 endtask
 
 task burst_read;
-input [31:0] Address;
+reg [31:0] Address;
+reg [7:0]  bl;
 
 int i,j;
-reg [31:0]   rd_data;
+reg [31:0]   exp_data;
 begin
-   @ (negedge sdram_clk);
+  
+   Address = afifo.pop_front(); 
+   bl      = bfifo.pop_front(); 
 
-      app_req        = 1;
-      app_wr_en_n    = 0;
-      app_req_wr_n   = 1;
-      app_req_addr   = Address[29:2];
-      app_req_len    = wrdfifo.size;
+   app_req        = 1;
+   app_wr_en_n    = 0;
+   app_req_wr_n   = 1;
+   app_req_addr   = Address[29:2];
+   app_req_len    = bl;
+
       // wait for app_req_ack == 1
       do begin
           @ (posedge sdram_clk);
@@ -354,10 +386,11 @@ begin
       @ (negedge sdram_clk);
       app_req           = 0;
 
-      for(j=0; j < wrdfifo.size; j++) begin
+      for(j=0; j < bl; j++) begin
          wait(app_rd_valid == 1);
-         if(app_rd_data !== wrdfifo[j]) begin
-             $display("READ ERROR: Burst-No: %d Addr: %x Rxp: %x Exd: %x",j,Address+(j*2),app_rd_data,wrdfifo[j]);
+         exp_data        = dfifo.pop_front(); // Exptected Read Data
+         if(app_rd_data !== exp_data) begin
+             $display("READ ERROR: Burst-No: %d Addr: %x Rxp: %x Exd: %x",j,Address+(j*2),app_rd_data,exp_data);
              ErrCnt = ErrCnt+1;
          end else begin
              $display("READ STATUS: Burst-No: %d Addr: %x Rxd: %x",j,Address+(j*2),app_rd_data);
