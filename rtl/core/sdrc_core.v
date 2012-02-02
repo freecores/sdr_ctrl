@@ -34,10 +34,12 @@
                                                               
   Author(s):                                                  
       - Dinesh Annayya, dinesha@opencores.org                 
-  Version  : 1.0 - 8th Jan 2012
+  Version  : 0.0 - 8th Jan 2012
                 Initial version with 16/32 Bit SDRAM Support
-           : 1.1 - 24th Jan 2012
+           : 0.1 - 24th Jan 2012
 	         8 Bit SDRAM Support is added
+             0.2 - 2nd Feb 2012
+	         Improved the command pipe structure to accept up-to 4 command of different bank.
 
                                                              
  Copyright (C) 2000 Authors and OPENCORES.ORG                
@@ -253,6 +255,8 @@ wire                     b2r_arb_ok;
 wire                     b2x_wrap;
 wire                     app_wr_next_int;
 wire                     app_rd_valid_int;
+wire                     x2a_rdlast;
+
 
 // synopsys translate_off 
    wire [3:0]           sdr_cmd;
@@ -262,6 +266,7 @@ wire                     app_rd_valid_int;
    assign sdr_den_n = sdr_den_n_int ; 
    assign sdr_dout  = sdr_dout_int ;
 
+assign  app_last_rd = x2a_rdlast;
 
 // To meet the timing at read path, read data is registered w.r.t pad_sdram_clock and register back to sdram_clk
 // assumption, pad_sdram_clk is synhronous and delayed clock of sdram_clk.
@@ -416,12 +421,11 @@ sdrc_xfr_ctl #(.SDR_DW(SDR_DW) ,  .SDR_BW(SDR_BW)) u_xfr_ctl (
           .sdr_din            (pad_sdr_din2       ),
           .sdr_dout           (sdr_dout_int       ),
           .sdr_den_n          (sdr_den_n_int      ),
-		    
       /* Data Flow to the app */
           .x2a_rdstart        (xfr_rdstart        ),
           .x2a_wrstart        (xfr_wrstart        ),
           .x2a_id             (xfr_id             ),
-          .x2a_rdlast         (app_last_rd         ),
+          .x2a_rdlast         (x2a_rdlast         ),
           .x2a_wrlast         (xfr_wrlast         ),
           .app_wrdt           (add_wr_data_int    ),
           .app_wren_n         (app_wr_en_n_int    ),
@@ -459,29 +463,39 @@ sdrc_bs_convert #(.SDR_DW(SDR_DW) ,  .SDR_BW(SDR_BW)) u_bs_convert (
           .reset_n            (reset_n            ),
           .sdr_width          (sdr_width          ),
 
-          .app_req_addr       (app_req_addr       ),  
-          .app_req_addr_int   (app_req_addr_int   ),  
-          .app_req_len        (app_req_len        ),  
-          .app_req_len_int    (app_req_len_int    ),  
-          .app_sdr_req        (app_req            ),  
-          .app_sdr_req_int    (app_req_int        ),  
-          .app_req_dma_last   (app_req_dma_last   ), 
-          .app_req_dma_last_int(app_req_dma_last_int),
-          .app_req_wr_n       (app_req_wr_n       ),
-          .app_req_ack_int    (app_req_ack_int    ),
-          .app_req_ack        (app_req_ack        ),
-
-          .app_wr_data        (app_wr_data        ),
+   /* Control Signal from xfr ctrl */
+          .x2a_rdstart        (xfr_rdstart        ),
+          .x2a_wrstart        (xfr_wrstart        ),
+          .x2a_rdlast         (x2a_rdlast         ),
+          .x2a_wrlast         (xfr_wrlast         ),
+          .app_rd_data_int    (app_rd_data_int    ),
+          .app_rd_valid_int   (app_rd_valid_int   ),
           .app_wr_data_int    (add_wr_data_int    ),
-          .app_wr_en_n        (app_wr_en_n        ),
           .app_wr_en_n_int    (app_wr_en_n_int    ),
           .app_wr_next_int    (app_wr_next_int    ),
-          .app_wr_next        (app_wr_next_req    ),
 
-          .app_rd_data_int    (app_rd_data_int    ),
+   /* Control Signal from request ctrl */
+          .app_req_addr_int   (app_req_addr_int   ),  
+          .app_req_len_int    (app_req_len_int    ),  
+          .app_req_ack_int    (app_req_ack_int    ),
+          .app_sdr_req_int    (app_req_int        ),  
+
+   /* Control Signal from Bank Ctrl  */
+          .app_req_dma_last_int(app_req_dma_last_int),
+
+   /*  Control Signal from/to to application i/f  */
+          .app_req_addr       (app_req_addr       ),  
+          .app_req_len        (app_req_len        ),  
+          .app_sdr_req        (app_req            ),  
+          .app_req_dma_last   (app_req_dma_last   ), 
+          .app_req_wr_n       (app_req_wr_n       ),
+          .app_req_ack        (app_req_ack        ),
+          .app_wr_data        (app_wr_data        ),
+          .app_wr_en_n        (app_wr_en_n        ),
+          .app_wr_next        (app_wr_next_req    ),
           .app_rd_data        (app_rd_data        ),
-          .app_rd_valid_int   (app_rd_valid_int   ),
           .app_rd_valid       (app_rd_valid       )
+
        );   
    
 endmodule // sdrc_core

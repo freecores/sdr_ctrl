@@ -157,7 +157,7 @@ wire #(2.0) sdram_clk_d   = sdram_clk;
 
     /* Parameters */
           .sdr_init_done      (sdr_init_done      ),
-          .cfg_req_depth      (2'h2               ),	        //how many req. buffer should hold
+          .cfg_req_depth      (2'h3               ),	        //how many req. buffer should hold
           .cfg_sdr_en         (1'b1               ),
           .cfg_sdr_mode_reg   (12'h033            ),
           .cfg_sdr_tras_d     (4'h4               ),

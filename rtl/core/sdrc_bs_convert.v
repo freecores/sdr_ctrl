@@ -15,7 +15,9 @@
                                                               
   Author(s):                                                  
       - Dinesh Annayya, dinesha@opencores.org                 
-  Version  :  1.0  - 8th Jan 2012
+  Version  :  0.0  - 8th Jan 2012 - Initial structure
+              0.2 - 2nd Feb 2012
+	         Improved the command pipe structure to accept up-to 4 command of different bank.
                                                               
 
                                                              
@@ -50,28 +52,37 @@ module sdrc_bs_convert (
                     reset_n,
                     sdr_width,
 
-                    app_req_addr,
-                    app_req_addr_int,
-                    app_req_len,
-                    app_req_len_int,
-                    app_sdr_req,
-                    app_sdr_req_int,
-                    app_req_dma_last,
-                    app_req_dma_last_int,
-                    app_req_wr_n,
-                    app_req_ack,
-                    app_req_ack_int,
-
-                    app_wr_data,
+        /* Control Signal from xfr ctrl */
+                    x2a_rdstart,
+                    x2a_wrstart,
+                    x2a_rdlast,
+                    x2a_wrlast,
+                    app_rd_data_int,
+                    app_rd_valid_int,
                     app_wr_data_int,
-                    app_wr_en_n,
                     app_wr_en_n_int,
                     app_wr_next_int,
-                    app_wr_next,
 
-                    app_rd_data_int,
+       /* Control Signal from request ctrl */
+                    app_req_addr_int,
+                    app_req_len_int,
+                    app_req_ack_int,
+                    app_sdr_req_int,
+
+   /* Control Signal from Bank Ctrl  */
+                    app_req_dma_last_int,
+
+   /*  Control Signal from/to to application i/f  */
+                    app_req_addr,
+                    app_req_len,
+                    app_sdr_req,
+                    app_req_dma_last,
+                    app_req_wr_n,
+                    app_req_ack,
+                    app_wr_data,
+                    app_wr_en_n,
+                    app_wr_next,
                     app_rd_data,
-                    app_rd_valid_int,
                     app_rd_valid
 		);
 parameter  APP_AW   = 30;  // Application Address Width
@@ -86,28 +97,41 @@ input                    clk;
 input                    reset_n ;
 input [1:0]             sdr_width           ; // 2'b00 - 32 Bit SDR, 2'b01 - 16 Bit SDR, 2'b1x - 8 Bit
 
-input [APP_AW-1:0]       app_req_addr;
+/* Control Signal from xfr ctrl */
+input                    x2a_rdstart; // read start indication
+input                    x2a_wrstart; // writ start indication
+input                    x2a_rdlast; //  read last burst access
+input                    x2a_wrlast; // write last transfer
+input [SDR_DW-1:0]       app_rd_data_int;
+input                    app_rd_valid_int;
+output [SDR_DW-1:0]      app_wr_data_int;
+output [SDR_BW-1:0]      app_wr_en_n_int;
+input                    app_wr_next_int;
+
+/* Control Signal from request ctrl */
 output [APP_AW:0]        app_req_addr_int;
-input  [APP_RW-1:0]      app_req_len ;
 output [APP_RW-1:0]      app_req_len_int; 
+input                    app_req_ack_int;
+output                   app_sdr_req_int;
+
+/* Control Signal from Bank Ctrl  */
+output                   app_req_dma_last_int;
+
+
+/*  Control Signal from/to to application i/f  */
+input [APP_AW-1:0]       app_req_addr;
+input  [APP_RW-1:0]      app_req_len ;
 input                    app_req_wr_n;
 input                    app_sdr_req;
-output                   app_sdr_req_int;
 input                    app_req_dma_last;
 output                   app_req_dma_last_int;
-input                    app_req_ack_int;
 output                   app_req_ack;
 
 input  [APP_DW-1:0]      app_wr_data;
-output [SDR_DW-1:0]      app_wr_data_int;
 input  [APP_BW-1:0]      app_wr_en_n;
-output [SDR_BW-1:0]      app_wr_en_n_int;
-input                    app_wr_next_int;
 output                   app_wr_next;
 
-input [SDR_DW-1:0]       app_rd_data_int;
 output [APP_DW-1:0]      app_rd_data;
-input                    app_rd_valid_int;
 output                   app_rd_valid;
 
 reg [APP_AW:0]           app_req_addr_int;
@@ -124,8 +148,8 @@ reg [SDR_BW-1:0]         app_wr_en_n_int;
 reg                      app_wr_next;
 
 reg [23:0]               saved_rd_data;
-reg [7:0]                rd_xfr_count;
-reg [7:0]                wr_xfr_count;
+reg [1:0]                rd_xfr_count;
+reg [1:0]                wr_xfr_count;
 
 
 wire                  ok_to_req;                   
@@ -152,7 +176,8 @@ always @(*) begin
             app_req_addr_int = {app_req_addr,1'b0};
             app_req_len_int = {app_req_len,1'b0};
             app_req_dma_last_int = app_req_dma_last;
-            app_sdr_req_int = app_sdr_req && ok_to_req;
+            //app_sdr_req_int = app_sdr_req && ok_to_req;
+            app_sdr_req_int = app_sdr_req ;
             app_req_ack = app_req_ack_int;
             app_wr_next = (app_wr_next_int & wr_xfr_count[0]);
             app_rd_valid = (rd_xfr_count & rd_xfr_count[0]);
@@ -176,10 +201,9 @@ always @(*) begin
             app_req_dma_last_int = app_req_dma_last;
             app_sdr_req_int = app_sdr_req && ok_to_req;
             app_req_ack = app_req_ack_int;
-            app_wr_next = (app_wr_next_int & (wr_xfr_count[1:0]== 2'b01));
-            app_rd_valid = (rd_xfr_count &   (rd_xfr_count[1:0]== 2'b01));
-	    // Note: counter is down counter from 00 -> 11 -> 10 -> 01 --> 00
-            if(wr_xfr_count[1:0] == 2'b01)
+            app_wr_next = (app_wr_next_int & (wr_xfr_count[1:0]== 2'b11));
+            app_rd_valid = (rd_xfr_count &   (rd_xfr_count[1:0]== 2'b11));
+            if(wr_xfr_count[1:0] == 2'b11)
             begin
                 app_wr_en_n_int = app_wr_en_n[3];
                 app_wr_data_int = app_wr_data[31:24];
@@ -189,7 +213,7 @@ always @(*) begin
                 app_wr_en_n_int = app_wr_en_n[2];
                 app_wr_data_int = app_wr_data[23:16];
             end
-            else if(wr_xfr_count[1:0] == 2'b11)
+            else if(wr_xfr_count[1:0] == 2'b01)
             begin
                 app_wr_en_n_int = app_wr_en_n[1];
                 app_wr_data_int = app_wr_data[15:8];
@@ -204,7 +228,6 @@ always @(*) begin
      end
 
 
-reg lcl_mc_req_wr_n;
 
 always @(posedge clk)
   begin
@@ -212,33 +235,33 @@ always @(posedge clk)
       begin
         rd_xfr_count    <= 8'b0;
         wr_xfr_count    <= 8'b0;
-        lcl_mc_req_wr_n <= 1'b1;
 	saved_rd_data   <= 24'h0;
       end
     else begin
-	if(app_req_ack)
-            lcl_mc_req_wr_n <= app_req_wr_n;
 
 	// During Write Phase
-        if(app_req_ack && (app_req_wr_n == 0)) begin
-           wr_xfr_count    <= app_req_len_int;
+        if(x2a_wrlast) begin
+           wr_xfr_count    <= 0;
         end
-        else if(app_wr_next_int & !lcl_mc_req_wr_n) begin
-           wr_xfr_count <= wr_xfr_count - 1'b1;
+        else if(app_wr_next_int) begin
+           wr_xfr_count <= wr_xfr_count + 1'b1;
         end
 
 	// During Read Phase
-        if(app_req_ack && app_req_wr_n) begin
-           rd_xfr_count    <= app_req_len_int;
+        if(x2a_rdlast) begin
+           rd_xfr_count    <= 0;
         end
-        else if(app_rd_valid_int & lcl_mc_req_wr_n) begin
-           rd_xfr_count   <= rd_xfr_count - 1'b1;
+        else if(app_rd_valid_int) begin
+           rd_xfr_count   <= rd_xfr_count + 1'b1;
+	end
+
+	// Save Previous Data
+        if(app_rd_valid_int) begin
 	   if(sdr_width == 2'b01) // 16 Bit SDR Mode
 	      saved_rd_data[15:0]  <= app_rd_data_int;
             else begin// 8 bit SDR Mode - 
-		      // Note: counter is down counter from 00 -> 11 -> 10 -> 01 --> 00
 	       if(rd_xfr_count[1:0] == 2'b00)      saved_rd_data[7:0]   <= app_rd_data_int[7:0];
-	       else if(rd_xfr_count[1:0] == 2'b11) saved_rd_data[15:8]  <= app_rd_data_int[7:0];
+	       else if(rd_xfr_count[1:0] == 2'b01) saved_rd_data[15:8]  <= app_rd_data_int[7:0];
 	       else if(rd_xfr_count[1:0] == 2'b10) saved_rd_data[23:16] <= app_rd_data_int[7:0];
 	    end
         end
