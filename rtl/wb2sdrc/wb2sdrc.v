@@ -13,7 +13,11 @@
   Author(s):  Dinesh Annayya, dinesha@opencores.org                 
   Version  : 0.0 - Initial Release
              0.1 - 2nd Feb 2012
-	           Async Fifo towards the application layer is selected with Registered Full Generation
+	           Async Fifo towards the application layer is selected 
+		   with Registered Full Generation
+             0.2 - 2nd Feb 2012
+	           Pending Read generation bug fix done to handle backto back write 
+		   followed by read request
                                                              
  Copyright (C) 2000 Authors and OPENCORES.ORG                
                                                              
@@ -198,7 +202,9 @@ always @(posedge wb_rst_i or posedge wb_clk_i) begin
    if(wb_rst_i) begin
        pending_read <= 1'b0;
    end else begin
-      pending_read <=  wb_stb_i & wb_cyc_i & !wb_we_i & !wb_ack_o;
+      //pending_read <=  wb_stb_i & wb_cyc_i & !wb_we_i & !wb_ack_o;
+      pending_read <=   (cmdfifo_wr && !wb_we_i) ? 1'b1:
+	                (wb_stb_i & wb_cyc_i & !wb_we_i & wb_ack_o) ? 1'b0: pending_read;
    end
 end
 
