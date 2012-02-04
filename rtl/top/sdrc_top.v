@@ -185,6 +185,7 @@ wire [dw/8-1:0]       app_wr_en_n        ; // Active low sdr byte-wise write dat
 wire                  app_wr_next_req    ; // Ready to accept the next write
 wire                  app_rd_valid       ; // sdr read valid
 wire                  app_last_rd        ; // Indicate last Read of Burst Transfer
+wire                  app_last_wr        ; // Indicate last Write of Burst Transfer
 wire [dw-1:0]         app_wr_data        ; // sdr write data
 wire  [dw-1:0]        app_rd_data        ; // sdr read data
 
@@ -249,7 +250,6 @@ sdrc_core #(.SDR_DW(SDR_DW) , .SDR_BW(SDR_BW)) u_sdrc_core (
  		/* Request from app */
           .app_req            (app_req            ) ,// Transfer Request
           .app_req_addr       (app_req_addr       ) ,// SDRAM Address
-          .app_req_addr_mask  (29'h0              ) ,// Address mask for queue wrap
           .app_req_len        (app_req_len        ) ,// Burst Length (in 16 bit words)
           .app_req_wrap       (1'b0               ) ,// Wrap mode request 
           .app_req_wr_n       (app_req_wr_n       ) ,// 0 => Write request, 1 => read req
@@ -262,6 +262,7 @@ sdrc_core #(.SDR_DW(SDR_DW) , .SDR_BW(SDR_BW)) u_sdrc_core (
           .app_rd_data        (app_rd_data        ) ,
           .app_rd_valid       (app_rd_valid       ) ,
 	  .app_last_rd        (app_last_rd        ) ,
+          .app_last_wr        (app_last_wr        ) ,
           .app_wr_next_req    (app_wr_next_req    ) ,
           .sdr_init_done      (sdr_init_done      ) ,
           .app_req_dma_last   (app_req            ) ,

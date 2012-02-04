@@ -26,6 +26,11 @@
             Address[24:13]  - Row Address
 
   The SDRAMs are operated in 4 beat burst mode.
+
+  If Wrap = 0; 
+      If the current burst cross the page boundary, then this block split the request into two coressponding change in address and request length
+
+  if the current burst cross the page boundar.
   This module takes requests from the memory controller, 
   chops them to page boundaries if wrap=0, 
   and passes the request to bank_ctl
@@ -70,14 +75,13 @@ module sdrc_req_gen (clk,
 		    reset_n,
 
 		    /* Request from app */
-		    req,	// Transfer Request
-		    req_id,	// ID for this transfer
-		    req_addr,	// SDRAM Address
-		    req_addr_mask,
-		    req_len,	// Burst Length (in 32 bit words)
-		    req_wrap,	// Wrap mode request (xfr_len = 4)
-		    req_wr_n,	// 0 => Write request, 1 => read req
-		    req_ack,	// Request has been accepted
+		    req,	        // Transfer Request
+		    req_id,	        // ID for this transfer
+		    req_addr,	        // SDRAM Address
+		    req_len,	        // Burst Length (in 32 bit words)
+		    req_wrap,	        // Wrap mode request (xfr_len = 4)
+		    req_wr_n,	        // 0 => Write request, 1 => read req
+		    req_ack,	        // Request has been accepted
 		    sdr_core_busy_n,	// SDRAM Core Busy Indication
 		    cfg_colbits,
 		    
@@ -112,8 +116,7 @@ parameter  SDR_BW   = 2;   // SDR Byte Width
    /* Request from app */
    input 			req;
    input [`SDR_REQ_ID_W-1:0] 	req_id;
-   input [APP_AW:0] 	req_addr;
-   input [APP_AW-2:0] 	req_addr_mask;
+   input [APP_AW-1:0] 	req_addr;
    input [APP_RW-1:0] 	req_len;
    input 			req_wr_n, req_wrap;
    output 			req_ack, sdr_core_busy_n;
@@ -151,8 +154,8 @@ parameter  SDR_BW   = 2;   // SDR Byte Width
    wire [11:0] 			r2b_raddr;
    wire [11:0] 			r2b_caddr;
 
-   reg [APP_AW-1:0] 	curr_sdr_addr, sdr_addrs_mask;
-   wire [APP_AW-1:0] 	next_sdr_addr, next_sdr_addr1;
+   reg [APP_AW-1:0] 	curr_sdr_addr ;
+   wire [APP_AW-1:0] 	next_sdr_addr ;
 
 
 //--------------------------------------------------------------------
@@ -161,45 +164,50 @@ parameter  SDR_BW   = 2;   // SDR Byte Width
 reg [APP_AW:0]           req_addr_int;
 reg [APP_RW-1:0]         req_len_int;
 always @(*) begin
-	if(sdr_width == 2'b00) begin // 32 Bit SDR Mode
-            req_addr_int     = {1'b0,req_addr};
-            req_len_int      = req_len;
-        end else if(sdr_width == 2'b01) begin // 16 Bit SDR Mode
-           // Changed the address and length to match the 16 bit SDR Mode
-            req_addr_int     = {req_addr,1'b0};
-            req_len_int      = {req_len,1'b0};
-        end else  begin // 8 Bit SDR Mode
-           // Changed the address and length to match the 16 bit SDR Mode
-            req_addr_int    = {req_addr,2'b0};
-            req_len_int     = {req_len,2'b0};
-	end
+   if(sdr_width == 2'b00) begin // 32 Bit SDR Mode
+      req_addr_int     = {1'b0,req_addr};
+      req_len_int      = req_len;
+   end else if(sdr_width == 2'b01) begin // 16 Bit SDR Mode
+      // Changed the address and length to match the 16 bit SDR Mode
+      req_addr_int     = {req_addr,1'b0};
+      req_len_int      = {req_len,1'b0};
+   end else  begin // 8 Bit SDR Mode
+      // Changed the address and length to match the 16 bit SDR Mode
+      req_addr_int    = {req_addr,2'b0};
+      req_len_int     = {req_len,2'b0};
+   end
 end
 
    //
-   // The maximum length for no page overflow is 200h/100h - caddr. Split a request
-   // into 2 or more requests if it crosses a page boundary.
-   // For non-queue accesses req_addr_mask is set to all 1 and the accesses
-   // proceed linearly. 
-   // All queues end on a 512 byte boundary (actually a 1K boundary). For Q
-   // accesses req_addr_mask is set to LSB of 1 and MSB of 0 to constrain the
-   // accesses within the space for a Q. When splitting and calculating the next
-   // address only the LSBs are incremented, the MSBs remain = req_addr.
+   // Identify the page over flow.
+   // Find the Maximum Burst length allowed from the selected column
+   // address, If the requested burst length is more than the allowed Maximum
+   // burst length, then we need to handle the bank cross over case and we
+   // need to split the reuest.
    //
    assign max_r2b_len = (cfg_colbits == 2'b00) ? (12'h100 - r2b_caddr) :
 	                (cfg_colbits == 2'b01) ? (12'h200 - r2b_caddr) :
 			(cfg_colbits == 2'b10) ? (12'h400 - r2b_caddr) : (12'h800 - r2b_caddr);
 
+
+     // If the wrap = 0 and current application burst length is crossing the page boundary, 
+     // then request will be split into two with corresponding change in request address and request length.
+     //
+     // If the wrap = 0 and current burst length is not crossing the page boundary, 
+     // then request from application layer will be transparently passed on the bank control block.
+
+     //
+     // if the wrap = 1, then this block will not modify the request address and length. 
+     // The wrapping functionality will be handle by the bank control module and 
+     // column address will rewind back as follows XX -> FF ? 00 ? 1
+     //
    assign page_ovflw = ({1'b0, lcl_req_len} > max_r2b_len) ? ~lcl_wrap : 1'b0;
 
    assign r2b_len = (page_ovflw) ? max_r2b_len : lcl_req_len;
 
    assign next_req_len = lcl_req_len - r2b_len;
 
-   assign next_sdr_addr1 = curr_sdr_addr + r2b_len;
-
-   // Wrap back based on the mask
-   assign next_sdr_addr = (sdr_addrs_mask & next_sdr_addr1) | 
-			  (~sdr_addrs_mask & curr_sdr_addr);
+   assign next_sdr_addr = curr_sdr_addr + r2b_len;
 
    assign sdr_core_busy_n = req_idle & b2r_arb_ok & sdr_init_done;
 
@@ -221,15 +229,11 @@ end
       lcl_wrap <= (req_ack) ? req_wrap : lcl_wrap;
 	     
       lcl_req_len <= (req_ack) ? req_len_int  :
-		   (req_ld) ? next_req_len : lcl_req_len;
+		     (req_ld) ? next_req_len : lcl_req_len;
 
       curr_sdr_addr <= (req_ack) ? req_addr_int :
 		       (req_ld) ? next_sdr_addr : curr_sdr_addr;
 
-      sdr_addrs_mask <= (req_ack) ?((sdr_width == 2'b00)  ? req_addr_mask :
-	                            (sdr_width == 2'b01)  ? {req_addr_mask,req_addr_mask[0]} : 
-				                            {req_addr_mask,req_addr_mask[1:0]}) : sdr_addrs_mask;
-      
    end // always @ (posedge clk)
    
    always @ (*) begin
@@ -274,13 +278,13 @@ end
 	           (cfg_colbits == 2'b01) ? {curr_sdr_addr[10:9]}  :
 	           (cfg_colbits == 2'b10) ? {curr_sdr_addr[11:10]} : curr_sdr_addr[12:11];
 
-   /********************
-   *  Colbits Mapping:
-   *           2'b00 - 8 Bit
-   *           2'b01 - 16 Bit
-   *           2'b10 - 10 Bit
-   *           2'b11 - 11 Bits
-   ************************/
+/********************
+*  Colbits Mapping:
+*           2'b00 - 8 Bit
+*           2'b01 - 16 Bit
+*           2'b10 - 10 Bit
+*           2'b11 - 11 Bits
+************************/
    assign r2b_caddr = (cfg_colbits == 2'b00) ? {4'b0, curr_sdr_addr[7:0]} :
 	              (cfg_colbits == 2'b01) ? {3'b0, curr_sdr_addr[8:0]} :
 	              (cfg_colbits == 2'b10) ? {2'b0, curr_sdr_addr[9:0]} : {1'b0, curr_sdr_addr[10:0]};

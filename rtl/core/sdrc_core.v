@@ -80,7 +80,6 @@ module sdrc_core
 		/* Request from app */
 		app_req,	        // Transfer Request
 		app_req_addr,	        // SDRAM Address
-		app_req_addr_mask,	// Address mask for queue wrap
 		app_req_len,	        // Burst Length (in 16 bit words)
 		app_req_wrap,	        // Wrap mode request (xfr_len = 4)
 		app_req_wr_n,	        // 0 => Write request, 1 => read req
@@ -148,7 +147,6 @@ input [1:0]             cfg_colbits         ; // 2'b00 - 8 Bit column address, 2
 //------------------------------------------------
 input 			app_req             ; // Application Request
 input [APP_AW-1:0] 	app_req_addr        ; // Address 
-input [APP_AW-2:0]      app_req_addr_mask   ; // Address Mask
 input 			app_req_wr_n        ; // 0 - Write, 1 - Read
 input                   app_req_wrap        ; // Address Wrap
 output                  app_req_ack         ; // Application Request Ack
@@ -277,7 +275,6 @@ sdrc_req_gen #(.SDR_DW(SDR_DW) , .SDR_BW(SDR_BW)) u_req_gen (
           .req                (app_req            ),
           .req_id             (4'b0               ),
           .req_addr           (app_req_addr       ),
-          .req_addr_mask      (app_req_addr_mask  ),
           .req_len            (app_req_len        ),
           .req_wrap           (app_req_wrap       ),
           .req_wr_n           (app_req_wr_n       ),

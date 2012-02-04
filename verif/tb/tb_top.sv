@@ -253,7 +253,10 @@ initial begin //{
   wait(u_dut.sdr_init_done == 1);
 
   #1000;
-  
+
+  $display("-------------------------------------- ");
+  $display(" Case-1: Single Write/Read Case        ");
+  $display("-------------------------------------- ");
 
   burst_write(32'h4_0000,8'h4);  
  #1000;
@@ -261,15 +264,25 @@ initial begin //{
 
   // Repeat one more time to analysis the 
   // SDRAM state change for same col/row address
+  $display("-------------------------------------- ");
+  $display(" Case-2: Repeat same transfer once again ");
+  $display("----------------------------------------");
   burst_write(32'h4_0000,8'h4);  
- #1000;
- #1000;
+  burst_read();  
   burst_write(32'h0040_0000,8'h5);  
-
- #1000;
   burst_read();  
 
-  // 4 Write & 4 Read 
+  $display("----------------------------------------");
+  $display(" Case-3 Create a Page Cross Over        ");
+  $display("----------------------------------------");
+  burst_write(32'h4_0FFC,8'h8);  
+  burst_write(32'h0040_0FF8,8'hF);  
+  burst_read();  
+  burst_read();  
+
+  $display("----------------------------------------");
+  $display(" Case:4 4 Write & 4 Read                ");
+  $display("----------------------------------------");
   burst_write(32'h4_0000,8'h4);  
   burst_write(32'h5_0000,8'h5);  
   burst_write(32'h6_0000,8'h6);  
@@ -279,9 +292,52 @@ initial begin //{
   burst_read();  
   burst_read();  
 
+  $display("---------------------------------------");
+  $display(" Case:5 16 Write & 16 Read With Different Bank and Row ");
+  $display("---------------------------------------");
+  //----------------------------------------
+  // Address Decodeing:
+  //  with cfg_col bit configured as: 00
+  //    <12 Bit Row> <2 Bit Bank> <8 Bit Column> <2'b00>
+  //
+  burst_write({12'h000,2'b00,8'h00,2'b00},8'h4);   // Row: 0 Bank : 0
+  burst_write({12'h000,2'b01,8'h00,2'b00},8'h5);   // Row: 0 Bank : 1
+  burst_write({12'h000,2'b10,8'h00,2'b00},8'h6);   // Row: 0 Bank : 2
+  burst_write({12'h000,2'b11,8'h00,2'b00},8'h7);   // Row: 0 Bank : 3
+  burst_write({12'h001,2'b00,8'h00,2'b00},8'h4);   // Row: 1 Bank : 0
+  burst_write({12'h001,2'b01,8'h00,2'b00},8'h5);   // Row: 1 Bank : 1
+  burst_write({12'h001,2'b10,8'h00,2'b00},8'h6);   // Row: 1 Bank : 2
+  burst_write({12'h001,2'b11,8'h00,2'b00},8'h7);   // Row: 1 Bank : 3
+  burst_read();  
+  burst_read();  
+  burst_read();  
+  burst_read();  
+  burst_read();  
+  burst_read();  
+  burst_read();  
+  burst_read();  
 
-  // 2 write and 2 read random
+  burst_write({12'h002,2'b00,8'h00,2'b00},8'h4);   // Row: 2 Bank : 0
+  burst_write({12'h002,2'b01,8'h00,2'b00},8'h5);   // Row: 2 Bank : 1
+  burst_write({12'h002,2'b10,8'h00,2'b00},8'h6);   // Row: 2 Bank : 2
+  burst_write({12'h002,2'b11,8'h00,2'b00},8'h7);   // Row: 2 Bank : 3
+  burst_write({12'h003,2'b00,8'h00,2'b00},8'h4);   // Row: 3 Bank : 0
+  burst_write({12'h003,2'b01,8'h00,2'b00},8'h5);   // Row: 3 Bank : 1
+  burst_write({12'h003,2'b10,8'h00,2'b00},8'h6);   // Row: 3 Bank : 2
+  burst_write({12'h003,2'b11,8'h00,2'b00},8'h7);   // Row: 3 Bank : 3
 
+  burst_read();  
+  burst_read();  
+  burst_read();  
+  burst_read();  
+  burst_read();  
+  burst_read();  
+  burst_read();  
+  burst_read();  
+
+  $display("---------------------------------------------------");
+  $display(" Case: 6 Random 2 write and 2 read random");
+  $display("---------------------------------------------------");
   for(k=0; k < 20; k++) begin
      StartAddr = $random & 32'h003FFFFF;
      burst_write(StartAddr,($random & 8'h3f)+1);  
