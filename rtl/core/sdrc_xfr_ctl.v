@@ -107,8 +107,8 @@ module sdrc_xfr_ctl (clk,
 		    x2a_rdlast,
 		    x2a_wrlast,
 		    x2a_id,
-		    app_wrdt,
-		    app_wren_n,
+		    a2x_wrdt,
+		    a2x_wren_n,
 		    x2a_wrnext,
 		    x2a_rddt,
 		    x2a_rdok,
@@ -158,8 +158,8 @@ output 			x2b_refresh, x2b_act_ok, x2b_rdok,
 output 			x2a_rdstart, x2a_wrstart, x2a_rdlast, x2a_wrlast;
 output [`SDR_REQ_ID_W-1:0] 	x2a_id;
 
-input [SDR_DW-1:0] 	app_wrdt;
-input [SDR_BW-1:0] 	app_wren_n;
+input [SDR_DW-1:0] 	a2x_wrdt;
+input [SDR_BW-1:0] 	a2x_wren_n;
 output [SDR_DW-1:0] 	x2a_rddt;
 output 			x2a_wrnext, x2a_rdok, sdr_init_done;
 		
@@ -556,7 +556,7 @@ output [SDR_BW-1:0] 	sdr_den_n;
 	 sdr_we_n <= xfr_cmd[0];
 	 sdr_cke <= (xfr_st != `XFR_IDLE) ? 1'b1 : 
 		    ~(mgmt_idle & b2x_idle & r2x_idle);
-	 sdr_dqm <= (wr_next) ? app_wren_n : {SDR_BW{1'b0}};
+	 sdr_dqm <= (wr_next) ? a2x_wren_n : {SDR_BW{1'b0}};
          sdr_den_n <= (wr_next) ? {SDR_BW{1'b0}} : {SDR_BW{1'b1}};
       end // else: !if(~reset_n)
 
@@ -567,7 +567,7 @@ output [SDR_BW-1:0] 	sdr_den_n;
 	 sdr_ba <= xfr_ba;
       end // if (~xfr_cmd[3])
       
-      sdr_dout <= (wr_next) ? app_wrdt : sdr_dout;
+      sdr_dout <= (wr_next) ? a2x_wrdt : sdr_dout;
 
    end // always @ (posedge clk)
    

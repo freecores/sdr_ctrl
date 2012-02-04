@@ -166,7 +166,7 @@ wire #(2.0) sdram_clk_d   = sdram_clk;
           .cfg_sdr_cas        (3'h3               ),
           .cfg_sdr_trcar_d    (4'h7               ),
           .cfg_sdr_twr_d      (4'h1               ),
-          .cfg_sdr_rfsh       (12'hC35            ),
+          .cfg_sdr_rfsh       (12'h100            ), // reduced from 12'hC35
           .cfg_sdr_rfmax      (3'h6               )
 
 );
@@ -259,8 +259,13 @@ initial begin //{
  #1000;
   burst_read();  
 
+  // Repeat one more time to analysis the 
+  // SDRAM state change for same col/row address
+  burst_write(32'h4_0000,8'h4);  
+ #1000;
  #1000;
   burst_write(32'h0040_0000,8'h5);  
+
  #1000;
   burst_read();  
 

@@ -154,6 +154,27 @@ parameter  SDR_BW   = 2;   // SDR Byte Width
    reg [APP_AW-1:0] 	curr_sdr_addr, sdr_addrs_mask;
    wire [APP_AW-1:0] 	next_sdr_addr, next_sdr_addr1;
 
+
+//--------------------------------------------------------------------
+// Generate the internal Adress and Burst length Based on sdram width
+//--------------------------------------------------------------------
+reg [APP_AW:0]           req_addr_int;
+reg [APP_RW-1:0]         req_len_int;
+always @(*) begin
+	if(sdr_width == 2'b00) begin // 32 Bit SDR Mode
+            req_addr_int     = {1'b0,req_addr};
+            req_len_int      = req_len;
+        end else if(sdr_width == 2'b01) begin // 16 Bit SDR Mode
+           // Changed the address and length to match the 16 bit SDR Mode
+            req_addr_int     = {req_addr,1'b0};
+            req_len_int      = {req_len,1'b0};
+        end else  begin // 8 Bit SDR Mode
+           // Changed the address and length to match the 16 bit SDR Mode
+            req_addr_int    = {req_addr,2'b0};
+            req_len_int     = {req_len,2'b0};
+	end
+end
+
    //
    // The maximum length for no page overflow is 200h/100h - caddr. Split a request
    // into 2 or more requests if it crosses a page boundary.
@@ -199,10 +220,10 @@ parameter  SDR_BW   = 2;   // SDR Byte Width
 
       lcl_wrap <= (req_ack) ? req_wrap : lcl_wrap;
 	     
-      lcl_req_len <= (req_ack) ? req_len  :
+      lcl_req_len <= (req_ack) ? req_len_int  :
 		   (req_ld) ? next_req_len : lcl_req_len;
 
-      curr_sdr_addr <= (req_ack) ? req_addr :
+      curr_sdr_addr <= (req_ack) ? req_addr_int :
 		       (req_ld) ? next_sdr_addr : curr_sdr_addr;
 
       sdr_addrs_mask <= (req_ack) ?((sdr_width == 2'b00)  ? req_addr_mask :

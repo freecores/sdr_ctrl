@@ -174,7 +174,7 @@ wire #(1.0) pad_clk     = sdram_clk_d;
           .cfg_sdr_cas        (3'h3               ),
           .cfg_sdr_trcar_d    (4'h7               ),
           .cfg_sdr_twr_d      (4'h1               ),
-          .cfg_sdr_rfsh       (12'hC35            ),
+          .cfg_sdr_rfsh       (12'h100            ), // reduced from 12'hC35
           .cfg_sdr_rfmax      (3'h6               )
 
 );

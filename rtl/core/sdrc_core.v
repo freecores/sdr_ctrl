@@ -90,6 +90,8 @@ module sdrc_core
 		
 		app_wr_data,
                 app_wr_en_n,
+		app_last_wr,
+
 		app_rd_data,
 		app_rd_valid,
 		app_last_rd,
@@ -155,6 +157,7 @@ output 			sdr_core_busy_n     ; // 0 - busy, 1 - free
 input [APP_DW-1:0] 	app_wr_data         ; // Write Data
 output 		        app_wr_next_req     ; // Next Write Data Request
 input [APP_BW-1:0] 	app_wr_en_n         ; // Byte wise Write Enable
+output                  app_last_wr         ; // Last Write trannsfer of a given Burst
 output [APP_DW-1:0] 	app_rd_data         ; // Read Data
 output                  app_rd_valid        ; // Read Valid
 output                  app_last_rd         ; // Last Read Transfer of a given Burst
@@ -196,9 +199,6 @@ input                   app_req_dma_last;    // this signal should close the ban
 // Internal Nets
    
 // SDR_REQ_GEN
-wire 			r2x_idle, app_req_ack,app_req_ack_int;
-wire                    app_req_dma_last_int;
-wire 			r2b_req, r2b_start, r2b_last, r2b_write;
 wire [`SDR_REQ_ID_W-1:0]r2b_req_id;
 wire [1:0] 		r2b_ba;
 wire [11:0] 		r2b_raddr;
@@ -206,24 +206,16 @@ wire [11:0] 		r2b_caddr;
 wire [APP_RW-1:0] 	r2b_len;
 
 // SDR BANK CTL
-wire 			b2r_ack, b2x_idle;
-wire 			b2x_req, b2x_start, b2x_last, b2x_tras_ok;
 wire [`SDR_REQ_ID_W-1:0]b2x_id;
 wire [1:0] 		b2x_ba;
-wire  			b2x_ba_last;
 wire [11:0] 		b2x_addr;
 wire [APP_RW-1:0] 	b2x_len;
 wire [1:0] 		b2x_cmd;
 
 // SDR_XFR_CTL
-wire 			x2b_ack;
 wire [3:0] 		x2b_pre_ok;
-wire 			x2b_refresh, x2b_act_ok, x2b_rdok, x2b_wrok;
-wire 			xfr_rdstart, app_last_rd;
-wire 			xfr_wrstart, xfr_wrlast;
 wire [`SDR_REQ_ID_W-1:0]xfr_id;
 wire [APP_DW-1:0] 	app_rd_data;
-wire 			app_wr_next_req, app_rd_valid;
 wire 			sdr_cs_n, sdr_cke, sdr_ras_n, sdr_cas_n, sdr_we_n; 
 wire [SDR_BW-1:0] 	sdr_dqm;
 wire [1:0] 		sdr_ba;
@@ -235,27 +227,16 @@ wire [SDR_BW-1:0] 	sdr_den_n_int;
 
 wire [1:0] 		xfr_bank_sel;
 
-wire [APP_AW:0]          app_req_addr_int;
 wire [APP_AW-1:0]        app_req_addr;
-wire [APP_RW-1:0]        app_req_len_int;
 wire [APP_RW-1:0]        app_req_len;
 
 wire [APP_DW-1:0]        app_wr_data;
-wire [SDR_DW-1:0]        add_wr_data_int;
+wire [SDR_DW-1:0]        a2x_wrdt       ;
 wire [APP_BW-1:0]        app_wr_en_n;
-wire [SDR_BW-1:0]        app_wr_en_n_int;
+wire [SDR_BW-1:0]        a2x_wren_n;
 
 //wire [31:0] app_rd_data;
-wire [SDR_DW-1:0]        app_rd_data_int;
-
-//
-wire                     app_req_int;
-wire                     r2b_wrap;
-wire                     b2r_arb_ok;
-wire                     b2x_wrap;
-wire                     app_wr_next_int;
-wire                     app_rd_valid_int;
-wire                     x2a_rdlast;
+wire [SDR_DW-1:0]        x2a_rddt;
 
 
 // synopsys translate_off 
@@ -263,10 +244,9 @@ wire                     x2a_rdlast;
    assign sdr_cmd = {sdr_cs_n, sdr_ras_n, sdr_cas_n, sdr_we_n}; 
 // synopsys translate_on 
 
-   assign sdr_den_n = sdr_den_n_int ; 
-   assign sdr_dout  = sdr_dout_int ;
+assign sdr_den_n = sdr_den_n_int ; 
+assign sdr_dout  = sdr_dout_int ;
 
-assign  app_last_rd = x2a_rdlast;
 
 // To meet the timing at read path, read data is registered w.r.t pad_sdram_clock and register back to sdram_clk
 // assumption, pad_sdram_clk is synhronous and delayed clock of sdram_clk.
@@ -281,6 +261,7 @@ always@(posedge clk) begin
    pad_sdr_din2 <= pad_sdr_din1;
 end
 
+
    /****************************************************************************/
    // Instantiate sdr_req_gen
    // This module takes requests from the app, chops them to burst booundaries
@@ -293,14 +274,14 @@ sdrc_req_gen #(.SDR_DW(SDR_DW) , .SDR_BW(SDR_BW)) u_req_gen (
 
 	/* Request from app */
           .r2x_idle           (r2x_idle           ),
-          .req                (app_req_int        ),
+          .req                (app_req            ),
           .req_id             (4'b0               ),
-          .req_addr           (app_req_addr_int   ),
+          .req_addr           (app_req_addr       ),
           .req_addr_mask      (app_req_addr_mask  ),
-          .req_len            (app_req_len_int    ),
+          .req_len            (app_req_len        ),
           .req_wrap           (app_req_wrap       ),
           .req_wr_n           (app_req_wr_n       ),
-          .req_ack            (app_req_ack_int      ),
+          .req_ack            (app_req_ack        ),
           .sdr_core_busy_n    (sdr_core_busy_n    ),
 		
        /* Req to bank_ctl */
@@ -367,7 +348,7 @@ sdrc_bank_ctl #(.SDR_DW(SDR_DW) ,  .SDR_BW(SDR_BW)) u_bank_ctl (
           .x2b_wrok           (x2b_wrok           ),
 
       /* for generate cuurent xfr address msb */
-          .sdr_req_norm_dma_last(app_req_dma_last_int),
+          .sdr_req_norm_dma_last(app_req_dma_last),
           .xfr_bank_sel       (xfr_bank_sel       ),
 
        /* SDRAM Timing */
@@ -422,16 +403,16 @@ sdrc_xfr_ctl #(.SDR_DW(SDR_DW) ,  .SDR_BW(SDR_BW)) u_xfr_ctl (
           .sdr_dout           (sdr_dout_int       ),
           .sdr_den_n          (sdr_den_n_int      ),
       /* Data Flow to the app */
-          .x2a_rdstart        (xfr_rdstart        ),
-          .x2a_wrstart        (xfr_wrstart        ),
+          .x2a_rdstart        (x2a_rdstart        ),
+          .x2a_wrstart        (x2a_wrstart        ),
           .x2a_id             (xfr_id             ),
           .x2a_rdlast         (x2a_rdlast         ),
-          .x2a_wrlast         (xfr_wrlast         ),
-          .app_wrdt           (add_wr_data_int    ),
-          .app_wren_n         (app_wr_en_n_int    ),
-          .x2a_wrnext         (app_wr_next_int    ),
-          .x2a_rddt           (app_rd_data_int    ),
-          .x2a_rdok           (app_rd_valid_int   ),
+          .x2a_wrlast         (x2a_wrlast         ),
+          .a2x_wrdt           (a2x_wrdt           ),
+          .a2x_wren_n         (a2x_wren_n         ),
+          .x2a_wrnext         (x2a_wrnext         ),
+          .x2a_rddt           (x2a_rddt           ),
+          .x2a_rdok           (x2a_rdok           ),
           .sdr_init_done      (sdr_init_done      ),
 			    
       /* SDRAM Parameters */
@@ -464,37 +445,32 @@ sdrc_bs_convert #(.SDR_DW(SDR_DW) ,  .SDR_BW(SDR_BW)) u_bs_convert (
           .sdr_width          (sdr_width          ),
 
    /* Control Signal from xfr ctrl */
-          .x2a_rdstart        (xfr_rdstart        ),
-          .x2a_wrstart        (xfr_wrstart        ),
+          // Read Interface Inputs
+          .x2a_rdstart        (x2a_rdstart        ),
           .x2a_rdlast         (x2a_rdlast         ),
-          .x2a_wrlast         (xfr_wrlast         ),
-          .app_rd_data_int    (app_rd_data_int    ),
-          .app_rd_valid_int   (app_rd_valid_int   ),
-          .app_wr_data_int    (add_wr_data_int    ),
-          .app_wr_en_n_int    (app_wr_en_n_int    ),
-          .app_wr_next_int    (app_wr_next_int    ),
+          .x2a_rdok           (x2a_rdok           ),
+	  // Read Interface outputs
+          .x2a_rddt           (x2a_rddt           ),
 
-   /* Control Signal from request ctrl */
-          .app_req_addr_int   (app_req_addr_int   ),  
-          .app_req_len_int    (app_req_len_int    ),  
-          .app_req_ack_int    (app_req_ack_int    ),
-          .app_sdr_req_int    (app_req_int        ),  
+          // Write Interface, Inputs
+          .x2a_wrstart        (x2a_wrstart        ),
+          .x2a_wrlast         (x2a_wrlast         ),
+          .x2a_wrnext         (x2a_wrnext         ),
 
-   /* Control Signal from Bank Ctrl  */
-          .app_req_dma_last_int(app_req_dma_last_int),
+          // Write Interface, Outputs
+          .a2x_wrdt           (a2x_wrdt           ),
+          .a2x_wren_n         (a2x_wren_n         ),
+
+   /* Control Signal from sdrc_bank_ctl  */
 
    /*  Control Signal from/to to application i/f  */
-          .app_req_addr       (app_req_addr       ),  
-          .app_req_len        (app_req_len        ),  
-          .app_sdr_req        (app_req            ),  
-          .app_req_dma_last   (app_req_dma_last   ), 
-          .app_req_wr_n       (app_req_wr_n       ),
-          .app_req_ack        (app_req_ack        ),
           .app_wr_data        (app_wr_data        ),
           .app_wr_en_n        (app_wr_en_n        ),
           .app_wr_next        (app_wr_next_req    ),
+	  .app_last_wr        (app_last_wr        ),
           .app_rd_data        (app_rd_data        ),
-          .app_rd_valid       (app_rd_valid       )
+          .app_rd_valid       (app_rd_valid       ),
+	  .app_last_rd        (app_last_rd        )
 
        );   
    

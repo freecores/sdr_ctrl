@@ -46,6 +46,11 @@ Reading D:/Actel/Libero_v9.1/Model/tcl/vsim/pref.tcl
 # Loading work.sdrc_xfr_ctl
 # Loading work.sdrc_bs_convert
 # Loading work.mt48lc8m8a2
+# ** Warning: (vsim-3017) ../tb/tb_core.sv(180): [TFMPC] - Too few port connections. Expected 44, found 43.
+#         Region: /tb_core/u_dut
+# ** Warning: (vsim-3722) ../tb/tb_core.sv(180): [TFMPC] - Missing connection for port 'app_last_wr'.
+# ** Warning: (vsim-3015) ../../rtl/core/sdrc_core.v(302): [PCDPC] - Port size (31 or 31) does not match connection size (30) for port 'req_addr'. The port definition is at: ../../rtl/core/sdrc_req_gen.v(75).
+#         Region: /tb_core/u_dut/u_req_gen
 # do run.do 
 # Write Address: 00040000, Burst Size:   4
 # Status: Burst-No:           0  Write Address: 00040000  WriteData: 12153524 
@@ -2643,7 +2648,7 @@ Reading D:/Actel/Libero_v9.1/Model/tcl/vsim/pref.tcl
 # STATUS: SDRAM Write/Read TEST PASSED
 ###############################
 # ** Note: $finish    : ../tb/tb_core.sv(320)
-#    Time: 142430 ns  Iteration: 0  Instance: /tb_core
+#    Time: 146610 ns  Iteration: 0  Instance: /tb_core
 ### test 1: basic_test1 --> PASSED
 ###########################################
 
