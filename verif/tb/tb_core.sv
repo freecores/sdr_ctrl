@@ -269,7 +269,6 @@ initial begin //{
   wait(u_dut.sdr_init_done == 1);
 
   #1000;
-/********************  
   $display("-------------------------------------- ");
   $display(" Case-1: Single Write/Read Case        ");
   $display("-------------------------------------- ");
@@ -287,7 +286,6 @@ initial begin //{
   burst_read();  
   burst_write(32'h0040_0000,8'h5);  
   burst_read();  
-***************/
   $display("----------------------------------------");
   $display(" Case-3 Create a Page Cross Over        ");
   $display("----------------------------------------");
@@ -295,7 +293,7 @@ initial begin //{
   burst_write(32'h0040_0FF8,8'hF);  
   burst_read();  
   burst_read();  
-/*****************
+
   $display("----------------------------------------");
   $display(" Case:4 4 Write & 4 Read                ");
   $display("----------------------------------------");
@@ -368,7 +366,6 @@ initial begin //{
  #100;
   end
 
-*********************/
 
   #10000;
 
