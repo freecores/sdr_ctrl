@@ -140,7 +140,6 @@ wire #(1.0) pad_clk     = sdram_clk_d;
           .app_req_wrap       (1'b0               ),	// Wrap mode request (xfr_len = 4)
           .app_req_wr_n       (app_req_wr_n       ),	// 0 => Write request, 1 => read req
           .app_req_ack        (app_req_ack        ),	// Request has been accepted
-          .sdr_core_busy_n    (                   ),	// OK to arbitrate next request
 		
           .app_wr_data        (app_wr_data        ),
           .app_wr_en_n        (app_wr_en_n        ),
@@ -270,7 +269,7 @@ initial begin //{
   wait(u_dut.sdr_init_done == 1);
 
   #1000;
-  
+/********************  
   $display("-------------------------------------- ");
   $display(" Case-1: Single Write/Read Case        ");
   $display("-------------------------------------- ");
@@ -288,7 +287,7 @@ initial begin //{
   burst_read();  
   burst_write(32'h0040_0000,8'h5);  
   burst_read();  
-
+***************/
   $display("----------------------------------------");
   $display(" Case-3 Create a Page Cross Over        ");
   $display("----------------------------------------");
@@ -296,7 +295,7 @@ initial begin //{
   burst_write(32'h0040_0FF8,8'hF);  
   burst_read();  
   burst_read();  
-
+/*****************
   $display("----------------------------------------");
   $display(" Case:4 4 Write & 4 Read                ");
   $display("----------------------------------------");
@@ -369,7 +368,7 @@ initial begin //{
  #100;
   end
 
-
+*********************/
 
   #10000;
 
