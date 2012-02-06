@@ -40,7 +40,8 @@
                                                               
   Author(s):                                                  
       - Dinesh Annayya, dinesha@opencores.org                 
-  Version  : 1.0 - 8th Jan 2012
+  Version  : 0.0 - 8th Jan 2012
+             0.1 - 5th Feb 2012, column/row/bank address are register to improve the timing issue in FPGA synthesis
                                                               
 
                                                              
@@ -73,6 +74,8 @@ later version.
 
 module sdrc_req_gen (clk,
 		    reset_n,
+		    cfg_colbits,
+		    sdr_width,
 
 		    /* Request from app */
 		    req,	        // Transfer Request
@@ -82,25 +85,24 @@ module sdrc_req_gen (clk,
 		    req_wrap,	        // Wrap mode request (xfr_len = 4)
 		    req_wr_n,	        // 0 => Write request, 1 => read req
 		    req_ack,	        // Request has been accepted
-		    sdr_core_busy_n,	// SDRAM Core Busy Indication
-		    cfg_colbits,
 		    
-		    /* Req to bank_ctl */
+		    /* Req to xfr_ctl */
 		    r2x_idle,
-		    r2b_req,	// request
-		    r2b_req_id,	// ID
-		    r2b_start,	// First chunk of burst
-		    r2b_last,	// Last chunk of burst
-		    r2b_wrap,	// Wrap Mode
-		    r2b_ba,	// bank address
-		    r2b_raddr,	// row address
-		    r2b_caddr,	// col address
-		    r2b_len,	// length
-		    r2b_write,	// write request
+
+		    /* Req to bank_ctl */
+		    r2b_req,	        // request
+		    r2b_req_id,	        // ID
+		    r2b_start,	        // First chunk of burst
+		    r2b_last,	        // Last chunk of burst
+		    r2b_wrap,	        // Wrap Mode
+		    r2b_ba,	        // bank address
+		    r2b_raddr,	        // row address
+		    r2b_caddr,	        // col address
+		    r2b_len,	        // length
+		    r2b_write,	        // write request
 		    b2r_ack,
-		    b2r_arb_ok,
-		    sdr_width,
-		    sdr_init_done);
+		    b2r_arb_ok
+		    );
 
 parameter  APP_AW   = 30;  // Application Address Width
 parameter  APP_DW   = 32;  // Application Data Width 
@@ -110,28 +112,35 @@ parameter  APP_RW   = 9;   // Application Request Width
 parameter  SDR_DW   = 16;  // SDR Data Width 
 parameter  SDR_BW   = 2;   // SDR Byte Width
 
-   input                        clk, reset_n;
-   input [1:0]                  cfg_colbits; // 2'b00 - 8 Bit column address, 2'b01 - 9 Bit, 10 - 10 bit, 11 - 11Bits
+input                   clk           ;
+input                   reset_n       ;
+input [1:0]             cfg_colbits   ; // 2'b00 - 8 Bit column address, 2'b01 - 9 Bit, 10 - 10 bit, 11 - 11Bits
 
-   /* Request from app */
-   input 			req;
-   input [`SDR_REQ_ID_W-1:0] 	req_id;
-   input [APP_AW-1:0] 	req_addr;
-   input [APP_RW-1:0] 	req_len;
-   input 			req_wr_n, req_wrap;
-   output 			req_ack, sdr_core_busy_n;
+/* Request from app */
+input 			req           ; // Request 
+input [`SDR_REQ_ID_W-1:0] req_id      ; // Request ID
+input [APP_AW-1:0] 	req_addr      ; // Request Address
+input [APP_RW-1:0] 	req_len       ; // Request length
+input 			req_wr_n      ; // 0 -Write, 1 - Read
+input                   req_wrap      ; // 1 - Wrap the Address on page boundary
+output 			req_ack       ; // Request Ack
 		
-   /* Req to bank_ctl */
-   output 			r2x_idle, r2b_req, r2b_start, r2b_last,
-				r2b_write, r2b_wrap; 
-   output [`SDR_REQ_ID_W-1:0] 	r2b_req_id;
-   output [1:0] 		r2b_ba;
-   output [11:0] 		r2b_raddr;
-   output [11:0] 		r2b_caddr;
-   output [APP_RW-1:0] 	r2b_len;
-   input 			b2r_ack, b2r_arb_ok, sdr_init_done;
+/* Req to bank_ctl */
+output 			r2x_idle      ;
+output                  r2b_req       ;
+output                  r2b_start     ;
+output                  r2b_last      ;
+output                  r2b_write     ;
+output                  r2b_wrap      ; 
+output [`SDR_REQ_ID_W-1:0] 	r2b_req_id;
+output [1:0] 		r2b_ba        ;
+output [11:0] 		r2b_raddr     ;
+output [11:0] 		r2b_caddr     ;
+output [APP_RW-1:0] 	r2b_len       ;
+input 			b2r_ack       ;
+input                   b2r_arb_ok    ;
 //
-   input [1:0] 			sdr_width; // 2'b00 - 32 Bit, 2'b01 - 16 Bit, 2'b1x - 8Bit
+input [1:0] 	        sdr_width; // 2'b00 - 32 Bit, 2'b01 - 16 Bit, 2'b1x - 8Bit
                                          
 
    /****************************************************************************/
@@ -140,19 +149,19 @@ parameter  SDR_BW   = 2;   // SDR Byte Width
    `define REQ_IDLE        1'b0
    `define REQ_ACTIVE      1'b1
 
-   reg  			req_st, next_req_st;
-   reg 				r2x_idle, req_ack, r2b_req, r2b_start, 
-				r2b_write, req_idle, req_ld, lcl_wrap;
+   reg  		req_st, next_req_st;
+   reg 			r2x_idle, req_ack, r2b_req, r2b_start, 
+			r2b_write, req_idle, req_ld, lcl_wrap;
    reg [`SDR_REQ_ID_W-1:0] 	r2b_req_id;
    reg [APP_RW-1:0] 	lcl_req_len;
 
-   wire 			r2b_last, page_ovflw;
+   wire 		r2b_last, page_ovflw;
    wire [APP_RW-1:0] 	r2b_len, next_req_len;
    wire [APP_RW:0] 	max_r2b_len;
 
-   wire [1:0] 			r2b_ba;
-   wire [11:0] 			r2b_raddr;
-   wire [11:0] 			r2b_caddr;
+   reg [1:0] 		r2b_ba;
+   reg [11:0] 		r2b_raddr;
+   reg [11:0] 		r2b_caddr;
 
    reg [APP_AW-1:0] 	curr_sdr_addr ;
    wire [APP_AW-1:0] 	next_sdr_addr ;
@@ -163,6 +172,7 @@ parameter  SDR_BW   = 2;   // SDR Byte Width
 //--------------------------------------------------------------------
 reg [APP_AW:0]           req_addr_int;
 reg [APP_RW-1:0]         req_len_int;
+
 always @(*) begin
    if(sdr_width == 2'b00) begin // 32 Bit SDR Mode
       req_addr_int     = {1'b0,req_addr};
@@ -209,7 +219,6 @@ end
 
    assign next_sdr_addr = curr_sdr_addr + r2b_len;
 
-   assign sdr_core_busy_n = req_idle & b2r_arb_ok & sdr_init_done;
 
    assign r2b_wrap = lcl_wrap;
 
@@ -219,20 +228,20 @@ end
 //
    always @ (posedge clk) begin
 
-      r2b_start <= (req_ack) ? 1'b1 :
-		   (b2r_ack) ? 1'b0 : r2b_start;
+      r2b_start      <= (req_ack) ? 1'b1 :
+		        (b2r_ack) ? 1'b0 : r2b_start;
 
-      r2b_write <= (req_ack) ? ~req_wr_n : r2b_write;
+      r2b_write      <= (req_ack) ? ~req_wr_n : r2b_write;
 
-      r2b_req_id <= (req_ack) ? req_id : r2b_req_id;
+      r2b_req_id     <= (req_ack) ? req_id : r2b_req_id;
 
-      lcl_wrap <= (req_ack) ? req_wrap : lcl_wrap;
+      lcl_wrap       <= (req_ack) ? req_wrap : lcl_wrap;
 	     
-      lcl_req_len <= (req_ack) ? req_len_int  :
-		     (req_ld) ? next_req_len : lcl_req_len;
+      lcl_req_len    <= (req_ack) ? req_len_int  :
+		        (req_ld) ? next_req_len : lcl_req_len;
 
-      curr_sdr_addr <= (req_ack) ? req_addr_int :
-		       (req_ld) ? next_sdr_addr : curr_sdr_addr;
+      curr_sdr_addr  <= (req_ack) ? req_addr_int :
+		        (req_ld) ? next_sdr_addr : curr_sdr_addr;
 
    end // always @ (posedge clk)
    
@@ -272,11 +281,17 @@ end
 //
 // addrs bits for the bank, row and column
 //
+// Register row/column/bank to improve fpga timing issue
+wire [APP_AW-1:0] 	map_address ;
 
+assign      map_address  = (req_ack) ? req_addr_int :
+		           (req_ld)  ? next_sdr_addr : curr_sdr_addr;
+
+always @ (posedge clk) begin
 // Bank Bits are always - 2 Bits
-   assign r2b_ba = (cfg_colbits == 2'b00) ? {curr_sdr_addr[9:8]}   :
-	           (cfg_colbits == 2'b01) ? {curr_sdr_addr[10:9]}  :
-	           (cfg_colbits == 2'b10) ? {curr_sdr_addr[11:10]} : curr_sdr_addr[12:11];
+    r2b_ba <= (cfg_colbits == 2'b00) ? {map_address[9:8]}   :
+	           (cfg_colbits == 2'b01) ? {map_address[10:9]}  :
+	           (cfg_colbits == 2'b10) ? {map_address[11:10]} : map_address[12:11];
 
 /********************
 *  Colbits Mapping:
@@ -285,13 +300,13 @@ end
 *           2'b10 - 10 Bit
 *           2'b11 - 11 Bits
 ************************/
-   assign r2b_caddr = (cfg_colbits == 2'b00) ? {4'b0, curr_sdr_addr[7:0]} :
-	              (cfg_colbits == 2'b01) ? {3'b0, curr_sdr_addr[8:0]} :
-	              (cfg_colbits == 2'b10) ? {2'b0, curr_sdr_addr[9:0]} : {1'b0, curr_sdr_addr[10:0]};
+    r2b_caddr <= (cfg_colbits == 2'b00) ? {4'b0, map_address[7:0]} :
+	               (cfg_colbits == 2'b01) ? {3'b0, map_address[8:0]} :
+	               (cfg_colbits == 2'b10) ? {2'b0, map_address[9:0]} : {1'b0, map_address[10:0]};
 
-   assign r2b_raddr = (cfg_colbits == 2'b00)  ? curr_sdr_addr[21:10] :
-	              (cfg_colbits == 2'b01)  ? curr_sdr_addr[22:11] :
-	              (cfg_colbits == 2'b10)  ? curr_sdr_addr[23:12] : curr_sdr_addr[24:13];
-	   
+    r2b_raddr <= (cfg_colbits == 2'b00)  ? map_address[21:10] :
+	               (cfg_colbits == 2'b01)  ? map_address[22:11] :
+	               (cfg_colbits == 2'b10)  ? map_address[23:12] : map_address[24:13];
+end	   
    
 endmodule // sdr_req_gen

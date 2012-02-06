@@ -254,7 +254,6 @@ sdrc_core #(.SDR_DW(SDR_DW) , .SDR_BW(SDR_BW)) u_sdrc_core (
           .app_req_wrap       (1'b0               ) ,// Wrap mode request 
           .app_req_wr_n       (app_req_wr_n       ) ,// 0 => Write request, 1 => read req
           .app_req_ack        (app_req_ack        ) ,// Request has been accepted
-          .sdr_core_busy_n    (app_core_busy_n    ) ,// OK to arbitrate next request
           .cfg_req_depth      (cfg_req_depth      ) ,//how many req. buffer should hold
  		
           .app_wr_data        (app_wr_data        ) ,

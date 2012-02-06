@@ -84,7 +84,6 @@ module sdrc_core
 		app_req_wrap,	        // Wrap mode request (xfr_len = 4)
 		app_req_wr_n,	        // 0 => Write request, 1 => read req
 		app_req_ack,	        // Request has been accepted
-		sdr_core_busy_n,	        // OK to arbitrate next request
 		cfg_req_depth,	        //how many req. buffer should hold
 		
 		app_wr_data,
@@ -150,7 +149,6 @@ input [APP_AW-1:0] 	app_req_addr        ; // Address
 input 			app_req_wr_n        ; // 0 - Write, 1 - Read
 input                   app_req_wrap        ; // Address Wrap
 output                  app_req_ack         ; // Application Request Ack
-output 			sdr_core_busy_n     ; // 0 - busy, 1 - free
 		
 input [APP_DW-1:0] 	app_wr_data         ; // Write Data
 output 		        app_wr_next_req     ; // Next Write Data Request
@@ -269,9 +267,12 @@ sdrc_req_gen #(.SDR_DW(SDR_DW) , .SDR_BW(SDR_BW)) u_req_gen (
           .clk                (clk          ),
           .reset_n            (reset_n            ),
 	  .cfg_colbits        (cfg_colbits        ),
+          .sdr_width          (sdr_width          ),
+
+	/* Req to xfr_ctl */
+          .r2x_idle           (r2x_idle           ),
 
 	/* Request from app */
-          .r2x_idle           (r2x_idle           ),
           .req                (app_req            ),
           .req_id             (4'b0               ),
           .req_addr           (app_req_addr       ),
@@ -279,7 +280,6 @@ sdrc_req_gen #(.SDR_DW(SDR_DW) , .SDR_BW(SDR_BW)) u_req_gen (
           .req_wrap           (app_req_wrap       ),
           .req_wr_n           (app_req_wr_n       ),
           .req_ack            (app_req_ack        ),
-          .sdr_core_busy_n    (sdr_core_busy_n    ),
 		
        /* Req to bank_ctl */
           .r2b_req            (r2b_req            ),
@@ -293,9 +293,7 @@ sdrc_req_gen #(.SDR_DW(SDR_DW) , .SDR_BW(SDR_BW)) u_req_gen (
           .r2b_len            (r2b_len            ),
           .r2b_write          (r2b_write          ),
           .b2r_ack            (b2r_ack            ),
-          .b2r_arb_ok         (b2r_arb_ok         ),
-          .sdr_width          (sdr_width          ),
-          .sdr_init_done      (sdr_init_done      )
+          .b2r_arb_ok         (b2r_arb_ok         )
      );
 
    /****************************************************************************/

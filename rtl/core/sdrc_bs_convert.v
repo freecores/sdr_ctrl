@@ -18,6 +18,8 @@
   Version  :  0.0  - 8th Jan 2012 - Initial structure
               0.2 - 2nd Feb 2012
 	         Improved the command pipe structure to accept up-to 4 command of different bank.
+	      0.3 - 6th Feb 2012
+	         Bug fix on read valid generation
                                                               
 
                                                              
@@ -141,7 +143,7 @@ always @(*) begin
         begin
            // Changed the address and length to match the 16 bit SDR Mode
             app_wr_next          = (x2a_wrnext & wr_xfr_count[0]);
-            app_rd_valid         = (rd_xfr_count & rd_xfr_count[0]);
+            app_rd_valid         = (x2a_rdok & rd_xfr_count[0]);
             if(wr_xfr_count[0] == 1'b1)
               begin
                 a2x_wren_n      = app_wr_en_n[3:2];
@@ -158,7 +160,7 @@ always @(*) begin
         begin
            // Changed the address and length to match the 16 bit SDR Mode
             app_wr_next         = (x2a_wrnext & (wr_xfr_count[1:0]== 2'b11));
-            app_rd_valid        = (rd_xfr_count &   (rd_xfr_count[1:0]== 2'b11));
+            app_rd_valid        = (x2a_rdok &   (rd_xfr_count[1:0]== 2'b11));
             if(wr_xfr_count[1:0] == 2'b11)
             begin
                 a2x_wren_n      = app_wr_en_n[3];
