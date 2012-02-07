@@ -34,7 +34,10 @@
   This module takes requests from the memory controller, 
   chops them to page boundaries if wrap=0, 
   and passes the request to bank_ctl
-                                                              
+
+  Note: With Wrap = 0, each request from Application layer will be splited into two request, 
+	if the current burst cross the page boundary. 
+
   To Do:                                                      
     nothing                                                   
                                                               
@@ -112,6 +115,7 @@ parameter  APP_RW   = 9;   // Application Request Width
 parameter  SDR_DW   = 16;  // SDR Data Width 
 parameter  SDR_BW   = 2;   // SDR Byte Width
 
+parameter  REQ_BW   = 12;   //  Request Width
 input                   clk           ;
 input                   reset_n       ;
 input [1:0]             cfg_colbits   ; // 2'b00 - 8 Bit column address, 2'b01 - 9 Bit, 10 - 10 bit, 11 - 11Bits
@@ -126,19 +130,19 @@ input                   req_wrap      ; // 1 - Wrap the Address on page boundary
 output 			req_ack       ; // Request Ack
 		
 /* Req to bank_ctl */
-output 			r2x_idle      ;
-output                  r2b_req       ;
-output                  r2b_start     ;
-output                  r2b_last      ;
-output                  r2b_write     ;
-output                  r2b_wrap      ; 
+output 			r2x_idle      ; 
+output                  r2b_req       ; // Request
+output                  r2b_start     ; // First Junk of the Burst Access
+output                  r2b_last      ; // Last Junk of the Burst Access
+output                  r2b_write     ; // 1 - Write, 0 - Read
+output                  r2b_wrap      ; // 1 - Wrap the Address at the page boundary.
 output [`SDR_REQ_ID_W-1:0] 	r2b_req_id;
-output [1:0] 		r2b_ba        ;
-output [11:0] 		r2b_raddr     ;
-output [11:0] 		r2b_caddr     ;
-output [APP_RW-1:0] 	r2b_len       ;
-input 			b2r_ack       ;
-input                   b2r_arb_ok    ;
+output [1:0] 		r2b_ba        ; // Bank Address
+output [11:0] 		r2b_raddr     ; // Row Address
+output [11:0] 		r2b_caddr     ; // Column Address
+output [REQ_BW-1:0] 	r2b_len       ; // Burst Length
+input 			b2r_ack       ; // Request Ack
+input                   b2r_arb_ok    ; // Bank controller fifo is not full and ready to accept the command
 //
 input [1:0] 	        sdr_width; // 2'b00 - 32 Bit, 2'b01 - 16 Bit, 2'b1x - 8Bit
                                          
@@ -153,11 +157,11 @@ input [1:0] 	        sdr_width; // 2'b00 - 32 Bit, 2'b01 - 16 Bit, 2'b1x - 8Bit
    reg 			r2x_idle, req_ack, r2b_req, r2b_start, 
 			r2b_write, req_idle, req_ld, lcl_wrap;
    reg [`SDR_REQ_ID_W-1:0] 	r2b_req_id;
-   reg [APP_RW-1:0] 	lcl_req_len;
+   reg [REQ_BW-1:0] 	lcl_req_len;
 
    wire 		r2b_last, page_ovflw;
-   wire [APP_RW-1:0] 	r2b_len, next_req_len;
-   wire [APP_RW:0] 	max_r2b_len;
+   wire [REQ_BW-1:0] 	r2b_len, next_req_len;
+   wire [REQ_BW:0] 	max_r2b_len;
 
    reg [1:0] 		r2b_ba;
    reg [11:0] 		r2b_raddr;
@@ -211,6 +215,8 @@ end
      // The wrapping functionality will be handle by the bank control module and 
      // column address will rewind back as follows XX -> FF ? 00 ? 1
      //
+     // Note: With Wrap = 0, each request from Application layer will be spilited into two request, 
+     //	if the current burst cross the page boundary. 
    assign page_ovflw = ({1'b0, lcl_req_len} > max_r2b_len) ? ~lcl_wrap : 1'b0;
 
    assign r2b_len = (page_ovflw) ? max_r2b_len : lcl_req_len;
@@ -290,8 +296,8 @@ assign      map_address  = (req_ack) ? req_addr_int :
 always @ (posedge clk) begin
 // Bank Bits are always - 2 Bits
     r2b_ba <= (cfg_colbits == 2'b00) ? {map_address[9:8]}   :
-	           (cfg_colbits == 2'b01) ? {map_address[10:9]}  :
-	           (cfg_colbits == 2'b10) ? {map_address[11:10]} : map_address[12:11];
+	      (cfg_colbits == 2'b01) ? {map_address[10:9]}  :
+	      (cfg_colbits == 2'b10) ? {map_address[11:10]} : map_address[12:11];
 
 /********************
 *  Colbits Mapping:
@@ -301,12 +307,12 @@ always @ (posedge clk) begin
 *           2'b11 - 11 Bits
 ************************/
     r2b_caddr <= (cfg_colbits == 2'b00) ? {4'b0, map_address[7:0]} :
-	               (cfg_colbits == 2'b01) ? {3'b0, map_address[8:0]} :
-	               (cfg_colbits == 2'b10) ? {2'b0, map_address[9:0]} : {1'b0, map_address[10:0]};
+	         (cfg_colbits == 2'b01) ? {3'b0, map_address[8:0]} :
+	         (cfg_colbits == 2'b10) ? {2'b0, map_address[9:0]} : {1'b0, map_address[10:0]};
 
     r2b_raddr <= (cfg_colbits == 2'b00)  ? map_address[21:10] :
-	               (cfg_colbits == 2'b01)  ? map_address[22:11] :
-	               (cfg_colbits == 2'b10)  ? map_address[23:12] : map_address[24:13];
+	         (cfg_colbits == 2'b01)  ? map_address[22:11] :
+	         (cfg_colbits == 2'b10)  ? map_address[23:12] : map_address[24:13];
 end	   
    
 endmodule // sdr_req_gen

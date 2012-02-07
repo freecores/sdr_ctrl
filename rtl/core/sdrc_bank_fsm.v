@@ -93,10 +93,10 @@ module sdrc_bank_fsm (clk,
 parameter  APP_AW   = 30;  // Application Address Width
 parameter  APP_DW   = 32;  // Application Data Width 
 parameter  APP_BW   = 4;   // Application Byte Width
-parameter  APP_RW   = 9;   // Application Request Width
 
 parameter  SDR_DW   = 16;  // SDR Data Width 
 parameter  SDR_BW   = 2;   // SDR Byte Width
+parameter  REQ_BW   = 12;   //  Request Width
    input                        clk, reset_n;
 
    /* Req from bank_ctl */
@@ -105,7 +105,7 @@ parameter  SDR_BW   = 2;   // SDR Byte Width
    input [`SDR_REQ_ID_W-1:0] 	r2b_req_id;
    input [11:0] 		r2b_raddr;
    input [11:0] 		r2b_caddr;
-   input [APP_RW-1:0] 	r2b_len;
+   input [REQ_BW-1:0] 	r2b_len;
    output 			b2r_ack;
    input                        sdr_dma_last;
 
@@ -114,7 +114,7 @@ parameter  SDR_BW   = 2;   // SDR Byte Width
 				tras_ok, b2x_wrap;
    output [`SDR_REQ_ID_W-1:0] 	b2x_id;
    output [11:0] 		b2x_addr;
-   output [APP_RW-1:0] 	b2x_len;
+   output [REQ_BW-1:0] 	b2x_len;
    output [1:0] 		b2x_cmd;
    input 			x2b_ack;
 
@@ -142,8 +142,8 @@ parameter  SDR_BW   = 2;   // SDR Byte Width
    wire [`SDR_REQ_ID_W-1:0] 	b2x_id;
    reg [`SDR_REQ_ID_W-1:0] 	l_id;
    reg [11:0] 			b2x_addr;
-   reg [APP_RW-1:0] 	l_len;
-   wire [APP_RW-1:0] 	b2x_len;
+   reg [REQ_BW-1:0] 	l_len;
+   wire [REQ_BW-1:0] 	b2x_len;
    reg [1:0] 			b2x_cmd;
    reg  			bank_valid;
    reg [11:0] 			bank_row;
@@ -170,7 +170,6 @@ parameter  SDR_BW   = 2;   // SDR Byte Width
       else begin
 
 	 bank_valid <= (x2b_refresh || bank_prech_page_closed) ? 1'b0 :  // force the bank status to be invalid
-//	 bank_valid <= (x2b_refresh) ? 1'b0 :
 		       (activate_bank) ? 1'b1 : bank_valid;
 
 	 tras_cntr <= (activate_bank) ? tras_delay :

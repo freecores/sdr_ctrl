@@ -97,10 +97,10 @@ module sdrc_bank_ctl (clk,
 parameter  APP_AW   = 30;  // Application Address Width
 parameter  APP_DW   = 32;  // Application Data Width 
 parameter  APP_BW   = 4;   // Application Byte Width
-parameter  APP_RW   = 9;   // Application Request Width
 
 parameter  SDR_DW   = 16;  // SDR Data Width 
 parameter  SDR_BW   = 2;   // SDR Byte Width
+parameter  REQ_BW   = 12;   //  Request Width
    input                        clk, reset_n;
 
    input [1:0] 			a2b_req_depth;
@@ -112,7 +112,7 @@ parameter  SDR_BW   = 2;   // SDR Byte Width
    input [1:0] 			r2b_ba;
    input [11:0] 		r2b_raddr;
    input [11:0] 		r2b_caddr;
-   input [APP_RW-1:0] 	        r2b_len;
+   input [REQ_BW-1:0] 	        r2b_len;
    output 			b2r_arb_ok, b2r_ack;
    input                        sdr_req_norm_dma_last;
 
@@ -122,7 +122,7 @@ parameter  SDR_BW   = 2;   // SDR Byte Width
    output [`SDR_REQ_ID_W-1:0] 	b2x_id;
    output [1:0] 		b2x_ba;
    output [11:0] 		b2x_addr;
-   output [APP_RW-1:0] 	b2x_len;
+   output [REQ_BW-1:0] 	b2x_len;
    output [1:0] 		b2x_cmd;
    input 			x2b_ack;
 
@@ -141,7 +141,7 @@ parameter  SDR_BW   = 2;   // SDR Byte Width
    wire [3:0] 			r2i_req, i2r_ack, i2x_req, 
 				i2x_start, i2x_last, i2x_wrap, tras_ok;
    wire [11:0] 			i2x_addr0, i2x_addr1, i2x_addr2, i2x_addr3;
-   wire [APP_RW-1:0] 	i2x_len0, i2x_len1, i2x_len2, i2x_len3;
+   wire [REQ_BW-1:0] 	i2x_len0, i2x_len1, i2x_len2, i2x_len3;
    wire [1:0] 			i2x_cmd0, i2x_cmd1, i2x_cmd2, i2x_cmd3;
    wire [`SDR_REQ_ID_W-1:0] 	i2x_id0, i2x_id1, i2x_id2, i2x_id3;
 
@@ -149,7 +149,7 @@ parameter  SDR_BW   = 2;   // SDR Byte Width
    wire 			b2x_idle, b2x_start, b2x_last, b2x_wrap;
    wire [`SDR_REQ_ID_W-1:0] 	b2x_id;
    wire [11:0] 			b2x_addr;
-   wire [APP_RW-1:0] 	b2x_len;
+   wire [REQ_BW-1:0] 	b2x_len;
    wire [1:0] 			b2x_cmd;
    wire [3:0] 			x2i_ack;
    reg [1:0] 			b2x_ba;

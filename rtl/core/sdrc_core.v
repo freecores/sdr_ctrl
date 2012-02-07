@@ -39,7 +39,10 @@
            : 0.1 - 24th Jan 2012
 	         8 Bit SDRAM Support is added
              0.2 - 2nd Feb 2012
-	         Improved the command pipe structure to accept up-to 4 command of different bank.
+	           Improved the command pipe structure to accept up-to 
+		   4 command of different bank.
+	     0.3 - 7th Feb 2012
+	           Bug fix for parameter defination for request length has changed from 9 to 12
 
                                                              
  Copyright (C) 2000 Authors and OPENCORES.ORG                
@@ -130,6 +133,7 @@ parameter  APP_RW   = 9;   // Application Request Width
 parameter  SDR_DW   = 16;  // SDR Data Width 
 parameter  SDR_BW   = 2;   // SDR Byte Width
              
+parameter  REQ_BW   = 12;   //  Request Width
 
 //-----------------------------------------------
 // Global Variable
@@ -199,13 +203,13 @@ wire [`SDR_REQ_ID_W-1:0]r2b_req_id;
 wire [1:0] 		r2b_ba;
 wire [11:0] 		r2b_raddr;
 wire [11:0] 		r2b_caddr;
-wire [APP_RW-1:0] 	r2b_len;
+wire [REQ_BW-1:0] 	r2b_len;
 
 // SDR BANK CTL
 wire [`SDR_REQ_ID_W-1:0]b2x_id;
 wire [1:0] 		b2x_ba;
 wire [11:0] 		b2x_addr;
-wire [APP_RW-1:0] 	b2x_len;
+wire [REQ_BW-1:0] 	b2x_len;
 wire [1:0] 		b2x_cmd;
 
 // SDR_XFR_CTL

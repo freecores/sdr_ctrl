@@ -132,10 +132,10 @@ module sdrc_xfr_ctl (clk,
 parameter  APP_AW   = 30;  // Application Address Width
 parameter  APP_DW   = 32;  // Application Data Width 
 parameter  APP_BW   = 4;   // Application Byte Width
-parameter  APP_RW   = 9;   // Application Request Width
 
 parameter  SDR_DW   = 16;  // SDR Data Width 
 parameter  SDR_BW   = 2;   // SDR Byte Width
+parameter  REQ_BW   = 12;   //  Request Width
 
 
 input            clk, reset_n; 
@@ -146,7 +146,7 @@ input 			b2x_req, b2x_start, b2x_last, b2x_tras_ok,
 input [`SDR_REQ_ID_W-1:0] 	b2x_id;
 input [1:0] 			b2x_ba;
 input [11:0] 		b2x_addr;
-input [APP_RW-1:0] 	b2x_len;
+input [REQ_BW-1:0] 	b2x_len;
 input [1:0] 			b2x_cmd;
 output 			x2b_ack;
 
@@ -201,8 +201,8 @@ output [SDR_BW-1:0] 	sdr_den_n;
    wire [1:0] 			xfr_ba;
    reg [1:0] 			l_ba;
    wire [11:0] 			xfr_addr;
-   wire [APP_RW-1:0] 	xfr_len, next_xfr_len;
-   reg [APP_RW-1:0] 	l_len;
+   wire [REQ_BW-1:0] 	xfr_len, next_xfr_len;
+   reg [REQ_BW-1:0] 	l_len;
 
    reg 				mgmt_idle, mgmt_req;
    reg [3:0] 			mgmt_cmd;
@@ -279,11 +279,11 @@ output [SDR_BW-1:0] 	sdr_den_n;
 
    assign wr_start = ld_xfr & b2x_write & b2x_start;
    
-   assign rd_last = rd_next & last_burst & ~|xfr_len[APP_RW-1:1];
+   assign rd_last = rd_next & last_burst & ~|xfr_len[REQ_BW-1:1];
 
    //assign wr_last = wr_next & last_burst & ~|xfr_len[APP_RW-1:1];
 
-   assign wr_last = last_burst & ~|xfr_len[APP_RW-1:1];
+   assign wr_last = last_burst & ~|xfr_len[REQ_BW-1:1];
    
    //assign xfr_ba = (ld_xfr) ? b2x_ba : l_ba;
    assign xfr_ba = (sel_mgmt) ? mgmt_ba : 
