@@ -133,7 +133,8 @@ parameter  APP_RW   = 9;   // Application Request Width
 parameter  SDR_DW   = 16;  // SDR Data Width 
 parameter  SDR_BW   = 2;   // SDR Byte Width
              
-parameter  REQ_BW   = 12;   //  Request Width
+// 12 bit subtractor is not feasibile for FPGA, so changed to 8 bits
+parameter  REQ_BW   = (`TARGET_DESIGN == `FPGA) ? 8 : 12;   //  Request Width
 
 //-----------------------------------------------
 // Global Variable

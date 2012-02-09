@@ -135,7 +135,8 @@ parameter  APP_BW   = 4;   // Application Byte Width
 
 parameter  SDR_DW   = 16;  // SDR Data Width 
 parameter  SDR_BW   = 2;   // SDR Byte Width
-parameter  REQ_BW   = 12;   //  Request Width
+// 12 bit subtractor is not feasibile for FPGA, so changed to 8 bits
+parameter  REQ_BW   = (`TARGET_DESIGN == `FPGA) ? 8 : 12;   //  Request Width
 
 
 input            clk, reset_n; 
@@ -241,7 +242,7 @@ output [SDR_BW-1:0] 	sdr_den_n;
 		    (sel_b2x) ? b2x_sdr_cmd : i_xfr_cmd;
 
    assign xfr_addr = (sel_mgmt) ? mgmt_addr : 
-		     (sel_b2x) ? b2x_addr : xfr_caddr;
+		     (sel_b2x) ? b2x_addr : xfr_caddr+1;
 
    assign mgmt_ack = sel_mgmt;
 
@@ -251,7 +252,9 @@ output [SDR_BW-1:0] 	sdr_den_n;
    
    assign xfr_len = (ld_xfr) ? b2x_len : l_len;
 
-   assign next_xfr_len = (xfr_end) ? xfr_len : xfr_len - 1;
+   //assign next_xfr_len = (l_xfr_end && !ld_xfr) ? l_len : xfr_len - 1;
+   assign next_xfr_len = (ld_xfr) ? b2x_len : 
+	                 (l_xfr_end) ? l_len:  l_len - 1;
 
    assign d_rd_next = (cas_latency == 2'b01) ? l_rd_next[2] :
 		      (cas_latency == 2'b10) ? l_rd_next[3] :
@@ -273,7 +276,7 @@ output [SDR_BW-1:0] 	sdr_den_n;
 
    assign xfr_end = ~|xfr_len;
 
-   assign l_xfr_end = ~|l_len;
+   assign l_xfr_end = ~|(l_len-1);
 
    assign rd_start = ld_xfr & b2x_read & b2x_start;
 
@@ -292,8 +295,9 @@ output [SDR_BW-1:0] 	sdr_den_n;
    assign xfr_wrap = (ld_xfr) ? b2x_wrap : l_wrap;
    
 //   assign burst_bdry = ~|xfr_caddr[2:0];
-   assign burst_bdry = ~|xfr_caddr[1:0];
-   
+   wire [1:0] xfr_caddr_lsb = (xfr_caddr[1:0]+1);
+   assign burst_bdry = ~|(xfr_caddr_lsb[1:0]);
+  
    always @ (posedge clk) begin
       if (~reset_n) begin
 	 xfr_caddr <= 12'b0;
@@ -312,9 +316,8 @@ output [SDR_BW-1:0] 	sdr_den_n;
       end // if (~reset_n)
 
       else begin
-	 xfr_caddr <= (ld_xfr) ? b2x_addr + 12'h1 :
-		      (rd_next | wr_next) ? xfr_caddr + 12'h1 :
-		      xfr_caddr; 
+	 xfr_caddr <= (ld_xfr) ? b2x_addr :
+		      (rd_next | wr_next) ? xfr_caddr + 1 : xfr_caddr; 
 	 l_start <= (dt_next) ? 1'b0 : 
 		   (ld_xfr) ? b2x_start : l_start;
 	 l_last <= (ld_xfr) ? b2x_last : l_last;
@@ -358,7 +361,8 @@ output [SDR_BW-1:0] 	sdr_den_n;
 		     l_xfr_end & ~mgmt_req & b2x_req & b2x_read;
 	   wr_next = 1'b0;
 	   rdok = l_xfr_end & ~mgmt_req;
-	   cb_pre_ok = l_xfr_end;
+	   // Break the timing path for FPGA Based Design
+	   cb_pre_ok = (`TARGET_DESIGN == `FPGA) ? 1'b0 : l_xfr_end;
 	   wrok = 1'b0;
 	   sel_mgmt = 1'b0;
 
@@ -501,11 +505,15 @@ output [SDR_BW-1:0] 	sdr_den_n;
 
    assign x2b_wrok = wrok;
 
-   assign x2b_pre_ok[0] = (l_ba == 2'b00) ? cb_pre_ok : 1'b1;
-   assign x2b_pre_ok[1] = (l_ba == 2'b01) ? cb_pre_ok : 1'b1;
-   assign x2b_pre_ok[2] = (l_ba == 2'b10) ? cb_pre_ok : 1'b1;
-   assign x2b_pre_ok[3] = (l_ba == 2'b11) ? cb_pre_ok : 1'b1;
+   //assign x2b_pre_ok[0] = (l_ba == 2'b00) ? cb_pre_ok : 1'b1;
+   //assign x2b_pre_ok[1] = (l_ba == 2'b01) ? cb_pre_ok : 1'b1;
+   //assign x2b_pre_ok[2] = (l_ba == 2'b10) ? cb_pre_ok : 1'b1;
+   //assign x2b_pre_ok[3] = (l_ba == 2'b11) ? cb_pre_ok : 1'b1;
    
+   assign x2b_pre_ok[0] = cb_pre_ok;
+   assign x2b_pre_ok[1] = cb_pre_ok;
+   assign x2b_pre_ok[2] = cb_pre_ok;
+   assign x2b_pre_ok[3] = cb_pre_ok;
    assign last_burst = (ld_xfr) ? b2x_last : l_last;
    
    /************************************************************************/

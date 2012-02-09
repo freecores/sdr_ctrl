@@ -100,7 +100,8 @@ parameter  APP_BW   = 4;   // Application Byte Width
 
 parameter  SDR_DW   = 16;  // SDR Data Width 
 parameter  SDR_BW   = 2;   // SDR Byte Width
-parameter  REQ_BW   = 12;   //  Request Width
+// 12 bit subtractor is not feasibile for FPGA, so changed to 8 bits
+parameter  REQ_BW   = (`TARGET_DESIGN == `FPGA) ? 8 : 12;   //  Request Width
    input                        clk, reset_n;
 
    input [1:0] 			a2b_req_depth;
@@ -172,7 +173,8 @@ parameter  REQ_BW   = 12;   //  Request Width
    
    wire [11:0] bank0_row, bank1_row, bank2_row, bank3_row;
 
-   assign b2x_tras_ok = &tras_ok;
+   assign  b2x_tras_ok        = &tras_ok;
+
 
    // Distribute the request from req_gen
 
@@ -181,10 +183,15 @@ parameter  REQ_BW   = 12;   //  Request Width
    assign r2i_req[2] = (r2b_ba == 2'b10) ? r2b_req & ~rank_fifo_full : 1'b0;
    assign r2i_req[3] = (r2b_ba == 2'b11) ? r2b_req & ~rank_fifo_full : 1'b0;
 
+   /******************
+   Modified the Better FPGA Timing Purpose
    assign b2r_ack = (r2b_ba == 2'b00) ? i2r_ack[0] :
 		    (r2b_ba == 2'b01) ? i2r_ack[1] :
 		    (r2b_ba == 2'b10) ? i2r_ack[2] :
 		    (r2b_ba == 2'b11) ? i2r_ack[3] : 1'b0;
+   ********************/
+   // Assumption: Only one Ack Will be asserted at a time.
+   assign b2r_ack  =|i2r_ack; 
 
    assign b2r_arb_ok = ~rank_fifo_full;
    
@@ -198,8 +205,11 @@ parameter  REQ_BW   = 12;   //  Request Width
    // If the rank_fifo is empty, send the request from the bank addressed by
    // r2b_ba 
 
-   assign xfr_ba = (rank_fifo_mt) ? r2b_ba : rank_ba[1:0];
-   assign xfr_ba_last = (rank_fifo_mt) ? sdr_req_norm_dma_last : rank_ba_last[0];
+   // In FPGA Mode, to improve the timing, also send the rank_ba
+   assign xfr_ba = (`TARGET_DESIGN == `FPGA) ? rank_ba[1:0]:
+	           ((rank_fifo_mt) ? r2b_ba : rank_ba[1:0]);
+   assign xfr_ba_last = (`TARGET_DESIGN == `FPGA) ? rank_ba_last[0]:
+	                ((rank_fifo_mt) ? sdr_req_norm_dma_last : rank_ba_last[0]);
    
    assign rank_req[0] = i2x_req[xfr_ba];     // each rank generates requests
 			
@@ -350,17 +360,21 @@ parameter  REQ_BW   = 12;   //  Request Width
 	 rank_ba[7:6] <= (rank_wr_sel[3]) ? r2b_ba :
 			 (rank_fifo_rd) ? 2'b00 : rank_ba[7:6];
 
-         rank_ba_last[0] <= (rank_wr_sel[0]) ? sdr_req_norm_dma_last :
+	 if(`TARGET_DESIGN == `ASIC) begin // This Logic is implemented for ASIC Only
+	    // Note: Currenly top-level does not generate the
+	    // sdr_req_norm_dma_last signal and can be tied zero at top-level
+            rank_ba_last[0] <= (rank_wr_sel[0]) ? sdr_req_norm_dma_last :
                             (rank_fifo_rd) ?  rank_ba_last[1] : rank_ba_last[0];
 
-         rank_ba_last[1] <= (rank_wr_sel[1]) ? sdr_req_norm_dma_last :
-                            (rank_fifo_rd) ?  rank_ba_last[2] : rank_ba_last[1];
+            rank_ba_last[1] <= (rank_wr_sel[1]) ? sdr_req_norm_dma_last :
+                               (rank_fifo_rd) ?  rank_ba_last[2] : rank_ba_last[1];
 
-         rank_ba_last[2] <= (rank_wr_sel[2]) ? sdr_req_norm_dma_last :
-                            (rank_fifo_rd) ?  rank_ba_last[3] : rank_ba_last[2];
+            rank_ba_last[2] <= (rank_wr_sel[2]) ? sdr_req_norm_dma_last :
+                               (rank_fifo_rd) ?  rank_ba_last[3] : rank_ba_last[2];
 
-         rank_ba_last[3] <= (rank_wr_sel[3]) ? sdr_req_norm_dma_last :
-                            (rank_fifo_rd) ?  1'b0 : rank_ba_last[3];
+            rank_ba_last[3] <= (rank_wr_sel[3]) ? sdr_req_norm_dma_last :
+                               (rank_fifo_rd) ?  1'b0 : rank_ba_last[3];
+         end
 
       end // else: !if(~reset_n)
    

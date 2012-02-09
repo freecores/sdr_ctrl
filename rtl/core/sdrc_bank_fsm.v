@@ -96,7 +96,9 @@ parameter  APP_BW   = 4;   // Application Byte Width
 
 parameter  SDR_DW   = 16;  // SDR Data Width 
 parameter  SDR_BW   = 2;   // SDR Byte Width
-parameter  REQ_BW   = 12;   //  Request Width
+// 12 bit subtractor is not feasibile for FPGA, so changed to 8 bits
+parameter  REQ_BW   = (`TARGET_DESIGN == `FPGA) ? 8 : 12;   //  Request Width
+
    input                        clk, reset_n;
 
    /* Req from bank_ctl */
@@ -144,7 +146,7 @@ parameter  REQ_BW   = 12;   //  Request Width
    reg [11:0] 			b2x_addr;
    reg [REQ_BW-1:0] 	l_len;
    wire [REQ_BW-1:0] 	b2x_len;
-   reg [1:0] 			b2x_cmd;
+   reg [1:0] 			b2x_cmd_t;
    reg  			bank_valid;
    reg [11:0] 			bank_row;
    reg [3:0] 			tras_cntr, timer0;
@@ -157,7 +159,44 @@ parameter  REQ_BW   = 12;   //  Request Width
    
    wire  			tras_ok_internal, tras_ok, activate_bank;
    
-   wire 			page_hit, timer0_tc, ld_trp, ld_trcd;
+   wire 			page_hit, timer0_tc_t, ld_trp, ld_trcd;
+
+   /*** Timing Break Logic Added for FPGA - Start ****/
+   reg	x2b_wrok_r, xfr_ok_r , x2b_rdok_r;
+   reg [1:0] b2x_cmd_r,timer0_tc_r,tras_ok_r,x2b_pre_ok_r,x2b_act_ok_r;
+   always @ (posedge clk)
+      if (~reset_n) begin
+	 x2b_wrok_r <= 1'b0;
+	 xfr_ok_r   <= 1'b0;
+	 x2b_rdok_r <= 1'b0;
+	 b2x_cmd_r  <= 2'b0;
+	 timer0_tc_r  <= 1'b0;
+	 tras_ok_r    <= 1'b0;
+	 x2b_pre_ok_r <= 1'b0;
+	 x2b_act_ok_r <= 1'b0;
+      end
+      else begin
+	 x2b_wrok_r <= x2b_wrok;
+	 xfr_ok_r   <= xfr_ok;
+	 x2b_rdok_r <= x2b_rdok;
+	 b2x_cmd_r  <= b2x_cmd_t;
+	 timer0_tc_r <= (ld_trp | ld_trcd) ? 1'b0 : timer0_tc_t;
+	 tras_ok_r   <= tras_ok_internal;
+	 x2b_pre_ok_r  <= x2b_pre_ok;
+	 x2b_act_ok_r  <= x2b_act_ok;
+      end
+
+ wire  x2b_wrok_t     = (`TARGET_DESIGN == `FPGA) ? x2b_wrok_r : x2b_wrok;
+ wire  xfr_ok_t       = (`TARGET_DESIGN == `FPGA) ? xfr_ok_r : xfr_ok;
+ wire  x2b_rdok_t     = (`TARGET_DESIGN == `FPGA) ? x2b_rdok_r : x2b_rdok;
+ wire [1:0] b2x_cmd   = (`TARGET_DESIGN == `FPGA) ? b2x_cmd_r : b2x_cmd_t;
+ wire  timer0_tc      = (`TARGET_DESIGN == `FPGA) ? timer0_tc_r : timer0_tc_t;
+ assign  tras_ok      = (`TARGET_DESIGN == `FPGA) ? tras_ok_r : tras_ok_internal;
+ wire  x2b_pre_ok_t   = (`TARGET_DESIGN == `FPGA) ? x2b_pre_ok_r : x2b_pre_ok;
+ wire  x2b_act_ok_t   = (`TARGET_DESIGN == `FPGA) ? x2b_act_ok_r : x2b_act_ok;
+
+   /*** Timing Break Logic Added for FPGA - End****/
+
 
    always @ (posedge clk)
       if (~reset_n) begin
@@ -177,7 +216,7 @@ parameter  REQ_BW   = 12;   //  Request Width
 	 
 	 timer0 <= (ld_trp) ? trp_delay :
 		   (ld_trcd) ? trcd_delay :
-		   (~timer0_tc) ? timer0 - 4'b1 : timer0;
+		   (timer0 != 'h0) ? timer0 - 4'b1 : timer0;
 	 
 	 bank_st <= next_bank_st;
 
@@ -215,23 +254,24 @@ parameter  REQ_BW   = 12;   //  Request Width
    end // always @ (posedge clk)
    
    assign tras_ok_internal = ~|tras_cntr;
-   assign tras_ok = tras_ok_internal;
 
    assign activate_bank = (b2x_cmd == `OP_ACT) & x2b_ack;
 
    assign page_hit = (r2b_raddr == bank_row) ? bank_valid : 1'b0;    // its a hit only if bank is valid
 
-   assign timer0_tc = ~|timer0;
+   assign timer0_tc_t = ~|timer0;
 
    assign ld_trp = (b2x_cmd == `OP_PRE) ? x2b_ack : 1'b0;
 
    assign ld_trcd = (b2x_cmd == `OP_ACT) ? x2b_ack : 1'b0;
    
+
+
    always @ (*) begin
 
        bank_prech_page_closed = 1'b0;
        b2x_req = 1'b0;
-       b2x_cmd = 2'bx;
+       b2x_cmd_t = 2'bx;
        b2r_ack = 1'b0;
        b2x_addr = 12'bx;
        next_bank_st = bank_st;
@@ -239,36 +279,50 @@ parameter  REQ_BW   = 12;   //  Request Width
       case (bank_st)
 
 	`BANK_IDLE : begin
-
-	   if (~r2b_req) begin
-              bank_prech_page_closed = 1'b0;
-	      b2x_req = 1'b0;
-	      b2x_cmd = 2'bx;
-	      b2r_ack = 1'b0;
-	      b2x_addr = 12'bx;
-	      next_bank_st = `BANK_IDLE;
-	   end // if (~r2b_req)
-	   else if (page_hit) begin 
-	      b2x_req = (r2b_write) ? x2b_wrok & xfr_ok : 
-			x2b_rdok & xfr_ok;
-	      b2x_cmd = (r2b_write) ? `OP_WR : `OP_RD;
-	      b2r_ack = 1'b1;
-	      b2x_addr = r2b_caddr;
-	      next_bank_st = (x2b_ack) ? `BANK_IDLE : `BANK_XFR;  // in case of hit, stay here till xfr sm acks
-	   end // if (page_hit)
-	   else begin  // page_miss
-	      b2x_req = tras_ok_internal & x2b_pre_ok;
-	      b2x_cmd = `OP_PRE;
-	      b2r_ack = 1'b1;
-	      b2x_addr = r2b_raddr & 12'hBFF;	   // Dont want to pre all banks!
-	      next_bank_st = (l_sdr_dma_last) ? `BANK_PRE : (x2b_ack) ? `BANK_ACT : `BANK_PRE;  // bank was precharged on l_sdr_dma_last
-	   end // else: !if(page_hit)
-
+		if(`TARGET_DESIGN == `FPGA) begin // To break the timing, b2x request are generated delayed
+	             if (~r2b_req) begin
+	                next_bank_st = `BANK_IDLE;
+	             end // if (~r2b_req)
+	             else if (page_hit) begin 
+	                b2r_ack = 1'b1;
+	                b2x_cmd_t = (r2b_write) ? `OP_WR : `OP_RD;
+	                next_bank_st = `BANK_XFR;  
+	             end // if (page_hit)
+	             else begin  // page_miss
+	                b2r_ack = 1'b1;
+	                b2x_cmd_t = `OP_PRE;
+	                next_bank_st = `BANK_PRE;  // bank was precharged on l_sdr_dma_last
+	             end // else: !if(page_hit)
+		end else begin // ASIC
+	             if (~r2b_req) begin
+                        bank_prech_page_closed = 1'b0;
+	                b2x_req = 1'b0;
+	                b2x_cmd_t = 2'bx;
+	                b2r_ack = 1'b0;
+	                b2x_addr = 12'bx;
+	                next_bank_st = `BANK_IDLE;
+	             end // if (~r2b_req)
+	             else if (page_hit) begin 
+	                b2x_req = (r2b_write) ? x2b_wrok_t & xfr_ok_t : 
+			                       x2b_rdok_t & xfr_ok_t;
+	                b2x_cmd_t = (r2b_write) ? `OP_WR : `OP_RD;
+	                b2r_ack = 1'b1;
+	                b2x_addr = r2b_caddr;
+	                next_bank_st = (x2b_ack) ? `BANK_IDLE : `BANK_XFR;  // in case of hit, stay here till xfr sm acks
+	             end // if (page_hit)
+	             else begin  // page_miss
+	                b2x_req = tras_ok & x2b_pre_ok_t;
+	                b2x_cmd_t = `OP_PRE;
+	                b2r_ack = 1'b1;
+	                b2x_addr = r2b_raddr & 12'hBFF;	   // Dont want to pre all banks!
+	                next_bank_st = (l_sdr_dma_last) ? `BANK_PRE : (x2b_ack) ? `BANK_ACT : `BANK_PRE;  // bank was precharged on l_sdr_dma_last
+	             end // else: !if(page_hit)
+	        end
 	end // case: `BANK_IDLE
 
 	`BANK_PRE : begin
-	   b2x_req = tras_ok_internal & x2b_pre_ok;
-	   b2x_cmd = `OP_PRE;
+	   b2x_req = tras_ok & x2b_pre_ok_t;
+	   b2x_cmd_t = `OP_PRE;
 	   b2r_ack = 1'b0;
 	   b2x_addr = l_raddr & 12'hBFF;	   // Dont want to pre all banks!
            bank_prech_page_closed = 1'b0;
@@ -276,8 +330,8 @@ parameter  REQ_BW   = 12;   //  Request Width
 	end // case: `BANK_PRE
 
 	`BANK_ACT : begin
-	   b2x_req = timer0_tc & x2b_act_ok;
-	   b2x_cmd = `OP_ACT;
+	   b2x_req = timer0_tc & x2b_act_ok_t;
+	   b2x_cmd_t = `OP_ACT;
 	   b2r_ack = 1'b0;
 	   b2x_addr = l_raddr;
            bank_prech_page_closed = 1'b0;
@@ -285,9 +339,9 @@ parameter  REQ_BW   = 12;   //  Request Width
 	end // case: `BANK_ACT
 	
 	`BANK_XFR : begin
-	   b2x_req = (l_write) ? timer0_tc & x2b_wrok & xfr_ok :
-		     timer0_tc & x2b_rdok & xfr_ok; 
-	   b2x_cmd = (l_write) ? `OP_WR : `OP_RD;
+	   b2x_req = (l_write) ? timer0_tc & x2b_wrok_t & xfr_ok_t :
+		     timer0_tc & x2b_rdok_t & xfr_ok_t; 
+	   b2x_cmd_t = (l_write) ? `OP_WR : `OP_RD;
 	   b2r_ack = 1'b0;
 	   b2x_addr = l_caddr;
            bank_prech_page_closed = 1'b0;
@@ -297,8 +351,8 @@ parameter  REQ_BW   = 12;   //  Request Width
 	end // case: `BANK_XFR
 
         `BANK_DMA_LAST_PRE : begin
-	   b2x_req = tras_ok_internal & x2b_pre_ok;
-	   b2x_cmd = `OP_PRE;
+	   b2x_req = tras_ok & x2b_pre_ok_t;
+	   b2x_cmd_t = `OP_PRE;
 	   b2r_ack = 1'b0;
 	   b2x_addr = l_raddr & 12'hBFF;	   // Dont want to pre all banks!
            bank_prech_page_closed = 1'b1;

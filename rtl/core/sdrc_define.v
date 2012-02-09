@@ -23,5 +23,7 @@
 `define SDR_REFRESH      4'b0001
 `define SDR_MODE         4'b0000
 
-
+`define  ASIC            1'b1
+`define  FPGA            1'b0
+`define  TARGET_DESIGN   `FPGA
 

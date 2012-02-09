@@ -28,7 +28,8 @@
   The SDRAMs are operated in 4 beat burst mode.
 
   If Wrap = 0; 
-      If the current burst cross the page boundary, then this block split the request into two coressponding change in address and request length
+      If the current burst cross the page boundary, then this block split the request 
+      into two coressponding change in address and request length
 
   if the current burst cross the page boundar.
   This module takes requests from the memory controller, 
@@ -115,7 +116,9 @@ parameter  APP_RW   = 9;   // Application Request Width
 parameter  SDR_DW   = 16;  // SDR Data Width 
 parameter  SDR_BW   = 2;   // SDR Byte Width
 
-parameter  REQ_BW   = 12;   //  Request Width
+// 12 bit subtractor is not feasibile for FPGA, so changed to 8 bits
+parameter  REQ_BW   = (`TARGET_DESIGN == `FPGA) ? 8 : 12;   //  Request Width
+
 input                   clk           ;
 input                   reset_n       ;
 input [1:0]             cfg_colbits   ; // 2'b00 - 8 Bit column address, 2'b01 - 9 Bit, 10 - 10 bit, 11 - 11Bits
@@ -161,7 +164,8 @@ input [1:0] 	        sdr_width; // 2'b00 - 32 Bit, 2'b01 - 16 Bit, 2'b1x - 8Bit
 
    wire 		r2b_last, page_ovflw;
    wire [REQ_BW-1:0] 	r2b_len, next_req_len;
-   wire [REQ_BW:0] 	max_r2b_len;
+   wire [12:0] 	        max_r2b_len;
+   reg  [12:0] 	        max_r2b_len_r;
 
    reg [1:0] 		r2b_ba;
    reg [11:0] 		r2b_raddr;
@@ -199,9 +203,9 @@ end
    // burst length, then we need to handle the bank cross over case and we
    // need to split the reuest.
    //
-   assign max_r2b_len = (cfg_colbits == 2'b00) ? (12'h100 - r2b_caddr) :
-	                (cfg_colbits == 2'b01) ? (12'h200 - r2b_caddr) :
-			(cfg_colbits == 2'b10) ? (12'h400 - r2b_caddr) : (12'h800 - r2b_caddr);
+   assign max_r2b_len = (cfg_colbits == 2'b00) ? (12'h100 - {4'b0, req_addr_int[7:0]}) :
+	                (cfg_colbits == 2'b01) ? (12'h200 - {3'b0, req_addr_int[8:0]}) :
+			(cfg_colbits == 2'b10) ? (12'h400 - {2'b0, req_addr_int[9:0]}) : (12'h800 - {1'b0, req_addr_int[10:0]});
 
 
      // If the wrap = 0 and current application burst length is crossing the page boundary, 
@@ -217,9 +221,9 @@ end
      //
      // Note: With Wrap = 0, each request from Application layer will be spilited into two request, 
      //	if the current burst cross the page boundary. 
-   assign page_ovflw = ({1'b0, lcl_req_len} > max_r2b_len) ? ~lcl_wrap : 1'b0;
+   assign page_ovflw = ({1'b0, lcl_req_len} > max_r2b_len_r) ? ~lcl_wrap : 1'b0;
 
-   assign r2b_len = (page_ovflw) ? max_r2b_len : lcl_req_len;
+   assign r2b_len = (page_ovflw) ? max_r2b_len_r : lcl_req_len;
 
    assign next_req_len = lcl_req_len - r2b_len;
 
@@ -234,6 +238,7 @@ end
 //
    always @ (posedge clk) begin
 
+      max_r2b_len_r  <= max_r2b_len;
       r2b_start      <= (req_ack) ? 1'b1 :
 		        (b2r_ack) ? 1'b0 : r2b_start;
 
