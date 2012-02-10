@@ -100,8 +100,6 @@ parameter  APP_BW   = 4;   // Application Byte Width
 
 parameter  SDR_DW   = 16;  // SDR Data Width 
 parameter  SDR_BW   = 2;   // SDR Byte Width
-// 12 bit subtractor is not feasibile for FPGA, so changed to 8 bits
-parameter  REQ_BW   = (`TARGET_DESIGN == `FPGA) ? 8 : 12;   //  Request Width
    input                        clk, reset_n;
 
    input [1:0] 			a2b_req_depth;
@@ -113,7 +111,7 @@ parameter  REQ_BW   = (`TARGET_DESIGN == `FPGA) ? 8 : 12;   //  Request Width
    input [1:0] 			r2b_ba;
    input [11:0] 		r2b_raddr;
    input [11:0] 		r2b_caddr;
-   input [REQ_BW-1:0] 	        r2b_len;
+   input [`REQ_BW-1:0] 	        r2b_len;
    output 			b2r_arb_ok, b2r_ack;
    input                        sdr_req_norm_dma_last;
 
@@ -123,7 +121,7 @@ parameter  REQ_BW   = (`TARGET_DESIGN == `FPGA) ? 8 : 12;   //  Request Width
    output [`SDR_REQ_ID_W-1:0] 	b2x_id;
    output [1:0] 		b2x_ba;
    output [11:0] 		b2x_addr;
-   output [REQ_BW-1:0] 	b2x_len;
+   output [`REQ_BW-1:0] 	b2x_len;
    output [1:0] 		b2x_cmd;
    input 			x2b_ack;
 
@@ -142,7 +140,7 @@ parameter  REQ_BW   = (`TARGET_DESIGN == `FPGA) ? 8 : 12;   //  Request Width
    wire [3:0] 			r2i_req, i2r_ack, i2x_req, 
 				i2x_start, i2x_last, i2x_wrap, tras_ok;
    wire [11:0] 			i2x_addr0, i2x_addr1, i2x_addr2, i2x_addr3;
-   wire [REQ_BW-1:0] 	i2x_len0, i2x_len1, i2x_len2, i2x_len3;
+   wire [`REQ_BW-1:0] 	i2x_len0, i2x_len1, i2x_len2, i2x_len3;
    wire [1:0] 			i2x_cmd0, i2x_cmd1, i2x_cmd2, i2x_cmd3;
    wire [`SDR_REQ_ID_W-1:0] 	i2x_id0, i2x_id1, i2x_id2, i2x_id3;
 
@@ -150,7 +148,7 @@ parameter  REQ_BW   = (`TARGET_DESIGN == `FPGA) ? 8 : 12;   //  Request Width
    wire 			b2x_idle, b2x_start, b2x_last, b2x_wrap;
    wire [`SDR_REQ_ID_W-1:0] 	b2x_id;
    wire [11:0] 			b2x_addr;
-   wire [REQ_BW-1:0] 	b2x_len;
+   wire [`REQ_BW-1:0] 	b2x_len;
    wire [1:0] 			b2x_cmd;
    wire [3:0] 			x2i_ack;
    reg [1:0] 			b2x_ba;
@@ -231,34 +229,33 @@ parameter  REQ_BW   = (`TARGET_DESIGN == `FPGA) ? 8 : 12;   //  Request Width
 			(rank_ba[7:6] == 2'b10) ? i2x_req[2] & ~i2x_cmd2[1] : 
 			i2x_req[3] & ~i2x_cmd3[1];
 			
-   always @ (rank_req or rank_ba or xfr_ba or xfr_ba_last) begin
+   always @ (*) begin
+      b2x_req = 1'b0;
+      b2x_ba =   xfr_ba;
 
-      if (rank_req[0]) begin 
-	 b2x_req = 1'b1;
-	 b2x_ba = xfr_ba;
-      end // if (rank_req[0])
-      
-      else if (rank_req[1]) begin 
-	 b2x_req = 1'b1;
-	 b2x_ba = rank_ba[3:2];
-      end // if (rank_req[1])
-      
-      else if (rank_req[2]) begin 
-	 b2x_req = 1'b1;
-	 b2x_ba = rank_ba[5:4];
-      end // if (rank_req[2])
-      
-      else if (rank_req[3]) begin 
-	 b2x_req = 1'b1;
-	 b2x_ba = rank_ba[7:6];
-      end // if (rank_req[3])
-      
-      else begin 
-	 b2x_req = 1'b0;
-	 b2x_ba = 2'b00;
-      end // else: !if(rank_req[3])
-      
-   end // always @ (rank_req or rank_fifo_mt or r2b_ba or rank_ba)
+      if(`TARGET_DESIGN == `ASIC) begin // Support Multiple Rank request only on ASIC
+         if (rank_req[0]) begin 
+	    b2x_req = 1'b1;
+	    b2x_ba = xfr_ba;
+         end // if (rank_req[0])
+	 else if (rank_req[1]) begin 
+	   b2x_req = 1'b1;
+	   b2x_ba = rank_ba[3:2];
+        end // if (rank_req[1])
+        else if (rank_req[2]) begin 
+	  b2x_req = 1'b1;
+	  b2x_ba = rank_ba[5:4];
+        end // if (rank_req[2])
+        else if (rank_req[3]) begin 
+	  b2x_req = 1'b1;
+	  b2x_ba = rank_ba[7:6];
+        end // if (rank_req[3])
+      end else begin // If FPGA
+         if (rank_req[0]) begin 
+	    b2x_req = 1'b1;
+	 end
+      end
+  end // always @ (rank_req or rank_fifo_mt or r2b_ba or rank_ba)
 
    assign b2x_idle = rank_fifo_mt;
    assign b2x_start = i2x_start[b2x_ba];

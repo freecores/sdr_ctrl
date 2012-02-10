@@ -133,8 +133,6 @@ parameter  APP_RW   = 9;   // Application Request Width
 parameter  SDR_DW   = 16;  // SDR Data Width 
 parameter  SDR_BW   = 2;   // SDR Byte Width
              
-// 12 bit subtractor is not feasibile for FPGA, so changed to 8 bits
-parameter  REQ_BW   = (`TARGET_DESIGN == `FPGA) ? 8 : 12;   //  Request Width
 
 //-----------------------------------------------
 // Global Variable
@@ -204,13 +202,13 @@ wire [`SDR_REQ_ID_W-1:0]r2b_req_id;
 wire [1:0] 		r2b_ba;
 wire [11:0] 		r2b_raddr;
 wire [11:0] 		r2b_caddr;
-wire [REQ_BW-1:0] 	r2b_len;
+wire [`REQ_BW-1:0] 	r2b_len;
 
 // SDR BANK CTL
 wire [`SDR_REQ_ID_W-1:0]b2x_id;
 wire [1:0] 		b2x_ba;
 wire [11:0] 		b2x_addr;
-wire [REQ_BW-1:0] 	b2x_len;
+wire [`REQ_BW-1:0] 	b2x_len;
 wire [1:0] 		b2x_cmd;
 
 // SDR_XFR_CTL

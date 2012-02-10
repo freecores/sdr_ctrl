@@ -116,8 +116,6 @@ parameter  APP_RW   = 9;   // Application Request Width
 parameter  SDR_DW   = 16;  // SDR Data Width 
 parameter  SDR_BW   = 2;   // SDR Byte Width
 
-// 12 bit subtractor is not feasibile for FPGA, so changed to 8 bits
-parameter  REQ_BW   = (`TARGET_DESIGN == `FPGA) ? 8 : 12;   //  Request Width
 
 input                   clk           ;
 input                   reset_n       ;
@@ -143,7 +141,7 @@ output [`SDR_REQ_ID_W-1:0] 	r2b_req_id;
 output [1:0] 		r2b_ba        ; // Bank Address
 output [11:0] 		r2b_raddr     ; // Row Address
 output [11:0] 		r2b_caddr     ; // Column Address
-output [REQ_BW-1:0] 	r2b_len       ; // Burst Length
+output [`REQ_BW-1:0] 	r2b_len       ; // Burst Length
 input 			b2r_ack       ; // Request Ack
 input                   b2r_arb_ok    ; // Bank controller fifo is not full and ready to accept the command
 //
@@ -160,10 +158,10 @@ input [1:0] 	        sdr_width; // 2'b00 - 32 Bit, 2'b01 - 16 Bit, 2'b1x - 8Bit
    reg 			r2x_idle, req_ack, r2b_req, r2b_start, 
 			r2b_write, req_idle, req_ld, lcl_wrap;
    reg [`SDR_REQ_ID_W-1:0] 	r2b_req_id;
-   reg [REQ_BW-1:0] 	lcl_req_len;
+   reg [`REQ_BW-1:0] 	lcl_req_len;
 
    wire 		r2b_last, page_ovflw;
-   wire [REQ_BW-1:0] 	r2b_len, next_req_len;
+   wire [`REQ_BW-1:0] 	r2b_len, next_req_len;
    wire [12:0] 	        max_r2b_len;
    reg  [12:0] 	        max_r2b_len_r;
 
@@ -225,9 +223,9 @@ end
 
    assign r2b_len = (page_ovflw) ? max_r2b_len_r : lcl_req_len;
 
-   assign next_req_len = lcl_req_len - r2b_len;
+   assign next_req_len = lcl_req_len - max_r2b_len_r;
 
-   assign next_sdr_addr = curr_sdr_addr + r2b_len;
+   assign next_sdr_addr = curr_sdr_addr + max_r2b_len_r;
 
 
    assign r2b_wrap = lcl_wrap;
