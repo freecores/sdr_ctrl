@@ -108,7 +108,7 @@ module sdrc_req_gen (clk,
 		    b2r_arb_ok
 		    );
 
-parameter  APP_AW   = 30;  // Application Address Width
+parameter  APP_AW   = 25;  // Application Address Width
 parameter  APP_DW   = 32;  // Application Data Width 
 parameter  APP_BW   = 4;   // Application Byte Width
 parameter  APP_RW   = 9;   // Application Request Width
@@ -151,16 +151,18 @@ input [1:0] 	        sdr_width; // 2'b00 - 32 Bit, 2'b01 - 16 Bit, 2'b1x - 8Bit
    /****************************************************************************/
    // Internal Nets
 
-   `define REQ_IDLE        1'b0
-   `define REQ_ACTIVE      1'b1
+   `define REQ_IDLE        2'b00
+   `define REQ_ACTIVE      2'b01
+   `define REQ_PAGE_WRAP   2'b10
 
-   reg  		req_st, next_req_st;
+   reg  [1:0]		req_st, next_req_st;
    reg 			r2x_idle, req_ack, r2b_req, r2b_start, 
 			r2b_write, req_idle, req_ld, lcl_wrap;
    reg [`SDR_REQ_ID_W-1:0] 	r2b_req_id;
    reg [`REQ_BW-1:0] 	lcl_req_len;
 
    wire 		r2b_last, page_ovflw;
+   reg page_ovflw_r;
    wire [`REQ_BW-1:0] 	r2b_len, next_req_len;
    wire [12:0] 	        max_r2b_len;
    reg  [12:0] 	        max_r2b_len_r;
@@ -219,24 +221,27 @@ end
      //
      // Note: With Wrap = 0, each request from Application layer will be spilited into two request, 
      //	if the current burst cross the page boundary. 
-   assign page_ovflw = ({1'b0, lcl_req_len} > max_r2b_len_r) ? ~lcl_wrap : 1'b0;
+   assign page_ovflw = ({1'b0, req_len_int} > max_r2b_len) ? ~r2b_wrap : 1'b0;
 
-   assign r2b_len = (page_ovflw) ? max_r2b_len_r : lcl_req_len;
+   assign r2b_len = r2b_start ? ((page_ovflw_r) ? max_r2b_len_r : lcl_req_len) :
+                      lcl_req_len;
 
-   assign next_req_len = lcl_req_len - max_r2b_len_r;
+   assign next_req_len = lcl_req_len - r2b_len;
 
-   assign next_sdr_addr = curr_sdr_addr + max_r2b_len_r;
+   assign next_sdr_addr = curr_sdr_addr + r2b_len;
 
 
    assign r2b_wrap = lcl_wrap;
 
-   assign r2b_last = ~page_ovflw;
+   assign r2b_last = (r2b_start & !page_ovflw_r) | (req_st == `REQ_PAGE_WRAP);
 //
 //
 //
    always @ (posedge clk) begin
 
-      max_r2b_len_r  <= max_r2b_len;
+      page_ovflw_r   <= (req_ack) ? page_ovflw: 'h0;
+
+      max_r2b_len_r  <= (req_ack) ? max_r2b_len: 'h0;
       r2b_start      <= (req_ack) ? 1'b1 :
 		        (b2r_ack) ? 1'b0 : r2b_start;
 
@@ -255,6 +260,12 @@ end
    end // always @ (posedge clk)
    
    always @ (*) begin
+      r2x_idle    = 1'b0;
+      req_idle    = 1'b0;
+      req_ack     = 1'b0;
+      req_ld      = 1'b0;
+      r2b_req     = 1'b0;
+      next_req_st = `REQ_IDLE;
 
       case (req_st)      // synopsys full_case parallel_case
 
@@ -273,7 +284,15 @@ end
 	   req_ack = 1'b0;
 	   req_ld = b2r_ack;
 	   r2b_req = 1'b1;                       // req_gen to bank_req
-	   next_req_st = (b2r_ack & r2b_last) ? `REQ_IDLE : `REQ_ACTIVE;
+	   next_req_st = (b2r_ack ) ? ((page_ovflw_r) ? `REQ_PAGE_WRAP :`REQ_IDLE) : `REQ_ACTIVE;
+	end // case: `REQ_ACTIVE
+	`REQ_PAGE_WRAP : begin
+	   r2x_idle = 1'b0;
+	   req_idle = 1'b0;
+	   req_ack  = 1'b0;
+	   req_ld = b2r_ack;
+	   r2b_req = 1'b1;                       // req_gen to bank_req
+	   next_req_st = (b2r_ack) ? `REQ_IDLE : `REQ_PAGE_WRAP;
 	end // case: `REQ_ACTIVE
 
       endcase // case(req_st)

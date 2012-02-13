@@ -106,7 +106,7 @@ module sdrc_top
 	            cfg_sdr_rfmax
 	    );
   
-parameter      APP_AW   = 30;  // Application Address Width
+parameter      APP_AW   = 25;  // Application Address Width
 parameter      APP_DW   = 32;  // Application Data Width 
 parameter      APP_BW   = 4;   // Application Byte Width
 parameter      APP_RW   = 9;   // Application Request Width
@@ -135,7 +135,7 @@ input                   wb_clk_i           ;
 
 input                   wb_stb_i           ;
 output                  wb_ack_o           ;
-input [29:0]            wb_addr_i          ;
+input [25:0]            wb_addr_i          ;
 input                   wb_we_i            ; // 1 - Write, 0 - Read
 input [dw-1:0]          wb_dat_i           ;
 input [dw/8-1:0]        wb_sel_i           ; // Byte enable
@@ -176,7 +176,7 @@ input [`SDR_RFSH_ROW_CNT_W -1 : 0] cfg_sdr_rfmax;
 // SDRAM controller Interface 
 //--------------------------------------------
 wire                  app_req            ; // SDRAM request
-wire [29:0]           app_req_addr       ; // SDRAM Request Address
+wire [24:0]           app_req_addr       ; // SDRAM Request Address
 wire [bl-1:0]         app_req_len        ;
 wire                  app_req_wr_n       ; // 0 - Write, 1 -> Read
 wire                  app_req_ack        ; // SDRAM request Accepted

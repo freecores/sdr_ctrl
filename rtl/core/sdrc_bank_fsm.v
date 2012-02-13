@@ -90,9 +90,6 @@ module sdrc_bank_fsm (clk,
 		     trp_delay,	   // Precharge to active delay
 		     trcd_delay);  // Active to R/W delay
    
-parameter  APP_AW   = 30;  // Application Address Width
-parameter  APP_DW   = 32;  // Application Data Width 
-parameter  APP_BW   = 4;   // Application Byte Width
 
 parameter  SDR_DW   = 16;  // SDR Data Width 
 parameter  SDR_BW   = 2;   // SDR Byte Width
@@ -222,7 +219,7 @@ parameter  SDR_BW   = 2;   // SDR Byte Width
 
    always @ (posedge clk) begin 
 
-      bank_row <= (activate_bank) ? b2x_addr : bank_row;
+      bank_row <= (bank_st == `BANK_ACT) ? b2x_addr : bank_row;
 
       if (~reset_n) begin
 	 l_start <= 1'b0;

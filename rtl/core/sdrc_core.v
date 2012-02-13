@@ -125,7 +125,7 @@ module sdrc_core
 		cfg_sdr_rfsh,
 		cfg_sdr_rfmax);
   
-parameter  APP_AW   = 30;  // Application Address Width
+parameter  APP_AW   = 25;  // Application Address Width
 parameter  APP_DW   = 32;  // Application Data Width 
 parameter  APP_BW   = 4;   // Application Byte Width
 parameter  APP_RW   = 9;   // Application Request Width

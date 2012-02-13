@@ -129,10 +129,6 @@ module sdrc_xfr_ctl (clk,
 		    rfsh_time,	   // time per row (31.25 or 15.6125 uS)
 		    rfsh_rmax);	   // Number of rows to rfsh at a time (<120uS)
    
-parameter  APP_AW   = 30;  // Application Address Width
-parameter  APP_DW   = 32;  // Application Data Width 
-parameter  APP_BW   = 4;   // Application Byte Width
-
 parameter  SDR_DW   = 16;  // SDR Data Width 
 parameter  SDR_BW   = 2;   // SDR Byte Width
 
