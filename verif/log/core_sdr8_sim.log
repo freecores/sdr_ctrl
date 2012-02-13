@@ -86,7 +86,6 @@ Reading D:/Actel/Libero_v9.1/Model/tcl/vsim/pref.tcl
 #  Case-3 Create a Page Cross Over        
 # ----------------------------------------
 # Write Address: 00000ff0, Burst Size:   8
-# at time     15177 ns ERROR: tRRD violation during Activate bank = 0
 # Status: Burst-No:           0  Write Address: 00000ff0  WriteData: 462df78c 
 # Status: Burst-No:           1  Write Address: 00000ff0  WriteData: 7cfde9f9 
 # Status: Burst-No:           2  Write Address: 00000ff0  WriteData: e33724c6 
@@ -96,7 +95,6 @@ Reading D:/Actel/Libero_v9.1/Model/tcl/vsim/pref.tcl
 # Status: Burst-No:           6  Write Address: 00000ff0  WriteData: bbd27277 
 # Status: Burst-No:           7  Write Address: 00000ff0  WriteData: 8932d612 
 # Write Address: 00010ff4, Burst Size:  15
-# at time     15617 ns ERROR: tRRD violation during Activate bank = 0
 # Status: Burst-No:           0  Write Address: 00010ff4  WriteData: 47ecdb8f 
 # Status: Burst-No:           1  Write Address: 00010ff4  WriteData: 793069f2 
 # Status: Burst-No:           2  Write Address: 00010ff4  WriteData: e77696ce 
@@ -113,7 +111,6 @@ Reading D:/Actel/Libero_v9.1/Model/tcl/vsim/pref.tcl
 # Status: Burst-No:          13  Write Address: 00010ff4  WriteData: 557845aa 
 # Status: Burst-No:          14  Write Address: 00010ff4  WriteData: cecccc9d 
 # Write Address: 00020ff8, Burst Size:  15
-# at time     16367 ns ERROR: tRRD violation during Activate bank = 0
 # Status: Burst-No:           0  Write Address: 00020ff8  WriteData: cb203e96 
 # Status: Burst-No:           1  Write Address: 00020ff8  WriteData: 8983b813 
 # Status: Burst-No:           2  Write Address: 00020ff8  WriteData: 86bc380d 
@@ -130,7 +127,6 @@ Reading D:/Actel/Libero_v9.1/Model/tcl/vsim/pref.tcl
 # Status: Burst-No:          13  Write Address: 00020ff8  WriteData: 9e314c3c 
 # Status: Burst-No:          14  Write Address: 00020ff8  WriteData: 7968bdf2 
 # Write Address: 00030ffc, Burst Size:  15
-# at time     17147 ns ERROR: tRRD violation during Activate bank = 0
 # Status: Burst-No:           0  Write Address: 00030ffc  WriteData: 452e618a 
 # Status: Burst-No:           1  Write Address: 00030ffc  WriteData: 20c4b341 
 # Status: Burst-No:           2  Write Address: 00030ffc  WriteData: ec4b34d8 
@@ -147,7 +143,6 @@ Reading D:/Actel/Libero_v9.1/Model/tcl/vsim/pref.tcl
 # Status: Burst-No:          13  Write Address: 00030ffc  WriteData: 42f24185 
 # Status: Burst-No:          14  Write Address: 00030ffc  WriteData: 27f2554f 
 # Write Address: 00040fe0, Burst Size:  15
-# at time     17997 ns ERROR: tRRD violation during Activate bank = 0
 # Status: Burst-No:           0  Write Address: 00040fe0  WriteData: 9dcc603b 
 # Status: Burst-No:           1  Write Address: 00040fe0  WriteData: 1d06333a 
 # Status: Burst-No:           2  Write Address: 00040fe0  WriteData: bf23327e 
@@ -164,7 +159,6 @@ Reading D:/Actel/Libero_v9.1/Model/tcl/vsim/pref.tcl
 # Status: Burst-No:          13  Write Address: 00040fe0  WriteData: ae7d945c 
 # Status: Burst-No:          14  Write Address: 00040fe0  WriteData: adcbc05b 
 # Write Address: 00050fe4, Burst Size:  15
-# at time     18717 ns ERROR: tRRD violation during Activate bank = 0
 # Status: Burst-No:           0  Write Address: 00050fe4  WriteData: 44de3789 
 # Status: Burst-No:           1  Write Address: 00050fe4  WriteData: a4ae3249 
 # Status: Burst-No:           2  Write Address: 00050fe4  WriteData: e8233ed0 
@@ -181,7 +175,6 @@ Reading D:/Actel/Libero_v9.1/Model/tcl/vsim/pref.tcl
 # Status: Burst-No:          13  Write Address: 00050fe4  WriteData: 36e5816d 
 # Status: Burst-No:          14  Write Address: 00050fe4  WriteData: 1cd9e739 
 # Write Address: 00060fe8, Burst Size:  15
-# at time     19447 ns ERROR: tRRD violation during Activate bank = 0
 # Status: Burst-No:           0  Write Address: 00060fe8  WriteData: 0fd28f1f 
 # Status: Burst-No:           1  Write Address: 00060fe8  WriteData: e9ebf6d3 
 # Status: Burst-No:           2  Write Address: 00060fe8  WriteData: 42d92f85 
@@ -198,7 +191,6 @@ Reading D:/Actel/Libero_v9.1/Model/tcl/vsim/pref.tcl
 # Status: Burst-No:          13  Write Address: 00060fe8  WriteData: 937dbc26 
 # Status: Burst-No:          14  Write Address: 00060fe8  WriteData: 39961773 
 # Write Address: 00070fec, Burst Size:  15
-# at time     20177 ns ERROR: tRRD violation during Activate bank = 0
 # Status: Burst-No:           0  Write Address: 00070fec  WriteData: d18bb4a3 
 # Status: Burst-No:           1  Write Address: 00070fec  WriteData: 9799a82f 
 # Status: Burst-No:           2  Write Address: 00070fec  WriteData: d9d292b3 
@@ -215,7 +207,6 @@ Reading D:/Actel/Libero_v9.1/Model/tcl/vsim/pref.tcl
 # Status: Burst-No:          13  Write Address: 00070fec  WriteData: da8ae2b5 
 # Status: Burst-No:          14  Write Address: 00070fec  WriteData: efbe94df 
 # Write Address: 00080fd0, Burst Size:  15
-# at time     20907 ns ERROR: tRRD violation during Activate bank = 0
 # Status: Burst-No:           0  Write Address: 00080fd0  WriteData: 3cf11979 
 # Status: Burst-No:           1  Write Address: 00080fd0  WriteData: 2231ff44 
 # Status: Burst-No:           2  Write Address: 00080fd0  WriteData: e8740cd0 
@@ -232,7 +223,6 @@ Reading D:/Actel/Libero_v9.1/Model/tcl/vsim/pref.tcl
 # Status: Burst-No:          13  Write Address: 00080fd0  WriteData: 8531340a 
 # Status: Burst-No:          14  Write Address: 00080fd0  WriteData: 5b6fb9b6 
 # Write Address: 00090fd4, Burst Size:  15
-# at time     21627 ns ERROR: tRRD violation during Activate bank = 0
 # Status: Burst-No:           0  Write Address: 00090fd4  WriteData: 9c0e8a38 
 # Status: Burst-No:           1  Write Address: 00090fd4  WriteData: 3cd18779 
 # Status: Burst-No:           2  Write Address: 00090fd4  WriteData: dc2bc4b8 
@@ -249,7 +239,6 @@ Reading D:/Actel/Libero_v9.1/Model/tcl/vsim/pref.tcl
 # Status: Burst-No:          13  Write Address: 00090fd4  WriteData: 5b172db6 
 # Status: Burst-No:          14  Write Address: 00090fd4  WriteData: 4a937195 
 # Write Address: 000a0fd8, Burst Size:  15
-# at time     22347 ns ERROR: tRRD violation during Activate bank = 0
 # Status: Burst-No:           0  Write Address: 000a0fd8  WriteData: a3071a46 
 # Status: Burst-No:           1  Write Address: 000a0fd8  WriteData: 02749b04 
 # Status: Burst-No:           2  Write Address: 000a0fd8  WriteData: 7bd261f7 
@@ -266,7 +255,6 @@ Reading D:/Actel/Libero_v9.1/Model/tcl/vsim/pref.tcl
 # Status: Burst-No:          13  Write Address: 000a0fd8  WriteData: 149e0729 
 # Status: Burst-No:          14  Write Address: 000a0fd8  WriteData: 8e37901c 
 # Write Address: 000b0fdc, Burst Size:  15
-# at time     23067 ns ERROR: tRRD violation during Activate bank = 0
 # Status: Burst-No:           0  Write Address: 000b0fdc  WriteData: 43356786 
 # Status: Burst-No:           1  Write Address: 000b0fdc  WriteData: ed3408da 
 # Status: Burst-No:           2  Write Address: 000b0fdc  WriteData: 9eb7c63d 
@@ -315,7 +303,6 @@ Reading D:/Actel/Libero_v9.1/Model/tcl/vsim/pref.tcl
 # Status: Burst-No:          13  Write Address: 000d0fc4  WriteData: 549efda9 
 # Status: Burst-No:          14  Write Address: 000d0fc4  WriteData: d0ca8ca1 
 # Write Address: 000e0fc8, Burst Size:  15
-# at time     25207 ns ERROR: tRRD violation during Activate bank = 0
 # Status: Burst-No:           0  Write Address: 000e0fc8  WriteData: 070bb90e 
 # Status: Burst-No:           1  Write Address: 000e0fc8  WriteData: f33466e6 
 # Status: Burst-No:           2  Write Address: 000e0fc8  WriteData: cfd6c09f 
@@ -332,7 +319,6 @@ Reading D:/Actel/Libero_v9.1/Model/tcl/vsim/pref.tcl
 # Status: Burst-No:          13  Write Address: 000e0fc8  WriteData: e3b7aec7 
 # Status: Burst-No:          14  Write Address: 000e0fc8  WriteData: 5b0bddb6 
 # Write Address: 000f0fcc, Burst Size:  15
-# at time     26547 ns ERROR: tRRD violation during Activate bank = 0
 # Status: Burst-No:           0  Write Address: 000f0fcc  WriteData: 5d059dba 
 # Status: Burst-No:           1  Write Address: 000f0fcc  WriteData: 6216abc4 
 # Status: Burst-No:           2  Write Address: 000f0fcc  WriteData: 5c8295b9 
@@ -476,7 +462,6 @@ Reading D:/Actel/Libero_v9.1/Model/tcl/vsim/pref.tcl
 # Status: Burst-No:          12  Write Address: 00170fac  WriteData: bccc4279 
 # Status: Burst-No:          13  Write Address: 00170fac  WriteData: cf63da9e 
 # Status: Burst-No:          14  Write Address: 00170fac  WriteData: fef064fd 
-# at time     32937 ns ERROR: tRRD violation during Activate bank = 0
 # READ STATUS: Burst-No:           0 Addr: 00000ff0 Rxd: 462df78c
 # READ STATUS: Burst-No:           1 Addr: 00000ff2 Rxd: 7cfde9f9
 # READ STATUS: Burst-No:           2 Addr: 00000ff4 Rxd: e33724c6
@@ -485,7 +470,6 @@ Reading D:/Actel/Libero_v9.1/Model/tcl/vsim/pref.tcl
 # READ STATUS: Burst-No:           5 Addr: 00000ffa Rxd: 72aff7e5
 # READ STATUS: Burst-No:           6 Addr: 00000ffc Rxd: bbd27277
 # READ STATUS: Burst-No:           7 Addr: 00000ffe Rxd: 8932d612
-# at time     33417 ns ERROR: tRRD violation during Activate bank = 0
 # READ STATUS: Burst-No:           0 Addr: 00010ff4 Rxd: 47ecdb8f
 # READ STATUS: Burst-No:           1 Addr: 00010ff6 Rxd: 793069f2
 # READ STATUS: Burst-No:           2 Addr: 00010ff8 Rxd: e77696ce
@@ -501,7 +485,6 @@ Reading D:/Actel/Libero_v9.1/Model/tcl/vsim/pref.tcl
 # READ STATUS: Burst-No:          12 Addr: 0001100c Rxd: 10642120
 # READ STATUS: Burst-No:          13 Addr: 0001100e Rxd: 557845aa
 # READ STATUS: Burst-No:          14 Addr: 00011010 Rxd: cecccc9d
-# at time     34207 ns ERROR: tRRD violation during Activate bank = 0
 # READ STATUS: Burst-No:           0 Addr: 00020ff8 Rxd: cb203e96
 # READ STATUS: Burst-No:           1 Addr: 00020ffa Rxd: 8983b813
 # READ STATUS: Burst-No:           2 Addr: 00020ffc Rxd: 86bc380d
@@ -517,7 +500,6 @@ Reading D:/Actel/Libero_v9.1/Model/tcl/vsim/pref.tcl
 # READ STATUS: Burst-No:          12 Addr: 00021010 Rxd: e5730aca
 # READ STATUS: Burst-No:          13 Addr: 00021012 Rxd: 9e314c3c
 # READ STATUS: Burst-No:          14 Addr: 00021014 Rxd: 7968bdf2
-# at time     35027 ns ERROR: tRRD violation during Activate bank = 0
 # READ STATUS: Burst-No:           0 Addr: 00030ffc Rxd: 452e618a
 # READ STATUS: Burst-No:           1 Addr: 00030ffe Rxd: 20c4b341
 # READ STATUS: Burst-No:           2 Addr: 00031000 Rxd: ec4b34d8
@@ -533,7 +515,6 @@ Reading D:/Actel/Libero_v9.1/Model/tcl/vsim/pref.tcl
 # READ STATUS: Burst-No:          12 Addr: 00031014 Rxd: b897be71
 # READ STATUS: Burst-No:          13 Addr: 00031016 Rxd: 42f24185
 # READ STATUS: Burst-No:          14 Addr: 00031018 Rxd: 27f2554f
-# at time     35917 ns ERROR: tRRD violation during Activate bank = 0
 # READ STATUS: Burst-No:           0 Addr: 00040fe0 Rxd: 9dcc603b
 # READ STATUS: Burst-No:           1 Addr: 00040fe2 Rxd: 1d06333a
 # READ STATUS: Burst-No:           2 Addr: 00040fe4 Rxd: bf23327e
@@ -549,7 +530,6 @@ Reading D:/Actel/Libero_v9.1/Model/tcl/vsim/pref.tcl
 # READ STATUS: Burst-No:          12 Addr: 00040ff8 Rxd: cfc4569f
 # READ STATUS: Burst-No:          13 Addr: 00040ffa Rxd: ae7d945c
 # READ STATUS: Burst-No:          14 Addr: 00040ffc Rxd: adcbc05b
-# at time     36677 ns ERROR: tRRD violation during Activate bank = 0
 # READ STATUS: Burst-No:           0 Addr: 00050fe4 Rxd: 44de3789
 # READ STATUS: Burst-No:           1 Addr: 00050fe6 Rxd: a4ae3249
 # READ STATUS: Burst-No:           2 Addr: 00050fe8 Rxd: e8233ed0
@@ -565,7 +545,6 @@ Reading D:/Actel/Libero_v9.1/Model/tcl/vsim/pref.tcl
 # READ STATUS: Burst-No:          12 Addr: 00050ffc Rxd: bf05007e
 # READ STATUS: Burst-No:          13 Addr: 00050ffe Rxd: 36e5816d
 # READ STATUS: Burst-No:          14 Addr: 00051000 Rxd: 1cd9e739
-# at time     37447 ns ERROR: tRRD violation during Activate bank = 0
 # READ STATUS: Burst-No:           0 Addr: 00060fe8 Rxd: 0fd28f1f
 # READ STATUS: Burst-No:           1 Addr: 00060fea Rxd: e9ebf6d3
 # READ STATUS: Burst-No:           2 Addr: 00060fec Rxd: 42d92f85
@@ -581,7 +560,6 @@ Reading D:/Actel/Libero_v9.1/Model/tcl/vsim/pref.tcl
 # READ STATUS: Burst-No:          12 Addr: 00061000 Rxd: 7d3599fa
 # READ STATUS: Burst-No:          13 Addr: 00061002 Rxd: 937dbc26
 # READ STATUS: Burst-No:          14 Addr: 00061004 Rxd: 39961773
-# at time     38217 ns ERROR: tRRD violation during Activate bank = 0
 # READ STATUS: Burst-No:           0 Addr: 00070fec Rxd: d18bb4a3
 # READ STATUS: Burst-No:           1 Addr: 00070fee Rxd: 9799a82f
 # READ STATUS: Burst-No:           2 Addr: 00070ff0 Rxd: d9d292b3
@@ -597,7 +575,6 @@ Reading D:/Actel/Libero_v9.1/Model/tcl/vsim/pref.tcl
 # READ STATUS: Burst-No:          12 Addr: 00071004 Rxd: b29fb665
 # READ STATUS: Burst-No:          13 Addr: 00071006 Rxd: da8ae2b5
 # READ STATUS: Burst-No:          14 Addr: 00071008 Rxd: efbe94df
-# at time     38987 ns ERROR: tRRD violation during Activate bank = 0
 # READ STATUS: Burst-No:           0 Addr: 00080fd0 Rxd: 3cf11979
 # READ STATUS: Burst-No:           1 Addr: 00080fd2 Rxd: 2231ff44
 # READ STATUS: Burst-No:           2 Addr: 00080fd4 Rxd: e8740cd0
@@ -613,7 +590,6 @@ Reading D:/Actel/Libero_v9.1/Model/tcl/vsim/pref.tcl
 # READ STATUS: Burst-No:          12 Addr: 00080fe8 Rxd: b3d97667
 # READ STATUS: Burst-No:          13 Addr: 00080fea Rxd: 8531340a
 # READ STATUS: Burst-No:          14 Addr: 00080fec Rxd: 5b6fb9b6
-# at time     39747 ns ERROR: tRRD violation during Activate bank = 0
 # READ STATUS: Burst-No:           0 Addr: 00090fd4 Rxd: 9c0e8a38
 # READ STATUS: Burst-No:           1 Addr: 00090fd6 Rxd: 3cd18779
 # READ STATUS: Burst-No:           2 Addr: 00090fd8 Rxd: dc2bc4b8
@@ -629,7 +605,6 @@ Reading D:/Actel/Libero_v9.1/Model/tcl/vsim/pref.tcl
 # READ STATUS: Burst-No:          12 Addr: 00090fec Rxd: 653b49ca
 # READ STATUS: Burst-No:          13 Addr: 00090fee Rxd: 5b172db6
 # READ STATUS: Burst-No:          14 Addr: 00090ff0 Rxd: 4a937195
-# at time     40507 ns ERROR: tRRD violation during Activate bank = 0
 # READ STATUS: Burst-No:           0 Addr: 000a0fd8 Rxd: a3071a46
 # READ STATUS: Burst-No:           1 Addr: 000a0fda Rxd: 02749b04
 # READ STATUS: Burst-No:           2 Addr: 000a0fdc Rxd: 7bd261f7
@@ -645,7 +620,6 @@ Reading D:/Actel/Libero_v9.1/Model/tcl/vsim/pref.tcl
 # READ STATUS: Burst-No:          12 Addr: 000a0ff0 Rxd: fea7a6fd
 # READ STATUS: Burst-No:          13 Addr: 000a0ff2 Rxd: 149e0729
 # READ STATUS: Burst-No:          14 Addr: 000a0ff4 Rxd: 8e37901c
-# at time     41787 ns ERROR: tRRD violation during Activate bank = 0
 # READ STATUS: Burst-No:           0 Addr: 000b0fdc Rxd: 43356786
 # READ STATUS: Burst-No:           1 Addr: 000b0fde Rxd: ed3408da
 # READ STATUS: Burst-No:           2 Addr: 000b0fe0 Rxd: 9eb7c63d
@@ -691,7 +665,6 @@ Reading D:/Actel/Libero_v9.1/Model/tcl/vsim/pref.tcl
 # READ STATUS: Burst-No:          12 Addr: 000d0fdc Rxd: d44b80a8
 # READ STATUS: Burst-No:          13 Addr: 000d0fde Rxd: 549efda9
 # READ STATUS: Burst-No:          14 Addr: 000d0fe0 Rxd: d0ca8ca1
-# at time     44047 ns ERROR: tRRD violation during Activate bank = 0
 # READ STATUS: Burst-No:           0 Addr: 000e0fc8 Rxd: 070bb90e
 # READ STATUS: Burst-No:           1 Addr: 000e0fca Rxd: f33466e6
 # READ STATUS: Burst-No:           2 Addr: 000e0fcc Rxd: cfd6c09f
@@ -707,7 +680,6 @@ Reading D:/Actel/Libero_v9.1/Model/tcl/vsim/pref.tcl
 # READ STATUS: Burst-No:          12 Addr: 000e0fe0 Rxd: 35a0c96b
 # READ STATUS: Burst-No:          13 Addr: 000e0fe2 Rxd: e3b7aec7
 # READ STATUS: Burst-No:          14 Addr: 000e0fe4 Rxd: 5b0bddb6
-# at time     44807 ns ERROR: tRRD violation during Activate bank = 0
 # READ STATUS: Burst-No:           0 Addr: 000f0fcc Rxd: 5d059dba
 # READ STATUS: Burst-No:           1 Addr: 000f0fce Rxd: 6216abc4
 # READ STATUS: Burst-No:           2 Addr: 000f0fd0 Rxd: 5c8295b9
@@ -1351,7 +1323,6 @@ Reading D:/Actel/Libero_v9.1/Model/tcl/vsim/pref.tcl
 # READ STATUS: Burst-No:           5 Addr: 0013e063 Rxd: 5c9967b9
 # READ STATUS: Burst-No:           6 Addr: 0013e065 Rxd: 55861fab
 # Write Address: 0026d9d0, Burst Size:  16
-# at time     81467 ns ERROR: tRRD violation during Activate bank = 2
 # Status: Burst-No:           0  Write Address: 0026d9d0  WriteData: 6c6a6dd8 
 # Status: Burst-No:           1  Write Address: 0026d9d0  WriteData: a2cc8845 
 # Status: Burst-No:           2  Write Address: 0026d9d0  WriteData: 46d6a78d 
@@ -1793,7 +1764,6 @@ Reading D:/Actel/Libero_v9.1/Model/tcl/vsim/pref.tcl
 # Status: Burst-No:           4  Write Address: 001ea1b9  WriteData: 0238e104 
 # Status: Burst-No:           5  Write Address: 001ea1b9  WriteData: 89646012 
 # Write Address: 0029b3fc, Burst Size:  12
-# at time    110347 ns ERROR: tRRD violation during Activate bank = 0
 # Status: Burst-No:           0  Write Address: 0029b3fc  WriteData: e203f0c4 
 # Status: Burst-No:           1  Write Address: 0029b3fc  WriteData: 1ffb813f 
 # Status: Burst-No:           2  Write Address: 0029b3fc  WriteData: e13256c2 
@@ -1842,7 +1812,6 @@ Reading D:/Actel/Libero_v9.1/Model/tcl/vsim/pref.tcl
 # Status: Burst-No:          14  Write Address: 0013e298  WriteData: aae0a255 
 # Status: Burst-No:          15  Write Address: 0013e298  WriteData: de7302bc 
 # Write Address: 0024fef2, Burst Size:   8
-# at time    113167 ns ERROR: tRRD violation during Activate bank = 3
 # Status: Burst-No:           0  Write Address: 0024fef2  WriteData: e0f280c1 
 # Status: Burst-No:           1  Write Address: 0024fef2  WriteData: f23316e4 
 # Status: Burst-No:           2  Write Address: 0024fef2  WriteData: a0b8a241 
@@ -1876,7 +1845,6 @@ Reading D:/Actel/Libero_v9.1/Model/tcl/vsim/pref.tcl
 # READ STATUS: Burst-No:           6 Addr: 0024fefe Rxd: 7fcff3ff
 # READ STATUS: Burst-No:           7 Addr: 0024ff00 Rxd: dac986b5
 # Write Address: 002082e8, Burst Size:  12
-# at time    115167 ns ERROR: tRRD violation during Activate bank = 3
 # Status: Burst-No:           0  Write Address: 002082e8  WriteData: 89042e12 
 # Status: Burst-No:           1  Write Address: 002082e8  WriteData: 1b978f37 
 # Status: Burst-No:           2  Write Address: 002082e8  WriteData: 574e1dae 
@@ -1890,7 +1858,6 @@ Reading D:/Actel/Libero_v9.1/Model/tcl/vsim/pref.tcl
 # Status: Burst-No:          10  Write Address: 002082e8  WriteData: 0f1e511e 
 # Status: Burst-No:          11  Write Address: 002082e8  WriteData: f4a1dae9 
 # Write Address: 0024f2eb, Burst Size:  12
-# at time    115857 ns ERROR: tRRD violation during Activate bank = 3
 # Status: Burst-No:           0  Write Address: 0024f2eb  WriteData: b704e26e 
 # Status: Burst-No:           1  Write Address: 0024f2eb  WriteData: af455e5e 
 # Status: Burst-No:           2  Write Address: 0024f2eb  WriteData: 3e502d7c 
@@ -1903,7 +1870,6 @@ Reading D:/Actel/Libero_v9.1/Model/tcl/vsim/pref.tcl
 # Status: Burst-No:           9  Write Address: 0024f2eb  WriteData: 674fdfce 
 # Status: Burst-No:          10  Write Address: 0024f2eb  WriteData: a5365c4a 
 # Status: Burst-No:          11  Write Address: 0024f2eb  WriteData: 6acd73d5 
-# at time    116547 ns ERROR: tRRD violation during Activate bank = 3
 # READ STATUS: Burst-No:           0 Addr: 002082e8 Rxd: 89042e12
 # READ STATUS: Burst-No:           1 Addr: 002082ea Rxd: 1b978f37
 # READ STATUS: Burst-No:           2 Addr: 002082ec Rxd: 574e1dae
@@ -1916,7 +1882,6 @@ Reading D:/Actel/Libero_v9.1/Model/tcl/vsim/pref.tcl
 # READ STATUS: Burst-No:           9 Addr: 002082fa Rxd: 3d7f5b7a
 # READ STATUS: Burst-No:          10 Addr: 002082fc Rxd: 0f1e511e
 # READ STATUS: Burst-No:          11 Addr: 002082fe Rxd: f4a1dae9
-# at time    117287 ns ERROR: tRRD violation during Activate bank = 3
 # READ STATUS: Burst-No:           0 Addr: 0024f2eb Rxd: b704e26e
 # READ STATUS: Burst-No:           1 Addr: 0024f2ed Rxd: af455e5e
 # READ STATUS: Burst-No:           2 Addr: 0024f2ef Rxd: 3e502d7c
@@ -1933,7 +1898,7 @@ Reading D:/Actel/Libero_v9.1/Model/tcl/vsim/pref.tcl
 # STATUS: SDRAM Write/Read TEST PASSED
 ###############################
 # ** Note: $finish    : ../tb/tb_core.sv(442)
-#    Time: 127950 ns  Iteration: 0  Instance: /tb_core
+#    Time: 127960 ns  Iteration: 0  Instance: /tb_core
 ### test 1: basic_test1 --> PASSED
 ###########################################
 

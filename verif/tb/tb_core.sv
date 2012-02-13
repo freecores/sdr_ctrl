@@ -70,7 +70,7 @@ parameter      bl              = 5;   // burst_lenght_width
 reg                   app_req            ; // Application Request
 reg  [8:0]            app_req_len        ; // Burst Request length
 wire                  app_req_ack        ; // Application Request Ack
-reg [29:0]            app_req_addr       ; // Application Address
+reg [24:0]            app_req_addr       ; // Application Address
 reg                   app_req_wr_n       ; // 1 -> Read, 0 -> Write
 reg [dw-1:0]          app_wr_data        ; // Write Data
 reg [dw/8-1:0]        app_wr_en_n        ; // Write Enable, Active Low
@@ -477,8 +477,11 @@ begin
    
        $display("Status: Burst-No: %d  Write Address: %x  WriteData: %x ",i,Address,app_wr_data);
    end
-   app_req           = 0;
-   app_wr_en_n       = 4'hF;
+   app_req        = 0;
+   app_wr_en_n    = 'hx;
+   app_req_wr_n   = 'hx;
+   app_req_addr   = 'hx;
+   app_req_len    = 'hx;
 
 
 end
@@ -495,6 +498,7 @@ begin
    Address = afifo.pop_front(); 
    bl      = bfifo.pop_front(); 
 
+   @ (negedge sdram_clk);
    app_req        = 1;
    app_wr_en_n    = 0;
    app_req_wr_n   = 1;
@@ -506,7 +510,11 @@ begin
           @ (posedge sdram_clk);
       end while(app_req_ack == 1'b0);
       @ (negedge sdram_clk);
-      app_req           = 0;
+      app_req        = 0;
+      app_wr_en_n    = 'hx;
+      app_req_wr_n   = 'hx;
+      app_req_addr   = 'hx;
+      app_req_len    = 'hx;
 
       for(j=0; j < bl; j++) begin
          wait(app_rd_valid == 1);

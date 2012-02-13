@@ -78,7 +78,7 @@ parameter      bl              = 5;   // burst_lenght_width
 // -------------------------------------      
 reg             wb_stb_i           ;
 wire            wb_ack_o           ;
-reg  [29:0]     wb_addr_i          ;
+reg  [24:0]     wb_addr_i          ;
 reg             wb_we_i            ; // 1 - Write, 0 - Read
 reg  [dw-1:0]   wb_dat_i           ;
 reg  [dw/8-1:0] wb_sel_i           ; // Byte enable
@@ -450,8 +450,12 @@ begin
    
        $display("Status: Burst-No: %d  Write Address: %x  WriteData: %x ",i,wb_addr_i,wb_dat_i);
    end
-   wb_stb_i           = 0;
-   wb_cyc_i           = 0;
+   wb_stb_i        = 0;
+   wb_cyc_i        = 0;
+   wb_we_i         = 'hx;
+   wb_sel_i        = 'hx;
+   wb_addr_i       = 'hx;
+   wb_dat_i        = 'hx;
 end
 endtask
 
@@ -485,8 +489,10 @@ begin
          end 
          @ (negedge sdram_clk);
       end
-   wb_stb_i           = 0;
-   wb_cyc_i           = 0;
+   wb_stb_i        = 0;
+   wb_cyc_i        = 0;
+   wb_we_i         = 'hx;
+   wb_addr_i       = 'hx;
 end
 endtask
 
