@@ -213,7 +213,7 @@ end
 // Application layer to SDRAM Controller
 // ------------------------------------------------------------------
    // Address + Burst Length + W/R Request 
-    async_fifo #(.W(25+bl+1),.DP(4),.WR_FAST(1'b0), .RD_FAST(1'b1)) u_cmdfifo (
+    async_fifo #(.W(25+bl+1),.DP(4),.WR_FAST(1'b0), .RD_FAST(1'b0)) u_cmdfifo (
      // Write Path Sys CLock Domain
           .wr_clk             (wb_clk_i           ),
           .wr_reset_n         (!wb_rst_i          ),
