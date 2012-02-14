@@ -191,7 +191,13 @@ module async_fifo (wr_clk,
     assign empty  = (RD_FAST == 1) ? empty_c : empty_q;
     assign aempty = aempty_c;
 
-    assign rd_data = mem[rd_ptr[AW-1:0]];
+    reg [W-1 : 0]  rd_data_q;
+
+   wire [W-1 : 0] rd_data_c = mem[rd_ptr[AW-1:0]];
+   always @(posedge rd_clk) begin
+	rd_data_q <= rd_data_c;
+   end
+   assign rd_data  = (RD_FAST == 1) ? rd_data_c : rd_data_q;
 
     wire [AW:0] grey_wr_ptr_dly ;
     assign #1 grey_wr_ptr_dly =  grey_wr_ptr;
