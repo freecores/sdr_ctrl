@@ -135,7 +135,7 @@ input                   wb_clk_i           ;
 
 input                   wb_stb_i           ;
 output                  wb_ack_o           ;
-input [25:0]            wb_addr_i          ;
+input [24:0]            wb_addr_i          ;
 input                   wb_we_i            ; // 1 - Write, 0 - Read
 input [dw-1:0]          wb_dat_i           ;
 input [dw/8-1:0]        wb_sel_i           ; // Byte enable
