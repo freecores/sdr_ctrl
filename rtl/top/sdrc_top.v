@@ -205,7 +205,7 @@ assign   pad_sdr_din = sdr_dq;
 wire #(1.0) sdram_pad_clk = sdram_clk;
 
 /************** Ends Here **************************/
-wb2sdrc u_wb2sdrc (
+wb2sdrc #(.dw(dw),.tw(tw),.bl(bl)) u_wb2sdrc (
       // WB bus
           .wb_rst_i           (wb_rst_i           ) ,
           .wb_clk_i           (wb_clk_i           ) ,
