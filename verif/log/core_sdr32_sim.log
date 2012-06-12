@@ -1,4 +1,5 @@
  Compiling with MODELSIM in core SDR_32BIT Mode 
+** Note: (vlog-1901) OptionFile "C:/cygwin/home/Dinesh/projects/sdr_ctrl/sdr_ctrl/trunk/verif/run/vlog.opt" not found. Ignored.
 Model Technology ModelSim ACTEL vlog 6.6d Compiler 2010.11 Nov  2 2010
 -- Compiling module tb_core
 -- Compiling module IS42VM16400K
