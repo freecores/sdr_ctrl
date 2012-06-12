@@ -215,7 +215,7 @@ output [SDR_BW-1:0] 	sdr_den_n;
 				wr_last, l_xfr_end, rd_start, d_rd_start,
 				wr_start, page_hit, burst_bdry, xfr_wrap,
 				b2x_prechg_hit;
-   reg [4:0] 			l_rd_next, l_rd_start, l_rd_last;
+   reg [6:0] 			l_rd_next, l_rd_start, l_rd_last;
    
    assign b2x_read = (b2x_cmd == `OP_RD) ? 1'b1 : 1'b0;
 
@@ -250,21 +250,29 @@ output [SDR_BW-1:0] 	sdr_den_n;
    assign next_xfr_len = (ld_xfr) ? b2x_len : 
 	                 (l_xfr_end) ? l_len:  l_len - 1;
 
-   assign d_rd_next = (cas_latency == 2'b01) ? l_rd_next[2] :
-		      (cas_latency == 2'b10) ? l_rd_next[3] :
-		      l_rd_next[4];
+   assign d_rd_next = (cas_latency == 3'b001) ? l_rd_next[2] :
+		      (cas_latency == 3'b010) ? l_rd_next[3] :
+		      (cas_latency == 3'b011) ? l_rd_next[4] :
+		      (cas_latency == 3'b100) ? l_rd_next[5] :
+		      l_rd_next[6];
 
-   assign d_rd_last = (cas_latency == 2'b01) ? l_rd_last[2] :
-		      (cas_latency == 2'b10) ? l_rd_last[3] :
-		      l_rd_last[4];
+   assign d_rd_last = (cas_latency == 3'b001) ? l_rd_last[2] :
+		      (cas_latency == 3'b010) ? l_rd_last[3] :
+		      (cas_latency == 3'b011) ? l_rd_last[4] :
+		      (cas_latency == 3'b100) ? l_rd_last[5] :
+		      l_rd_last[6];
 
-   assign d_rd_start = (cas_latency == 2'b01) ? l_rd_start[2] :
-		      (cas_latency == 2'b10) ? l_rd_start[3] :
-		      l_rd_start[4];
+   assign d_rd_start = (cas_latency == 3'b001) ? l_rd_start[2] :
+		       (cas_latency == 3'b010) ? l_rd_start[3] :
+		       (cas_latency == 3'b011) ? l_rd_start[4] :
+		       (cas_latency == 3'b100) ? l_rd_start[5] :
+		       l_rd_start[6];
 
-   assign rd_pipe_mt = (cas_latency == 2'b01) ? ~|l_rd_next[1:0] :
-		       (cas_latency == 2'b10) ? ~|l_rd_next[2:0] :
-		       ~|l_rd_next[3:0];
+   assign rd_pipe_mt = (cas_latency == 3'b001) ? ~|l_rd_next[1:0] :
+		       (cas_latency == 3'b010) ? ~|l_rd_next[2:0] :
+		       (cas_latency == 3'b011) ? ~|l_rd_next[3:0] :
+		       (cas_latency == 3'b100) ? ~|l_rd_next[4:0] :
+		       ~|l_rd_next[5:0];
 
    assign dt_next = wr_next | d_rd_next;
 
@@ -301,9 +309,9 @@ output [SDR_BW-1:0] 	sdr_den_n;
 	 l_id <= 0;
 	 l_ba <= 0;
 	 l_len <= 0;
-	 l_rd_next <= 5'b0;
-	 l_rd_start <= 5'b0;
-	 l_rd_last <= 5'b0;
+	 l_rd_next <= 7'b0;
+	 l_rd_start <= 7'b0;
+	 l_rd_last <= 7'b0;
 	 act_cmd <= 1'b0;
 	 d_act_cmd <= 1'b0;
 	 xfr_st <= `XFR_IDLE;
@@ -319,9 +327,9 @@ output [SDR_BW-1:0] 	sdr_den_n;
 	 l_id <= (ld_xfr) ? b2x_id : l_id;
 	 l_ba <= (ld_xfr) ? b2x_ba : l_ba;
 	 l_len <= next_xfr_len;
-	 l_rd_next <= {l_rd_next[3:0], rd_next};
-	 l_rd_start <= {l_rd_start[3:0], rd_start};
-	 l_rd_last <= {l_rd_last[3:0], rd_last};
+	 l_rd_next <= {l_rd_next[5:0], rd_next};
+	 l_rd_start <= {l_rd_start[5:0], rd_start};
+	 l_rd_last <= {l_rd_last[5:0], rd_last};
 	 act_cmd <= (xfr_cmd == `SDR_ACTIVATE) ? 1'b1 : 1'b0;
 	 d_act_cmd <= act_cmd;
 	 xfr_st <= next_xfr_st;
