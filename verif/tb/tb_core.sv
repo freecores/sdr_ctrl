@@ -167,7 +167,7 @@ wire #(1.0) pad_clk     = sdram_clk_d;
           .sdr_init_done      (sdr_init_done      ),
           .cfg_req_depth      (2'h3               ),	        //how many req. buffer should hold
           .cfg_sdr_en         (1'b1               ),
-          .cfg_sdr_mode_reg   (12'h033            ),
+          .cfg_sdr_mode_reg   (13'h033            ),
           .cfg_sdr_tras_d     (4'h4               ),
           .cfg_sdr_trp_d      (4'h2               ),
           .cfg_sdr_trcd_d     (4'h2               ),
@@ -187,7 +187,7 @@ wire #(1.0) pad_clk     = sdram_clk_d;
   assign Dq[31:24]  = (sdr_den_n[3] == 1'b0) ? sdr_dout[31:24] : 8'hZZ;
 mt48lc2m32b2 #(.data_bits(32)) u_sdram32 (
           .Dq                 (Dq                 ) , 
-          .Addr               (sdr_addr[11:0]     ), 
+          .Addr               (sdr_addr[10:0]     ), 
           .Ba                 (sdr_ba             ), 
           .Clk                (sdram_clk_d        ), 
           .Cke                (sdr_cke            ), 

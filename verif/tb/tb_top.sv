@@ -159,7 +159,7 @@ wire #(2.0) sdram_clk_d   = sdram_clk;
           .sdr_init_done      (sdr_init_done      ),
           .cfg_req_depth      (2'h3               ),	        //how many req. buffer should hold
           .cfg_sdr_en         (1'b1               ),
-          .cfg_sdr_mode_reg   (12'h033            ),
+          .cfg_sdr_mode_reg   (13'h033            ),
           .cfg_sdr_tras_d     (4'h4               ),
           .cfg_sdr_trp_d      (4'h2               ),
           .cfg_sdr_trcd_d     (4'h2               ),
@@ -175,7 +175,7 @@ wire #(2.0) sdram_clk_d   = sdram_clk;
 `ifdef SDR_32BIT
 mt48lc2m32b2 #(.data_bits(32)) u_sdram32 (
           .Dq                 (Dq                 ) , 
-          .Addr               (sdr_addr[11:0]     ), 
+          .Addr               (sdr_addr[10:0]     ), 
           .Ba                 (sdr_ba             ), 
           .Clk                (sdram_clk_d        ), 
           .Cke                (sdr_cke            ), 
