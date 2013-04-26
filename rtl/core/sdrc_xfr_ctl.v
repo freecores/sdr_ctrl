@@ -140,7 +140,7 @@ input 			b2x_req, b2x_start, b2x_last, b2x_tras_ok,
 				b2x_wrap, r2x_idle, b2x_idle; 
 input [`SDR_REQ_ID_W-1:0] 	b2x_id;
 input [1:0] 			b2x_ba;
-input [11:0] 		b2x_addr;
+input [12:0] 		b2x_addr;
 input [`REQ_BW-1:0] 	b2x_len;
 input [1:0] 			b2x_cmd;
 output 			x2b_ack;
@@ -163,7 +163,7 @@ output 			sdr_cs_n, sdr_cke, sdr_ras_n, sdr_cas_n,
 				sdr_we_n; 
 output [SDR_BW-1:0] 	sdr_dqm;
 output [1:0] 		sdr_ba;
-output [11:0] 		sdr_addr;
+output [12:0] 		sdr_addr;
 input [SDR_DW-1:0] 	sdr_din;
 output [SDR_DW-1:0] 	sdr_dout;
 output [SDR_BW-1:0] 	sdr_den_n;
@@ -187,7 +187,7 @@ output [SDR_BW-1:0] 	sdr_den_n;
    `define XFR_RDWT        2'b11
 
    reg [1:0] 			xfr_st, next_xfr_st;
-   reg [11:0] 			xfr_caddr;
+   reg [12:0] 			xfr_caddr;
    wire 			last_burst;
    wire 			x2a_rdstart, x2a_wrstart, x2a_rdlast, x2a_wrlast;
    reg 				l_start, l_last, l_wrap;
@@ -195,13 +195,13 @@ output [SDR_BW-1:0] 	sdr_den_n;
    reg [`SDR_REQ_ID_W-1:0] 	l_id;
    wire [1:0] 			xfr_ba;
    reg [1:0] 			l_ba;
-   wire [11:0] 			xfr_addr;
+   wire [12:0] 			xfr_addr;
    wire [`REQ_BW-1:0] 	xfr_len, next_xfr_len;
    reg [`REQ_BW-1:0] 	l_len;
 
    reg 				mgmt_idle, mgmt_req;
    reg [3:0] 			mgmt_cmd;
-   reg [11:0] 			mgmt_addr;
+   reg [12:0] 			mgmt_addr;
    reg [1:0] 			mgmt_ba;
 
    reg 				sel_mgmt, sel_b2x;
@@ -302,7 +302,7 @@ output [SDR_BW-1:0] 	sdr_den_n;
   
    always @ (posedge clk) begin
       if (~reset_n) begin
-	 xfr_caddr <= 12'b0;
+	 xfr_caddr <= 13'b0;
 	 l_start <= 1'b0;
 	 l_last <= 1'b0;
 	 l_wrap <= 1'b0;
@@ -545,7 +545,7 @@ output [SDR_BW-1:0] 	sdr_den_n;
 				sdr_we_n; 
    reg [SDR_BW-1:0] 	sdr_dqm;
    reg [1:0] 			sdr_ba;
-   reg [11:0] 			sdr_addr;
+   reg [12:0] 			sdr_addr;
    reg [SDR_DW-1:0] 	sdr_dout;
    reg [SDR_BW-1:0] 	sdr_den_n;
 
@@ -645,7 +645,7 @@ output [SDR_BW-1:0] 	sdr_den_n;
 	   mgmt_req = 1'b0;
 	   mgmt_cmd = `SDR_DESEL;
 	   mgmt_ba = 2'b0;
-	   mgmt_addr = 12'h400;    // A10 = 1 => all banks
+	   mgmt_addr = 13'h400;    // A10 = 1 => all banks
 	   ld_tmr0 = 1'b0;
 	   tmr0_d = 4'b0;
 	   dec_cntr1 = 1'b0;
@@ -660,7 +660,7 @@ output [SDR_BW-1:0] 	sdr_den_n;
 	   mgmt_req = 1'b1;
 	   mgmt_cmd = (precharge_ok) ? `SDR_PRECHARGE : `SDR_DESEL;
 	   mgmt_ba = 2'b0;
-	   mgmt_addr = 12'h400;	   // A10 = 1 => all banks
+	   mgmt_addr = 13'h400;	   // A10 = 1 => all banks
 	   ld_tmr0 = mgmt_ack;
 	   tmr0_d = trp_delay;
 	   ld_cntr1 = 1'b0;
@@ -675,7 +675,7 @@ output [SDR_BW-1:0] 	sdr_den_n;
 	   mgmt_req = 1'b1;
 	   mgmt_cmd = `SDR_DESEL;
 	   mgmt_ba = 2'b0;
-	   mgmt_addr = 12'h400;	   // A10 = 1 => all banks
+	   mgmt_addr = 13'h400;	   // A10 = 1 => all banks
 	   ld_tmr0 = 1'b0;
 	   tmr0_d = trp_delay;
 	   ld_cntr1 = 1'b0;
@@ -690,7 +690,7 @@ output [SDR_BW-1:0] 	sdr_den_n;
 	   mgmt_req = 1'b1;
 	   mgmt_cmd = `SDR_REFRESH;
 	   mgmt_ba = 2'b0;
-	   mgmt_addr = 12'h400;	   // A10 = 1 => all banks
+	   mgmt_addr = 13'h400;	   // A10 = 1 => all banks
 	   ld_tmr0 = mgmt_ack;
 	   tmr0_d = trcar_delay;
 	   dec_cntr1 = mgmt_ack;
@@ -705,7 +705,7 @@ output [SDR_BW-1:0] 	sdr_den_n;
 	   mgmt_req = 1'b1;
 	   mgmt_cmd = `SDR_DESEL;
 	   mgmt_ba = 2'b0;
-	   mgmt_addr = 12'h400;	   // A10 = 1 => all banks
+	   mgmt_addr = 13'h400;	   // A10 = 1 => all banks
 	   ld_tmr0 = 1'b0;
 	   tmr0_d = trcar_delay;
 	   dec_cntr1 = 1'b0;
@@ -737,7 +737,7 @@ output [SDR_BW-1:0] 	sdr_den_n;
 	   mgmt_req = 1'b1;
 	   mgmt_cmd = `SDR_DESEL;
 	   mgmt_ba = 2'bx;
-	   mgmt_addr = 12'bx;
+	   mgmt_addr = 13'bx;
 	   ld_tmr0 = 1'b0;
 	   tmr0_d = 4'h7;
 	   dec_cntr1 = 1'b0;
@@ -752,7 +752,7 @@ output [SDR_BW-1:0] 	sdr_den_n;
 	   mgmt_req = 1'b0;
 	   mgmt_cmd = `SDR_DESEL;
 	   mgmt_ba = 2'bx;
-	   mgmt_addr = 12'bx;
+	   mgmt_addr = 13'bx;
 	   ld_tmr0 = 1'b0;
 	   tmr0_d = 4'h7;
 	   dec_cntr1 = 1'b0;

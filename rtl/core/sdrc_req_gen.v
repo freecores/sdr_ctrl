@@ -11,19 +11,19 @@
      cfg_colbits= 2'b00
             Address[7:0]    - Column Address
             Address[9:8]    - Bank Address
-            Address[21:10]  - Row Address
+            Address[22:10]  - Row Address
      cfg_colbits= 2'b01
             Address[8:0]    - Column Address
             Address[10:9]   - Bank Address
-            Address[22:11]  - Row Address
+            Address[23:11]  - Row Address
      cfg_colbits= 2'b10
             Address[9:0]    - Column Address
             Address[11:10]   - Bank Address
-            Address[23:12]  - Row Address
+            Address[24:12]  - Row Address
      cfg_colbits= 2'b11
             Address[10:0]    - Column Address
             Address[12:11]   - Bank Address
-            Address[24:13]  - Row Address
+            Address[25:13]  - Row Address
 
   The SDRAMs are operated in 4 beat burst mode.
 
@@ -108,7 +108,7 @@ module sdrc_req_gen (clk,
 		    b2r_arb_ok
 		    );
 
-parameter  APP_AW   = 25;  // Application Address Width
+parameter  APP_AW   = 26;  // Application Address Width
 parameter  APP_DW   = 32;  // Application Data Width 
 parameter  APP_BW   = 4;   // Application Byte Width
 parameter  APP_RW   = 9;   // Application Request Width
@@ -139,8 +139,8 @@ output                  r2b_write     ; // 1 - Write, 0 - Read
 output                  r2b_wrap      ; // 1 - Wrap the Address at the page boundary.
 output [`SDR_REQ_ID_W-1:0] 	r2b_req_id;
 output [1:0] 		r2b_ba        ; // Bank Address
-output [11:0] 		r2b_raddr     ; // Row Address
-output [11:0] 		r2b_caddr     ; // Column Address
+output [12:0] 		r2b_raddr     ; // Row Address
+output [12:0] 		r2b_caddr     ; // Column Address
 output [`REQ_BW-1:0] 	r2b_len       ; // Burst Length
 input 			b2r_ack       ; // Request Ack
 input                   b2r_arb_ok    ; // Bank controller fifo is not full and ready to accept the command
@@ -168,8 +168,8 @@ input [1:0] 	        sdr_width; // 2'b00 - 32 Bit, 2'b01 - 16 Bit, 2'b1x - 8Bit
    reg  [12:0] 	        max_r2b_len_r;
 
    reg [1:0] 		r2b_ba;
-   reg [11:0] 		r2b_raddr;
-   reg [11:0] 		r2b_caddr;
+   reg [12:0] 		r2b_raddr;
+   reg [12:0] 		r2b_caddr;
 
    reg [APP_AW-1:0] 	curr_sdr_addr ;
    wire [APP_AW-1:0] 	next_sdr_addr ;
@@ -328,13 +328,13 @@ always @ (posedge clk) begin
 *           2'b10 - 10 Bit
 *           2'b11 - 11 Bits
 ************************/
-    r2b_caddr <= (cfg_colbits == 2'b00) ? {4'b0, map_address[7:0]} :
-	         (cfg_colbits == 2'b01) ? {3'b0, map_address[8:0]} :
-	         (cfg_colbits == 2'b10) ? {2'b0, map_address[9:0]} : {1'b0, map_address[10:0]};
+    r2b_caddr <= (cfg_colbits == 2'b00) ? {5'b0, map_address[7:0]} :
+	         (cfg_colbits == 2'b01) ? {4'b0, map_address[8:0]} :
+	         (cfg_colbits == 2'b10) ? {3'b0, map_address[9:0]} : {2'b0, map_address[10:0]};
 
-    r2b_raddr <= (cfg_colbits == 2'b00)  ? map_address[21:10] :
-	         (cfg_colbits == 2'b01)  ? map_address[22:11] :
-	         (cfg_colbits == 2'b10)  ? map_address[23:12] : map_address[24:13];
+    r2b_raddr <= (cfg_colbits == 2'b00)  ? map_address[22:10] :
+	         (cfg_colbits == 2'b01)  ? map_address[23:11] :
+	         (cfg_colbits == 2'b10)  ? map_address[24:12] : map_address[25:13];
 end	   
    
 endmodule // sdr_req_gen

@@ -100,8 +100,8 @@ parameter  SDR_BW   = 2;   // SDR Byte Width
    input 			r2b_req, r2b_start, r2b_last,
 				r2b_write, r2b_wrap;
    input [`SDR_REQ_ID_W-1:0] 	r2b_req_id;
-   input [11:0] 		r2b_raddr;
-   input [11:0] 		r2b_caddr;
+   input [12:0] 		r2b_raddr;
+   input [12:0] 		r2b_caddr;
    input [`REQ_BW-1:0] 	r2b_len;
    output 			b2r_ack;
    input                        sdr_dma_last;
@@ -110,7 +110,7 @@ parameter  SDR_BW   = 2;   // SDR Byte Width
    output 			b2x_req, b2x_start, b2x_last,
 				tras_ok, b2x_wrap;
    output [`SDR_REQ_ID_W-1:0] 	b2x_id;
-   output [11:0] 		b2x_addr;
+   output [12:0] 		b2x_addr;
    output [`REQ_BW-1:0] 	b2x_len;
    output [1:0] 		b2x_cmd;
    input 			x2b_ack;
@@ -121,7 +121,7 @@ parameter  SDR_BW   = 2;   // SDR Byte Width
    
    input [3:0] 			tras_delay, trp_delay, trcd_delay;
 
-   output [11:0] 			bank_row;
+   output [12:0] 			bank_row;
 
    /****************************************************************************/
    // Internal Nets
@@ -138,17 +138,17 @@ parameter  SDR_BW   = 2;   // SDR Byte Width
    reg 				b2x_req, b2r_ack;
    wire [`SDR_REQ_ID_W-1:0] 	b2x_id;
    reg [`SDR_REQ_ID_W-1:0] 	l_id;
-   reg [11:0] 			b2x_addr;
+   reg [12:0] 			b2x_addr;
    reg [`REQ_BW-1:0] 	l_len;
    wire [`REQ_BW-1:0] 	b2x_len;
    reg [1:0] 			b2x_cmd_t;
    reg  			bank_valid;
-   reg [11:0] 			bank_row;
+   reg [12:0] 			bank_row;
    reg [3:0] 			tras_cntr, timer0;
    reg 				l_wrap, l_write;
    wire 			b2x_wrap;
-   reg [11:0] 			l_raddr;
-   reg [11:0] 			l_caddr;
+   reg [12:0] 			l_raddr;
+   reg [12:0] 			l_caddr;
    reg                          l_sdr_dma_last;
    reg                          bank_prech_page_closed;
    
@@ -268,7 +268,7 @@ parameter  SDR_BW   = 2;   // SDR Byte Width
        b2x_req = 1'b0;
        b2x_cmd_t = 2'bx;
        b2r_ack = 1'b0;
-       b2x_addr = 12'bx;
+       b2x_addr = 13'bx;
        next_bank_st = bank_st;
 
       case (bank_st)
@@ -294,7 +294,7 @@ parameter  SDR_BW   = 2;   // SDR Byte Width
 	                b2x_req = 1'b0;
 	                b2x_cmd_t = 2'bx;
 	                b2r_ack = 1'b0;
-	                b2x_addr = 12'bx;
+	                b2x_addr = 13'bx;
 	                next_bank_st = `BANK_IDLE;
 	             end // if (~r2b_req)
 	             else if (page_hit) begin 
@@ -309,7 +309,7 @@ parameter  SDR_BW   = 2;   // SDR Byte Width
 	                b2x_req = tras_ok & x2b_pre_ok_t;
 	                b2x_cmd_t = `OP_PRE;
 	                b2r_ack = 1'b1;
-	                b2x_addr = r2b_raddr & 12'hBFF;	   // Dont want to pre all banks!
+	                b2x_addr = r2b_raddr & 13'hBFF;	   // Dont want to pre all banks!
 	                next_bank_st = (l_sdr_dma_last) ? `BANK_PRE : (x2b_ack) ? `BANK_ACT : `BANK_PRE;  // bank was precharged on l_sdr_dma_last
 	             end // else: !if(page_hit)
 	        end
@@ -319,7 +319,7 @@ parameter  SDR_BW   = 2;   // SDR Byte Width
 	   b2x_req = tras_ok & x2b_pre_ok_t;
 	   b2x_cmd_t = `OP_PRE;
 	   b2r_ack = 1'b0;
-	   b2x_addr = l_raddr & 12'hBFF;	   // Dont want to pre all banks!
+	   b2x_addr = l_raddr & 13'hBFF;	   // Dont want to pre all banks!
            bank_prech_page_closed = 1'b0;
 	   next_bank_st = (x2b_ack) ? `BANK_ACT : `BANK_PRE;
 	end // case: `BANK_PRE
@@ -349,7 +349,7 @@ parameter  SDR_BW   = 2;   // SDR Byte Width
 	   b2x_req = tras_ok & x2b_pre_ok_t;
 	   b2x_cmd_t = `OP_PRE;
 	   b2r_ack = 1'b0;
-	   b2x_addr = l_raddr & 12'hBFF;	   // Dont want to pre all banks!
+	   b2x_addr = l_raddr & 13'hBFF;	   // Dont want to pre all banks!
            bank_prech_page_closed = 1'b1;
 	   next_bank_st = (x2b_ack) ? `BANK_IDLE : `BANK_DMA_LAST_PRE;
 	end // case: `BANK_DMA_LAST_PRE

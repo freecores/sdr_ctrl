@@ -83,6 +83,7 @@ module wb2sdrc (
 parameter      dw              = 32;  // data width
 parameter      tw              = 8;   // tag id width
 parameter      bl              = 9;   // burst_lenght_width 
+parameter      APP_AW          = 26;  // Application Address Width
 //--------------------------------------
 // Wish Bone Interface
 // -------------------------------------      
@@ -91,7 +92,7 @@ input                   wb_clk_i           ;
 
 input                   wb_stb_i           ;
 output                  wb_ack_o           ;
-input [24:0]            wb_addr_i          ;
+input [APP_AW-1:0]      wb_addr_i          ;
 input                   wb_we_i            ; // 1 - Write , 0 - Read
 input [dw-1:0]          wb_dat_i           ;
 input [dw/8-1:0]        wb_sel_i           ; // Byte enable
@@ -120,7 +121,7 @@ CTI_O(2:0) Description
 input                   sdram_clk          ; // sdram clock
 input                   sdram_resetn       ; // sdram reset
 output                  sdr_req            ; // SDRAM request
-output [24:0]           sdr_req_addr       ; // SDRAM Request Address
+output [APP_AW-1:0]           sdr_req_addr       ; // SDRAM Request Address
 output [bl-1:0]         sdr_req_len        ;
 output                  sdr_req_wr_n       ; // 0 - Write, 1 -> Read
 input                   sdr_req_ack        ; // SDRAM request Accepted
@@ -213,7 +214,7 @@ end
 // Application layer to SDRAM Controller
 // ------------------------------------------------------------------
    // Address + Burst Length + W/R Request 
-    async_fifo #(.W(25+bl+1),.DP(4),.WR_FAST(1'b0), .RD_FAST(1'b0)) u_cmdfifo (
+    async_fifo #(.W(APP_AW+bl+1),.DP(4),.WR_FAST(1'b0), .RD_FAST(1'b0)) u_cmdfifo (
      // Write Path Sys CLock Domain
           .wr_clk             (wb_clk_i           ),
           .wr_reset_n         (!wb_rst_i          ),

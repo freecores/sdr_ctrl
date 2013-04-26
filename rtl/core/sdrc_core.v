@@ -43,6 +43,8 @@
 		   4 command of different bank.
 	     0.3 - 7th Feb 2012
 	           Bug fix for parameter defination for request length has changed from 9 to 12
+             0.4 - 26th April 2013
+                   SDRAM Address Bit is Extended by 12 bit to 13 bit to support higher SDRAM
 
                                                              
  Copyright (C) 2000 Authors and OPENCORES.ORG                
@@ -125,7 +127,7 @@ module sdrc_core
 		cfg_sdr_rfsh,
 		cfg_sdr_rfmax);
   
-parameter  APP_AW   = 25;  // Application Address Width
+parameter  APP_AW   = 26;  // Application Address Width
 parameter  APP_DW   = 32;  // Application Data Width 
 parameter  APP_BW   = 4;   // Application Byte Width
 parameter  APP_RW   = 9;   // Application Request Width
@@ -171,7 +173,7 @@ output                  sdr_cas_n           ; // SDRAM cas
 output			sdr_we_n            ; // SDRAM write enable
 output [SDR_BW-1:0] 	sdr_dqm             ; // SDRAM Data Mask
 output [1:0] 		sdr_ba              ; // SDRAM Bank Enable
-output [11:0] 		sdr_addr            ; // SDRAM Address
+output [12:0] 		sdr_addr            ; // SDRAM Address
 input [SDR_DW-1:0] 	pad_sdr_din         ; // SDRA Data Input
 output [SDR_DW-1:0] 	sdr_dout            ; // SDRAM Data Output
 output [SDR_BW-1:0] 	sdr_den_n           ; // SDRAM Data Output enable
@@ -186,7 +188,7 @@ input [3:0]             cfg_sdr_trcd_d      ; // Active to R/W delay
 input 			cfg_sdr_en          ; // Enable SDRAM controller
 input [1:0] 		cfg_req_depth       ; // Maximum Request accepted by SDRAM controller
 input [APP_RW-1:0]	app_req_len         ; // Application Burst Request length in 32 bit 
-input [11:0] 		cfg_sdr_mode_reg    ;
+input [12:0] 		cfg_sdr_mode_reg    ;
 input [2:0] 		cfg_sdr_cas         ; // SDRAM CAS Latency
 input [3:0] 		cfg_sdr_trcar_d     ; // Auto-refresh period
 input [3:0]             cfg_sdr_twr_d       ; // Write recovery delay
@@ -200,14 +202,14 @@ input                   app_req_dma_last;    // this signal should close the ban
 // SDR_REQ_GEN
 wire [`SDR_REQ_ID_W-1:0]r2b_req_id;
 wire [1:0] 		r2b_ba;
-wire [11:0] 		r2b_raddr;
-wire [11:0] 		r2b_caddr;
+wire [12:0] 		r2b_raddr;
+wire [12:0] 		r2b_caddr;
 wire [`REQ_BW-1:0] 	r2b_len;
 
 // SDR BANK CTL
 wire [`SDR_REQ_ID_W-1:0]b2x_id;
 wire [1:0] 		b2x_ba;
-wire [11:0] 		b2x_addr;
+wire [12:0] 		b2x_addr;
 wire [`REQ_BW-1:0] 	b2x_len;
 wire [1:0] 		b2x_cmd;
 
@@ -218,7 +220,7 @@ wire [APP_DW-1:0] 	app_rd_data;
 wire 			sdr_cs_n, sdr_cke, sdr_ras_n, sdr_cas_n, sdr_we_n; 
 wire [SDR_BW-1:0] 	sdr_dqm;
 wire [1:0] 		sdr_ba;
-wire [11:0] 		sdr_addr;
+wire [12:0] 		sdr_addr;
 wire [SDR_DW-1:0] 	sdr_dout;
 wire [SDR_DW-1:0] 	sdr_dout_int;
 wire [SDR_BW-1:0] 	sdr_den_n;

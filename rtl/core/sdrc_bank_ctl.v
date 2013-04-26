@@ -105,8 +105,8 @@ parameter  SDR_BW   = 2;   // SDR Byte Width
 				r2b_write, r2b_wrap;
    input [`SDR_REQ_ID_W-1:0] 	r2b_req_id;
    input [1:0] 			r2b_ba;
-   input [11:0] 		r2b_raddr;
-   input [11:0] 		r2b_caddr;
+   input [12:0] 		r2b_raddr;
+   input [12:0] 		r2b_caddr;
    input [`REQ_BW-1:0] 	        r2b_len;
    output 			b2r_arb_ok, b2r_ack;
    input                        sdr_req_norm_dma_last;
@@ -116,7 +116,7 @@ parameter  SDR_BW   = 2;   // SDR Byte Width
 				b2x_tras_ok, b2x_wrap;
    output [`SDR_REQ_ID_W-1:0] 	b2x_id;
    output [1:0] 		b2x_ba;
-   output [11:0] 		b2x_addr;
+   output [12:0] 		b2x_addr;
    output [`REQ_BW-1:0] 	b2x_len;
    output [1:0] 		b2x_cmd;
    input 			x2b_ack;
@@ -135,7 +135,7 @@ parameter  SDR_BW   = 2;   // SDR Byte Width
 
    wire [3:0] 			r2i_req, i2r_ack, i2x_req, 
 				i2x_start, i2x_last, i2x_wrap, tras_ok;
-   wire [11:0] 			i2x_addr0, i2x_addr1, i2x_addr2, i2x_addr3;
+   wire [12:0] 			i2x_addr0, i2x_addr1, i2x_addr2, i2x_addr3;
    wire [`REQ_BW-1:0] 	i2x_len0, i2x_len1, i2x_len2, i2x_len3;
    wire [1:0] 			i2x_cmd0, i2x_cmd1, i2x_cmd2, i2x_cmd3;
    wire [`SDR_REQ_ID_W-1:0] 	i2x_id0, i2x_id1, i2x_id2, i2x_id3;
@@ -143,7 +143,7 @@ parameter  SDR_BW   = 2;   // SDR Byte Width
    reg 				b2x_req;
    wire 			b2x_idle, b2x_start, b2x_last, b2x_wrap;
    wire [`SDR_REQ_ID_W-1:0] 	b2x_id;
-   wire [11:0] 			b2x_addr;
+   wire [12:0] 			b2x_addr;
    wire [`REQ_BW-1:0] 	b2x_len;
    wire [1:0] 			b2x_cmd;
    wire [3:0] 			x2i_ack;
@@ -165,7 +165,7 @@ parameter  SDR_BW   = 2;   // SDR Byte Width
    wire 			rank_fifo_wr, rank_fifo_rd;
    wire 			rank_fifo_full, rank_fifo_mt;
    
-   wire [11:0] bank0_row, bank1_row, bank2_row, bank3_row;
+   wire [12:0] bank0_row, bank1_row, bank2_row, bank3_row;
 
    assign  b2x_tras_ok        = &tras_ok;
 
@@ -562,7 +562,7 @@ parameter  SDR_BW   = 2;   // SDR Byte Width
    
 
 /* address for current xfr, debug only */
-wire [11:0] cur_row = (xfr_bank_sel==3) ? bank3_row:
+wire [12:0] cur_row = (xfr_bank_sel==3) ? bank3_row:
 			(xfr_bank_sel==2) ? bank2_row: 
 			(xfr_bank_sel==1) ? bank1_row: bank0_row; 
 
