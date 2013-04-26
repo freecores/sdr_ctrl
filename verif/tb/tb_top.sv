@@ -78,7 +78,7 @@ parameter      bl              = 5;   // burst_lenght_width
 // -------------------------------------      
 reg             wb_stb_i           ;
 wire            wb_ack_o           ;
-reg  [24:0]     wb_addr_i          ;
+reg  [25:0]     wb_addr_i          ;
 reg             wb_we_i            ; // 1 - Write, 0 - Read
 reg  [dw-1:0]   wb_dat_i           ;
 reg  [dw/8-1:0] wb_sel_i           ; // Byte enable
@@ -104,7 +104,7 @@ reg   [2:0]     wb_cti_i           ;
 `endif
 
 wire [1:0]            sdr_ba             ; // SDRAM Bank Select
-wire [11:0]           sdr_addr           ; // SDRAM ADRESS
+wire [12:0]           sdr_addr           ; // SDRAM ADRESS
 wire                  sdr_init_done      ; // SDRAM Init Done 
 
 // to fix the sdram interface timing issue
@@ -175,7 +175,7 @@ wire #(2.0) sdram_clk_d   = sdram_clk;
 `ifdef SDR_32BIT
 mt48lc2m32b2 #(.data_bits(32)) u_sdram32 (
           .Dq                 (Dq                 ) , 
-          .Addr               (sdr_addr           ), 
+          .Addr               (sdr_addr[11:0]     ), 
           .Ba                 (sdr_ba             ), 
           .Clk                (sdram_clk_d        ), 
           .Cke                (sdr_cke            ), 
@@ -190,7 +190,7 @@ mt48lc2m32b2 #(.data_bits(32)) u_sdram32 (
 
    IS42VM16400K u_sdram16 (
           .dq                 (Dq                 ), 
-          .addr               (sdr_addr           ), 
+          .addr               (sdr_addr[11:0]     ), 
           .ba                 (sdr_ba             ), 
           .clk                (sdram_clk_d        ), 
           .cke                (sdr_cke            ), 
@@ -205,7 +205,7 @@ mt48lc2m32b2 #(.data_bits(32)) u_sdram32 (
 
 mt48lc8m8a2 #(.data_bits(8)) u_sdram8 (
           .Dq                 (Dq                 ) , 
-          .Addr               (sdr_addr           ), 
+          .Addr               (sdr_addr[11:0]     ), 
           .Ba                 (sdr_ba             ), 
           .Clk                (sdram_clk_d        ), 
           .Cke                (sdr_cke            ), 

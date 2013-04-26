@@ -70,7 +70,7 @@ parameter      bl              = 5;   // burst_lenght_width
 reg                   app_req            ; // Application Request
 reg  [8:0]            app_req_len        ; // Burst Request length
 wire                  app_req_ack        ; // Application Request Ack
-reg [24:0]            app_req_addr       ; // Application Address
+reg [25:0]            app_req_addr       ; // Application Address
 reg                   app_req_wr_n       ; // 1 -> Read, 0 -> Write
 reg [dw-1:0]          app_wr_data        ; // Write Data
 reg [dw/8-1:0]        app_wr_en_n        ; // Write Enable, Active Low
@@ -104,7 +104,7 @@ wire [dw-1:0]         app_rd_data        ; // Read Data
 `endif
 
 wire [1:0]            sdr_ba             ; // SDRAM Bank Select
-wire [11:0]           sdr_addr           ; // SDRAM ADRESS
+wire [12:0]           sdr_addr           ; // SDRAM ADRESS
 wire                  sdr_init_done      ; // SDRAM Init Done 
 
 // to fix the sdram interface timing issue
@@ -187,7 +187,7 @@ wire #(1.0) pad_clk     = sdram_clk_d;
   assign Dq[31:24]  = (sdr_den_n[3] == 1'b0) ? sdr_dout[31:24] : 8'hZZ;
 mt48lc2m32b2 #(.data_bits(32)) u_sdram32 (
           .Dq                 (Dq                 ) , 
-          .Addr               (sdr_addr           ), 
+          .Addr               (sdr_addr[11:0]     ), 
           .Ba                 (sdr_ba             ), 
           .Clk                (sdram_clk_d        ), 
           .Cke                (sdr_cke            ), 
@@ -205,7 +205,7 @@ assign Dq[15:8] = (sdr_den_n[1] == 1'b0) ? sdr_dout[15:8] : 8'hZZ;
 
    IS42VM16400K u_sdram16 (
           .dq                 (Dq                 ), 
-          .addr               (sdr_addr           ), 
+          .addr               (sdr_addr[11:0]     ), 
           .ba                 (sdr_ba             ), 
           .clk                (sdram_clk_d        ), 
           .cke                (sdr_cke            ), 
@@ -221,7 +221,7 @@ assign Dq[7:0]  = (sdr_den_n[0] == 1'b0) ? sdr_dout[7:0]  : 8'hZZ;
 
 mt48lc8m8a2 #(.data_bits(8)) u_sdram8 (
           .Dq                 (Dq                 ) , 
-          .Addr               (sdr_addr           ), 
+          .Addr               (sdr_addr[11:0]     ), 
           .Ba                 (sdr_ba             ), 
           .Clk                (sdram_clk_d        ), 
           .Cke                (sdr_cke            ), 
