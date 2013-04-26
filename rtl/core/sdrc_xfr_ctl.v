@@ -171,7 +171,7 @@ output [SDR_BW-1:0] 	sdr_den_n;
    output [1:0]			xfr_bank_sel;
 
    input 			sdram_enable;
-   input [11:0] 		sdram_mode_reg;
+   input [12:0] 		sdram_mode_reg;
    input [2:0] 			cas_latency;
    input [3:0] 			trp_delay, trcar_delay, twr_delay;
    input [`SDR_RFSH_TIMER_W-1 : 0] rfsh_time;

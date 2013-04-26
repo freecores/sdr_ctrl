@@ -29,6 +29,8 @@
 	         8 Bit SDRAM Support is added
 	     0.2 - 31st Jan 2012
 	         sdram_dq and sdram_pad_clk are internally generated
+	     0.3 - 26th April 2013
+                  Sdram Address witdh is increased from 12 to 13bits
 
                                                              
  Copyright (C) 2000 Authors and OPENCORES.ORG                
@@ -135,7 +137,7 @@ input                   wb_clk_i           ;
 
 input                   wb_stb_i           ;
 output                  wb_ack_o           ;
-input [24:0]            wb_addr_i          ;
+input [APP_AW-1:0]            wb_addr_i          ;
 input                   wb_we_i            ; // 1 - Write, 0 - Read
 input [dw-1:0]          wb_dat_i           ;
 input [dw/8-1:0]        wb_sel_i           ; // Byte enable
@@ -153,7 +155,7 @@ output                  sdr_cas_n           ; // SDRAM cas
 output			sdr_we_n            ; // SDRAM write enable
 output [SDR_BW-1:0] 	sdr_dqm             ; // SDRAM Data Mask
 output [1:0] 		sdr_ba              ; // SDRAM Bank Enable
-output [11:0] 		sdr_addr            ; // SDRAM Address
+output [12:0] 		sdr_addr            ; // SDRAM Address
 inout [SDR_DW-1:0] 	sdr_dq              ; // SDRA Data Input/output
 
 //------------------------------------------------
@@ -165,7 +167,7 @@ input [3:0]             cfg_sdr_trp_d       ; // Precharge to active delay
 input [3:0]             cfg_sdr_trcd_d      ; // Active to R/W delay
 input 			cfg_sdr_en          ; // Enable SDRAM controller
 input [1:0] 		cfg_req_depth       ; // Maximum Request accepted by SDRAM controller
-input [11:0] 		cfg_sdr_mode_reg    ;
+input [12:0] 		cfg_sdr_mode_reg    ;
 input [2:0] 		cfg_sdr_cas         ; // SDRAM CAS Latency
 input [3:0] 		cfg_sdr_trcar_d     ; // Auto-refresh period
 input [3:0]             cfg_sdr_twr_d       ; // Write recovery delay
