@@ -1,4 +1,4 @@
-#!/bin/csh
+#!/bin/csh -f
 
 if(! -e work) then
    vlib work
